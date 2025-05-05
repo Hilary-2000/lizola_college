@@ -1,0 +1,362 @@
+<<<<<<< HEAD
+27th Apr 2025 09:05:13AM : Student Nah - of Reg No. (FGF11) course data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:05:00AM : Student Nah - of Reg No. (FGF11) data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:03:36AM : Samuel Kibet - of Reg No. (KW/2023/34) data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:03:14AM : Samuel Kibet - of Reg No. (KW/2023/34) data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:03:04AM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:03:02AM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:02:57AM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:02:00AM : Samuel Kibet - of Reg No. (KW/2023/34) data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:01:48AM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:01:45AM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:01:41AM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:01:38AM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:01:34AM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 09:01:06AM : Samuel Kibet - of Reg No. (KW/2023/34) data has been updated successfully! - {HILLARY NGIGE}
+27th Apr 2025 08:23:43AM : HILLARY NGIGE successfully logged into the system as Principal - {HILLARY NGIGE}
+26th Apr 2025 19:22:28PM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 19:21:05PM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 19:19:41PM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 19:19:40PM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 19:19:38PM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 19:19:32PM : Samuel Kibet - of Reg No. (KW/2023/34) data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 19:19:24PM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 19:19:20PM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 19:18:21PM : Transaction for "Samuel Kibet" Reg No "KW/2023/34" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 17:27:13PM : Transaction for "Samuel Kibet" Reg No "KW/2023/34" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 17:08:12PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 17:08:10PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 17:07:52PM : Transaction for "Samuel Kibet" Reg No "KW/2023/34" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 17:00:11PM : Transaction for "Samuel Kibet" Reg No "KW/2023/34" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:59:56PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:59:01PM : Transaction for "Samuel Kibet" Reg No "KW/2023/34" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:58:45PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:58:36PM : Transaction for "Samuel Kibet" Reg No "KW/2023/34" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:58:20PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:58:10PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:51:08PM : Transaction for "Samuel Kibet" Reg No "KW/2023/34" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:49:06PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:48:32PM : Transaction for "Samuel Kibet" Reg No "KW/2023/34" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:48:06PM : Samuel Kibet - of Reg No. (KW/2023/34) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:44:43PM : Transaction for "Charles Khamala" Reg No "4" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:38:58PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:30:22PM : Transaction for "Charles Khamala" Reg No "4" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:30:02PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:30:00PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:29:58PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:29:56PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:29:54PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:29:34PM : Transaction for "Charles Khamala" Reg No "4" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:25:05PM : Charles Charles of adm no 4 last year academic balance has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:24:48PM : Charles Charles of adm no 4 last year academic balance has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:23:08PM : Charles Charles of adm no 4 last year academic balance has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:22:06PM : Charles Charles of adm no 4 last year academic balance has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:17:12PM : Charles Charles of adm no 4 last year academic balance has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:15:07PM : Transaction for "Charles Khamala" Reg No "4" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:13:58PM : Transaction for "Charles Khamala" Reg No "4" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 16:10:34PM : Transaction for "Charles Khamala" Reg No "4" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:58:40PM : Transaction for "Charles Khamala" Reg No "4" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:58:13PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:57:44PM : Charles Khamala - of Reg No. (4) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:57:40PM : Charles Khamala - of Reg No. (4) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:51:45PM : Transaction for "Charles Khamala" Reg No "4" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:51:02PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:51:00PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:50:57PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:50:06PM : Transaction for "Charles Khamala" Reg No "4" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:33:10PM : Transaction for "Charles Khamala" Reg No "4" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:29:29PM : Charles Khamala - of Reg No. (4) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:03:31PM : Transaction for "Hillary Ngige" Reg No "KW/2023/35" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:03:07PM : Hillary Ngige - of Reg No. (KW/2023/35) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:01:03PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 15:01:01PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+26th Apr 2025 14:59:11PM : Transaction for "Hillary Ngige" Reg No "KW/2023/35" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 14:50:54PM : Hillary Ngige - of Reg No. (KW/2023/35) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 14:50:32PM : Transaction for "Hillary Ngige" Reg No "KW/2023/35" has been completed successfully! - {HILLARY NGIGE}
+26th Apr 2025 14:50:03PM : Hillary Ngige - of Reg No. (KW/2023/35) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 14:49:12PM : Hillary Ngige - of Reg No. (KW/2023/35) course data has been updated successfully! - {HILLARY NGIGE}
+26th Apr 2025 14:48:38PM : HILLARY NGIGE successfully logged into the system as Principal - {HILLARY NGIGE}
+25th Apr 2025 20:51:55PM : Expense "Fuel" uploaded successfully! - {CHEBBY KIBET}
+25th Apr 2025 19:36:12PM : Staff "HILLARY NGIGE" information has been updated successfully! - {CHEBBY KIBET}
+25th Apr 2025 19:35:50PM : CHEBBY KIBET successfully logged into the system as Principal - {CHEBBY KIBET}
+25th Apr 2025 19:35:42PM : Changed the password of Chebby Kibet successfully! - {HILLARY NGIGE}
+25th Apr 2025 19:29:12PM : Transaction for "Viola Anyango" Reg No "LTVC-2025-37" has been completed successfully! - {HILLARY NGIGE}
+25th Apr 2025 19:12:33PM : Transaction for "Viola Anyango" Reg No "LTVC-2025-37" has been completed successfully! - {HILLARY NGIGE}
+25th Apr 2025 19:04:06PM : Transaction for "Viola Anyango" Reg No "LTVC-2025-37" has been completed successfully! - {HILLARY NGIGE}
+25th Apr 2025 19:03:29PM : Transaction for "Viola Anyango" Reg No "LTVC-2025-37" has been completed successfully! - {HILLARY NGIGE}
+25th Apr 2025 19:03:00PM : Fees structure has been modified. Votehead "Tuition" changed successfully! - {HILLARY NGIGE}
+25th Apr 2025 19:01:42PM : VIOLA ANYANGO has been admitted successfully - {HILLARY NGIGE}
+25th Apr 2025 19:00:12PM : Admission prefix has has been updated successfully! - {HILLARY NGIGE}
+25th Apr 2025 18:59:16PM : Academic calender has been updated successfully! - {HILLARY NGIGE}
+25th Apr 2025 18:58:11PM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+12th May 2024 14:42:15PM : CHEBBY KIBET successfully logged into the system as Principal - {CHEBBY KIBET}
+12th May 2024 14:41:54PM : Staff "CHEBBY KIBET" information has been updated successfully! - {HILLARY NGIGE}
+12th May 2024 14:27:26PM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+11th May 2024 11:36:13AM : Expense "KRA" updated successfully! - {HILLARY NGIGE}
+11th May 2024 11:36:02AM : Expense "KRA" updated successfully! - {HILLARY NGIGE}
+11th May 2024 09:30:22AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+10th May 2024 13:27:02PM : Expense "Another Test Expense" uploaded successfully! - {HILLARY NGIGE}
+10th May 2024 12:01:06PM : Expense "Trial Expenses" updated successfully! - {HILLARY NGIGE}
+10th May 2024 12:00:55PM : Expense "Test Expenses" updated successfully! - {HILLARY NGIGE}
+10th May 2024 11:29:36AM : Expense "Test Expenses" uploaded successfully! - {HILLARY NGIGE}
+10th May 2024 10:46:54AM : Expense "TEST EXPENSE" updated successfully! - {HILLARY NGIGE}
+10th May 2024 09:07:50AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+09th May 2024 11:01:13AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+08th May 2024 12:54:35PM : Fees structure has been modified. Votehead deleted successfully! - {HILLARY NGIGE}
+08th May 2024 12:54:26PM : Fees structure has been modified. Votehead "Tutitom" has been added successfully! - {HILLARY NGIGE}
+08th May 2024 12:53:29PM : Fees structure has been modified. Votehead "Fees Structure" has been added successfully! - {HILLARY NGIGE}
+08th May 2024 12:52:55PM : Fees structure has been modified. Votehead "Tuition" has been added successfully! - {HILLARY NGIGE}
+08th May 2024 12:52:28PM : Fees structure has been modified. Votehead "Tuition" has been added successfully! - {HILLARY NGIGE}
+08th May 2024 12:51:52PM : Fees structure has been modified. Votehead "Tuitiom" has been added successfully! - {HILLARY NGIGE}
+08th May 2024 12:51:26PM : Fees structure has been modified. Votehead "Tuition" changed successfully! - {HILLARY NGIGE}
+08th May 2024 12:51:12PM : Fees structure has been modified. Votehead "Admissions" changed successfully! - {HILLARY NGIGE}
+08th May 2024 12:50:57PM : Fees structure has been modified. Votehead "Tutoring" has been added successfully! - {HILLARY NGIGE}
+08th May 2024 08:21:52AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+=======
+>>>>>>> 81e1b958f51128c22ca1a0a78f0b19cacfa0380c
+28th Apr 2024 09:47:43AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+27th Apr 2024 10:02:39AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+26th Apr 2024 13:37:27PM : MWANGI KARANGI has been admitted successfully - {HILLARY NGIGE}
+26th Apr 2024 11:58:11AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+25th Apr 2024 14:13:47PM : Revenue "BRISKEY MASKATEERS" has been updated successfully! - {HILLARY NGIGE}
+25th Apr 2024 10:04:54AM : Revenue category "Miscellaneous income" has been added successfully! - {HILLARY NGIGE}
+25th Apr 2024 10:04:31AM : Revenue category "Finance income" has been added successfully! - {HILLARY NGIGE}
+25th Apr 2024 10:04:06AM : Revenue category "Rental Revenue From Facilities And Equipment" updated successfully! - {HILLARY NGIGE}
+25th Apr 2024 10:03:43AM : Revenue category "Rendering Of Services- Fees From Students" updated successfully! - {HILLARY NGIGE}
+25th Apr 2024 10:03:06AM : Revenue category "Cafeteria Sales" updated successfully! - {HILLARY NGIGE}
+25th Apr 2024 10:02:48AM : Revenue category "Public Contributions And Donations" updated successfully! - {HILLARY NGIGE}
+25th Apr 2024 10:02:26AM : Revenue category "Transfers From Other Levels Of Government" updated successfully! - {HILLARY NGIGE}
+25th Apr 2024 09:59:15AM : Revenue category "Grants From Donors And Development Partners" updated successfully! - {HILLARY NGIGE}
+25th Apr 2024 09:58:57AM : Revenue category "Transfers From Other National Government Entities" updated successfully! - {HILLARY NGIGE}
+25th Apr 2024 09:44:21AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+24th Apr 2024 13:15:40PM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+23rd Apr 2024 11:27:39AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+22nd Apr 2024 19:13:54PM : Revenue category "Revenue Category 1" updated successfully! - {HILLARY NGIGE}
+22nd Apr 2024 19:10:21PM : Revenue category "ESD" deleted successfully! - {HILLARY NGIGE}
+22nd Apr 2024 19:10:04PM : Revenue category "Machiavelli" updated successfully! - {HILLARY NGIGE}
+22nd Apr 2024 19:09:53PM : Revenue category "Scumblers" updated successfully! - {HILLARY NGIGE}
+22nd Apr 2024 19:09:44PM : Revenue category "Scumble" updated successfully! - {HILLARY NGIGE}
+22nd Apr 2024 19:09:21PM : Revenue category "Scumble" updated successfully! - {HILLARY NGIGE}
+22nd Apr 2024 19:08:33PM : Revenue category "Scumble" updated successfully! - {HILLARY NGIGE}
+22nd Apr 2024 19:08:29PM : Revenue category "Machiavelli" updated successfully! - {HILLARY NGIGE}
+22nd Apr 2024 18:46:52PM : Revenue category "DESIDERIOUS" has been added successfully! - {HILLARY NGIGE}
+22nd Apr 2024 18:46:33PM : Revenue category "Esd" updated successfully! - {HILLARY NGIGE}
+22nd Apr 2024 18:36:40PM : Revenue category "ESD" has been added successfully! - {HILLARY NGIGE}
+22nd Apr 2024 18:22:20PM : Revenue category "Revenue 100" deleted successfully! - {HILLARY NGIGE}
+22nd Apr 2024 18:21:13PM : Revenue category "Servere attache" has been added successfully! - {HILLARY NGIGE}
+22nd Apr 2024 17:59:48PM : Revenue category "Revenue 100" has been added successfully! - {HILLARY NGIGE}
+22nd Apr 2024 17:57:20PM : Revenue category "Grants and other government entity" has been added successfully! - {HILLARY NGIGE}
+22nd Apr 2024 17:30:11PM : Expense category "Malibu Stocks" added successfully! - {HILLARY NGIGE}
+22nd Apr 2024 14:47:02PM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+20th Apr 2024 10:31:23AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+19th Apr 2024 05:32:08AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+18th Apr 2024 10:13:40AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+17th Apr 2024 13:52:05PM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+16th Apr 2024 10:16:09AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+15th Apr 2024 20:33:24PM : Revenue "HILLARY NGIGE" has been updated successfully! - {HILLARY NGIGE}
+15th Apr 2024 20:32:47PM : Revenue "DOMESTIC REVENUES" has been updated successfully! - {HILLARY NGIGE}
+15th Apr 2024 19:41:47PM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+13th Apr 2024 22:54:42PM : Revenue "Revenue One" has been updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 22:54:22PM : Revenue "Revenue One" has been added successfully! - {HILLARY NGIGE}
+13th Apr 2024 22:46:00PM : Revenue "RENTING THE SWIMMING POOL" has been updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 22:45:51PM : Revenue "KITALE MAN" has been updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 22:45:40PM : Revenue "BRISKEY MASKATEERS" has been updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 22:45:04PM : Revenue "BRISKEY MASKATEERS" has been updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 22:38:58PM : Revenue category "Machiavelli" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 22:38:29PM : Revenue category "Scumblers" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 18:17:18PM : Revenue category "Machiavelli" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 18:17:06PM : Revenue category "Revenue Category One" has been added successfully! - {HILLARY NGIGE}
+13th Apr 2024 18:12:25PM : Revenue category "Category 1" deleted successfully! - {HILLARY NGIGE}
+13th Apr 2024 18:12:22PM : Revenue category "School revenue" deleted successfully! - {HILLARY NGIGE}
+13th Apr 2024 18:12:19PM : Revenue category "Pen and Paper" deleted successfully! - {HILLARY NGIGE}
+13th Apr 2024 18:12:16PM : Revenue category "Mt Kenya Revenue Donations" deleted successfully! - {HILLARY NGIGE}
+13th Apr 2024 18:12:12PM : Revenue category "Mt Kenya Revenue Donations" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 18:07:43PM : Revenue category "Revenue Category 1" has been added successfully! - {HILLARY NGIGE}
+13th Apr 2024 18:06:23PM : Revenue category "Scumblers" has been added successfully! - {HILLARY NGIGE}
+13th Apr 2024 18:05:49PM : Revenue category "Scumble" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 18:04:45PM : Revenue category "Scumble" has been added successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:42:57PM : Revenue category "School Revenue" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:42:44PM : Revenue category "Pen And Paper" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:42:40PM : Revenue category "Mt Kenya Revenue Donations" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:42:15PM : Revenue category "Mt Kenya Revenue Donations" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:42:09PM : Revenue category "School Revenue" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:42:01PM : Revenue category "Pen And Paper" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:41:46PM : Revenue category "Category 1" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:41:39PM : Revenue category "Mt Kenya Revenue Donations" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:41:21PM : Revenue category "Category 1" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:40:57PM : Revenue category "Machiavelli" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:40:23PM : Revenue category "Pen And Paper" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:38:09PM : Revenue category "ss" has been added successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:19:32PM : Revenue category "Mt Kenya Revenue Donations" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 16:19:10PM : Revenue category "Mt Kenya Revenue Donations" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 14:18:56PM : Expense "KODI" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 14:18:39PM : Expense "Sugar" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 14:18:22PM : Expense "sugar" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 14:18:09PM : Expense "sugar" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 14:10:09PM : Expense "JAMES MUGOH" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 14:09:25PM : Expense "Rice" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 14:09:05PM : Expense "One Expense" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 14:08:46PM : Expense "Maximum Calamity" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 14:08:39PM : Expense "Car Buying" updated successfully! - {HILLARY NGIGE}
+13th Apr 2024 10:47:50AM : Expense "Expense Name" uploaded successfully! - {HILLARY NGIGE}
+13th Apr 2024 10:10:35AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+12th Apr 2024 18:25:17PM : Expense category "Expense Category 2" added successfully! - {HILLARY NGIGE}
+12th Apr 2024 12:47:21PM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+24th Feb 2024 10:12:46AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+13th Feb 2024 20:18:55PM : Class "DIPLOMA" added successfully - {HILLARY NGIGE}
+13th Feb 2024 19:30:33PM : Quako Kika - of Reg No. (HJHGJHG) course data has been updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 14:21:11PM : Revenue "BRISKEY MASKATEERS" has been updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 12:21:47PM : Expense "One Expense" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 12:21:17PM : Expense "Maximum Calamity" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 12:03:53PM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+13th Feb 2024 08:10:07AM : Expense "Car Buying" uploaded successfully! - {HILLARY NGIGE}
+13th Feb 2024 07:48:20AM : Expense "Maximum Calamity" uploaded successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:47:31AM : Expense "Ginger" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:47:12AM : Expense "KODI" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:46:59AM : Expense "KODI" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:46:36AM : Expense "KODI" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:46:09AM : Expense "KODI" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:45:49AM : Expense "Unga" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:39:00AM : Expense "KODI" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:36:44AM : Expense "KODI" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:28:02AM : Expense "Rice" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:27:53AM : Expense "Rice" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:27:34AM : Expense "Rices" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:27:10AM : Expense "Rices" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:15:05AM : Expense "Ginger" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:14:56AM : Expense "Rices" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:03:31AM : Expense "Office Expenses" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 06:03:09AM : Expense "JAMES MUGOH" updated successfully! - {HILLARY NGIGE}
+13th Feb 2024 05:45:21AM : Expense "One Expense" uploaded successfully! - {HILLARY NGIGE}
+13th Feb 2024 05:36:27AM : Expense category "Rent" added successfully! - {HILLARY NGIGE}
+13th Feb 2024 05:33:16AM : Expense category "Daily Expenses" added successfully! - {HILLARY NGIGE}
+13th Feb 2024 05:31:17AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+12th Feb 2024 22:43:38PM : Expense category "Muskateers" added successfully! - {HILLARY NGIGE}
+12th Feb 2024 21:42:28PM : Expense category "House Allowance" added successfully! - {HILLARY NGIGE}
+12th Feb 2024 16:40:33PM : Revenue "BRISKEY MASKATEERS" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 16:32:18PM : Revenue "BRISKEY MASKATEERS" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 16:18:29PM : Revenue "BRISKEY MASKATEERS" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 16:17:23PM : Revenue "KITALE MAN" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 16:17:00PM : Revenue "BRISKEY MASKATEERS" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 15:36:57PM : Revenue "BRISKEY MASKATEERS" has been added successfully! - {HILLARY NGIGE}
+12th Feb 2024 15:34:32PM : Revenue "KITALE MAN" has been added successfully! - {HILLARY NGIGE}
+12th Feb 2024 15:25:10PM : Revenue "School Bus" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 15:24:44PM : Revenue "School Bus" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 15:13:18PM : Revenue "RENTING THE SWIMMING POOL" has been added successfully! - {HILLARY NGIGE}
+12th Feb 2024 14:55:51PM : Revenue "Hillary Ngige" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 14:47:39PM : Revenue "DOMESTIC REVENUES" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 14:41:48PM : Transaction for "Quako Kika" Reg No "HJHGJHG" has been completed successfully! - {HILLARY NGIGE}
+12th Feb 2024 14:41:19PM : Fees structure has been modified. Votehead "Tuition" changed successfully! - {HILLARY NGIGE}
+12th Feb 2024 14:40:43PM : Fees structure has been modified. Votehead "Tuition" changed successfully! - {HILLARY NGIGE}
+12th Feb 2024 13:56:43PM : Revenue "Government Bursaries" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 13:56:34PM : Revenue "Government Bursaries" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 13:50:38PM : Revenue "DOMESTIC REVENUES" has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 13:46:50PM : Revenue "DOMESTIC REVENUES" has been added successfully! - {HILLARY NGIGE}
+12th Feb 2024 13:42:09PM : Revenue "Mackezie Brown" has been added successfully! - {HILLARY NGIGE}
+12th Feb 2024 11:47:55AM : Class "ARTISAN CRAFT" updated successfully - {HILLARY NGIGE}
+12th Feb 2024 11:47:40AM : Class "CRAFT CERTIFICATE 1" updated successfully - {HILLARY NGIGE}
+12th Feb 2024 11:47:25AM : Class "DIPLOMA MODULE 2" updated successfully - {HILLARY NGIGE}
+12th Feb 2024 11:47:12AM : Class "DIPLOMA MODULE 1" updated successfully - {HILLARY NGIGE}
+12th Feb 2024 11:46:16AM : Class "ARTISAN" added successfully - {HILLARY NGIGE}
+12th Feb 2024 11:45:54AM : Class "CRAFT CERTIFICATE MODULE 2 (NON MODULAR)" added successfully - {HILLARY NGIGE}
+12th Feb 2024 11:45:42AM : Class "CRAFT CERTIFICATE MODULE 1 (NON MODULAR)" updated successfully - {HILLARY NGIGE}
+12th Feb 2024 11:45:30AM : Class "CRAFT CERTIFICATE MODULE (NON MODULAR)" added successfully - {HILLARY NGIGE}
+12th Feb 2024 11:44:42AM : Class "Craft Certificate 1" updated successfully - {HILLARY NGIGE}
+12th Feb 2024 11:44:37AM : Class "CRAFT CERTIFICATE MODULE 2" updated successfully - {HILLARY NGIGE}
+12th Feb 2024 11:44:31AM : Class "Craft Certificate 2" updated successfully - {HILLARY NGIGE}
+12th Feb 2024 11:44:23AM : Class "CRAFT CERTIFICATE MODULE 1" added successfully - {HILLARY NGIGE}
+12th Feb 2024 11:44:05AM : Class "DIPLOMA MODULE 3" added successfully - {HILLARY NGIGE}
+12th Feb 2024 09:58:25AM : Transaction for "Quako Kika" Reg No "HJHGJHG" has been completed successfully! - {HILLARY NGIGE}
+12th Feb 2024 09:48:16AM : Transaction for "Quako Kika" Reg No "HJHGJHG" has been completed successfully! - {HILLARY NGIGE}
+12th Feb 2024 09:38:19AM : Transaction for "Quako Kika" Reg No "HJHGJHG" has been completed successfully! - {HILLARY NGIGE}
+12th Feb 2024 09:36:01AM : Staff "Hillary Ngige" information has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 09:35:54AM : Staff "JUMA AMANEX" information has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 09:34:37AM : Staff "Hillary Ngige" information has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 09:34:20AM : Staff "Hillary Ngige" information has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 09:32:59AM : Staff "Hillary Ngige" information has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 09:31:00AM : Staff "Hillary Ngige" information has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 09:17:40AM : Staff "JUMA AMANEX" information has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 07:18:41AM : Staff "JUMA AMANEX" information has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 06:37:05AM : Corden Muigai - of Reg No. (SW-ED-34) data has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 05:41:26AM : Quako Kika - of Reg No. (HJHGJHG) course data has been updated successfully! - {HILLARY NGIGE}
+12th Feb 2024 05:40:37AM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+11th Feb 2024 12:33:53PM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+01st Feb 2024 22:25:35PM : Transaction for "Hillary  Ngige" Reg No "SW-ED-45" has been completed successfully! - {HILLARY NGIGE}
+01st Feb 2024 22:24:50PM : HILLARY  NGIGE has been admitted successfully - {HILLARY NGIGE}
+01st Feb 2024 22:21:50PM : Transaction for "Charles Khamala" Reg No "4" has been completed successfully! - {HILLARY NGIGE}
+01st Feb 2024 22:20:32PM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+31st Jan 2024 22:32:22PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+31st Jan 2024 20:11:43PM : HILLARY NGIGE successfully logged into the system as System Administrator - {HILLARY NGIGE}
+31st Jan 2024 19:29:32PM : Revenue category "Category 1" has been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 19:25:49PM : Revenue category "Muskari Kombo"  updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 19:24:10PM : Revenue category "N/A"  updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 19:23:11PM : Revenue category "N/a" updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 19:20:19PM : Revenue category "Mt Kenya Revenue Donations" updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 19:16:19PM : Expense category deleted successfully! - {HILLARY NGIGE}
+31st Jan 2024 19:14:41PM : Expense category "Categorical" updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 19:12:44PM : Expense "Categorical" added successfully! - {HILLARY NGIGE}
+31st Jan 2024 19:10:44PM : The Sports House / Clubs "Housing Levy" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 19:08:31PM : The Sports House / Clubs "" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:44:31PM : The Sports House / Clubs "Spot housess" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:41:10PM : The Sports House / Clubs "ICT department" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:40:40PM : The Sports House / Clubs "" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:36:49PM : The Sports House / Clubs "ICT department" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:35:19PM : The Sports House / Clubs "Spot houses" has been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:34:27PM : The Sports House / Clubs has been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:32:41PM : Role has been deleted successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:30:08PM : Role "Librarians" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:29:18PM : Role "Sos" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:18:38PM : Ses has been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:15:33PM : Academic calender has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:14:15PM : Admission prefix has has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:09:39PM : Course "Business Technology" has been deleted successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:09:20PM : Course "Business Technology" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:06:39PM : Course "Business Technology" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 18:02:28PM : Course "Business IT"has been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:52:05PM : School information changed successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:47:32PM : Expense "JAMES MUGOH" updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:42:40PM : Expense "Hillary Ngige" uploaded successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:29:17PM : Fees structure has been modified. Votehead "Student I`ds" changed successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:28:58PM : Fees structure has been modified. Votehead deleted successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:28:01PM : Fees structure has been modified. Votehead "Admissions" changed successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:26:59PM : Fees structure has been modified. Votehead changed to "Admissions" from "Admissions" successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:22:14PM : Admissions has been deleted successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:19:26PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:14:35PM : Transaction for "Tracy Oundo" adm no "10" has been completed successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:06:36PM : Revenue "Hillary Swimming" has been deleted successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:05:54PM : Revenue "Hillary Test Revenue" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:01:14PM : Revenue "HILLARY SWIMMING" has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 17:00:07PM : Revenue "HILLARY SWIMMING" has been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 16:54:59PM : Staff "James Mugo" information has been deleted successfully! - {HILLARY NGIGE}
+31st Jan 2024 16:52:35PM : Staff "JAMES MUGO" information has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 16:48:43PM : Departments (DEPARTMENT 1002) with a code of (DP-1002) have been deleted successfully! - {HILLARY NGIGE}
+31st Jan 2024 16:48:41PM : Departments (DEPARTMENT 1002) with a code of (DP-1002) have been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 16:48:36PM : Departments (DEPARTMENT 1002) have been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 16:47:34PM : Departments (DEPARTMENT 1000) with a code of (DP-1000) have been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 16:47:32PM : Departments (DEPARTMENT 1000) with a code of (DP-1000) have been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 16:47:26PM : Departments (DEPARTMENT 1000) have been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 16:45:45PM : Departments (DEPARTMENT 100) with a code of (3) have been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 16:40:44PM : Departments (DEPARTMENT 100) have been added successfully! - {HILLARY NGIGE}
+31st Jan 2024 16:37:40PM : Updated the password of Juma Amanex - {HILLARY NGIGE}
+31st Jan 2024 16:31:12PM : Registration of JUMA AMANEX as <b>Hillary Tester</b> has been done successfully - {HILLARY NGIGE}
+31st Jan 2024 16:11:03PM : Mugo Karama of Reg No (SW-ED-40) discounts have been updated successfully - {HILLARY NGIGE}
+31st Jan 2024 16:10:43PM : Mugo Karama of Reg No (SW-ED-40) discounts have been updated successfully - {HILLARY NGIGE}
+31st Jan 2024 14:50:44PM : Hillary Ngige of Reg No (SW-ED-39) discounts have been updated successfully - {HILLARY NGIGE}
+31st Jan 2024 14:49:58PM : Hilla Ngige of Reg No () discounts have been updated successfully - {HILLARY NGIGE}
+31st Jan 2024 14:47:20PM : Hilla Hilla of adm no SW-ED-42 last year academic balance has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 14:47:17PM : Hilla Ngige of Reg No (SW-ED-42) discounts have been updated successfully - {HILLARY NGIGE}
+31st Jan 2024 14:45:22PM : Hillary Ngige of Reg No (SW-ED-39) discounts have been updated successfully - {HILLARY NGIGE}
+31st Jan 2024 14:45:07PM : Hillary Hillary of adm no SW-ED-39 last year academic balance has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 14:44:19PM : Hillary Ngige of Reg No (SW-ED-39) discounts have been updated successfully - {HILLARY NGIGE}
+31st Jan 2024 14:44:13PM : Hillary Ngige of adm no SW-ED-39 last year academic balance has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 14:43:34PM : Hilla Ngige of Reg No (SW-ED-42) discounts have been updated successfully - {HILLARY NGIGE}
+31st Jan 2024 14:41:44PM : N/A of Reg No (SW-ED-42) discounts have been updated successfully - {HILLARY NGIGE}
+31st Jan 2024 14:39:50PM : N/A of Reg No (SW-ED-42) discounts have been updated successfully - {HILLARY NGIGE}
+31st Jan 2024 14:32:59PM : Hilla Hilla of adm no SW-ED-42 last year academic balance has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 14:07:28PM : N/A of adm no SW-ED-42 last year academic balance has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 13:57:50PM Hilla Ngige - of Reg No. (SW-ED-42) course data has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 13:46:29PM Hilla Ngige - of Reg No. (SW-ED-42) data has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 13:45:45PM Hilla Ngige - of Reg No. (SW-ED-42) data has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 13:45:16PM Hilla Ngige - (SW-ED-42) data has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 13:44:23PM Hilla Ngige data has been updated successfully! - {HILLARY NGIGE}
+31st Jan 2024 13:35:39PM MUGOH KIAMA has been admitted successfully - {HILLARY NGIGE}

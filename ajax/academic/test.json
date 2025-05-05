@@ -1,0 +1,302 @@
+[
+    {
+        "Day": "Monday",
+        "classes": [
+            {
+                "classname": "Grade 6",
+                "lessons": [
+                    "MAT {IHA}|SST {IDI} = RM1",
+                    "MAT {IHA}|SST {IDI}",
+                    "ENG {HGB}",
+                    "KIS {BBE}",
+                    "ENG {HGB}",
+                    " SCI {BJI}",
+                    "MAT {IHA}|SST {IDI}",
+                    " ENG {HGB}",
+                    " CRE {BJD}",
+                    " CRE {BJD}"
+                ]
+            },
+            {
+                "classname": "Grade 8",
+                "lessons": [
+                    "ENG {HGB}",
+                    " KIS {BBE}",
+                    " MAT {IHA}",
+                    " ENG {HGB}",
+                    " SST {IDI}",
+                    " MAT {IHA}",
+                    " SCI {BJI}",
+                    " SST {IDI}",
+                    " SCI {BJI}",
+                    " KIS {BBE}"
+                ]
+            },
+            {
+                "classname": "Grade 7",
+                "lessons": [
+                    "MAT {BJI}",
+                    "MAT {BJI}",
+                    "ENG {IDI}",
+                    " ENG {IDI}",
+                    " KIS {BJD}",
+                    "KIS {BJD}",
+                    " SST {HGB}",
+                    " SCI {IHA}",
+                    " CRE {BBE}",
+                    ""
+                ]
+            }
+        ]
+    },
+    {
+        "Day": "Tuesday",
+        "classes": [
+            {
+                "classname": "Grade 6",
+                "lessons": [
+                    "KIS {BBE}",
+                    " ENG {HGB}",
+                    "MAT {IHA}|SST {IDI}",
+                    "MAT {IHA}|SST {IDI}",
+                    " ENG {HGB}",
+                    " CRE {BJD}",
+                    " SCI {BJI}",
+                    " KIS {BBE}",
+                    "",
+                    "MAT {IHA}|SST {IDI}"
+                ]
+            },
+            {
+                "classname": "Grade 8",
+                "lessons": [
+                    "MAT {IHA}",
+                    "MAT {IHA}",
+                    "ENG {HGB}",
+                    " KIS {BBE}",
+                    "SCI {BJI}",
+                    " SCI {BJI}",
+                    "SST {IDI}",
+                    " ENG {HGB}",
+                    " CRE {BJD}",
+                    ""
+                ]
+            },
+            {
+                "classname": "Grade 7",
+                "lessons": [
+                    "ENG {IDI}",
+                    " MAT {BJI}",
+                    " KIS {BJD}",
+                    " KIS {BJD}",
+                    " ENG {IDI}",
+                    " SCI {IHA}",
+                    " CRE {BBE}",
+                    "MAT {BJI}",
+                    " SCI {IHA}",
+                    "SST {HGB}"
+                ]
+            }
+        ]
+    },
+    {
+        "Day": "Wednesday",
+        "classes": [
+            {
+                "classname": "Grade 6",
+                "lessons": [
+                    "KIS {BBE}",
+                    "MAT {IHA}|SST {IDI}",
+                    " ENG {HGB}",
+                    "MAT {IHA}|SST {IDI}",
+                    " ENG {HGB}",
+                    " CRE {BJD}",
+                    " KIS {BBE}",
+                    " SCI {BJI}",
+                    " SCI {BJI}",
+                    ""
+                ]
+            },
+            {
+                "classname": "Grade 8",
+                "lessons": [
+                    "SCI {BJI}",
+                    " ENG {HGB}",
+                    "MAT {IHA}",
+                    " KIS {BBE}",
+                    " MAT {IHA}",
+                    " SCI {BJI}",
+                    "ENG {HGB}",
+                    " CRE {BJD}",
+                    " SST {IDI}",
+                    "MAT {IHA}"
+                ]
+            },
+            {
+                "classname": "Grade 7",
+                "lessons": [
+                    "ENG {IDI}",
+                    " KIS {BJD}",
+                    "MAT {BJI}",
+                    " MAT {BJI}",
+                    "KIS {BJD}",
+                    " CRE {BBE}",
+                    "ENG {IDI}",
+                    " SST {HGB}",
+                    "CRE {BBE}",
+                    " SST {HGB}"
+                ]
+            }
+        ]
+    },
+    {
+        "Day": "Thursday",
+        "classes": [
+            {
+                "classname": "Grade 6",
+                "lessons": [
+                    "ENG {HGB}",
+                    "",
+                    " KIS {BBE}",
+                    " ENG {HGB}",
+                    "MAT {IHA}|SST {IDI}",
+                    " KIS {BBE}",
+                    "MAT {IHA}|SST {IDI}",
+                    " CRE {BJD}",
+                    " SCI {BJI}",
+                    "MAT {IHA}|SST {IDI}"
+                ]
+            },
+            {
+                "classname": "Grade 8",
+                "lessons": [
+                    "CRE {BJD}",
+                    "SST {IDI}",
+                    "MAT {IHA}",
+                    " KIS {BBE}",
+                    " ENG {HGB}",
+                    "ENG {HGB}",
+                    " CRE {BJD}",
+                    " SCI {BJI}",
+                    "SST {IDI}",
+                    "KIS {BBE}"
+                ]
+            },
+            {
+                "classname": "Grade 7",
+                "lessons": [
+                    "ENG {IDI}",
+                    "MAT {BJI}",
+                    "MAT {BJI}",
+                    "KIS {BJD}",
+                    "CRE {BBE}",
+                    "KIS {BJD}",
+                    "CRE {BBE}",
+                    "SCI {IHA}",
+                    "SCI {IHA}",
+                    "SST {HGB}"
+                ]
+            }
+        ]
+    },
+    {
+        "Day": "Friday",
+        "classes": [
+            {
+                "classname": "Grade 6",
+                "lessons": [
+                    "KIS {BBE}",
+                    " ENG {HGB}",
+                    " KIS {BBE}",
+                    " ENG {HGB}",
+                    "MAT {IHA}|SST {IDI}",
+                    " CRE {BJD}",
+                    "",
+                    " SCI {BJI}",
+                    " SCI {BJI}",
+                    "MAT {IHA}|SST {IDI}"
+                ]
+            },
+            {
+                "classname": "Grade 8",
+                "lessons": [
+                    "MAT {IHA}",
+                    " KIS {BBE}",
+                    " ENG {HGB}",
+                    " MAT {IHA}",
+                    " KIS {BBE}",
+                    " SST {IDI}",
+                    " SCI {BJI}",
+                    " CRE {BJD}",
+                    " ENG {HGB}",
+                    " SCI {BJI}"
+                ]
+            },
+            {
+                "classname": "Grade 7",
+                "lessons": [
+                    "MAT {BJI}",
+                    " KIS {BJD}",
+                    " KIS {BJD}",
+                    " ENG {IDI}",
+                    " MAT {BJI}",
+                    " SST {HGB}",
+                    " SCI {IHA}",
+                    " SCI {IHA}",
+                    " ENG {IDI}",
+                    " CRE {BBE}"
+                ]
+            }
+        ]
+    },
+    {
+        "Day": "Saturday",
+        "classes": [
+            {
+                "classname": "Grade 6",
+                "lessons": [
+                    "MAT {IHA}|SST {IDI}",
+                    "MAT {IHA}|SST {IDI}",
+                    " KIS {BBE}",
+                    " ENG {HGB}",
+                    " ENG {HGB}",
+                    "",
+                    " KIS {BBE}",
+                    " SCI {BJI}",
+                    " SCI {BJI}",
+                    " CRE {BJD}"
+                ]
+            },
+            {
+                "classname": "Grade 8",
+                "lessons": [
+                    "ENG {HGB}",
+                    "KIS {BBE}",
+                    "SCI {BJI}",
+                    "MAT {IHA}",
+                    " KIS {BBE}",
+                    " SCI {BJI}",
+                    " SST {IDI}",
+                    " CRE {BJD}",
+                    " SST {IDI}",
+                    "MAT {IHA}"
+                ]
+            },
+            {
+                "classname": "Grade 7",
+                "lessons": [
+                    "MAT {BJI}",
+                    " MAT {BJI}",
+                    " KIS {BJD}",
+                    "KIS {BJD}",
+                    " SCI {IHA}",
+                    "SCI {IHA}",
+                    "SST {HGB}",
+                    " CRE {BBE}",
+                    "SST {HGB}",
+                    " ENG {IDI}"
+                ]
+            }
+        ]
+    }
+]

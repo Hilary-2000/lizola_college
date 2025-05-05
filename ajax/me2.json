@@ -1,0 +1,118 @@
+[
+    {
+        "course_level": 1,
+        "course_name": "5",
+        "course_status": 0,
+        "id": 1,
+        "module_terms": [
+            {
+                "id": 1,
+                "term_name": "TERM_1",
+                "status": "2",
+                "start_date": "20230101000000",
+                "end_date": "20230410000000"
+            },
+            {
+                "id": 2,
+                "term_name": "TERM_2",
+                "status": "0",
+                "start_date": "20230411000000",
+                "end_date": "20230810000000"
+            },
+            {
+                "id": 3,
+                "term_name": "TERM_3",
+                "status": "0",
+                "start_date": "20230811000000",
+                "end_date": "20231231000000"
+            }
+        ]
+    },
+    {
+        "course_level": 4,
+        "course_name": "5",
+        "course_status": 0,
+        "id": 1,
+        "module_terms": [
+            {
+                "id": 1,
+                "term_name": "TERM_1",
+                "status": 1,
+                "start_date": "20230101000000",
+                "end_date": "20230410000000"
+            },
+            {
+                "id": 2,
+                "term_name": "TERM_2",
+                "status": 0,
+                "start_date": "20230411000000",
+                "end_date": "20230810000000"
+            },
+            {
+                "id": 3,
+                "term_name": "TERM_3",
+                "status": 0,
+                "start_date": "20230811000000",
+                "end_date": "20231231000000"
+            }
+        ]
+    },
+    {
+        "course_level": 4,
+        "course_name": "5",
+        "course_status": 0,
+        "id": 1,
+        "module_terms": [
+            {
+                "id": 1,
+                "term_name": "TERM_1",
+                "status": 1,
+                "start_date": "20230101000000",
+                "end_date": "20230410000000"
+            },
+            {
+                "id": 2,
+                "term_name": "TERM_2",
+                "status": 0,
+                "start_date": "20230411000000",
+                "end_date": "20230810000000"
+            },
+            {
+                "id": 3,
+                "term_name": "TERM_3",
+                "status": 0,
+                "start_date": "20230811000000",
+                "end_date": "20231231000000"
+            }
+        ]
+    },
+    {
+        "course_level": 1,
+        "course_name": "5",
+        "course_status": 1,
+        "id": 1,
+        "module_terms": [
+            {
+                "id": 1,
+                "term_name": "TERM_1",
+                "status": 1,
+                "start_date": "20230101000000",
+                "end_date": "20230410000000"
+            },
+            {
+                "id": 2,
+                "term_name": "TERM_2",
+                "status": 0,
+                "start_date": "20230411000000",
+                "end_date": "20230810000000"
+            },
+            {
+                "id": 3,
+                "term_name": "TERM_3",
+                "status": 0,
+                "start_date": "20230811000000",
+                "end_date": "20231231000000"
+            }
+        ]
+    }
+]

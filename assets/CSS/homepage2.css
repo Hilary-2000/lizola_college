@@ -1,0 +1,912 @@
+.subjectAndTeacher{
+    width: 80%;
+    position: relative;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 10px auto;
+    padding: 10px;
+}
+.setting_s label{
+    font-size: 14px; /**changed from 12px**/
+    font-weight: 600;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.setting_s{
+    position: relative;
+    width: 90%;
+    height: auto;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px gray;
+}
+.short_detail label{
+    color: gray;
+    font-weight: 400;
+}
+.short_detail{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.student_details{
+    position: relative;
+    width: 70%;
+    margin: auto;
+    padding: 7px 30px;
+    font-family: "Rockwell";
+    display: flex;
+    border-top: 1px solid gray;
+    border-left: 4px solid gray;
+    border-right: 4px solid gray;
+    border-bottom: 1px solid gray;
+    border-radius: 20px;
+}
+table{
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 14px; /**changed from 12px**/
+    margin: 10px auto;
+}
+th{
+    background: linear-gradient( rgba(74, 124, 126, 0.295), lightslategray);
+    text-align: center;
+    color: black;
+    padding: 5px 10px;
+    color: rgb(7, 7, 56);
+    font-size: 14px;
+}
+.student_details p, .payment_details p,.signature p , .schoollogo p{
+    font-size: 14px; /**changed from 12px**/
+}
+.data_labels{
+    margin-left: 20px;
+}
+.student_details span{
+    font-weight: 600;
+}
+.foot_er{
+    text-align: center;
+    
+    font-family: "Calibri";
+    font-weight: 500;
+}
+.print_main_page{
+    background-color: wheat;
+    position: relative;
+    height: 900px;
+    width: 700px;
+    background-color: white;
+    margin: auto;
+}
+#h4s{
+    font-size: 14px; /**changed from 12px**/
+}
+.print_page{
+    position: relative;
+    /* border: 1px solid cadetblue; */
+    width: 90%;
+    min-height: 97%;
+    margin: auto;
+    margin-top: 10px;
+    padding: 10px 5px;
+    background-position: center;
+}
+
+.schoollogo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.schoollogo img{
+    width: 50px;
+    height: 50px;
+    position: relative;
+    margin: auto;
+    padding: 3px;
+    border-radius: 50%;
+    background-color: brown;
+    margin-bottom: 10px;
+}
+.schoollogo h2{
+    font-family: "Rockwell";
+    line-height: 16px;
+    color: brown;
+}
+.schoollogo h3{
+    font-size: 13px;
+    font-family: "Calibri";
+}
+.payment_details{
+    font-family: "Rockwell";
+    width: 50%;
+    margin: 10px auto;
+    border-left: 4px solid gray;
+    border-right: 4px solid gray;
+    border-radius: 20px;
+    padding: 15px;
+}
+.printable_page{
+    padding: 8px;
+    position: relative;
+    font-family: "Calibri";
+    border-bottom: 1px dashed black;
+    width: 90%;
+    margin: auto;
+    background-size: 100px 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    backface-visibility: visible;
+    background-clip: padding-box;
+}
+.printable_page:last-child{
+    border: none;
+}
+.page_titles{
+    width: auto;
+    text-align: center;
+    position: relative;
+    margin: 8px auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.page_titles h2{
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+.page_titles h4{
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.message_remider p{
+    font-size: 12x;
+}
+.message_remider{
+    position: relative;
+    margin: 9px 0;
+}
+.signature{
+    font-family: "Rockwell";
+    width: 80%;
+    margin: 10px auto;
+    border-left: 4px solid gray;
+    border-right: 4px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-radius: 20px;
+    padding: 15px;
+}
+.school_name{
+    font-size: 35px;
+    color: rgb(206, 206, 206);
+    font-weight: 600;
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+    top: 40%;
+    left: 15%;
+    text-align: center;
+}
+.hide{
+    display: none;
+}
+.rotate_right{
+    transform: rotate(-45deg);
+}
+.meanscores123{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.meanscores{
+    position: relative;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+.meanscores123 strong{
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.printer_page{
+    background-color: white;
+    line-height: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.printer_page .btns button{
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    padding: 3px;
+    border: 1px solid saddlebrown;
+    border-radius: 20px;
+    background-color: white;
+    justify-content: center;
+}
+.printer_page .btns button:hover{
+    background-color: saddlebrown;
+    color: white;
+}
+.printer_page .btns{
+    position: fixed;
+    top: 100px;
+    right: 3%;
+    background-color: rgba(255, 255, 255, 0.336);
+    flex-direction: column;
+    border-left: 4px solid cadetblue;
+    border-right: 4px solid cadetblue;
+    border-top: .5px solid cadetblue;
+    border-bottom: .5px solid cadetblue;
+    box-shadow: 2px 2px 10px gray;
+    width: 100px;
+    justify-content: space-between;
+    height: 60px;
+    padding: 10px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+.printer_page button img{
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+.student_data p{
+    font-family: "Calibri";
+    font-size: 13px;
+    margin: 10px 0;
+    line-height: 7px;
+}
+.fee_reminder{
+    position: relative;
+    width: 90%;
+    margin: auto;
+    padding: 5px;
+}
+.notification_parent_window{
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 200px;
+    height: auto;
+    text-align: center;
+    left: -100px;
+    top: 40px;
+    border: 1px solid gray;
+    box-shadow: 1px 1px 10px  gray;
+    padding: 5px 0px;
+    backdrop-filter: blur(10px);
+}
+.notification_parent_window .anchors{
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+    display: inline-block;
+    transform: rotate(-45deg);
+    top: -7px;
+    border-right: 1px solid gray;
+    border-top: 1px solid gray;
+}
+.notification_parent_window .ti_tles h3{
+    font-weight: 400;
+    font-size: 14px;    
+}
+.notification_parent_window .ti_tles{
+    position: relative;
+}
+#per_profile{
+    left: -150px;
+}
+#per_profile .anchors{
+    right: 30px;
+}
+.notification_conts{
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    overflow: auto;
+}
+.notification_parent_window .button_holder{
+    position: relative;
+    padding: 2px;
+}
+.notice{
+    position: relative;
+    font-size: 14px; /**changed from 12px**/
+    font-weight: 600;
+    padding: 10px 3px;
+    width: 80%;
+    margin: 3px auto;
+    cursor: pointer;
+    border-left: 4px solid green;
+    border-right: 4px solid green;
+    border-radius: 10px;
+    background-color: rgb(192, 192, 192);
+}
+
+.notice:hover{
+    border-color: gray;
+    background-color: rgb(175, 175, 175);
+    text-decoration: underline;
+    text-underline-offset: 1px;
+}
+.dashboard .icons{
+    position: relative;
+}
+.dashboard img:hover{
+    background-color: rgba(255, 255, 255, 0.534);
+}
+.dashboard img{
+    cursor: pointer;
+}
+.load_clear{
+    position: absolute;
+    top: 0%;
+    left: 0px;
+    background: rgba(0, 0, 0, 0);
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+}
+.good_btn, .bad_btn{
+    font-size: 13px;
+    font-weight: 600;
+    color: gray;
+    padding: 5px 7px;
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    width: 90%;
+    margin: 2px auto;
+}
+.good_btn:hover{
+    color: green;
+}
+.bad_btn:hover{
+    color: brown;
+}
+/**Notice table**/
+.table_notify_holder{
+    position: relative;
+    width: 70%;
+    margin: 10px auto;
+    border: 1px solid black;
+    border-radius: 20px 20px 0 0;
+    min-width: 450px;
+    text-align: center;
+    padding: 10px 0;
+    overflow: auto;
+}
+.table_notify{
+    position: relative;
+    width: calc(100% - 20px);
+    padding: 10px;
+    min-width: 450px;
+}
+.table_rows{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 3px;
+    min-width: 400px;
+}
+.table_rows p{
+    font-size: 1.2em;
+}
+.table_head{
+    background-color: rgb(184, 184, 184);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 5px;
+    height: 20px;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 10px 10px 0 0 ;
+    z-index: -1;
+}
+.table_dat{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 5px;
+    height: auto;
+    text-align: center;
+}
+.table_body{
+    position: relative;
+    max-height: 300px;
+    overflow-x: auto;
+    min-width: 400px;
+}
+.table_dat:first-child, .table_head:first-child{
+    width: calc(100% /25);
+}
+.table_dat:nth-child(2), .table_head:nth-child(2) {
+    width: calc(100% /2.5);
+}
+.table_dat:nth-child(3), .table_head:nth-child(3){
+    width: calc(100% /6);
+}
+.table_dat:nth-child(4), .table_head:nth-child(4){
+    width: calc(100% /6);
+}
+.table_dat:nth-child(5), .table_head:nth-child(5){
+    width: calc(100% /8);
+}
+.table_dat .link{
+    margin: 0%;
+    width: calc(100% /9);
+    padding: 0%;
+}
+.bolder{
+    font-weight: 700;
+    /* background-color: rgba(187, 187, 187, 0.61); */
+}
+.message_header{
+    position: relative;
+    width: 60%;
+    padding: 10px;
+    margin: 10px auto;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+.message_header span{
+    color: brown;
+}
+.message_header label, .message_contents label{
+    font-size: 14px; /**changed from 12px**/
+}
+.message_contents{
+    position: relative;
+    text-align: left;
+    width: 80%;
+    margin: auto;
+    background: rgb(202, 202, 202);
+    padding: 5px;
+    border-radius: 10px;
+}
+.queried{
+    color: slateblue;
+    border-bottom: 1px dashed skyblue;
+    cursor: help;
+}
+.balance_holder{
+    position: absolute;
+    right: 0px;
+}
+.message_contents p{
+    font-weight: 400px;
+}
+.red_notice{
+    font-size: 13px;
+    font-weight: 600;
+    color: red;
+}
+.green_notice{
+    font-size: 13px;
+    font-weight: 600;
+    color: green;
+}
+.add_expense, .add_expenses{
+    position: relative;
+    width: 90%;
+    padding: 10px 15px;
+    border: 1px solid rgb(175, 175, 175);
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+.add_expenses{
+    border: none;
+    margin: auto;
+}
+.add_expense input[type=text],.add_expense input[type=number], .add_expense select, .add_expense input[type=password], 
+.add_expenses input[type=text],.add_expenses input[type=number],
+.add_expenses input[type=date],input[type=date],input[type=number]
+,input[type=text]{
+    position: relative;
+    width: 70%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    text-align: center;
+    font-weight: 600;
+    margin-left: 15px;
+    font-size: 14px;
+}
+.dates_holder{
+    display: flex;
+    position: relative;
+    width: calc(100% - 20px);
+    margin: auto;
+}
+.dates_holder .add_expenses{
+    position: relative;
+    min-width: calc(100% - 30px);
+}
+#dpimage-sett{
+    cursor: pointer;
+}
+.image_view{
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.733);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.image_view img{
+    max-width: 90vw;
+    max-height: 90vh;
+}
+.closers{
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    cursor: pointer;
+    font-size: 30px;
+}
+.green_bg{
+    background-color: rgba(0, 128, 0, 0.507);
+}
+.red_bg{
+    background-color: rgba(128, 0, 0, 0.507);
+}
+.closers:hover{
+    color: rgb(255, 0, 0);
+}
+#sch_logos2, #sch_logos{
+    cursor: pointer;
+}
+.admin_special{
+    position: absolute;
+    padding: 10px;
+    right: -18px;
+    background-color: gold;
+    width: 30px;
+    height: 10px;
+    top: -8px;
+}
+textarea{
+    position: relative;
+    font-family: "nunito";
+    padding: 10px;
+    font-size: 12px; /**changed from 12px**/
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 10px gray;
+    outline: none;
+}
+.staff_list{
+    position: relative;
+    width: 200px;
+    border: 1px solid gray;
+    right: 0%;
+    height: auto;
+    max-height: 300px;
+    overflow: auto;
+    margin: 10px 0px;
+    background-color: white;
+}
+.staff_list .staff_dets{
+    position: relative;
+    width: 94%;
+    margin: auto;
+    padding: 10px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.view_informations{
+    position: relative;
+    width: 98%;
+    background-color: rgb(255, 255, 255);
+    padding: 10px 5px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    pad: 10px;
+}
+.dp_holder{
+    position: relative;
+    width: 30%;
+}
+.dp_s{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.dp_holder img{
+    width: auto;
+    min-width: 100px;
+    margin: auto;
+    background-color: rgb(231, 231, 231);
+    box-shadow: 2px 2px 10px rgb(197, 197, 197);
+    border-radius: 50%;
+    padding: 5px;
+}
+.student_data_2 h3{
+    color: cadetblue;
+}
+.student_data_2{
+    display: flex;
+    gap: 10px;
+}
+.students_information_2, .parent_information_2{
+    box-shadow: 4px 4px 10px rgb(190, 190, 190);
+    padding: 5px;
+    border: 1px solid rgb(207, 207, 207);
+}
+.students_information_2 p{
+    margin: 5px;
+    margin-left: 10px;
+}
+.new_balances{
+    border-radius: 5px;
+    padding: 3px;
+    display: flex;
+    position: relative;
+}
+.acc_rej{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    text-align: center;
+}
+.redAcc,.greenRej{
+    padding: auto 10px;
+    position: relative;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+.redAcc{
+    color: green;
+}
+.greenRej{
+    color: red;
+}
+.redAcc:hover{
+    color: lightgreen;
+}
+.greenRej:hover{
+    color: orange;
+}
+.selectoptions{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 270px;
+    border: 1px solid skyblue;
+    border-radius: 5px;
+    margin: auto;
+}
+.avail_view_options{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+}
+.avail_view_options .tables{
+    position: relative;
+    background-color: rgba(135, 207, 235, 0.39);
+    text-align: center;
+    width: 70px;
+    padding: 5px 0;
+    cursor: pointer;
+}
+.selected_Option{
+    position: relative;
+    text-align: center;
+    width: 70px;
+    padding: 5px 0;
+    background-color: skyblue;
+    font-weight: 600;
+    cursor: pointer;
+}
+.table_holderdd table{
+    position: relative;
+    min-width: 600px;
+    margin: 10px auto;
+    border-collapse: collapse;
+    border: 1px solid gray;
+}
+.table_holderdd tr:nth-child(even){
+    background-color: rgb(228, 228, 228);
+}
+.table_holderdd .row-hover:hover{
+    background-color: rgb(199, 199, 199);
+    cursor: pointer;
+}
+td,  th{
+    border: 1px solid gray;
+    padding: 5px 10px;
+    text-align: center;
+}
+.table_holderdd p{
+    line-height: 20px;
+}
+.avail_view_options .tables:hover, .avail_view_options .charts:hover{
+    background-color: skyblue;
+    font-weight: 600;
+}
+.view_opt{
+    font-weight: 600;
+    padding: 5px 13px;
+}
+#purpChart,#modeChart{
+    border: 1px solid slategrey;
+}
+.meanscore2{
+    position: relative;
+    margin: auto;
+    display: flex;
+    margin-top: 3px;
+    padding: 4px;
+    align-items: center;
+    justify-content: space-around;
+}
+.meanscore2 span{
+    color: brown;
+    font-weight: 600;
+}
+h3, h4, p, label{
+    line-height: 20px;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+p{
+    font-size: 14px; /**changed from 12px**/
+    line-height: 20px;
+}
+tr{
+    margin: 5px auto;
+}
+@media screen and (max-width : 650px) {
+    .view_informations{
+        flex-direction: column;
+    }
+}
+@media screen and (max-width : 650px) {
+    .student_data_2{
+        flex-direction: column;
+    }
+}
+@media screen and (max-width: 550px){
+    .table_notify_holder{
+        min-width: 300px;
+        width: 100%;
+    }
+    .table_head{
+        font-size: 10px;
+    }
+    .reader{
+        display: none;
+    }
+}
+@media screen and (max-width: 400px){
+    .table_notify_holder{
+        min-width: 90%;
+        width: 100%;
+    }
+    .table_head{
+        font-size: 9px;
+    }
+}
+/* @media print{
+    .printer_page{
+        background-color: rgb(255, 255, 255);
+        color: brown;
+    }
+    .printer_page .btns button{
+        width: 100px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        padding: 3px;
+        border: 1px solid saddlebrown;
+        border-radius: 20px;
+        background-color: white;
+        justify-content: center;
+    }
+    .printer_page .btns button:hover{
+        background-color: saddlebrown;
+        color: white;
+    }
+    .printer_page .btns{
+        position: fixed;
+        top: 100px;
+        right: 3%;
+        background-color: rgba(255, 255, 255, 0.336);
+        flex-direction: column;
+        border-left: 4px solid cadetblue;
+        border-right: 4px solid cadetblue;
+        border-top: .5px solid cadetblue;
+        border-bottom: .5px solid cadetblue;
+        box-shadow: 2px 2px 10px gray;
+        width: 100px;
+        justify-content: space-between;
+        height: 60px;
+        padding: 10px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+    }
+    .printer_page button img{
+        width: 20px;
+        height: 20px;
+        position: relative;
+    }
+    .fee_reminder{
+        position: relative;
+        width: 90%;
+        margin: auto;
+        padding: 5px;
+    }
+    .printable_page{
+        padding: 8px;
+        position: relative;
+        font-family: "Calibri";
+        border-bottom: 1px dashed black;
+        width: 90%;
+        margin: auto;
+        background-size: 100px 100px;
+        background-position: center;
+        background-repeat: no-repeat;
+        backface-visibility: visible;
+        background-clip: padding-box;
+    }
+    .printable_page:last-child{
+        border: none;
+    }
+    .page_titles{
+        width: auto;
+        text-align: center;
+        position: relative;
+        margin: 8px auto;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .page_titles h2{
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 3px;
+    }
+    .page_titles h4{
+        font-size: 13px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .student_data p{
+        font-family: "Calibri";
+        font-size: 13px;
+        margin: 10px 0;
+        line-height: 7px;
+    }
+    .student_data_2 h3{
+        color: cadetblue;
+    }
+    .student_data_2{
+        display: flex;
+        gap: 10px;
+    }
+    .message_remider p{
+        font-size: 12x;
+    }
+    .message_remider{
+        position: relative;
+        margin: 9px 0;
+    }
+} */

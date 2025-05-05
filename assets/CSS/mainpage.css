@@ -1,0 +1,2884 @@
+*{
+    padding:0%;
+    margin: 0%;
+    font-family: "Nunito", sans-serif;
+}
+:root{
+    --maincolors:rgb(0, 29, 192);
+}
+html{
+    scroll-behavior: smooth;
+}
+td{
+    font-family: "Nunito", sans-serif;;
+    font-size: 14px; /**changed from 12px**/
+}
+label{
+    font-size: 14px; /**changed from 12px**/
+    /* font-weight: 500; */
+    cursor: pointer;
+    font-family: "Nunito", sans-serif;;
+}
+div{
+    font-family: "Nunito", sans-serif;;
+}
+p{
+    font-size: 14px; /**changed from 12px**/
+    font-family: "Nunito", sans-serif;;
+}
+h3{
+    font-family: "Nunito", sans-serif;;
+}
+h4{
+    font-family: "Nunito", sans-serif;;
+    text-align: center;
+}
+/* input{
+    all: unset;
+} */
+.mainpages{
+    width: 100vw;
+    height: 100%;
+    min-width: 500px;
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.418), rgba(0, 0, 0, 0.411)), url("../../images/board.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: 14px; /**changed from 12px**/
+}
+.dashboard{
+    font-family: "Calibri";
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 10%;
+    width: 80%;
+    max-height: 50px;
+    box-shadow: 2px 2px 10px gray;
+    z-index: 2;
+    min-width: 500px;
+    background: linear-gradient(rgba(255, 255, 255, 0.534),rgba(0, 0, 0, 0.719));
+}
+.my_element_max_300{
+    max-height: 300px;
+}
+.administrationwindow{
+    background: linear-gradient(rgba(235, 235, 235, 0.274),rgba(0,0,0,0.4));
+    width: 150px;
+    height: auto;
+    z-index: 1;
+    position: absolute;
+    top: 75px;
+    left: 0px;
+    border: 1px solid black;
+    box-shadow: 2px 2px 10px rgb(180, 180, 180);
+    border-radius: 10px;
+    display: none;
+}
+.administrationwindow button, .administrationwindow input[type=button] {
+    width:100%;
+    height: auto;
+    padding: 4px 4px;
+    margin: 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    border: 1px solid black;
+    outline: none;
+}
+.administrationwindow button:hover{
+    color: black;
+    background-color: rgb(179, 179, 179);
+    font-weight: bolder;
+}
+.administrationwindow button img{
+    width: 20px;
+}
+.administrationwindow .conts{
+    margin: 8px 10px;
+}
+.dashboard .left_dash{
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 50px;
+    background: linear-gradient( rgba(74, 124, 126, 0.295), rgba(74, 124, 126, 0.568));
+}
+.limited{
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+.exam_form{
+    position: relative;
+    font-family: "Calibri";
+    min-width: 100%;
+}
+.exam_form label{
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.flexed_column{
+    display: flex;
+    flex-direction: column;
+}
+.flexed{
+    display: flex;
+    justify-content: space-between;
+}
+.dashboard .left_dash .conts{
+    position: relative;
+    width: auto;
+    height: auto;
+    padding: 10px 5px;
+}
+.invinsible{
+    color: red;
+    font-size: 11px;
+}
+.dashboard .dash_menu,.dashboard .dash_back{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.dash_back{
+    background-color: rgb(190, 190, 190);
+    box-shadow: 2px 2px 5px gray;
+    cursor: pointer;
+    margin-left: 2px;
+    border-radius: 5px;
+    height: 80%;
+    width: 40px;
+    border: .2px solid gray;
+}
+.dash_back:hover{
+    box-shadow: 2px 2px 5px rgb(103, 212, 148);
+}
+.dashboard  .dash_menu li, .dashboard .dash_back li{
+    position: relative;
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    cursor: pointer;
+    font-size: 13px;
+    color: rgb(255, 255, 255);
+}
+.dashboard  .dash_menu li::after{
+    content: '';
+    height: 3px;
+    width: 0%;
+    position: absolute;
+    background: rgb(255, 255, 255);
+    left: 0px;
+    bottom: -10px;
+    transition: 0.2s;
+}
+.academics{
+    left: 200px;
+}
+.dashboard  .dash_menu li:hover::after{
+    width: 100%;
+}
+.dashboard .dip{
+    width: 40px;
+    height:40px;
+    position: relative;
+    margin-right: 20px;
+    background: rgb(204, 204, 204);
+    border-radius: 50%;
+    padding: 2px;
+}
+.dashboard .notify{
+    width: 30px;
+    cursor: pointer;
+}
+.num_notify{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    background: rgb(207, 207, 207);
+    border-radius: 50%;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+}
+.dashboard input[type=text]{
+    padding: 10px;
+    border: 1px solid gray;
+    width: 100%;
+    border-radius: 10px;
+    outline: none;
+    text-align: center;
+    color: MidnightBlue;
+}
+
+.sidebars{
+    display: block;
+    /* font-size: 13px; */
+    width: 20%;
+    min-width: 200px;
+    z-index: 3;
+    backdrop-filter: blur(14px);
+    position: absolute;
+    background: linear-gradient( rgba(122, 157, 158, 0.7), rgba(74, 124, 126, 0.67));
+    height: calc(100vh - 20px);
+    overflow: auto;
+    padding: 10px 0;
+}
+
+.checkboxholder{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 80%;
+    justify-content: space-between;
+    border-bottom: .3px dashed rgb(71, 71, 71);
+    padding: 3px auto;
+}
+
+.contsload{
+    position: relative;
+    width: 40%;
+}
+.contsload img{
+    width: 50px;
+    height: 50px;
+    position: relative;
+    align-self: center;
+    background: gray;
+}
+
+.paywindow{
+    position: relative;
+    width: 70%;
+    border: .5px solid rgb(136, 136, 136);
+    margin: 10px auto;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.paywindow select{
+    cursor: pointer;
+    background-color: transparent;
+}
+.paywindow .payments{
+    position: relative;
+    margin-left: 20px;
+    border: .5px solid gray;
+    padding: 10px;
+    width: 70%;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.contsbtn{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.paywindow h3{
+    text-align: center;
+}
+.paywindow label, .paywindow .conts p, .middle1 .body3 label , .body4 label{
+    font-size: 14px; /**changed from 12px**/
+    cursor: pointer;
+}
+.sidebars .contsc{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 5%;    
+}
+.conts12 img{
+    width: 15px;
+    padding: 0%;
+}
+.sidebars .contsds{
+    display: none;
+}
+.sidebars .contsc .sidebtns {
+    padding: 5px 10px;
+    margin: 4px 0;
+    display: flex ;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    backdrop-filter: blur(10px);
+    outline: none;
+    cursor: pointer;
+    background-color: rgba(10, 21, 30, 0.486);
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+.sidebars .contsc .sidebtns:hover{
+    background-color: rgb(99, 99, 99);
+    font-weight: bold;
+}
+.selectedbtn{
+    background-color: rgb(99, 99, 99);
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    color: rgb(255, 255, 255);
+}
+.sidebars .conts{
+    position: relative;
+    margin: 5px 0;
+    padding: 2px 0;
+    overflow: hidden;
+    height: auto;
+}
+.sidebars .conts .schicon{
+    width: 50px;
+    height: 45px;
+    background-color: burlywood;
+    padding: 2px;
+    border-radius: 50%;
+}
+.centernpadd{
+    padding: 5px 4px;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+}
+.sidebars .conts h2{
+    font-size: 15px;
+}
+.sidebars .titles{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px dashed black;
+    padding:0 0 10px 10px;
+}
+.sidebars .titles h2{
+    font-size: 14px;
+}
+.sidebars .conts label{
+    position: relative;
+    font-size: 15px;
+    margin: 10px 2px;
+    padding: 10px 80% 10px 0;
+    cursor: pointer;
+    font-weight: 600;
+}
+.sidebars .navButs{
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(54, 0, 0);
+    padding: 2px 10px ;
+    text-align: left;
+    width: 90%;
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.maincontents{
+    width: 80vw;
+    position: fixed;
+    right: 0;
+    top: 50px;
+    height: 100vh;
+    max-height: calc(94% - 25px);
+    overflow: auto;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.76) , rgba(105, 105, 105, 0.712));
+    backdrop-filter: blur(10px);
+}
+.contents{
+    height: auto;;
+    position: relative;
+    font-family: "Calibri";
+    min-width: none;
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+}
+.contents .welcome h2{
+    font-size: 18px;
+    font-weight: 200;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+.contents .welcome p{
+    font-size: 13px;
+    word-wrap: break-word;
+}
+
+.contents .welcome .contedd{
+    padding: 2px 10px;
+    border-left: 2px solid brown;
+    position: relative;
+    width: auto;
+}
+.images{
+    width: 50px;
+    height: 50px;
+    padding: 2px;
+    border-radius: 50%;
+    background-color: rgb(223, 143, 143);
+    margin-left: 20px;
+}
+.contents .welcome .name_n_icons{
+    display: flex;
+    align-items: center;
+}
+
+.contents .cardholder .cards{
+    position: relative;
+    min-width: 150px;
+    max-width: 150px;
+    height: auto;
+    padding: 5px;
+    background-color: rgb(73, 149, 153);
+    margin: 10px 10px;
+    border-radius: 10px; 
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+.conted{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.contents .cardholder .cards .conted:nth-child(2){
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    position: relative;
+}
+.contents .cardholder .cards .conted:nth-child(3){
+    position: relative;
+    margin: 5px 0;
+    text-align: center;
+}
+.cardholder .cards .conted:nth-child(2) p{
+    color: white;
+}
+.cardholder .cards button,.cardholder .cards input[type=button]{
+    width: auto;
+    padding: 5px 8px;
+    color: whitesmoke;
+    background-color: teal;
+    border: 1px cadetblue solid;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 5px;
+}
+.cards p{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#admissionessentials{
+    border-top: 1px dashed gray;
+    border-bottom: 1px dashed gray;
+    width: 20%;
+    margin: 10px 0;
+    margin-left: 30px;
+}
+.dp_images{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100px;
+    margin: auto;
+    align-items: center;
+}
+.dp_images img{
+    width: 70px;
+    padding: 5px;
+    background: lightslategray;
+    border-radius: 50%;
+}
+.cardholder .cards button:hover,.cardholder .cards input[type=button]:hover{
+    color: teal;
+    background-color: whitesmoke;
+}
+.middle1 .topsearch2{
+    width: 100%;
+    border-top: 3px double rgb(199, 199, 199);
+    border-bottom: 3px double rgb(199, 199, 199);
+    width: auto;
+    position: relative;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+.pleasewait{
+    position: absolute;
+    color: rgb(36, 36, 36);
+    font-family: "Calibri";
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px;
+    background: linear-gradient(rgb(25, 113, 137),rgb(102, 160, 176),rgb(25, 113, 137));
+    top: 40vh;
+    z-index: 10;
+    left: 45vw;
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.viewinformation{
+    position: relative;
+    margin: auto;
+    text-align: left;
+    width: 90%;
+}
+.viewinformation .names,.viewinformation .dobdoa, 
+.viewinformation .numbers,.viewinformation .moreinformation,
+.viewinformation .pinformation{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    width: 90%;
+    margin: 20px auto 20px;
+    justify-content: space-between;
+    align-items: left;
+    border: 1px solid slategray;
+    border-radius: 5px;
+    padding: 10px;
+}
+.viewinformation .studentdetails , .viewinformation .notification{
+    width: 98%;
+    position: relative;
+    margin: 20px auto;
+    border: 1px solid rgb(189, 189, 189);
+    padding: 20px 10px;
+    border-radius: 15px;
+}
+.viewinformation .pinfor{
+    position: relative;
+    width: 98%;
+}
+.viewinformation .studentdetails .ttt ,.viewinformation .pinfor .ttt ,.viewinformation .notification .ttt{
+    position: absolute;
+    width: auto;
+    height: auto;
+    padding: 4px 10px;
+    text-align: center;
+    left: 10px;
+    top: -20px;
+    z-index: 2;
+    background-color: rgb(247, 247, 247);
+    border-radius: 5px;
+    font-weight: 600;
+    box-shadow: 1px 1px 10px gray;
+}
+.viewinformation label{
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.otherbtn .viewinformation h3{
+    color:  rgb(74, 73, 78);    
+}
+.view .informationtoview{
+    width: 100%;
+    margin: auto;
+    overflow: auto;
+}
+.instructions{
+    border-bottom: 1px dashed black ;
+    margin-bottom: 10px;
+}
+.middle1 .body2 table, .middle1 .body2 td ,
+.registerbody table , .registerbody td,
+.informationtoview table , .informationtoview td, 
+.middle1 .contstable table, .middle1 .contstable td,
+.middle1 .paywindow table, .middle1 .paywindow td,
+.middle1 .body1 table, .middle1 .body1 td,
+.middle1 table,.middle1 td
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 14px; /**changed from 12px**/
+    /* font-weight: 500; */
+    margin: 10px auto;
+    color: black;
+}
+#geterrorpay{
+    margin: 10px 0;
+}
+.middle1 .body2 table , .registerbody table, .informationtoview table,.middle1 .contstable table{
+    min-width: 300px;
+    border-radius: 10px 10px 0 0;
+    margin: 5px auto;
+}
+.middle1 .topsearch2 label{
+    font-size: 14px; /**changed from 12px**/
+    cursor: pointer;
+    font-weight: 600;
+    color: brown;
+    text-align: left;
+    font-weight: 600;
+}
+.middle1 .contstable{
+    position: relative;
+    width: 100%;
+    overflow: auto;
+}
+#resulters{
+    margin-top: 10px;
+    border-top: 1px dashed gray;
+}
+table th {
+    background: linear-gradient( rgba(74, 124, 126, 0.295), lightslategray);
+    text-align: center;
+    color: black;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: rgb(7, 7, 56);
+    border: .5px solid gray;
+    font-size: 14px;
+}
+.record_new_expense{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.expense_record_panel{
+    border: 1px solid rgb(187, 187, 187);
+    position: relative;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+table td{
+    text-align: left;
+    padding: 5px;
+    color: black;
+    font-size: 14px;
+}
+table tr:nth-child(odd) td{
+    background-color: rgba(187, 198, 209, 0.685);
+    color: rgb(25,25,112);
+}
+table tr:last-of-type{
+    border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+.cards .block{
+    position: absolute;
+    left: 0%;
+    top: 5px;
+    width: 95px;
+    height: 20px;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(40px);
+}
+.contents .cardholder .cards:hover{
+    background-color: rgb(54, 109, 112);
+    box-shadow: 2px 2px 10px rgb(118, 137, 138);
+    transform: translate(0,-5px);
+    transform: scale(1.1,1.1);
+}
+.contents .cardholder .cards p{
+    font-size: 14px; 
+    color: rgb(7, 63, 65); 
+}
+
+.formsexams{
+    position: relative;
+    min-width: 99%;
+    display: flex;
+    overflow: hidden;
+}
+.formsexams1{
+    position: relative;
+    min-width: 99%;
+}
+.formsexams1 .conts{
+    margin: 5px auto;
+}
+.contents .cardholder{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    overflow: auto;
+    width: auto;
+}
+.dashboard .menuicon{
+    width: 20px;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 10%;
+}
+.dashboard .menuicon:hover{
+    box-shadow: 2px 2px 10px gray;
+}
+.arrow{
+    width: 5px;
+    height: 5px;
+    border-right :2px solid rgb(107, 27, 27);
+    border-bottom :2px solid rgb(107, 27, 27);
+    position: relative;
+    display: block;
+}
+.contents .titled{
+    position: relative;
+    width: auto;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;    
+}
+.contents .titled h2{
+    font-size: 20px;
+    font-family: "Rockwell";
+    font-weight: 500;
+}
+.dialogholder{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.4);
+    top: 0%;
+    left: 0%;
+    z-index: 10;
+}
+.dialogholder .dialogwindow{
+    position: relative;
+    width: 300px;
+    min-height: 70px;
+    height: auto;
+    border: 1px solid cadetblue;
+    background-color: white;
+    margin: auto;
+    margin-top: calc(50vh - 100px);
+    padding: 10px ;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.dialogwindow .buttons{
+    position: relative;
+    width: 180px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 5px;
+}
+.dialogwindow button{
+    position: relative;
+    width: 40%;
+    padding: 4px 10px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid cadetblue;
+    color: rgb(29, 83, 85);
+    cursor: pointer;
+}
+.dialogwindow button:hover{
+    color: white;
+    background-color: cadetblue;
+}
+.dialogwindow .message{
+    text-align: center;
+    font-size: 13px;
+}
+.middle1 .registerbody{
+    text-align: center;
+    position: relative;
+    overflow: auto;
+}
+.middle1 .registerbodytop,.middle1 .registerbody{
+    width: 100%;
+    position: relative;
+    padding: 10px 0;
+    margin-bottom: 5px;
+}
+.registerbodytop .option1 input[type=text]{
+    width: 200px;
+    position: relative;
+    color: MidnightBlue;
+}
+.registerbodytop .conts , .registerbodytop .option1, .registerbodytop .option2{
+    margin: 0 0 10px 0;
+    position: relative;
+}
+.option2 select{
+    max-width: 150px;
+}
+.contents .admWindow{
+    position: relative;
+    width: 90%;
+    height: auto;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 2px 2px 10px gray;
+    background-color: rgba(255, 255, 255, 0.692);
+    backdrop-filter: blur(10px);
+}
+.changesubwindow2{
+    margin: auto;
+    background: rgb(255, 255, 255);
+    padding: 10px 5px;
+    position: relative;
+    margin-top: 20vh;
+    border-radius: 10px;
+    font-family: 'Cambria Math';
+    transform: 2s;
+    width: 1000px !important;
+}
+.changesubwindow{
+    margin: auto;
+    width: 450px;
+    background: white;
+    padding: 10px 5px;
+    position: relative;
+    margin-top: 20vh;
+    border-radius: 10px;
+    font-family: 'Cambria Math';
+    transform: 2s;
+}
+.nextprevious{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: relative;
+    width: auto;
+    margin: 5px 0;
+}
+.nextprevious p{
+    color: brown;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    text-align: right;
+}
+.nextprevious p:hover{
+    color: black;
+}
+.editexams{
+    width: 400px;
+    margin-top: 15vh;
+}
+.editregexams{
+    width: 500px;
+    margin-top: 10vh;
+    /* max-height: 96vh; */
+    /* overflow: auto; */
+}
+.addsubject{
+    width: 300px;
+    margin-top: 20vh;
+    overflow: auto;
+}
+.add_subjects{
+    width: 300px;
+}
+.formation3{
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+.formation3 .conts{
+    min-width: 100%;
+    max-width: 100%;
+}
+.formation3 label{
+    font-weight: 600;
+}
+#returnback,#returnback2,#returnback3{
+    color: rgb(1, 118, 183);
+    margin-top: 5px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+}
+#returnback:hover,#returnback2:hover,#returnback3:hover{
+    color: rgb(36, 36, 36);
+}
+.changesubwindow .funga, .changesubwindow2 .funga{
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 25px;
+    font-family: "Calibri";
+}
+.changesubwindow .fungasubjects,.changesubwindow .toasubjects, .changesubwindow2 .fungasubjects,.changesubwindow2 .toasubjects{
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 3px;
+    font-family: "Calibri";
+}
+.boddy1{
+    position: relative;
+}
+.funga:hover, .changesubwindow .fungasubjects:hover,.changesubwindow .toasubjects:hover, .changesubwindow2 .fungasubjects:hover,.changesubwindow2 .toasubjects:hover{
+    color: rgb(247, 37, 0);
+    font-weight: bolder;
+}
+.changesubwindow #namesub, .changesubwindow2 #namesub{
+    position: relative;
+    margin: 3px auto;
+    padding: 2px 5px;
+    font-size: 15px;
+    color: tomato;
+    border: 1px solid gray;
+    border-radius: 30px;
+    outline: none;
+    width: 90%;
+}
+.changesubwindow h3, .changesubwindow2 h3{
+    text-align: center;
+    color: black;
+    margin: 3px auto;
+}
+.changesubwindow button, .changesubwindow2 button{
+    width: auto;
+    min-width:100px;
+    outline: none;
+    height: auto;
+    padding:3px 10px;
+    background: linear-gradient( to right, rgba(74, 124, 126, 0.829), rgba(74, 124, 126, 0.897));
+    color: rgb(255, 255, 255);
+    border: .5px solid  rgb(131, 131, 131);
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.changesubwindow button:hover, .changesubwindow2 button:hover{
+    background: rgb(16, 141, 148);
+    color: rgb(255, 255, 255);
+}
+
+.changesubwindow label, .changesubwindow2 label{
+    font-weight: 600;
+}
+
+.changesubwindow .informed, .changesubwindow2 .informed{
+    position: relative;
+    border-top: .5px dashed black;
+    border-bottom: .5px dashed black;
+    padding: 5px 0px;
+    margin: 5px auto;
+}
+.contents .admWindow .bottom{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+}
+.contents .admWindow .top1 button:hover,.viewinformation button:hover,.back_button button:hover,.middle1  button:hover,.body2 button:hover,.middle2 button:hover{
+    background: rgb(16, 141, 148);
+    color: rgb(255, 255, 255);
+}
+.back_button{
+    position: absolute;
+    z-index: 10;
+    top: 20px;
+    left: 0px;
+    padding: 0%;
+    background-color: rgba(126, 126, 126, 0.452);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    max-width: 0;
+    max-height: 0%;
+}
+.admWindow .top1 button,.viewinformation button,.middle1  button,.body2 button,.middle2 button, .back_button button{
+    width: auto;
+    min-width:100px;
+    outline: none;
+    height: auto;
+    padding:3px 10px;
+    background: cadetblue;
+    color: rgb(255, 255, 255);
+    border: .5px solid  rgb(131, 131, 131);
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+.back_button button img{
+    width: 20px;
+    height: 15px;
+}
+.information{
+    margin: 20px auto;
+}
+.checkboxholder label:hover{
+    color: brown;
+}
+.borded{
+    border-bottom: 1px dashed brown;
+    padding: 0 0 5px 0;
+    margin: 0 0 5px 0;
+}
+.body2 button{
+    width: auto;
+    min-width:100px;
+    outline: none;
+    height: auto;
+    padding:3px 10px;
+    background: cadetblue;
+    color: rgb(255, 255, 255);
+    border: .5px solid  rgb(131, 131, 131);
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+.contents .admWindow .top1{
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    margin: 0 0 5px 0;
+    border-bottom: 1px solid black;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient( rgba(74, 124, 126, 0.295), rgba(74, 124, 126, 0.568));
+}
+.otherbtn{
+    position: relative;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    overflow: auto;
+    padding: 10px 0;
+}
+
+.otherbtn table button, .middle1 .contstable button{
+    width: 70px;
+    height: auto;
+    background: cadetblue;
+    padding: 3px 10px;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+    margin: 2px auto;
+    font-size: 11px;
+}
+.registerbody table input[type=checkbox]{
+    margin: 0 auto;
+    position: relative;
+    cursor: pointer;
+    align-items: center;
+}
+.loadwindow,.dialogholder,.changepasswindow{
+    position: fixed;
+    top: 0%;
+    left: 0px;
+    background: rgba(0,0,0,0.4);
+    width: 100vw;
+    height: 100vh;
+    z-index: 4;
+}
+.loadwindow{
+    z-index: 20;
+}
+.loadwindow .loadingcontents{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: auto;
+    margin-top: calc(50vh - 25px);
+}
+.changepasswindow,.confirmpaymentwindow{
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 10;
+}
+.changepass{
+    width: 400px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 01);
+    margin: auto;
+    position: relative;
+    margin-top: calc(40vh - 50px);
+    padding: 10px 10px;
+    font-family: "Calibri";
+    overflow: hidden;
+    border-radius: 10px;
+	transition: .5s;
+}
+.confirmpayment{
+    width: 300px;
+    height: auto;
+    background-color: rgba(255, 255, 255, 01);
+    margin: auto;
+    position: relative;
+    margin-top: 20vh;
+    padding: 10px 10px;
+    font-family: "Calibri";
+    overflow: auto;
+    border-radius: 10px;
+	transition: .5s;
+}
+.confirmpayment h3{
+    font-weight: 600;
+    text-align: center;
+}
+.btns{
+    width: 100%;
+    margin: auto;
+    padding: 5px 0;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
+}
+.boddy3{
+    position: relative;
+    width: 50%;
+    padding: 10px 5px;
+    border: .5px solid gray;
+    border-top: 4px solid gray;
+    border-bottom: 4px solid gray;
+    margin: 10px auto;
+    border-radius: 15px;
+}
+.roundedbtn{
+    position: relative;
+    padding: 10px;
+    text-align: center;
+    background-color: cadetblue;
+    cursor: pointer;
+    margin: 5px 0;
+    border-radius: 50%;
+}
+.roundedbtn:hover{
+    box-shadow: 2px 2px 5px gray;
+    color: blue;
+}
+.staff_information{
+    margin: 10px 0;
+}
+.information_window{
+    position: absolute;
+    width: 200px;
+    height: auto;
+    padding: 10px;
+    right: 10px;
+    top:-5px;
+    background-color: whitesmoke;
+    box-shadow: 2px 2px 10px gray;
+}
+.more_infor{
+    color:rgb(0, 119, 255);
+    padding: 0 5px;
+    cursor: pointer;
+    text-underline-offset: 1px;
+}
+.more_infor:hover{
+    color: rgb(0, 47, 255);
+    text-decoration: underline;
+}
+.block_btn{
+    background-color: cadetblue;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    font-size: 14px; /**changed from 12px**/
+    display: inline-block;
+    padding: 10px;
+    /* font-weight: 600; */
+    margin: 5px 0;
+}
+.block_btn:hover{
+    color: white;
+    box-shadow: 2px 2px 5px rgb(77, 77, 77);
+}
+.boddy3 label{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.delete-sub{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+.delete-sub:hover{
+    color: red;
+}
+.confirmpayment button{
+    width: 35%;
+    padding: 5px 5px;
+    border: .5px solid gray;
+    cursor: pointer;
+    border-radius: 30px;
+    outline: none;
+}
+.confirmpayment button:hover{
+    color: rgb(0, 0, 0);
+    background-color: rgb(128, 190, 192);
+    font-weight: 700;
+}
+.passwindows{
+	transition: .5s;
+    display: flex;
+    position: relative;
+    margin: 0% auto;
+    width: calc(850px - 20px);
+    justify-content: space-between;
+}
+.passwindows .contse,.passwindows .changepass1{
+    width: 400px;
+}
+.changepass h3{
+    margin: 10px auto;
+    text-align: center;
+}
+.changepass .changepass1 .conts{
+    margin: 10px auto;
+}
+.changepass button{
+    width: auto;
+    height: auto;
+    background: cadetblue;
+    padding: 7px 10px;
+    border: .5px solid black;
+    color: black;
+    cursor: pointer;
+    margin: 2px auto;
+    font-size: 11px;
+    border-radius: 30px;
+    outline: none;
+}
+.loadwindow .loadingcontents img{
+    width: 50px;
+}
+.contsbt{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+    margin: 20px 0 0px 0;
+}
+.otherbtn table button:hover, .middle1 .contstable button:hover , .changepass button:hover{
+    color: white;
+    background: rgb(39, 93, 95);
+}
+.contents .admWindow .top1 p{
+    color: rgb(49, 49, 49);
+}
+.contsfd{
+    overflow: auto;
+    padding: 10px 0;
+}
+.middle1 .tops{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.middle1 .tops label{
+    cursor: pointer;
+    font-size: 14px; /**changed from 12px**/
+    /* font-weight: 600; */
+}
+.middle1 .body1{
+    margin: 10px auto;
+    padding: 10px 0;
+    border-top: .5px solid gray;
+}
+.middle1 .otheropt{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.body1 table button , .body4 table button{
+    margin: 1px auto;
+    width: 70px;
+    font-size: 14px; /**changed from 12px**/
+}
+.displaydata{
+    color: red;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.middle1 .tablecarriers{
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+}
+.contsfd table, .body1 table{
+    margin: 10px auto;
+}
+.middle1 .btndates{
+    font-size: 14px; /**changed from 12px**/
+    display: flex;
+    flex-direction: row;
+}
+.notice1{
+    border-bottom: 1px dashed black;
+}
+.call_option{
+    display: flex;
+    align-items: center;
+}
+.call_option img{
+    width: 20px;
+}
+.middle1 .staffinformed{
+    position: relative;
+    width: 98%;
+    height: auto;
+    margin: 20px auto;
+    border: 1px solid gray;
+    padding: 10px 5px;
+}
+.staffinformed .conts{
+    margin: 5px;
+}
+.staffinformed .notice,.staffinformed .trnames,.staffinformed .credentials, .staffinformed .statuses{
+    width: 96%;
+    height: auto;
+    position: relative;
+    border: .5px solid gray;
+    margin: 20px auto 5px auto;
+    padding: 10px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.staffinformed .action{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.staffinformed label{
+    font-size: 14px; /**changed from 12px**/
+    position: relative;
+    cursor: pointer;
+    /* font-weight: 500; */
+}
+.staffinformed .titles{
+    position: absolute;
+    width: auto;
+    padding: 2px 5px;
+    height: auto;
+    background: white;
+    font-size: 14px; /**changed from 12px**/
+    top: -15px;
+    left: 0%;
+    color: cadetblue;
+}
+.paneled{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background-color: rgba(240, 230, 140, 0.048);
+    z-index: 2;
+    display: none;
+}
+.staffinformed .titlesd,.viewinformation .tttsd{
+    position: absolute;
+    width: auto;
+    padding: 5px 10px;
+    height: auto;
+    font-size: 16px;
+    top: -14px; /**changed from 12px**/
+    left: 40%;
+    color: rgb(0, 0, 0);
+    background: lightslategray;
+    border-radius: 4px;
+    z-index: 1;
+}
+.year_card{
+    position: relative;
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+.margin-bottom-5px{
+    margin-bottom: 5px;
+}
+.my_salo-flexbox{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: start;
+    height: auto;
+}
+.payments-details{
+    padding: 5px 0;
+}
+.middle1 .body3,.middle1 .body5{
+    position: relative;
+    border: 1px solid gray;
+    border-top: 4px solid gray;
+    border-bottom: 4px solid gray;
+    margin: auto;
+    overflow: auto;
+    border-radius: 20px;
+}
+.middle1 .body3{
+    width: 50%;
+}
+.middle1 .body5{
+    width: 90%;
+}
+.middle1 .body4{
+    margin: 10px auto 0 auto;
+    border-top: 1px dashed black;
+    padding: 5px;
+}
+.butns{
+    color: brown;
+    font-weight: bold;
+    cursor: pointer;
+}
+.embold{
+    font-weight: 600;
+}
+.butns:hover{
+    text-decoration: underline;
+    text-underline-offset: 1px;
+}
+.body3 img,.body4 img{
+    width: 40px;
+    margin: auto;
+}
+.body4 .boddy{
+    width: 300px;
+}
+.classlist input[type=checkbox]{
+    min-width: 15px;
+    min-height: 15px;
+    max-width: 15px;
+    max-height: 15px;
+    cursor: pointer;
+}
+.subjectandclass{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+}
+.subjectandclass .conts1{
+    min-width: 45%;
+}
+.classlist{
+    position: relative;
+    width: 200px;
+    box-shadow: 1px 1px 10px rgb(139, 139, 139) inset;
+    padding: 5px;
+    margin-left: 10px;
+    height:100px;
+    overflow:auto;
+}
+.classlist2{
+    position: relative;
+    width: 80%;
+    box-shadow: 1px 1px 10px rgb(139, 139, 139) inset;
+    padding: 5px;
+    margin-left: 10px;
+    min-height: 100px;
+}
+.classlist2 input[type=checkbox]{
+    min-width: 15px;
+    min-height: 15px;
+    cursor: pointer;
+}
+.middle1 .body,.middle1 .body2{
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid gray
+}
+.middle1 .body .left{
+    /* border-right: 1px solid gray; */
+}
+.middle1 .body strong{
+    font-size: 14px; /**changed from 12px**/
+    /* font-weight: 600; */
+}
+.middle1 .body label{
+    font-size: 14px; /**changed from 12px**/
+    cursor: pointer;
+    /* font-weight: 700; */
+    font-family: "Rockwell";
+}
+
+.middle1 .topsearch2 select{
+    position: relative;
+    margin-left: 20px;
+    border: 1px solid gray;
+    cursor: pointer;
+    color: rgb(63, 63, 63);
+    width: 80%;
+    background-color: transparent;
+}
+.middle1 .body select{
+    position: relative;
+    width: 78%;
+    padding:5px 10px;
+    margin-left: 10px;
+    border: 1px solid gray;
+}
+.body2 select{
+    position: relative;
+    width: 95%;
+    padding:5px 10px;
+    margin-left: 10px;
+    border: 1px solid gray;
+    color: var(--maincolors);
+    background-color: transparent;
+}
+select option{
+    color: rgb(3, 33, 34);
+    cursor: pointer;
+    background-color: transparent;
+}
+select option:hover{
+    background: cadetblue;
+}
+.bot{
+    display: flex;
+    justify-content: space-between;
+}
+.stats{
+    position: relative;
+}
+.stats .spanned{
+    position: relative;
+    color: brown;
+    margin-left: 100px;
+    display: inline-block;
+}
+.bot p{
+    position: relative;
+    color: rgb(37, 182, 240);
+    cursor: pointer;
+    margin: 5px;
+}
+.middle2{
+    position: relative;
+    margin: 10px auto;
+    width: 70%;
+    border: 1px solid rgb(170, 170, 170);
+    border-radius: 10px;
+    padding: 10px;
+}
+.conthead{
+    position: fixed;
+    top: 60px;
+    align-self: center;
+    text-align: center;
+    width: 450px;
+
+}
+.middle2 label{
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.middle2 h3{
+    font-size: 14px;
+    text-align: center;
+}
+.middle2 .conts{
+    margin: 5px 0pc;
+}
+.middle2 select{
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: transparent;
+    color: gray;
+    border-radius: 5px;
+}
+.middle2 #paysmode{
+    margin-left: 10px;
+}
+.moveright{
+    position: relative;
+    width: 50%;
+    padding: 15px;
+    border: 1px solid rgba(128, 128, 128, 0.63);
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgb(190, 190, 190);
+}
+.middle2 option{
+    cursor: pointer;
+    color: cadetblue;
+}
+.middle1{
+    padding: 10px 5px;
+    position: relative;
+    width: 98%;
+    margin: auto;
+}
+
+.middle1 .bodywindow .staffdatas{
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+.staffdatas .left , .staffdatas .right{
+    position: relative;
+    width: 40%;
+}
+.middle1 .staffdatas label{
+    font-size: 14px; /**changed from 12px**/
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    /* font-weight: 600; */
+}
+.sections{
+    font-size: 16px;
+    color: brown;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    margin: 3px 0;
+    margin-top: 10px;
+}
+.middle1 a{
+    text-decoration: none;
+    color: black;
+    text-decoration: underline;
+}
+.middle1 a:hover{
+    color: brown;
+}
+.tableHolder{
+    position: relative;
+    width: 60vw;
+    overflow: auto;
+    height: auto;
+    max-height: 100vh;
+    margin: auto;
+}
+.errors{
+    font-size: 14px; /**changed from 12px**/
+    /* font-weight: 600; */
+}
+.middle1 input[type=text],.middle1 input[type=date],
+.middle1 input[type=email],.middle2 input[type=text],
+.middle2 input[type=date],.middle2 input[type=email],
+.middle1 input[type=number], .middle1 input[type=password], 
+.middle1 select,
+.exam_form input[type=text],.exam_form input[type=date],
+.exam_form input[type=number],.exam_form select, 
+.formation3 select,.formation3 input[type=number],
+.formation input[type=text],.formation input[type=number],
+.formation select,input[type=number],input[type=text]
+{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    position: relative;
+    width: 200px;
+    padding:5px 10px;
+    margin-left: 10px;
+    border: 1px solid gray;
+    font-size: unset;
+    font-size: 14px !important; /**changed from 12px**/
+    color: MidnightBlue;
+    /* min-width: 100px; */
+    /* max-width: 200px; */
+    border-radius:5px;
+    font-family: "Calibri";
+    background-color: white;
+}
+#admitform input[type=text],#admitform select,
+#admitform input[type=number],#admitform input[type=date],
+#admitform input[type=email]{
+    min-width: 90%;
+    font-size: unset;
+    font-size: 14px; /**changed from 12px**/
+}
+.middle1 td .my_dorms_name{
+    margin: auto;
+    align-self: center;
+}
+.link{
+    /* all: unset; */
+    color: rgb(3, 78, 47);
+    font-size: 14px; /**changed from 12px**/
+    /* font-weight: 500; */
+    cursor: pointer;
+    /**margin: 5px auto;*/
+    text-align: center;
+    width: fit-content;
+}
+.link:hover{
+    color: brown;
+    text-underline-offset: 2px;
+    text-decoration: underline;
+}
+.my_dorms_name{
+    max-width: 150px;
+    min-width: 150px;
+}
+td .link{
+    max-width: 50px;
+}
+.middle1 .options select,.middle1 .options input[type=date]{
+    width: 20%;
+    background-color: transparent;
+}
+
+.middle1 .options input[type=text]{
+    width: 20%;
+    cursor: text;
+    color: MidnightBlue;
+    font-size: unset;
+    font-size: 14px; /**changed from 12px**/
+}
+.completeadm{
+    position: relative;
+    font-size: 13px;
+}
+
+.studentdetails .conts,.pinformation .conts{
+    position: relative;
+    padding: 5px 0px;
+    margin: 0 2px ;
+}
+.middle1 .body .conts{
+    margin: 10px 0;;
+}
+.middle1 .left, .middle1 .right{
+    padding: 10px;
+}
+.middle2 .tops{
+    margin: 10px auto;
+    border-bottom: 1px dashed black;
+    padding: 10px 0;
+}
+.dashboard .left_dash .menu{
+    display: none;
+}
+.contents .admWindow .bottom1{
+    position: relative;
+    width: calc(100%-20px);
+    padding: 2px 10px;
+    margin: auto;
+    margin-top: 10px;
+    text-align: left;
+    border-top: 1px solid gray;
+    text-align: right;
+}
+.registerbodybottom .buttons{
+    display: flex;
+    width: 50%;
+    min-width: 300px;
+    margin: 5px auto;
+}
+.notifies{
+    display: flex;
+    justify-content: space-between;
+}
+.sidebars .icons{
+    width: 20px;
+}
+.sidebars .contsd{
+    width: auto;
+    height: auto;
+}
+.hide{
+    display: none;
+}
+.rotate_right{
+    transform: rotate(-45deg);
+}
+.rotate_down{
+    transform: rotate(45deg);
+}
+.animate{
+    animation-name: scale;
+    animation-duration: .3s;
+    animation-direction: normal;
+}
+
+.formsexams1 .conts label,.formsexams1 input[type=text],
+.formsexams1 input[type=number],.formsexams1 select
+.formsexams1 input[type=date]
+{
+    font-size: unset;
+    font-size: 14px; /**changed from 12px**/
+    /* font-weight: 400; */
+    /* background-color: rgba(0, 255, 255, 0.164); */
+    color: MidnightBlue;
+}
+.formsexams1 .conts label{
+    /* font-weight: 600; */
+}
+.animate2{
+    animation-name: scale2;
+    animation-duration: 1s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+td{
+    align-items: center;
+}
+
+.topsearch{
+    position: relative;
+    margin: 3px auto;
+    padding: 5px;
+    width: 90%;
+    border-radius: 10px 10px 0 0;
+}
+.animate10{
+    animation-name: scale10;
+    animation-duration: 1s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.unhide{
+    display: block;
+    position: fixed;
+    left: 0mm;
+    top: 0%;
+}
+.nhide{
+    display: block;
+    position: fixed;
+    left: 0mm;
+    top: 0%;
+}
+.animate3{
+    animation-name: scale3;
+    animation-duration: .5s;
+    animation-direction: normal;
+}
+.animate4{
+    animation-name: scale4;
+    animation-duration: .5s;
+    animation-direction: normal;
+}
+.animate5 {
+    animation-name: scale5;
+    animation-duration: .5s;
+    animation-direction: normal;
+}
+.animate6 {
+    animation-name: scale6;
+    animation-duration: .5s;
+    animation-direction: normal;
+}
+.animate7 {
+    animation-name: scale7;
+    animation-duration: .5s;
+    animation-direction: normal;
+}
+.animate8 {
+    animation-name: scale8;
+    animation-duration: .5s;
+    animation-direction: normal;
+}
+#closesidebar{
+    display: none;
+    font-size: 30px;
+    position: absolute;
+    right: 10px;
+    top: -10px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;   
+}
+.animate20 {
+    animation-name: slideLeft;
+    -webkit-animation-name: slideLeft;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    visibility: visible;
+}
+.animate21 {
+    animation-name: slideRight;
+    -webkit-animation-name: slideRight;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    visibility: visible;
+}
+#closesidebar:hover{
+    color: red;
+    font-weight: bolder;
+}
+/**********setting scroll bars************/
+::-webkit-scrollbar{
+    width: 15px;
+    height: 15px;
+}
+::-webkit-scrollbar-thumb{
+    width: 15px;
+    height: 15px;
+    background-color: rgb(83, 83, 83);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track{
+    width: 15px;
+    height: 15px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar:hover{
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    color: brown;
+}
+.tableme{
+    position: relative;
+    overflow: auto;
+    width: 100%;
+    height: auto;
+}
+#subjectlist{
+    overflow: auto;
+}
+.bordered{
+    margin-top: 5px;
+    border-top: 1px solid gray;
+    border-radius: 10px;
+    padding: 5px 1px;
+}
+.bordered_bottom{
+    border-bottom: .5px dashed black;
+}
+.table_holders{
+    position: relative;
+    margin: auto;
+    width: 95%;
+    min-width: 95%;
+    overflow: auto;
+}
+.table_fill{
+    width: 100%;
+    position: relative;
+    padding: 0 5px;
+    border: 1px gray solid;
+    margin: 10px auto;
+    border-radius: 15px 15px 0 0;
+    min-width: 600px;
+    height: auto;
+}
+.table_fill p {
+    max-width: calc(80% / 5);
+    width: calc(80% / 5 );
+    text-align: center;
+}
+.imagers{
+    position: absolute;
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    left: 40%;
+    align-self: center;
+    margin: 0px 10%;
+    background-attachment: unset;
+}
+.meanscores123{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.meanscores123 strong{
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.meanscores{
+    position: relative;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+.meanscore2{
+    position: relative;
+    margin: auto;
+    display: flex;
+    margin-top: 3px;
+    padding: 4px;
+    align-items: center;
+    justify-content: space-around;
+}
+.meanscore2 span{
+    color: brown;
+    font-weight: 600;
+}
+.imagers img{
+    width: 50px;
+    height: 30px;
+    backdrop-filter: blur(10px);
+    background: rgb(150, 150, 150);
+}
+.middle1 .table_fill input[type=number], 
+.middle1 .table_fill select{
+    position: relative;
+    text-align: center;
+    align-self: center;
+    margin: 0%;
+    max-width: 20px;
+    width: 20px;
+    background-color: transparent;
+}
+.table_fill p:first-child {
+    width: calc(80% / 8);
+    text-align: left;
+}
+.table_body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: auto;
+    max-height: 45vh;
+}
+.middle1 .top{
+    position: relative;
+    width: 80%;
+    text-align: left;
+    margin: 5px auto;
+}
+.middle1 .table_header{
+    width: 100%;
+    position: relative;
+    height: auto;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 800;
+    border-bottom: 2px solid salmon;
+}
+.td{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 100px;
+}
+
+.table_row{
+    margin: 0%;
+    position: relative;
+    height: 60px;
+    border-bottom: 1px dashed black;
+    padding: 4px;
+}
+.table_fill button{
+    margin: 0%;
+}
+.table_row:last-child{
+    margin: 0%;
+    position: relative;
+    height: 40px;
+    border-bottom: none;
+}
+.table_row .td p:nth-child(4){
+    width: calc(80% / 3);
+    background-color: coral;
+    text-align: center;
+}
+.titled_sections{
+    color: brown;
+    font-size: 18px;
+    font-weight: 600;
+}
+.search_students_finance{
+    position: relative;
+    margin: 10px auto 0 auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    height: 100px;
+    border-bottom: 1px solid gray;
+    padding: 0;
+}
+.search_students_finance button{
+    margin-bottom: 0px;
+}
+.ontop{
+    position: relative;
+    width: 100%;
+}
+.ontop select, .ontop input[type=date], .ontop input[type=text]  {
+    position: relative;
+    min-width: 150px;
+    color: MidnightBlue;
+}
+.body4 select{
+    max-width: 200px;
+}
+.ontop label{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.anonymus{
+    position: absolute;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.342);
+    z-index: 10;
+    bottom: 10px;
+    right: 10px;
+}
+.staffdatas input[type=text], .staffdatas select,
+.staffdatas input[type=number],.staffdatas input[type=date],
+.staffdatas input[type=email],.staffdatas input[type=password]{
+    min-width: 65%;
+}
+.copyright{
+    width: 100%;
+    z-index: 2;
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    text-align: right;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 14px; /**changed from 12px**/
+    padding: 5px 10px;
+    color: rgb(255, 255, 255);
+}
+.copyright1{
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 14px; /**changed from 12px**/
+    padding: 5px 10px;
+    display: none;
+}
+.logs_information{
+    border-bottom: 1px solid black;
+    padding: 10px 0;
+    margin: 10px auto;
+}
+.bg_green{
+    background-color: green;
+}
+.paywindow input[type=text],.paywindow input[type=number]{
+    position: relative;
+    max-width: 70%;
+    color: MidnightBlue;
+}
+#showfees{
+    color: black;
+}
+#showfees:hover{
+    color: rgb(73, 149, 153);;
+}
+.expense_record_panel{
+    position: relative;
+    margin-top: 20px;
+}
+.fs-12px{
+    font-size: 14px; /**changed from 12px**/
+}
+.fs-14px{
+    font-size: 14px;
+}
+.fs-16px{
+    font-size: 16px;
+}
+
+.bg-cadet{
+    background-color: cadetblue;
+}
+.bg-cadet{
+    padding: 5px 0;
+}
+.margin-3px{
+    margin: 3px 0;
+}
+.banner{
+    position: relative;
+    display: inline-block;
+    padding: 2px;
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 82, 0);
+}
+.bannera{
+    position: relative;
+    display: inline-block;
+    padding: 2px;
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 251, 0);
+}
+.financial_statements{
+    position: relative;
+    margin: 10px auto;
+    border: 1px solid black;
+    width: 94%;
+    padding: 5px 10px;
+    min-width: 500px;
+}
+.finace_headers{
+    background-color: cadetblue;
+    padding: 10px 0;
+    text-align: center;
+}
+.titles, .finance_body , .finance_body_total, .finance_body_total_2{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    width: calc(100% - 10px);
+}
+.finance_header{
+    margin: 10px 0;
+}
+.finance_body .name_title, .finance_body_total .name_title, .finance_body_total_2 .name_title{
+    font-weight: 600;
+    width: 200px;
+}
+.finance_body_total_2 {
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    margin: 4px 0;
+    padding: 5px 0;
+    font-weight: 600;
+}
+.finance_body_total{
+    border-top: 4px double gray;
+    border-bottom: 4px double gray;
+    margin: 4px 0;
+    padding: 5px 0;
+    font-weight: 600;
+}
+.t1, .t2, .t3{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100%/4);
+}
+.title_name{
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.color_brown{
+    color: steelblue;
+}
+@media screen and (max-width: 1000px){
+    .dashboard{
+        position: fixed;
+        width: 100vw;
+        min-width: none;
+    }
+    .dashboard .dash_menu li{
+        font-size: 13px;
+    }
+    
+    .middle2{
+        margin: 10px auto;
+        width: 90%;
+    }
+    .middle2 .conts{
+        margin: 20px auto;
+    }
+    .tttsd{
+        display: none;
+        position: absolute;
+        width: auto;
+        height: auto;
+        top: -14px; /**changed from 12px**/
+        left: 0%;
+        background-color: lightcoral;
+    }
+    .sidebars{
+        display: none;
+    }
+    .maincontents{
+        width: 100vw;
+        left: 0;
+        overflow: auto;
+        margin: auto;
+        min-width: 200px;
+        height: 90vh;
+    }
+    .cardholder{
+        padding: 10px;
+        width: inherit;
+    }
+    .contents{
+        width: 100%;
+        min-width: none;
+    }
+    .contents .welcome{
+        margin: 5px auto;
+        margin: 5px 10px;
+        height: auto;
+        width: inherit;
+        word-wrap: break-word;
+    }
+    .mainpages{
+        /**width: 200px;*/
+        min-width: 200px;
+        position: absolute;
+        margin: auto;
+    }
+    .dashboard .left_dash .menu{
+        display: block;
+    }
+    .loadwindow .loadingcontents{
+        width: 100px;
+        font-size: 14px; /**changed from 12px**/
+    }
+    #closesidebar{
+        display: block;
+    }.tablecarriers{
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        
+    }
+    .editregexams{
+        margin-top: 20px;
+        /* max-height: 94%; */
+    }
+    .tableHolder{
+        width: 85vw;
+    }
+}
+.recent_messages{
+    position: relative;
+    overflow: auto;
+    min-width: 250px;
+    max-width: 600px;
+    margin: 10px auto;
+    max-height: 500px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+.recent_messges .titles h2{
+    color: gray;
+    text-align: center;
+    font-weight: 400;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.norm_unseen{
+    display: none;
+}
+.norm_seen{
+    display: inline-block;
+}
+.one_message:hover .norm_seen, .one_message:hover  .norm_unseen{
+    font-weight: 800;
+    font-style: italic;
+    cursor: pointer;
+}
+.one_message:hover{
+    cursor: pointer;
+}
+.one_message{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    margin: 5px 0;
+}
+.chargedd{
+    padding: 8px;
+}
+.one_message:nth-child(even){
+    background-color: rgba(183, 189, 196, 0.527);
+}
+
+.one_message:nth-child(odd){
+    background-color: rgba(255, 255, 255, 0.507);
+}
+.status{
+    position: relative;
+    border-right: 1px solid gray;
+    padding: 5px;
+}
+.message_detail{
+    position: relative;
+    padding: 5px;
+    border-right: 1px solid gray;
+    width: 70%;
+    overflow: hidden;
+}
+.status p{
+    font-size: 14px; /**changed from 12px**/
+    /* font-weight: 600; */
+    color: rgb(58, 58, 58);
+}
+.date_sent{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 5px;
+}
+.date_sent img{
+    width: 15px;
+}
+.message_admin{
+    border-bottom: 4px double rgb(199, 199, 199);
+}
+@media screen and (max-width: 1016px){
+    .changesubwindow2{
+        width: 810px !important;
+    }
+}
+@media screen and (max-width: 810px){   
+    .middle1 .otheropt{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .staffdatas input[type=text], .staffdatas select,
+    .staffdatas input[type=number],.staffdatas input[type=date],
+    .staffdatas input[type=email],.staffdatas input[type=password]{
+        min-width: 85%;
+    }
+    .dashboard .dash_menu li{
+        font-size: 14px; /**changed from 12px**/
+    }
+    .meanscores123, .meanscore2{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .copyright{
+        display: none;
+    }
+    .copyright1{
+        display: inline-block;
+    }
+    .my_dorms_name{
+        max-width: 100px;
+        min-width: 100px;
+        margin: 0%;
+        margin: auto;
+    }
+    .dip{
+        width: 30px;
+    }
+    .middle1 .body3{
+        width: 80%;
+        margin: auto;
+        min-width: 300px;
+    }
+    .changesubwindow2{
+        width: 650px !important;
+    }
+}
+@media screen and (max-width: 650px){
+    .changesubwindow2{
+        width: 450px !important;
+    }
+}
+@media screen and (max-width: 500px){
+    
+    .trnames .conts,.credentials .conts, .statuses .conts  {
+        width: 95%;
+        margin: auto;
+    }
+    .changesubwindow{
+        width: 80%;
+        min-width: 300px;
+    }
+    .classlist{
+        width: 85%;
+        min-width: 100px;
+    }
+    .information_window, .more_infor{
+        display: none;
+    }
+    .boddy3{
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 530px){
+    
+    .studentdetails .conts {
+        width: 95%;
+        margin: auto;
+    }
+    .paywindow .payments{
+        margin: 10px auto;
+        width: 80%;
+    }
+
+    .paywindow .payments input[type=number],.paywindow input[type=text]{
+        min-width: 80%;
+        width: 80%;
+        
+    }
+}
+@media screen and (max-width: 450px){
+    .changesubwindow2{
+        width: 350 !important;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .boddy3{
+        width: 95%;
+    }
+    .changesubwindow2{
+        display: none;
+    }
+}
+@media screen and (max-width: 380px){
+    .contents .cardholder .cards{
+        margin: 10px auto;
+    }
+    
+}
+@media screen and (max-width: 550px){
+    .norm_unseen{
+        display: inline-block;
+    }
+    .norm_seen{
+        display: none;
+    }
+    .message_detail{
+        width: 50%;
+    }
+}
+@media screen and (max-width: 600px){
+    .dashboard .dash_menu{
+        display: none;
+    }
+    .boddy3 .btns{
+        flex-direction: column;
+        width: 80%;
+    }
+    .middle1 .body3{
+        width: 80%;
+        margin: auto;
+        min-width: 300px;
+    }
+    .middle1 .btndates{
+        font-size: 14px; /**changed from 12px**/
+        display: flex;
+        flex-direction: column;
+    }
+    .tttsd{
+        position: absolute;
+        width: auto;
+        height: auto;
+        top: -14px; /**changed from 12px**/
+        left: 0%;
+    }
+    .dashboard .left_dash{
+        position: inherit;
+        display: flex;
+        justify-content: space-between;
+        min-width: 100px;
+        width: 100vw;
+        height: inherit;
+        left: 0mm;
+    }
+    #admissionessentials{
+        width: 50%;
+        margin: 10px 0;
+        margin-left: 30px;
+    }
+    .admWindow{
+        min-width: 95%;
+        margin: auto;
+        position: relative;
+    }
+    .admWindow .body{
+        flex-direction: column;
+    }
+    .middle1 .topsearch2{
+        flex-direction: column;
+        width: 96%;
+    }
+    .middle1 .topsearch2 select{
+        min-width: 150px;
+        max-width: 150px;
+    }
+    .topsearch2 .conts{
+        width: 100%;
+    }
+    .searchwindows {
+        width: 100%;
+        position: relative;
+    }
+    .staffdatas{
+        flex-direction: column;
+    }
+    .tops{
+        flex-direction: column;
+        align-items: center;
+    }
+    .staffdatas .left , .staffdatas .right{
+        position: relative;
+        width: calc(100% - 20px);
+    }
+    .middle1 .topsearch2 .conts{
+        margin: 5px auto;
+    }
+    .sidebars .contsds{
+        display: block;
+    }
+    
+}
+
+.slideUp {
+    animation-name: slideUp;
+    -webkit-animation-name: slideUp;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    visibility: visible;
+  }
+  
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(70%);
+    } 
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0%);
+    }
+  }
+  
+  @-webkit-keyframes slideUp {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(70%);
+    } 
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0%);
+    }
+  }
+  @keyframes slideLeft {
+    0% {
+      -webkit-transform: translateX(0px);
+    } 
+    100% {
+      -webkit-transform: translatex(-290px);
+    }
+    
+  }
+  @-webkit-keyframes slideLeft {
+    0% {
+      -webkit-transform: translateX(0px);
+    } 
+    100% {
+      -webkit-transform: translatex(-290px);
+    }
+  }
+
+  @keyframes slideRight {
+    0% {
+      -webkit-transform: translateX(-290px);
+    } 
+    100% {
+      -webkit-transform: translatex(0px);
+    }
+    
+  }
+  @-webkit-keyframes slideRight {
+    0% {
+      -webkit-transform: translateX(-290px);
+    } 
+    100% {
+      -webkit-transform: translatex(0px);
+    }
+  }
+  
+@keyframes scale{
+    from {transform: scale(.5); }
+    to {transform: scale(1);}
+}
+
+@keyframes scale2{
+    from {transform: scale(0); }
+    to {transform: scale(1);}
+}
+@keyframes scale10{
+    from {transform: scale(1); }
+    to {transform: scale(0);}
+}
+
+@keyframes scale3{
+    0% {left: -200px;}
+    100% {left: 0%;}
+}
+@keyframes scale4{
+    0% {left: 0%;}
+    100% {left: -200px;}
+}
+
+@keyframes scale5{
+    0% {left: 0%;}
+    100% {left: -400px;}
+}
+
+@keyframes scale20{
+    0% {left: 0%;}
+    100% {left: -300px;}
+}
+
+
+/**Animations for the add subjects**/
+@keyframes scale6{
+    0% {left: 0px;}
+    100% {left: -400px;}
+}
+@keyframes scale7{
+    0% {left: 0%;}
+    100% {left: -400px;}
+}
+@keyframes scale8{
+    0% {left: -400px;}
+    100% {left: 0;}
+}
+@keyframes scale9{
+    0% {left: 0%;}
+    100% {left: -400px;}
+}
+@supports(scrollbar-width: thin){
+    .no-support{
+        display: none;
+    }
+}
+.school_logo{
+    position: relative;
+    width: 80px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.school_logo img{
+    position: relative;
+    width: 80px;
+    height: 80px;
+    padding: 2px;
+    background-color: rgb(165, 226, 228);
+    border-radius: 50%;
+}
+.student_images{
+    position: relative;
+    width: 120px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.student_images img{
+    position: relative;
+    width: 120px;
+    height: 120px;
+    padding: 2px;
+    background-color: rgb(165, 226, 228);
+    border-radius: 50%;
+}
+.basic_details,.administrator_contact{
+    position: relative;
+    width: calc(100% - 20px);
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 10px auto;
+    margin-top: 20px;
+    padding: 15px 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.basic_details input[type='text'], .administrator_contact input[type='text'],
+.basic_details input[type='number'], .administrator_contact input[type='number'],
+.basic_details input[type='email'], .administrator_contact input[type='email'],
+.basic_details input[type='date'], .administrator_contact input[type='date']{
+    position: relative;
+    min-width: 90%;
+    color: MidnightBlue;
+    margin: auto 10px;
+}
+.basic_details .titles,.administrator_contact .titles{
+    position: absolute;
+    width: 200px;
+    height: auto;
+    padding: 3px;
+    text-align: center;
+    left: 10px;
+    top: -10px;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+    /* border-radius: 10px; */
+    font-weight: 600;
+    /* box-shadow: 3px 3px 10px gray; */
+}
+.basic_details select{
+    color: MidnightBlue;
+}
+.basic_details label, .administrator_contact label{
+    font-weight: 500;
+}
+.back_button button{
+    min-width: 50px;
+    max-width: 50px;
+}
+.back_arrow img{
+    width: 20px;
+    height: 20px;
+    align-items: center;
+}
+#staffdatas input[type='text']{
+    width: 90%;
+}
+
+table{
+    font-family: "Calibri";
+    font-size: 14px;
+}
+select{
+    text-align: left;
+}
+
+.dis-abled{
+    cursor: not-allowed;
+    background-color: gray;
+    color: black;
+    max-width: 50px;
+}

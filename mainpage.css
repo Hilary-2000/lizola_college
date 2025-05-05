@@ -1,0 +1,367 @@
+*{
+    margin: 0;
+    padding: 0%;
+}
+html{
+    scroll-behavior: smooth;
+}
+.mainpage{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background:url("images/school.jpg");
+    background-size: cover;
+    background-position: center;
+}
+.ladybird{
+    position: relative;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(95, 158, 160);
+    margin: 5% auto 0 0;
+}
+.information_section{
+    position: relative;
+    width: 50%;
+    max-width: 50ch;
+    height: auto;
+    margin: auto;
+    backdrop-filter: blur(10px);
+    padding: 20px 10px;
+    color: rgb(0, 0, 0);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+}
+.information_section h3, .titles h3{
+    font-size: 24px;
+    font-weight: 400;
+}
+.information_section p{
+    font-size: 14px;
+    line-height: 25px;
+    font-style: italic;
+}
+.information_section img{
+    position: relative;
+    width: 85%;
+    margin: auto;
+}
+.dp-flex-al-ctr{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.link{
+    cursor: pointer;
+    color: cornflowerblue;
+    font-size: 12px;
+}
+.link:hover{
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.submit-btn{
+    padding: 7px 15px;
+    cursor: pointer;
+    border: 1px solid gray;
+    background-color: rgb(0, 110, 0);
+    border-radius: 5px;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+}
+.submit-btn:hover{
+    background-color: rgb(1, 161, 1);
+    box-shadow: 2px 2px 10px gray;
+}
+.conts{
+    position: relative;
+    margin: 10px auto;
+    text-align: center;
+}
+.t-center-align{
+    text-align: center;
+}
+.cont{
+    position: relative;
+    margin: auto;
+    padding: 3px;;
+}
+.cont input, .cont select{
+    position: relative;
+    padding: 5px;
+    width: 70%;
+    margin: 2px auto 2px 10px;
+    border-radius: 4px;
+    border: 1px solid gray;
+}
+.hide{
+    display: none;
+}
+.conts button{
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: transparent;
+    border-radius: 10px;
+    width: 200px;
+    font-size: 16px;
+    overflow: hidden;
+    margin: 10px;
+    color: white;
+}
+.conts .overs{
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+    width: 0%;
+    border-radius: 5px;
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+    z-index: -1;
+    transition: 0.2s;
+}
+.conts button:hover .overs{
+    width: 100%;
+}
+.conts button:hover{
+    color: black;
+}
+.top_bar{
+    position: relative;
+    width: calc(100vw - 20px);
+    top: 0;
+    left: 0%;
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(95, 158, 160);
+    align-items: center;
+}
+.headings{
+    position: relative;
+    display: flex;
+    margin: 5px 0;
+    color: black;
+}
+.headings menu{
+    position: relative;
+    text-decoration: none;
+    margin: auto 10px;
+    cursor: pointer;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 13px;
+    filter: invert(10);
+}
+.headings menu:hover{
+    transform: scale(1.2);
+    color: teal;
+}
+.headings h3{
+    text-transform: uppercase;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    cursor: pointer;
+    
+}
+.headings img{
+    width: 20px;
+    margin: auto 4px;
+    cursor: pointer;
+}
+.YourDetail{
+    position: relative;
+    background-color: white;
+    padding: 10px;
+    margin: auto;
+    color: gray;
+    width: 90%;
+    border-radius: 20px;
+}
+.YourDetail label{
+    cursor: pointer;
+}
+.inside img{
+    border-radius: 50%;
+    position: relative;
+    margin: auto;
+}
+.animate{
+    animation-name: scale;
+    animation-duration: .3s;
+    animation-direction: normal;
+}
+.loadwindow{
+    position: fixed;
+    top: 0%;
+    left: 0px;
+    background: rgba(0,0,0,0.4);
+    width: 100vw;
+    height: 100vh;
+    z-index: 4;
+}
+.loadwindow{
+    z-index: 20;
+}
+.loadwindow .loadingcontents{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: auto;
+    margin-top: calc(50vh - 25px);
+}
+.loadwindow .loadingcontents img{
+    width: 50px;
+}
+.ft-sz-14px{
+    font-size: 14px;
+}
+.ft-sz-16px{
+    font-size: 16px;
+}
+.ft-sz-20px{
+    font-size: 20px;
+}
+.ft-wg-600{
+    font-weight: 600;
+}
+.titles{
+    position: relative;
+    width: 35%;
+    border-radius: 20px;
+    margin: 10px auto;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.titles a{
+    position: relative;
+    all: unset;
+    font-size: 14px;
+    cursor: pointer;
+    line-height: 25px;
+    text-underline-offset: 2px;
+    width: auto;
+}
+.titled{
+    position: relative;
+    margin: 5px 0;
+}
+.titled p{
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.inform{
+    position: relative;
+    font-size: 13px;
+    line-height: 25px;
+    background-color: rgba(255, 255, 255, 0.247);
+    margin: 5px auto;
+    padding: 10px;
+    border-radius: 20px;
+}
+.contented{
+    position: relative;
+    max-height: 60vh;
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+.titles a:hover{
+    font-style: italic;
+    color: tomato;
+}
+.titles .content{
+    background: lightgray;
+    position: relative;
+    width: 60%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    padding: 20px;
+}
+.titles h3{
+    text-align: center;
+}
+.selected{
+    font-style: italic;
+    color: tomato;
+    text-decoration: underline;
+}
+
+/**********setting scroll bars************/
+::-webkit-scrollbar{
+    width: 3px;
+    height: 3px;
+}
+::-webkit-scrollbar-thumb{
+    width: 3px;
+    height: 3px;
+    max-height: 5pc;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track{
+    width: 3px;
+    height: 3px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar:hover{
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    color: brown;
+}
+
+@keyframes scale{
+    from {transform: scale(.5); }
+    to {transform: scale(1);}
+}
+
+.footer{
+    background-color: rgba(255, 255, 255, 0.685);
+    position: absolute;
+    font-family: cursive;
+    text-align: right;
+    right: 0%;
+    bottom: 0%;
+    width: 100vw;
+    font-size: 12px;
+}
+
+/* Media queries */
+@media screen and (max-width:600px){
+    .top_bar{
+        flex-direction: column;
+    }
+    .information_section{
+        width: 90vw;
+    }
+    input, select{
+        padding: 3px;
+    }
+
+}
+@media screen and (max-width:1000px){
+    .loadwindow .loadingcontents{
+        width: 100px;
+        font-size: 12px;
+    }
+    .footer{
+        display: none;
+    }
+}
+@media screen and (max-width:1000px){
+    .ladybird{
+        flex-direction: column;
+    }
+    .titles{
+        width: 80%;
+    }
+}
