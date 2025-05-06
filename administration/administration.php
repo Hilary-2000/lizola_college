@@ -93,8 +93,17 @@
                             <select name="intake_month" id="intake_month" class="form-control">
                                 <option value="" hidden>Select an Option</option>
                                 <option value="JAN">JAN</option>
+                                <option value="FEB">FEB</option>
+                                <option value="MAR">MAR</option>
+                                <option value="APR">APR</option>
                                 <option value="MAY">MAY</option>
+                                <option value="JUN">JUN</option>
+                                <option value="JUL">JUL</option>
+                                <option value="AUG">AUG</option>
                                 <option value="SEP">SEP</option>
+                                <option value="OCT">OCT</option>
+                                <option value="NOV">NOV</option>
+                                <option value="DEC">DEC</option>
                             </select>
                         </div>
                         <div class="col-md-6">
@@ -116,11 +125,12 @@
                         <div id="course_list_holder"><p class="text-secondary">Select Course Level to display available courses!</p></div>
                     </div>
                     <div class="conts">
-                        <label for="upis">Student`s UPI:</label>
-                        <input type="text" name="upis" id="upis" placeholder="Unique Personal Identifier">
+                        <label for="course_module_terms">Course Module Terms:<img src="images/ajax_clock_small.gif" class="hide" id="course_term_loader"></label>
+                        <div id="course_term_holder"><p class="text-secondary">Select Course to display the course terms!</p></div>
+                        <input class="d-none" type="text" name="upis" id="upis" placeholder="Unique Personal Identifier">
                     </div>
                     <div class="conts">
-                        <label for="bcno">Birth certificate number:</label>
+                        <label for="bcno">National ID number:</label>
                         <p id="bcnerr"></p>
                         <input type="text" name="bcno" id="bcno" placeholder="Enter BC No">
                     </div>

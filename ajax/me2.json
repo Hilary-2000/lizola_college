@@ -1,117 +1,57 @@
 [
     {
-        "course_level": 1,
-        "course_name": "5",
-        "course_status": 0,
-        "id": 1,
-        "module_terms": [
-            {
-                "id": 1,
-                "term_name": "TERM_1",
-                "status": "2",
-                "start_date": "20230101000000",
-                "end_date": "20230410000000"
-            },
-            {
-                "id": 2,
-                "term_name": "TERM_2",
-                "status": "0",
-                "start_date": "20230411000000",
-                "end_date": "20230810000000"
-            },
-            {
-                "id": 3,
-                "term_name": "TERM_3",
-                "status": "0",
-                "start_date": "20230811000000",
-                "end_date": "20231231000000"
-            }
-        ]
-    },
-    {
-        "course_level": 4,
-        "course_name": "5",
-        "course_status": 0,
-        "id": 1,
-        "module_terms": [
-            {
-                "id": 1,
-                "term_name": "TERM_1",
-                "status": 1,
-                "start_date": "20230101000000",
-                "end_date": "20230410000000"
-            },
-            {
-                "id": 2,
-                "term_name": "TERM_2",
-                "status": 0,
-                "start_date": "20230411000000",
-                "end_date": "20230810000000"
-            },
-            {
-                "id": 3,
-                "term_name": "TERM_3",
-                "status": 0,
-                "start_date": "20230811000000",
-                "end_date": "20231231000000"
-            }
-        ]
-    },
-    {
-        "course_level": 4,
-        "course_name": "5",
-        "course_status": 0,
-        "id": 1,
-        "module_terms": [
-            {
-                "id": 1,
-                "term_name": "TERM_1",
-                "status": 1,
-                "start_date": "20230101000000",
-                "end_date": "20230410000000"
-            },
-            {
-                "id": 2,
-                "term_name": "TERM_2",
-                "status": 0,
-                "start_date": "20230411000000",
-                "end_date": "20230810000000"
-            },
-            {
-                "id": 3,
-                "term_name": "TERM_3",
-                "status": 0,
-                "start_date": "20230811000000",
-                "end_date": "20231231000000"
-            }
-        ]
-    },
-    {
-        "course_level": 1,
-        "course_name": "5",
+        "course_level": 10,
+        "course_name": "31",
         "course_status": 1,
         "id": 1,
         "module_terms": [
             {
                 "id": 1,
-                "term_name": "TERM_1",
-                "status": 1,
-                "start_date": "20230101000000",
-                "end_date": "20230410000000"
+                "term_name": "MODULE 1",
+                "status": "0",
+                "start_date": "",
+                "end_date": "",
+                "termly_cost": 0
             },
             {
                 "id": 2,
-                "term_name": "TERM_2",
-                "status": 0,
-                "start_date": "20230411000000",
-                "end_date": "20230810000000"
+                "term_name": "MODULE 2",
+                "status": "2",
+                "start_date": "20250506192326",
+                "end_date": "20260306192326",
+                "termly_cost": 20000
             },
             {
                 "id": 3,
-                "term_name": "TERM_3",
-                "status": 0,
-                "start_date": "20230811000000",
-                "end_date": "20231231000000"
+                "term_name": "MODULE 3",
+                "status": "0",
+                "start_date": "",
+                "end_date": "",
+                "termly_cost": 0
+            },
+            {
+                "id": 4,
+                "term_name": "MODULE 4",
+                "status": "0",
+                "start_date": "",
+                "end_date": "",
+                "termly_cost": 0
+            },
+            {
+                "id": 5,
+                "term_name": "MODULE 5",
+                "status": "0",
+                "start_date": "",
+                "end_date": "",
+                "termly_cost": 0
+            },
+            {
+                "id": 6,
+                "term_name": "MODULE 6",
+                "status": "0",
+                "start_date": "",
+                "end_date": "",
+                "termly_cost": 0
             }
         ]
     }

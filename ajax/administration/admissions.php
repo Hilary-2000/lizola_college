@@ -15,7 +15,7 @@
     if($_SERVER['REQUEST_METHOD'] == 'GET'){
         include("../../connections/conn2.php");
         if(isset($_GET['admit'])){
-            echo "<p class='text-danger'>This section does not work!</p>";
+            echo "<p class='text-danger'>Wrong place wrong time! ;-( </p>";
         }elseif(isset($_GET['get_course_fees_structure'])){
             $course_level = $_GET['course_level'];
             
@@ -117,14 +117,10 @@
                     for($index = 0; $index < count($valued); $index++){
                         // loop through course levels
                         $course_levels = isJson_report($valued[$index]->course_levels) ? json_decode($valued[$index]->course_levels) : [];
-                        
                         // add course flag after looping through the course levele the course is offered
                         $proceed = false;
-                        for ($ind=0; $ind < count($course_levels); $ind++) { 
-                            if($course_levels[$ind] == $course_id){
-                                $proceed = true;
-                                break;
-                            }
+                        if(isset($valued[$index]->course_level) && $valued[$index]->course_level == $course_id){
+                            $proceed = true;
                         }
 
                         // proceed!
@@ -148,6 +144,8 @@
             $stmt = $conn2->prepare($select);
             $stmt->execute();
             $result = $stmt->get_result();
+
+            // course levels
             $course_levels = [];
             
             // get results
@@ -567,8 +565,7 @@
                 }else {
                     echo "<p>Not Executed!</p>";
                 }
-            }
-            elseif (isset($_GET['comadm'])) {
+            }elseif (isset($_GET['comadm'])) {
                 $select = "SELECT * from `student_data` WHERE (`adm_no` = ? or `adm_no` like ?) and `deleted` = 0 and activated =1 ";
                 $comadm = "%".$_GET['comadm']."%";
                 $comadim = $_GET['comadm'];
@@ -578,8 +575,7 @@
                 $result = $stmt->get_result();
                 $searh = "Admission no =  <span style='color:brown;'>\"".$_GET['comadm']."\"</span>";
                 createStudentn4($conn2,$result,$searh);
-            }
-            elseif (isset($_GET['combcno'])) {
+            }elseif (isset($_GET['combcno'])) {
                 $combcno = $_GET['combcno'];
                 $compbcno = "%".$_GET['combcno']."%";
                 $select = "SELECT * from `student_data` WHERE (`BCNo` = ? or `BCNo` like ?) and `deleted` = 0 and activated =1 ";
@@ -589,8 +585,7 @@
                 $result = $stmt->get_result();
                 $searh = "Birth certificate no containing <span style='color:brown;'>\"".$_GET['combcno']."\"</span>";
                 createStudentn4($conn2,$result,$searh);
-            }
-            elseif (isset($_GET['bybcntype'])) {
+            }elseif (isset($_GET['bybcntype'])) {
                 $select = "SELECT * from `student_data` WHERE `BCNo` like ? and `deleted` = 0 and activated =1 ";
                 $bcno = "%".$_GET['bybcntype']."%";
                 $stmt = $conn2->prepare($select);
@@ -2617,19 +2612,16 @@
                     $levels = isJson_report($data) ? json_decode($data) : [];
                 }
             }
-
+            // data to display
             $data_to_display = "<p class='text-danger'>No levels present!</p>";
 
             // loop
             if(count($levels) > 0){
-                $data_to_display = "";
+                $data_to_display = "<select class='form-control' id='course_list_setup'><option value='' hidden>Select course level</option>";
                 for ($index=0; $index < count($levels); $index++) { 
-                    $data_to_display.=
-                    "<p>
-                        <input type='checkbox' class='course_level' name='level_".$index."' value='".$levels[$index]->id."' id='level_".$levels[$index]->id."'>
-                        <label for='level_".$levels[$index]->id."' class='form-control-label'>".$levels[$index]->classes."</label>
-                    </p>";
+                    $data_to_display .= "<option value='".$levels[$index]->id."' >".$levels[$index]->classes."</option>";
                 }
+                $data_to_display .= "</select>";
             }
 
             // echo
@@ -2648,20 +2640,37 @@
                 }
             }
 
-            $data_to_display = "<p class='text-danger'>No levels present!</p>";
+            // $data_to_display = "<p class='text-danger'>No levels present!</p>";
 
+            // // loop
+            // if(count($levels) > 0){
+            //     $data_to_display = "";
+            //     for ($index=0; $index < count($levels); $index++) { 
+            //         $data_to_display.=
+            //         "<p>
+            //             <input type='checkbox' class='course_level_edit' name='level_edit_".$index."' value='".$levels[$index]->id."' id='level_edit_".$levels[$index]->id."'>
+            //             <label for='level_edit_".$levels[$index]->id."' class='form-control-label'>".$levels[$index]->classes."</label>
+            //         </p>";
+            //     }
+            // }
+
+            // // echo
+            // echo $data_to_display;
+
+            // data_to_display
+            $data_to_display = "<p class='text-danger'>No levels present!</p>";
+            $course_level = isset($_GET['course_level']) ? $_GET['course_level'] : "";
+            
             // loop
             if(count($levels) > 0){
-                $data_to_display = "";
+                $data_to_display = "<select class='form-control' id='course_list_setup_edit'><option value='' hidden>Select course level</option>";
                 for ($index=0; $index < count($levels); $index++) { 
-                    $data_to_display.=
-                    "<p>
-                        <input type='checkbox' class='course_level_edit' name='level_edit_".$index."' value='".$levels[$index]->id."' id='level_edit_".$levels[$index]->id."'>
-                        <label for='level_edit_".$levels[$index]->id."' class='form-control-label'>".$levels[$index]->classes."</label>
-                    </p>";
+                    $selected = $course_level == $levels[$index]->id ? "selected" : "";
+                    $data_to_display .= "<option value='".$levels[$index]->id."' ".$selected." >".$levels[$index]->classes."</option>";
                 }
+                $data_to_display .= "</select>";
             }
-
+            
             // echo
             echo $data_to_display;
         }elseif(isset($_GET['get_supplier_data'])){
@@ -2715,6 +2724,11 @@
             $course_levels = $_GET['course_levels'];
             $department_name = $_GET['department_name'];
             $course_id = $_GET['course_id'];
+            $course_level = $_GET['course_level'];
+            $no_of_terms = $_GET['no_of_terms'];
+            $termly_fees = $_GET['termly_fees'];
+            $term_duration = $_GET['term_duration'];
+            $duration_intervals = $_GET['duration_intervals'];
 
 
             if ($result) {
@@ -2728,6 +2742,11 @@
                     $new_courses->course_name = $course_name;
                     $new_courses->course_levels = $course_levels;
                     $new_courses->department = $department_name;
+                    $new_courses->course_level = $course_level;
+                    $new_courses->no_of_terms = $no_of_terms;
+                    $new_courses->termly_fees = $termly_fees;
+                    $new_courses->term_duration = $term_duration;
+                    $new_courses->duration_intervals = $duration_intervals;
 
                     // add the courses
                     $new_course_data = [];
@@ -2798,8 +2817,13 @@
                     $new_course = new stdClass();
                     $new_course->id = ($last_id+1);
                     $new_course->course_name = $_GET['course_name'];
-                    $new_course->course_levels = $_GET['course_levels'];
+                    $new_course->course_levels = "[]";
                     $new_course->department = $_GET['department_name'];
+                    $new_course->course_level = $_GET['course_level'];
+                    $new_course->no_of_terms = $_GET['no_of_terms'];
+                    $new_course->termly_fees = $_GET['termly_fees'];
+                    $new_course->term_duration = $_GET['term_duration'];
+                    $new_course->duration_intervals = $_GET['duration_intervals'];
 
                     // add  that to the list of courses present
                     array_push($courses,$new_course);
@@ -2817,6 +2841,11 @@
                     $new_course->course_name = $_GET['course_name'];
                     $new_course->course_levels = $_GET['course_levels'];
                     $new_course->department = $_GET['department_name'];
+                    $new_course->course_level = $_GET['course_level'];
+                    $new_course->no_of_terms = $_GET['no_of_terms'];
+                    $new_course->termly_fees = $_GET['termly_fees'];
+                    $new_course->term_duration = $_GET['term_duration'];
+                    $new_course->duration_intervals = $_GET['duration_intervals'];
 
                     // save to the database
                     $insert = "INSERT INTO `settings` (`sett`,`valued`) VALUES (?,?)";
@@ -2896,30 +2925,42 @@
                         }
                         
                         // get the levels
-                        $levels = "No classes selected";
-                        $level_ids = isJson_report($course_list[$index]->course_levels) ? json_decode($course_list[$index]->course_levels) : [];
-                        // echo $course_list[$index]->course_levels."<br>";
-                        if(count($level_ids) > 0){
-                            $levels = "<ul>";
-                            for($ind = 0; $ind < count($level_ids); $ind++){
-                                $level_name = $level_ids[$ind];
-                                for($in = 0; $in < count($course_levels); $in++){
-                                    // echo $course_levels[$in]->id." ".$level_name." ".$course_levels[$in]->classes."<br>";
-                                    if($level_name == $course_levels[$in]->id){
-                                        $level_name = $course_levels[$in]->classes;
-                                        break;
-                                    }
+                        // $levels = "No classes selected";
+                        // $level_ids = isJson_report($course_list[$index]->course_levels) ? json_decode($course_list[$index]->course_levels) : [];
+                        // // echo $course_list[$index]->course_levels."<br>";
+                        // if(count($level_ids) > 0){
+                        //     $levels = "<ul>";
+                        //     for($ind = 0; $ind < count($level_ids); $ind++){
+                        //         $level_name = $level_ids[$ind];
+                        //         for($in = 0; $in < count($course_levels); $in++){
+                        //             // echo $course_levels[$in]->id." ".$level_name." ".$course_levels[$in]->classes."<br>";
+                        //             if($level_name == $course_levels[$in]->id){
+                        //                 $level_name = $course_levels[$in]->classes;
+                        //                 break;
+                        //             }
+                        //         }
+                        //         $levels .= "<li>".$level_name."</li>";
+                        //     }
+                        // }
+                        // $levels.="</ul>";
+
+                        $level = "Level not defined!";
+                        if(isset($course_list[$index]->course_level)){
+                            for($in = 0; $in < count($course_levels); $in++){
+                                // echo $course_levels[$in]->id." ".$level_name." ".$course_levels[$in]->classes."<br>";
+                                if($course_list[$index]->course_level == $course_levels[$in]->id){
+                                    $level = $course_levels[$in]->classes;
+                                    break;
                                 }
-                                $levels .= "<li>".$level_name."</li>";
                             }
                         }
-                        $levels.="</ul>";
+
 
                         // data to display
                         $data_to_display .= "<tr>
                                                 <td>".($index+1).". </td>
                                                 <td>".$course_list[$index]->course_name."</td>
-                                                <td>".$levels."</td>
+                                                <td>".$level."</td>
                                                 <td>".$department_name."</td>
                                                 <td>
                                                     <input hidden value='".json_encode($course_list[$index])."' id='hidden_value_courses_".$course_list[$index]->id."'>
@@ -4612,11 +4653,8 @@
                         
                         // add course flag after looping through the course levele the course is offered
                         $proceed = false;
-                        for ($ind=0; $ind < count($course_levels); $ind++) { 
-                            if($course_levels[$ind] == $course_id){
-                                $proceed = true;
-                                break;
-                            }
+                        if(isset($valued[$index]->course_level) && $valued[$index]->course_level == $course_id){
+                            $proceed = true;
                         }
 
                         // proceed!
@@ -4741,11 +4779,14 @@
                         
                         // add course flag after looping through the course levele the course is offered
                         $proceed = false;
-                        for ($ind=0; $ind < count($course_levels); $ind++) { 
-                            if($course_levels[$ind] == $course_id){
-                                $proceed = true;
-                                break;
-                            }
+                        // for ($ind=0; $ind < count($course_levels); $ind++) { 
+                        //     if($course_levels[$ind] == $course_id){
+                        //         $proceed = true;
+                        //         break;
+                        //     }
+                        // }
+                        if(isset($valued[$index]->course_level) && $valued[$index]->course_level == $course_id){
+                            $proceed = true;
                         }
 
                         // proceed!
@@ -5276,6 +5317,34 @@
             // body of the table
             $data_to_display.="</table></div>";
             echo $data_to_display;
+        }elseif(isset($_GET['get_course_module_terms'])){
+            $select = "SELECT * FROM settings WHERE sett = 'courses';";
+            $stmt = $conn2->prepare($select);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $courses = [];
+            if($result){
+                if($row = $result->fetch_assoc()){
+                    $courses = isJson_report($row['valued']) ? json_decode($row['valued']) : [];
+                }
+            }
+
+            if(count($courses) > 0){
+                foreach($courses as $course){
+                    if($course->id == $_GET['get_course_module_terms']){
+                        $data_to_display = "<select class='form-control' id='course_module_terms'><option hidden value=''>Select Term to start from</option>";
+                        $module_terms = isset($course->no_of_terms) ? $course->no_of_terms : 3;
+                        for($index = 0; $index < $module_terms; $index++){
+                            $data_to_display .= "<option value='".($index+1)."'>Module Term ".($index+1)."</option>";
+                        }
+                        $data_to_display .= "</select>";
+                        echo $data_to_display;
+                        break;
+                    }
+                }
+            }else{
+                echo "<p class='text-danger'>No courses available</p>";
+            }
         }
     }elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include("../../connections/conn1.php");
@@ -5297,6 +5366,7 @@
             $parentname2 = $_POST['parentname2'];
             $parentcontact2 = $_POST['parentconts2'];
             $parentrelation2 = $_POST['parentrela2'];
+            $course_module_terms = $_POST['course_module_terms'];
             $pmail2 = $_POST['pemail2'];
  
             if (strlen($parentname2) < 1) {
@@ -5334,6 +5404,8 @@
 
             // get the level id
             $level_id = null;
+            $module_terms = 0;
+            $module_period = "0 days";
             $select = "SELECT * FROM `settings` WHERE `sett` = 'class';";
             $stmt = $conn2->prepare($select);
             $stmt->execute();
@@ -5344,6 +5416,30 @@
                     for($index = 0; $index < count($valued); $index++){
                         if($classenrol == $valued[$index]->classes){
                             $level_id = $valued[$index]->id;
+                            $module_terms = isset($valued[$index]->no_of_terms) ? $valued[$index]->no_of_terms : 0;
+                            $module_period = isset($valued[$index]->term_duration) ? $valued[$index]->term_duration ." ". $valued[$index]->duration_intervals : "0 days";
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // get the level id
+            $module_terms = 0;
+            $module_period = "0 days";
+            $term_cost = 0;
+            $select = "SELECT * FROM `settings` WHERE `sett` = 'courses';";
+            $stmt = $conn2->prepare($select);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            if($res){
+                if($row = $res->fetch_assoc()){
+                    $courses = isJson_report($row['valued']) ? json_decode($row['valued']) : [];
+                    for($index = 0; $index < count($courses); $index++){
+                        if($course_chosen == $courses[$index]->id){
+                            $module_terms = isset($courses[$index]->no_of_terms) ? $courses[$index]->no_of_terms : 0;
+                            $module_period = isset($courses[$index]->term_duration) ? $courses[$index]->term_duration ." ". $courses[$index]->duration_intervals : "0 days";
+                            $term_cost = isset($courses[$index]->termly_fees) ? $courses[$index]->termly_fees : 0;
                             break;
                         }
                     }
@@ -5353,54 +5449,31 @@
             // ------------------------SET COURSE DETAILS----------------------------
 
             // get the course name
-            $course_id = $course_chosen;
+            $course_name_chosen = $course_chosen;
 
             // set up the course details
             $course_detail = new stdClass();
             $course_detail->course_level = $level_id;
-            $course_detail->course_name = $course_id;
+            $course_detail->course_name = $course_name_chosen;
             $course_detail->course_status = 1;
             $course_detail->id = 1;
             $course_detail->module_terms = [];
             
-            $module_terms = [];
-            // term 1
-            $terms = getTermV3($conn2);
-            $academic_terms = getAcademicStartV1($conn2,$terms);
-            $term = new stdClass();
-            $term->id = 1;
-            $term->term_name = "TERM_1";
-            $term->status = 1;
-            $term->start_date = date("YmdHis",strtotime($academic_terms[0]));
-            $term->end_date = date("YmdHis",strtotime($academic_terms[1]));
-            array_push($module_terms,$term);
-            
-            // term 2
-            $term = new stdClass();
-            $term->id = 2;
-            $term->term_name = "TERM_2";
-            $term->status = 0;
-            $term->start_date = "";
-            $term->end_date = "";
-            array_push($module_terms,$term);
-            
-            // term 3
-            $term = new stdClass();
-            $term->id = 3;
-            $term->term_name = "TERM_3";
-            $term->status = 0;
-            $term->start_date = "";
-            $term->end_date = "";
-            array_push($module_terms,$term);
-
-            // push this module terms
-            $course_detail->module_terms = $module_terms;
+            for($index = 0; $index < $module_terms; $index++){
+                $term = new stdClass();
+                $term->id = $index + 1;
+                $term->term_name = "MODULE ". ($index + 1);
+                $term->status = $course_module_terms == ($index+1) ? 1 : 0;
+                $term->start_date = $course_module_terms == ($index+1) ? date("YmdHis") : "";
+                $term->end_date = $course_module_terms == ($index+1) ? date("YmdHis", strtotime("+".$module_period)) : "";
+                $term->termly_cost = $course_module_terms == ($index+1) ? $term_cost : 0;
+                array_push($course_detail->module_terms, $term);
+            }
 
             // stringify the JSON data
             $course_details_string = json_encode([$course_detail]);
 
             // ----------------END OF SETTING COURSE DETAILS--------------
-            
             $doa = date("Y-m-d");
             $insert = "INSERT INTO `student_data` (`surname`,`adm_no`,`first_name`,`second_name`,`student_upi`,`D_O_B`,`gender`,`stud_class`,`D_O_A`,`parentName`,`parentContacts`,`parent_relation`,`parent_email`,`parent_name2`,`parent_contact2`,`parent_relation2`,`parent_email2`,`address`,`BCNo`,`primary_parent_occupation`,`secondary_parent_occupation`,`course_done`,`my_course_list`,`intake_year`,`intake_month`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $conn2->prepare($insert);
@@ -5993,6 +6066,29 @@
             $course_updated = isJson_report($_POST['course_updated']) ? json_decode($_POST['course_updated']) : json_decode("{}");
             $student_id = $_POST['student_id'];
 
+            // get the courses
+            $select = "SELECT * FROM `settings` WHERE sett = 'courses'";
+            $stmt = $conn2->prepare($select);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $courses = [];
+            if($result){
+                if($row = $result->fetch_assoc()){
+                    $courses = isJson_report($row['valued']) ? json_decode($row['valued']) : [];
+                }
+            }
+            
+            $course_duration = "0 days";
+            $course_cost = 0;
+            if(count($courses) > 0 && isset($course_updated->id)){
+                foreach($courses as $course){
+                    if($course->id == $course_updated->course_name){
+                        $course_duration = $course->term_duration." ".$course->duration_intervals;
+                        $course_cost = $course->termly_fees;
+                    }
+                }
+            }
+
             // configure those that are active with date and those inactive remove the time
             if($course_updated->module_terms != null){
                 $module_terms = $course_updated->module_terms;
@@ -6001,9 +6097,9 @@
                     if($module_terms[$index]->status == 1){
                         // term
                         $terms = getTermV3($conn2);
-                        $academic_terms = getAcademicStartV1($conn2,$terms);
-                        $module_terms[$index]->start_date = date("YmdHis",strtotime($academic_terms[0]));
-                        $module_terms[$index]->end_date = date("YmdHis",strtotime($academic_terms[1]));
+                        $module_terms[$index]->start_date = date("YmdHis");
+                        $module_terms[$index]->end_date = date("YmdHis",strtotime($course_duration));
+                        $module_terms[$index]->termly_cost = $course_cost*1;
                     }
 
                     // module terms
@@ -6011,6 +6107,7 @@
                         // term
                         $module_terms[$index]->start_date = "";
                         $module_terms[$index]->end_date = "";
+                        $module_terms[$index]->termly_cost = 0;
                     }
                 }
             }
@@ -6028,15 +6125,21 @@
                     $my_course_list = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
                     $present = 0;
                     for ($index=0; $index < count($my_course_list); $index++) { 
-                        if($my_course_list[$index]->id == $course_progress_id){
-                            $my_course_list[$index] = $course_updated;
-                            $present = 1;
-                            break;
+                        if(($my_course_list[$index]->id == $course_progress_id)){
+                            foreach($my_course_list[$index]->module_terms as $key => $module_terms){
+                                if($module_terms->status != $course_updated->module_terms[$key]->status){
+                                    $present +=1;
+                                }
+                            }
+                            if($present > 0){
+                                $my_course_list[$index] = $course_updated;
+                                break;
+                            }
                         }
                     }
 
                     // update if present
-                    if($present == 1){
+                    if($present > 0){
                         // update the student data
                         $update = "UPDATE `student_data` SET `my_course_list` = ? WHERE `adm_no` = ?";
                         $my_course_list = json_encode($my_course_list);
@@ -6048,6 +6151,8 @@
                         echo "<p class='text-success'>Course updates have been done successfully!</p>";
                         $log_text = ucwords(strtolower($row['first_name']." ".$row['second_name']))." - of Reg No. (".$row['adm_no'].") course data has been updated successfully!";
                         log_administration($log_text);
+                    }else{
+                        echo "<p class='text-success'>No changes made!</p>";
                     }
                 }
             }
@@ -7577,6 +7682,23 @@ function isJson_report($string) {
                     }
                 }
 
+                // check when the course list will be over
+                $course_list = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
+                $course_status = "In-Active";
+                if (count($course_list) > 0) {
+                    foreach($course_list as $course){
+                        if($course->course_status == "1"){
+                            // get the active module
+                            foreach($course->module_terms as $module_term){
+                                if($module_term->status == "1"){
+                                    $course_status = ucfirst(strtolower($module_term->term_name." ".timeUntilCourseCompletion($module_term->end_date)));
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 // echo json_encode($row);
                 $xs++;
                 $data.="<tr class='search_this_main' id='search_this_main".($xs)."'><td>".($xs)."</td>";
@@ -7592,7 +7714,7 @@ function isJson_report($string) {
                 // $data.="<td>Kes ".number_format($balance)."</td>";
                 $data.="<td>".$row['intake_month']." ".$row['intake_year']."</td>";
                 // $data.="<td class='search_this' id='thr".($xs)."'>".ucwords(strtolower(getSportHouses($conn2,$row['clubs_id'])))."</td>";
-                $data.="<td class='search_this' id='lvl".($xs)."'>".$classes."</td>";
+                $data.="<td class='search_this' id='lvl".($xs)."'>".$classes."<br><small class='text-primary'>".$course_status."</small></td>";
                 $data.="<td class='search_this' id='cse".($xs)."' >".$course_name."</td>";
                 $data.="<td>"."<p style='display:flex;'><span style='font-size:12px;' class='link view_students' id='view".$row['adm_no']."'><i class='fa fa-pen-fancy'></i> Edit </span>"."</td></tr>";
             }
@@ -7606,6 +7728,37 @@ function isJson_report($string) {
             echo "<p style='font-size:15px;'>No results..</p>";
         }
     }
+
+    function timeUntilCourseCompletion($rawDate) {
+        // Parse the custom format: YYYYmmddHHiiss
+        $target = DateTime::createFromFormat('YmdHis', $rawDate);
+        if (!$target) {
+            return "Invalid date format.";
+        }
+    
+        $now = new DateTime();
+        $diff = $now->diff($target);
+        $isFuture = $target > $now;
+    
+        if ($diff->days === 0) {
+            return "Today";
+        }
+    
+        $prefix = $isFuture ? "TO BE COMPLETED IN " : "COMPLETED ";
+        $suffix = $isFuture ? "" : " AGO";
+    
+        if ($diff->y > 0) {
+            return $prefix . $diff->y . " year" . ($diff->y > 1 ? "s" : "") . $suffix;
+        } elseif ($diff->m > 0) {
+            return $prefix . $diff->m . " month" . ($diff->m > 1 ? "s" : "") . $suffix;
+        } elseif ($diff->d >= 7) {
+            $weeks = floor($diff->d / 7);
+            return $prefix . $weeks . " week" . ($weeks > 1 ? "s" : "") . $suffix;
+        } else {
+            return $prefix . $diff->d . " day" . ($diff->d > 1 ? "s" : "") . $suffix;
+        }
+    }
+    
     function createStudentclass($result,$class,$conn2){
         $daros = classNameAdms($class);
         $date_used = $_GET['date_used'];

@@ -46,7 +46,29 @@ function getCourseList(course_level) {
     // get the course lists
     var datapass = "?get_course_list=true&course_level="+course_level;
     sendData2("GET","administration/admissions.php",datapass,cObj("course_list_holder"),cObj("course_list_loader"));
+    setTimeout(() => {
+        var timeout = 0;
+        var ids = setInterval(() => {
+            timeout++;
+            //after two minutes of slow connection the next process wont be executed
+            if (timeout == 1200) {
+                stopInterval(ids);
+            }
+            if (cObj("course_list_loader").classList.contains("hide")) {
+                if (cObj("course_chosen")!=undefined && cObj("course_chosen")!=null) {
+                    cObj("course_chosen").addEventListener("change", getCourseModuleTerms);
+                }
+                // stop
+                stopInterval(ids);
+            }
+        }, 100);
+    }, 100);
     
+}
+
+function getCourseModuleTerms() {
+    var datapass = "?get_course_module_terms="+this.value;
+    sendData2("GET","administration/admissions.php", datapass, cObj("course_term_holder"), cObj("course_term_loader"));
 }
 function getCourseListEdit(course_level) {
     // get the course lists
@@ -2750,20 +2772,7 @@ function tablebtnlistener() {
                     cObj("paroccupation1").value = splitdata[26];
                     cObj("paroccupation2").value = splitdata[27];
                     cObj("medical_histry").value = splitdata[23];
-                    //set for email and sms
-                    // if (splitdata[12].length > 5) {
-                    //     var name = splitdata[1].substr(splitdata[1].length - 1, splitdata.length);
-                    //     // var showname = splitdata[1] + "'s";
-                    //     // if (name == "s" || name == "S") {
-                    //     //     showname = splitdata[1] + "'";
-                    //     // }
-
-                    //     // set the action of calling and sending email
-                    //     cObj("call_phone").disabled = false;
-                    //     cObj("mail_to").disabled = false;
-                    //     // cObj("call_phone").innerHTML = splitdata[10].trim().length != 0 ? "<a class='link' href='tel:" + splitdata[10] + "'>Click to call " + showname + " parent </a>" : cObj("call_phone").disabled = true;
-                    //     // cObj("mail_to").innerHTML = splitdata[10].trim().length != 0 ? "<a class='link' href='mailto:" + splitdata[12] + "'>Click to send " + showname + " parent an email.</a>" : cObj("mail_to").disabled = true;
-                    // }
+                    
                     cObj("pnamed2").value = splitdata[16];
                     cObj("pcontacted2").value = splitdata[17];
                     cObj("pemails2").value = splitdata[19];
@@ -2822,9 +2831,6 @@ function tablebtnlistener() {
                     cObj("transport_enrolled_std_infor").innerHTML = splitdata[34];
                     cObj("board_enrolled_std_infor").innerHTML = splitdata[35];
 
-                    // cObj("call_phone2").innerHTML = "<a class='link' href='tel:" + splitdata[17] + "'>Click to call " + showname + " parent </a>";
-                    // cObj("mail_to2").innerHTML = "<a class='link' href='mailto:" + splitdata[19] + "'>Click to send " + showname + " parent an email.</a>";
-
                     var clubs_in_sporter = document.getElementsByClassName("clubs_in_sporter");
                     // console.log(splitdata);
                     for (let index = 0; index < clubs_in_sporter.length; index++) {
@@ -2879,7 +2885,7 @@ function tablebtnlistener() {
                     if(course_history != null){
                         // display that in the table.
                         var data_to_display = "<h4 class='text-center'>Course Progress <input id='course_level_value' hidden value='"+JSON.stringify(splitdata[43])+"'></h4><table class='table'><tr><th>Course Level</th><th>Course Name</th><th>Module Terms</th><th>Status</th><th>period</th></tr>";
-                        data_to_display+="<tr><td rowspan='3' style='vertical-align: middle;'><b>"+course_history.course_level_name+"</b></td><td rowspan='3' style='vertical-align: middle;'><b>"+course_history.course_name+"</b></td><td>"+course_history.module_terms[0].term_name+"</td><td><label class='form-control-label' for='checked1' >Status : </label> <select class='form-control select_options' id='select_option_0'><option value='' hidden>Select Option</option><option value='0' "+(course_history.module_terms[0].status == 0 ? "selected" : "")+">In-Active</option><option "+(course_history.module_terms[0].status == 1 ? "selected" : "")+" value='1'>Active</option><option "+(course_history.module_terms[0].status == 2 ? "selected" : "")+" value='2'>Completed</option></select></td><td>"+(course_history.module_terms[0].start_date.length > 0 ? "Start Date : "+"<b>"+formatDate_1(course_history.module_terms[0].start_date)+"</b>"+"<br>End Date : "+"<b>"+formatDate_1(course_history.module_terms[0].end_date)+"</b>" : "In-Active") +"</td></tr>";
+                        data_to_display+="<tr><td rowspan='"+course_history.module_terms.length+"' style='vertical-align: middle;'><b>"+course_history.course_level_name+"</b></td><td rowspan='"+course_history.module_terms.length+"' style='vertical-align: middle;'><b>"+course_history.course_name+"</b></td><td>"+course_history.module_terms[0].term_name+"</td><td><label class='form-control-label' for='checked1' >Status : </label> <select class='form-control select_options' id='select_option_0'><option value='' hidden>Select Option</option><option value='0' "+(course_history.module_terms[0].status == 0 ? "selected" : "")+">In-Active</option><option "+(course_history.module_terms[0].status == 1 ? "selected" : "")+" value='1'>Active</option><option "+(course_history.module_terms[0].status == 2 ? "selected" : "")+" value='2'>Completed</option></select></td><td>"+(course_history.module_terms[0].start_date.length > 0 ? "Start Date : "+"<b>"+formatDate_1(course_history.module_terms[0].start_date)+"</b>"+"<br>End Date : "+"<b>"+formatDate_1(course_history.module_terms[0].end_date)+"</b>" : "In-Active") +"</td></tr>";
 
                         // loop through the data
                         for (let index = 1; index < course_history.module_terms.length; index++) {
@@ -3669,7 +3675,7 @@ cObj("submitbtn").onclick = function () {
                 datapass += "&parentrela2=" + parrelation2 + "&pemail2=" + pemail2 + "&parentname2=" + parname2 + "&parentconts2=" + parconts2;
                 datapass += "&parent_accupation1=" + parent_accupation1 + "&parent_accupation2=" + parent_accupation2 + "&last_year_academic_balance=" + last_year_academic_balance;
                 datapass += "&course_chosen="+course_chosen+"&adm_option="+valObj("automated_amd");
-                datapass += "&intake_year="+valObj("intake_year")+"&intake_month="+valObj("intake_month");
+                datapass += "&intake_year="+valObj("intake_year")+"&intake_month="+valObj("intake_month")+"&course_module_terms="+valObj("course_module_terms");
                 sendDataPost("POST", "ajax/administration/admissions.php", datapass, cObj("erroradm"),cObj("loadings"));
                 setTimeout(() => {
                     var ids = setInterval(() => {
@@ -3746,6 +3752,18 @@ function checkAdmission() {
     }
     if (cObj("admgenman").innerText.length > 0) {
         err++;
+    }
+
+    if (cObj("course_module_terms") != undefined) {
+        err += checkBlank("course_module_terms");
+    }else{
+        err ++;
+    }
+
+    if (cObj("course_chosen") != undefined) {
+        err += checkBlank("course_chosen");
+    }else{
+        err ++;
     }
 
     // continue with the course enrollment
@@ -9571,56 +9589,48 @@ cObj("close_add_course_win").onclick = function () {
 
 // add the course material
 cObj("add_course_btn").onclick = function () {
+    // errors
     var err = checkBlank("course_input_text");
+    err += cObj("course_list_setup") != undefined ? checkBlank("course_list_setup") : 1;
+    err += checkBlank("no_of_terms");
+    err += checkBlank("termly_fees");
+    err += checkBlank("term_duration");
+    err += checkBlank("duration_intervals");
+
     cObj("add_course_outputtxt").innerHTML = "";
     if (err == 0) {
-        // check if there is any checkbox checked
-        var course_level = document.getElementsByClassName("course_level");
-        let counter = 0;
-        var course_levels = [];
-        for (let index = 0; index < course_level.length; index++) {
-            const element = course_level[index];
-            if (element.checked == true) {
-                counter++;
-                course_levels.push(element.value);
-            }
-        }
+        // proceed and save the course levels
+        var dept_name = valObj("department_id");
+        var datapass = "?add_course=true&course_name="+valObj("course_input_text")+"&course_level="+valObj("course_list_setup")+"&department_name="+dept_name;
+        datapass += "&no_of_terms="+valObj("no_of_terms")+"&termly_fees="+valObj("termly_fees")+"&term_duration="+valObj("term_duration")+"&duration_intervals="+valObj("duration_intervals");
+        sendData2("GET","administration/admissions.php",datapass, cObj("add_course_outputtxt"), cObj("add_course_clock"));
+        setTimeout(() => {
+            var timeout = 0;
+            var ids = setInterval(() => {
+                timeout++;
+                //after two minutes of slow connection the next process wont be executed
+                if (timeout == 1200) {
+                    stopInterval(ids);
+                }
+                if (cObj("add_course_clock").classList.contains("hide")) {
+                    setTimeout(() => {
+                        cObj("close_add_course_window").click();
+                        cObj('course_input_text').value = "";
+                        var course_level = document.getElementsByClassName("course_level");
+                        for (let index = 0; index < course_level.length; index++) {
+                            const element = course_level[index];
+                            element.checked = false;
+                        }
+                        cObj("add_course_outputtxt").innerHTML = "";
 
-        if (counter > 0) {
-            // proceed and save the course levels
-            var dept_name = valObj("department_id");
-            var datapass = "?add_course=true&course_name="+valObj("course_input_text")+"&course_levels="+JSON.stringify(course_levels)+"&department_name="+dept_name;
-            sendData2("GET","administration/admissions.php",datapass, cObj("add_course_outputtxt"), cObj("add_course_clock"));
-            setTimeout(() => {
-                var timeout = 0;
-                var ids = setInterval(() => {
-                    timeout++;
-                    //after two minutes of slow connection the next process wont be executed
-                    if (timeout == 1200) {
-                        stopInterval(ids);
-                    }
-                    if (cObj("add_course_clock").classList.contains("hide")) {
-                        setTimeout(() => {
-                            cObj("close_add_course_window").click();
-                            cObj('course_input_text').value = "";
-                            var course_level = document.getElementsByClassName("course_level");
-                            for (let index = 0; index < course_level.length; index++) {
-                                const element = course_level[index];
-                                element.checked = false;
-                            }
-                            cObj("add_course_outputtxt").innerHTML = "";
-
-                            // show the courses
-                            get_courses();
-                        }, 1000);
-                        // stop
-                        stopInterval(ids);
-                    }
-                }, 100);
+                        // show the courses
+                        get_courses();
+                    }, 1000);
+                    // stop
+                    stopInterval(ids);
+                }
             }, 100);
-        }else{
-            cObj("add_course_outputtxt").innerHTML = "<p class='text-danger'>Select atleast one course level to proceed!</p>";
-        }
+        }, 100);
     }else{
         cObj("add_course_outputtxt").innerHTML = "<p class='text-danger'>Provide the course name to proceed!</p>";
     }
@@ -9628,55 +9638,46 @@ cObj("add_course_btn").onclick = function () {
 
 cObj("Edit_course_btn").onclick = function () {
     var err = checkBlank("course_edit_input_text");
+    err += checkBlank("course_list_setup_edit");
+    err += checkBlank("edit_no_of_terms");
+    err += checkBlank("edit_termly_fees");
+    err += checkBlank("edit_term_duration");
+    err += checkBlank("edit_duration_intervals");
     cObj("edit_course_outputtxt").innerHTML = "";
     if (err == 0) {
-        // check if there is any checkbox checked
-        var course_level = document.getElementsByClassName("course_level_edit");
-        let counter = 0;
-        var course_levels = [];
-        for (let index = 0; index < course_level.length; index++) {
-            const element = course_level[index];
-            if (element.checked == true) {
-                counter++;
-                course_levels.push(element.value);
-            }
-        }
+        // proceed and save the course levels
+        var dept_name = valObj("department_id_edit");
+        var datapass = "?edit_course=true&course_name="+valObj("course_edit_input_text")+"&course_levels="+JSON.stringify([])+"&department_name="+dept_name+"&course_id="+valObj("course_id_holder");
+        datapass += "&course_level="+valObj("course_list_setup_edit")+"&no_of_terms="+valObj("edit_no_of_terms")+"&termly_fees="+valObj("edit_termly_fees")+"&term_duration="+valObj("edit_term_duration");
+        datapass += "&duration_intervals="+valObj("edit_duration_intervals");
+        sendData2("GET","administration/admissions.php",datapass, cObj("edit_course_outputtxt"), cObj("edit_course_clock"));
+        setTimeout(() => {
+            var timeout = 0;
+            var ids = setInterval(() => {
+                timeout++;
+                //after two minutes of slow connection the next process wont be executed
+                if (timeout == 1200) {
+                    stopInterval(ids);
+                }
+                if (cObj("edit_course_clock").classList.contains("hide")) {
+                    setTimeout(() => {
+                        cObj("close_Edit_course_window").click();
+                        cObj('course_edit_input_text').value = "";
+                        var course_level = document.getElementsByClassName("course_level_edit");
+                        for (let index = 0; index < course_level.length; index++) {
+                            const element = course_level[index];
+                            element.checked = false;
+                        }
+                        cObj("edit_course_outputtxt").innerHTML = "";
 
-        if (counter > 0) {
-            // proceed and save the course levels
-            var dept_name = valObj("department_id_edit");
-            var datapass = "?edit_course=true&course_name="+valObj("course_edit_input_text")+"&course_levels="+JSON.stringify(course_levels)+"&department_name="+dept_name+"&course_id="+valObj("course_id_holder");
-            sendData2("GET","administration/admissions.php",datapass, cObj("edit_course_outputtxt"), cObj("edit_course_clock"));
-            setTimeout(() => {
-                var timeout = 0;
-                var ids = setInterval(() => {
-                    timeout++;
-                    //after two minutes of slow connection the next process wont be executed
-                    if (timeout == 1200) {
-                        stopInterval(ids);
-                    }
-                    if (cObj("edit_course_clock").classList.contains("hide")) {
-                        setTimeout(() => {
-                            cObj("close_Edit_course_window").click();
-                            cObj('course_edit_input_text').value = "";
-                            var course_level = document.getElementsByClassName("course_level_edit");
-                            for (let index = 0; index < course_level.length; index++) {
-                                const element = course_level[index];
-                                element.checked = false;
-                            }
-                            cObj("edit_course_outputtxt").innerHTML = "";
-
-                            // show the courses
-                            get_courses();
-                        }, 1000);
-                        // stop
-                        stopInterval(ids);
-                    }
-                }, 100);
+                        // show the courses
+                        get_courses();
+                    }, 1000);
+                    // stop
+                    stopInterval(ids);
+                }
             }, 100);
-        }else{
-            cObj("edit_course_outputtxt").innerHTML = "<p class='text-danger'>Select atleast one course level to proceed!</p>";
-        }
+        }, 100);
     }else{
         cObj("edit_course_outputtxt").innerHTML = "<p class='text-danger'>Provide the course name to proceed!</p>";
     }
@@ -9774,11 +9775,21 @@ function editCourses() {
         // set course name
         cObj("course_edit_input_text").value = course_data.course_name;
         cObj("course_id_holder").value = course_data.id;
+        cObj("edit_no_of_terms").value = course_data.no_of_terms;
+        cObj("edit_term_duration").value = course_data.term_duration;
+        cObj("edit_termly_fees").value = course_data.termly_fees;
+        var children = cObj("edit_duration_intervals").children;
+        for (let index = 0; index < children.length; index++) {
+            const element = children[index];
+            if (element.value == course_data.duration_intervals) {
+                element.selected = true;
+            }
+        }
 
 
         // get the levels
         // get the courses levels
-        var datapass = "?get_courses_edit=true";
+        var datapass = "?get_courses_edit=true&course_level="+(course_data.course_level != undefined ? course_data.course_level : "");
         cObj("level_available_course_name_edit").innerHTML = "";
         sendData2("GET","administration/admissions.php",datapass,cObj("level_available_course_name_edit"),cObj("edit_course_clock"));
         setTimeout(() => {

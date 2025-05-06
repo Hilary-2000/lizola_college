@@ -7602,6 +7602,8 @@
             $select = "SELECT sum(`TERM_2`) AS 'TOTALS' FROM `fees_structure`  WHERE `classes` = ? AND `course` = ? AND `activated` = 1  and `roles` = 'regular';";
         }elseif($term_they_are_in == "TERM_3"){
             $select = "SELECT sum(`TERM_3`) AS 'TOTALS' FROM `fees_structure`  WHERE `classes` = ? AND `course` = ? AND `activated` = 1  and `roles` = 'regular';";
+        }else{
+            $select = "SELECT sum(`TERM_1`) AS 'TOTALS' FROM `fees_structure` WHERE `classes` = ? AND `course` = ? AND `activated` = 1  and `roles` = 'regular';";
         }
         $stmt = $conn2->prepare($select);
         $stmt->bind_param("ss",$class,$course_enrolled);

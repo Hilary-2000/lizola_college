@@ -441,18 +441,10 @@ if (auth == 2) {
 setInterval(() => {
     var datapass = "?activeuser=true&userid="+cObj("useriddds").value;
     sendData("GET","administration/admissions.php",datapass,cObj("nulled"));
-<<<<<<< HEAD
 }, 60000);
-=======
-}, 2000);
->>>>>>> 81e1b958f51128c22ca1a0a78f0b19cacfa0380c
 
 //check for notifications
 setInterval(() => {
     var datapass = "?notices=true";
     sendData("GET","notices/notices.php",datapass,cObj("note_2"));
-<<<<<<< HEAD
 }, 60000);
-=======
-}, 30000);
->>>>>>> 81e1b958f51128c22ca1a0a78f0b19cacfa0380c

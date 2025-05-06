@@ -3380,27 +3380,54 @@ function checkPresnt($array, $string){
                     <p class="funga" id="close_add_course_win">&times</p>
                     <h6 class="text-center">Add Course</h6>
                 </div>
-                <div class="conts" id="">
-                    <div class="add_expense">
+                <div class="container border border-dark rounded p-2 w-75">
+                    <div class="form-group">
                         <label class="form-control-label" for="course_input_text">Enter Course Name: <br></label>
-                        <input class="form-control w-100 mx-0" type="text" name="course_input_text" id="course_input_text" placeholder="eg: Information Technology">
-                        <hr >
+                        <input class="form-control" type="text" name="course_input_text" id="course_input_text" placeholder="eg: Information Technology">
+                    </div>
+                    <div class="form-group">
                         <label for="level_lists" class="form-control-label">Level Available</label> (<small class="text-secondary">Select the level the course is to be offered!</small>)
                         <img src="images/ajax_clock_small.gif" class="" id="add_course_clock">
-                        <div id="level_available_course_name">
+                        <div id="level_available_course_name" class="w-75">
                             <p class="text-danger">Set the course levels first before setting up courses!</p>
-                        </div><br>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="no_of_terms" class="form-control-label">No of Terms</label>
+                        <input type="number" name="no_of_terms" id="no_of_terms" class="form-control" placeholder="No of Terms(5 terms)">
+                    </div>
+                    <div class="form-group">
+                        <label for="termly_fees" class="form-control-label">Termly Fees</label>
+                        <input type="number" name="termly_fees" id="termly_fees" class="form-control" placeholder="Termly fees(Kes 20,000)">
+                    </div>
+                    <div class="form-group my-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="duration_in_figures" class="form-control-label">Term Durations</label>
+                                <input type="number" name="term_duration" id="term_duration" class="form-control" placeholder="Duration e.g, 10 months">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="duration_intervals" class="form-control-label">Duration Intervals</label>
+                                <select name="duration_intervals" id="duration_intervals" class="form-control">
+                                    <option value="year">Years</option>
+                                    <option value="months" selected>Months</option>
+                                    <option value="week">Weeks</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="department_list" class="form-control-label">Course Department</label>
                         <img src="images/ajax_clock_small.gif" class="" id="display_my_departments">
-                        <div id="department_list_window">
-                            <p class="text-danger">Set the course levels first before setting up courses!</p>
+                        <div id="department_list_window" class="w-75">
+                            <p class="text-danger">Set the course departments!</p>
                         </div>
                         <p id="add_course_outputtxt"></p>
                     </div>
-                    <div class="btns">
-                        <button type="button" id="add_course_btn">Add Course</button>
-                        <button type="button" id="close_add_course_window">Close</button>
-                    </div>
+                </div>
+                <div class="btns">
+                    <button type="button" id="add_course_btn">Add Course</button>
+                    <button type="button" id="close_add_course_window">Close</button>
                 </div>
             </div>
         </div>
@@ -3412,24 +3439,50 @@ function checkPresnt($array, $string){
                 </div>
                 <div class="conts" id="">
                     <div class="add_expense">
-                        <label class="form-control-label" for="course_edit_input_text">Enter Course Name: <br></label>
-                        <input type="hidden" id="course_id_holder">
-                        <input class="form-control w-100 mx-0" type="text" name="course_edit_input_text" id="course_edit_input_text" placeholder="eg: Information Technology">
-                        <hr>
-
-                        <label for="level_lists" class="form-control-label">Level Available</label> (<small class="text-secondary">Select the level the course is to be offered!</small>)
-                        <img src="images/ajax_clock_small.gif" class="" id="edit_course_clock">
-                        <div id="level_available_course_name_edit">
-                            <p class="text-danger">Set the course levels first before setting up courses!</p>
+                        <div class="form-control">
+                            <label class="form-control-label" for="course_edit_input_text">Enter Course Name: <br></label>
+                            <input type="hidden" id="course_id_holder">
+                            <input class="form-control w-100 mx-0" type="text" name="course_edit_input_text" id="course_edit_input_text" placeholder="eg: Information Technology">
                         </div>
-                        <br>
-
-                        <label for="department_list" class="form-control-label">Course Department</label>
-                        <img src="images/ajax_clock_small.gif" class="" id="display_my_departments_edit">
-                        <div id="department_list_window_edit">
-                            <p class="text-danger">Set the course levels first before setting up courses!</p>
+                        <div class="form-control">
+                            <label for="level_lists" class="form-control-label">Level Available</label> (<small class="text-secondary">Select the level the course is to be offered!</small>)
+                            <img src="images/ajax_clock_small.gif" class="" id="edit_course_clock">
+                            <div id="level_available_course_name_edit">
+                                <p class="text-danger">Set the course levels first before setting up courses!</p>
+                            </div>
                         </div>
-                        <p id="edit_course_outputtxt"></p>
+                        <div class="form-group">
+                            <label for="edit_no_of_terms" class="form-control-label">No of Terms</label>
+                            <input type="number" name="edit_no_of_terms" id="edit_no_of_terms" class="form-control" placeholder="No of Terms(5 terms)">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_termly_fees" class="form-control-label">Termly Fees</label>
+                            <input type="number" name="edit_termly_fees" id="edit_termly_fees" class="form-control" placeholder="Termly fees(Kes 20,000)">
+                        </div>
+                        <div class="form-group my-2">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="edit_term_duration" class="form-control-label">Term Durations</label>
+                                    <input type="number" name="edit_term_duration" id="edit_term_duration" class="form-control" placeholder="Duration e.g, 10 months">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="edit_duration_intervals" class="form-control-label">Duration Intervals</label>
+                                    <select name="edit_duration_intervals" id="edit_duration_intervals" class="form-control">
+                                        <option value="year">Years</option>
+                                        <option value="months" selected>Months</option>
+                                        <option value="week">Weeks</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <label for="department_list" class="form-control-label">Course Department</label>
+                            <img src="images/ajax_clock_small.gif" class="" id="display_my_departments_edit">
+                            <div id="department_list_window_edit">
+                                <p class="text-danger">Set the course levels first before setting up courses!</p>
+                            </div>
+                            <p id="edit_course_outputtxt"></p>
+                        </div>
                     </div>
                     <div class="btns">
                         <button type="button" id="Edit_course_btn">Edit Course</button>

@@ -52,11 +52,8 @@ function getExpensesNDisplay(student_data) {
             col.push(element['document_number']);
             col.push(element['expense_description']);
             col.push(element['exp_sub_category']);
-<<<<<<< HEAD
             col.push(element['approval_status']);
             col.push(element['approval_comment']);
-=======
->>>>>>> 81e1b958f51128c22ca1a0a78f0b19cacfa0380c
             // var col = element.split(":");
             rowsColStudents_expenses.push(col);
         }
@@ -88,12 +85,8 @@ function setEvents() {
 function activate_amount() {
     var disable = true;
     if (cObj("expense_categories_value") != undefined && cObj("expense_categories_value") != null) {
-<<<<<<< HEAD
         let expense_categories_value = valObj("expense_categories_value");
         console.log(expense_categories_value);
-=======
-        var expense_categories_value = valObj("expense_categories_value");
->>>>>>> 81e1b958f51128c22ca1a0a78f0b19cacfa0380c
         if(hasJsonStructure(expense_categories_value)){
             expense_categories_value = JSON.parse(expense_categories_value);
             for (let index = 0; index < expense_categories_value.length; index++) {
@@ -126,10 +119,7 @@ function editExpense() {
         cObj("edit_expense_record_date").value = data[11];
         cObj("edit_expense_description").value = data[14];
         cObj("edit_document_number").value = data[13];
-<<<<<<< HEAD
         cObj("reason_for_payment_decline").innerText = data[17] != null ? (data[17].length > 0 ? data[17] : "Reason not stated!") : "Reason not stated!";
-=======
->>>>>>> 81e1b958f51128c22ca1a0a78f0b19cacfa0380c
         console.log(data);
         
         // set the expense activity
@@ -144,7 +134,6 @@ function editExpense() {
         }
         
         cObj("edit_expense_windows").classList.remove("hide");
-<<<<<<< HEAD
         cObj("expense_status_view").innerHTML = data[16] == 1 ? "<span class='badge bg-success'>Payment Approved</span>" : (data[16] == 0 ? "<span class='badge bg-warning'>Payment Not Approved Yet!</span>" : "<span class='badge bg-danger'>Payment Declined!</span>");
         
         // disable the update button of payment is already approved
@@ -163,8 +152,6 @@ function editExpense() {
         }
 
         // send data to database
-=======
->>>>>>> 81e1b958f51128c22ca1a0a78f0b19cacfa0380c
         var datapass = "getExpenseCategories=true";
         sendDataPost("POST","ajax/administration/admissions.php",datapass,cObj("show_expense_category"),cObj("expense_cat_egories"));
         setTimeout(() => {
@@ -175,11 +162,8 @@ function editExpense() {
                 if (timeout == 1200) {
                     stopInterval(ids);
                 }
-<<<<<<< HEAD
 
                 // expense category
-=======
->>>>>>> 81e1b958f51128c22ca1a0a78f0b19cacfa0380c
                 if (cObj("expense_cat_egories").classList.contains("hide")) {
                     var exp_cats_exp = document.getElementsByClassName("exp_cats_exp");
                     for (let index = 0; index < exp_cats_exp.length; index++) {
@@ -221,24 +205,16 @@ function displayRecord_expenses(start, finish, arrays) {
         //create a table of the 50 records
         var counter = start+1;
         for (let index = start; index < finish; index++) {
-<<<<<<< HEAD
             var approval_status = arrays[index][16] == 1 ? '<small class="badge bg-success" title="Approved">A</small>' : (arrays[index][16] == 0 ? '<small class="badge bg-warning" title="Not-Approved">-A</small>' : '<small class="badge bg-danger" title="Payment Declined">-A</small>');
             tableData += "<tr><input type='hidden' id='data_expenses"+index+"' value='"+JSON.stringify(arrays[index])+"'><td>"+arrays[index][8]+" "+approval_status+"</td><td>"+arrays[index][2]+"</td><td>"+arrays[index][1]+"</td><td>Kes "+arrays[index][0]+"</td><td class='text-center'>"+ (arrays[index][13] != null ? arrays[index][13] : "-") +"</td><td>"+arrays[index][6]+" @ "+arrays[index][4]+"</td><td><span class='link edit_expense' id='edit_expense"+index+"'><i class='fas fa-pen-fancy'></i> Edit</span></td></tr>";
-=======
-            tableData += "<tr><input type='hidden' id='data_expenses"+index+"' value='"+JSON.stringify(arrays[index])+"'><td>"+arrays[index][8]+"</td><td>"+arrays[index][2]+"</td><td>"+arrays[index][1]+"</td><td>Kes "+arrays[index][0]+"</td><td class='text-center'>"+ (arrays[index][13] != null ? arrays[index][13] : "-") +"</td><td>"+arrays[index][6]+" @ "+arrays[index][4]+"</td><td><span class='link edit_expense' id='edit_expense"+index+"'><i class='fas fa-pen-fancy'></i> Edit</span></td></tr>";
->>>>>>> 81e1b958f51128c22ca1a0a78f0b19cacfa0380c
             counter++;
         }
     }else{
         //create a table of the 50 records
         var counter = start+1;
         for (let index = start; index < total; index++) {
-<<<<<<< HEAD
             var approval_status = arrays[index][16] == 1 ? '<small class="badge bg-success" title="Approved">A</small>' : (arrays[index][16] == 0 ? '<small class="badge bg-warning" title="Not-Approved">-A</small>' : '<small class="badge bg-danger" title="Payment Declined">-A</small>');
             tableData += "<tr><input type='hidden' id='data_expenses"+index+"' value='"+JSON.stringify(arrays[index])+"'><td>"+arrays[index][8]+" "+approval_status+"</td><td>"+arrays[index][2]+"</td><td>"+arrays[index][1]+"</td><td>Kes "+arrays[index][0]+"</td><td class='text-center'>"+ (arrays[index][13] != null ? arrays[index][13] : "-") +"</td><td>"+arrays[index][6]+" @ "+arrays[index][4]+"</td><td><span class='link edit_expense' id='edit_expense"+index+"'><i class='fas fa-pen-fancy'></i> Edit</span></td></tr>";
-=======
-            tableData += "<tr><input type='hidden' id='data_expenses"+index+"' value='"+JSON.stringify(arrays[index])+"'><td>"+arrays[index][8]+"</td><td>"+arrays[index][2]+"</td><td>"+arrays[index][1]+"</td><td>Kes "+arrays[index][0]+"</td><td class='text-center'>"+ (arrays[index][13] != null ? arrays[index][13] : "-") +"</td><td>"+arrays[index][6]+" @ "+arrays[index][4]+"</td><td><span class='link edit_expense' id='edit_expense"+index+"'><i class='fas fa-pen-fancy'></i> Edit</span></td></tr>";
->>>>>>> 81e1b958f51128c22ca1a0a78f0b19cacfa0380c
             counter++;
         }
         fins = total;
