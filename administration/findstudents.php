@@ -59,49 +59,6 @@
                 <hr>
                 <p id="swindow"></p>
                 <p id="topsearch2"></p>
-                
-                <!-- <div class="topsearch2" id ="clas_tr_na">
-                    <div class="conts">
-                        <p id="errorSearch"></p>
-                        <label for="sach" >Search here by: </label><br>
-                        <select class="form-control-select w-100" name="sach" id="sach">
-                            <option value="" hidden>Select option..</option>
-                            <option value="name">Name</option>
-                            <option value="AdmNo">Admission No</option>
-                            <option value="class">Class</option>
-                            <option value="bcno">BC number</option>
-                            <option value="allstuds" id ='alstuds'>All students</option>
-                            <option value="regtoday" id='regtodays'>Registered today</option>
-                        </select>
-                    </div>
-                    <div class="searchwindows hide" id="swindow">
-                        <div class="conts hide" id="named">
-                            <label for="name">Enter name: <br></label>
-                            <input type="text" name="name" id="name" placeholder="Type name here">
-                            <img src="images/ajax_clock_small.gif" class="hide" id="names_loaders_find">
-                        </div>
-                        <div class="conts hide" id="admnosd">
-                            <label for="admno">Enter admission no: <br></label>
-                            <input type="text" name="admno" id="admno" placeholder="Type admission no.">
-                            <img src="images/ajax_clock_small.gif" class="hide" id="admnos_loaders_find">
-                        </div>
-                        <div class="classenroll hide bg-red" id="classenroll">
-                            <label for="selclass">Select Course Level: <br></label>
-                            <p id="stud_class_find"></p>
-                        </div> 
-                        <div class="conts hide" id="course_lists_search_bar">
-                            <label for="course_chosen_search">Select Course: <img class="hide" src="images/ajax_clock_small.gif" id="course_list_find_loader"><br></label>
-                            <p id="get_student_class_list"> Course list will appear here!</p>
-                        </div>
-                        <div class="conts hide" id="bcnos">
-                            <label for="bcnosd">Enter birth certifcate no. <br></label>
-                            <input type="text" name="bcnosd" id="bcnosd" placeholder="Enter BC NO.">
-                        </div> 
-                    </div>
-                    <div class="conts">
-                        <span id="findingstudents" class="btn btn-primary rounded" type="button"><i class="fas fa-search"></i> Search</span>
-                    </div>
-                </div> -->
                 <div class="body1 hide" id="class_tr_search">
                         <div class="conts" id="">
                             <label for="class_assigned_tr">Class assigned: <br></label>
@@ -129,16 +86,6 @@
                             </div>
                         </div> -->
                         <div class="studentdetails">
-                            <!-- <div class="dp_images">
-                                <img src="images/dp.png" alt="images">
-                                <button>Change</button>
-                            </div>
-                            <div class="stats">
-                                <label><strong>Attendance:</strong><br></label>
-                                <label class = "spanned"><span>Term 1: 85% <br>Term 2: 77% <br>Term 3: 87%</span></label>
-                                <label><br><strong>Admission essentials:</strong><br></label>
-                                <label class = "spanned"><span>Tissue, Bread</span>.</label>
-                            </div> -->
                             <div class="cont">
                                 <div class="row my-1">
                                     <div class="col-md-6">
@@ -314,20 +261,37 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="intake_month_edit" class="form-control-label"><b>Intake Month</b></label>
-                                    <select name="intake_month_edit" id="intake_month_edit" class="form-control">
+                                    <select name="intake_month_edit" id="intake_month_edit" class="form-control w-100">
                                         <option value="" hidden>Select an Option</option>
                                         <option value="JAN">JAN</option>
+                                        <option value="FEB">FEB</option>
+                                        <option value="MAR">MAR</option>
+                                        <option value="APR">APR</option>
                                         <option value="MAY">MAY</option>
+                                        <option value="JUN">JUN</option>
+                                        <option value="JUL">JUL</option>
+                                        <option value="AUG">AUG</option>
                                         <option value="SEP">SEP</option>
+                                        <option value="OCT">OCT</option>
+                                        <option value="NOV">NOV</option>
+                                        <option value="DEC">DEC</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="intake_year_edit" class="form-control-label"><b>Intake Year</b></label>
-                                    <select name="intake_year_edit" id="intake_year_edit" class="form-control">
+                                    <select name="intake_year_edit" id="intake_year_edit" class="form-control w-100">
                                         <option value="" hidden>Select an Option</option>
                                         <?php for($index = date("Y"); $index > 2017; $index--):?>
                                             <option value="<?=$index?>"><?=$index?></option>
                                         <?php endfor;?>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="course_progress" class="form-control-label"><b>Course Progress</b></label>
+                                    <select name="course_progress" id="course_progress" class="form-control w-100">
+                                        <option value="" hidden>Select how you wish the student progress</option>
+                                        <option value="1">Automated</option>
+                                        <option value="0">Manual</option>
                                     </select>
                                 </div>
                             </div>
@@ -365,6 +329,8 @@
                                         </tr>
                                     </table>
                                 </div>
+                                <span class="btn btn-secondary btn-sm w-25 mx-auto my-2" id="add_modules"><i class="fa fa-plus"></i> Add Course Modules <img src="images/ajax_clock_small.gif" class="hide" id="add_course_modules_loader"></span>
+                                <br>
                                 <span class="btn btn-secondary btn-sm w-50 mx-auto my-2" id="save_course_progress"><i class="fa fa-save"></i> Save Course Progress <img src="images/ajax_clock_small.gif" class="hide" id="save_course_progress_loader"></span>
                                 <div id="error_handler_course_progress"></div>
                             </div>

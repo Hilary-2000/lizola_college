@@ -2890,7 +2890,8 @@ function tablebtnlistener() {
                         // loop through the data
                         for (let index = 1; index < course_history.module_terms.length; index++) {
                             const element = course_history.module_terms[index];
-                            data_to_display+="<tr><td>"+course_history.module_terms[index].term_name+"</td><td><label class='form-control-label' for='select_option_1' >Status : </label> <select class='form-control select_options' id='select_option_"+index+"'><option value='' hidden>Select Option</option><option value='0' "+(course_history.module_terms[index].status == 0 ? "selected" : "")+">In-Active</option><option "+(course_history.module_terms[index].status == 1 ? "selected" : "")+" value='1'>Active</option><option "+(course_history.module_terms[index].status == 2 ? "selected" : "")+" value='2'>Completed</option></select></td><td>"+(course_history.module_terms[index].start_date.length > 0 ? "Start Date : "+"<b>"+formatDate_1(course_history.module_terms[index].start_date)+"</b>"+"<br>End Date : "+"<b>"+formatDate_1(course_history.module_terms[index].end_date)+"</b>" : "In-Active") +"</td></tr>";
+                            let delete_button = (index == (course_history.module_terms.length-1)) ? "<span class='btn btn-sm btn-outline-danger' id='delete_course_term_module'><i class='fa fa-trash'></i> Del</span>" : "";
+                            data_to_display+="<tr><td>"+course_history.module_terms[index].term_name+"<br>"+delete_button+"</td><td><label class='form-control-label' for='select_option_1' >Status : </label> <select class='form-control select_options' id='select_option_"+index+"'><option value='' hidden>Select Option</option><option value='0' "+(course_history.module_terms[index].status == 0 ? "selected" : "")+">In-Active</option><option "+(course_history.module_terms[index].status == 1 ? "selected" : "")+" value='1'>Active</option><option "+(course_history.module_terms[index].status == 2 ? "selected" : "")+" value='2'>Completed</option></select></td><td>"+(course_history.module_terms[index].start_date.length > 0 ? "Start Date : "+"<b>"+formatDate_1(course_history.module_terms[index].start_date)+"</b>"+"<br>End Date : "+"<b>"+formatDate_1(course_history.module_terms[index].end_date)+"</b>" : "In-Active") +"</td></tr>";
                         }
                         data_to_display += "</table>";
 
@@ -2914,6 +2915,38 @@ function tablebtnlistener() {
                     for (let index = 0; index < intake_month_edit.length; index++) {
                         const element = intake_month_edit[index];
                         if(element.value == splitdata[45]){
+                            element.selected = true;
+                        }
+                    }
+                    
+                    if(cObj("delete_course_term_module") != undefined){
+                        cObj("delete_course_term_module").addEventListener("click", function () {
+                            var datapass = "delete_course_module=true&admission_number="+valObj("adminnos");
+                            sendDataPost("POST","ajax/administration/admissions.php", datapass, cObj("error_handler_course_progress"), cObj("save_course_progress_loader"));
+                            setTimeout(() => {
+                                var timeout = 0;
+                                var ids = setInterval(() => {
+                                    timeout++;
+                                    //after two minutes of slow connection the next process wont be executed
+                                    if (timeout == 1200) {
+                                        stopInterval(ids);
+                                    }
+                                    if (cObj("save_course_progress_loader").classList.contains("hide")) {
+                                        cObj("view"+valObj("adminnos")).click();
+                                        setTimeout(() => {
+                                            cObj("error_handler_course_progress").innerHTML = "";
+                                        }, 3000);
+                                        stopInterval(ids);
+                                    }
+                                }, 100);
+                            }, 200);
+                        });
+                    }
+                    
+                    var course_progress_children = cObj("course_progress").children;
+                    for (let index = 0; index < course_progress_children.length; index++) {
+                        const element = course_progress_children[index];
+                        if (element.value == splitdata[46]) {
                             element.selected = true;
                         }
                     }
@@ -3244,6 +3277,7 @@ cObj("updatestudinfor").onclick = function () {
                 var parconts2 = valObj('pcontacted2');
                 var parrelation2 = valObj('parrelationship2');
                 var pemail2 = valObj('pemails2');
+                var course_progress = valObj("course_progress");
                 var existing_course = cObj("course_level_value") != undefined ? valObj("course_level_value") : null;
                 //collect the data and send to the database
                 var datapass = "?updatestudinfor=true&class=" + classed + "&index=" + index + "&bcnos=" + bcnos + "&dob=" + dobs + "&genders=" + gender + "&disabled=" + disabled + "&describe=" + describe;
@@ -3251,7 +3285,7 @@ cObj("updatestudinfor").onclick = function () {
                 datapass += "&parentname2=" + parname2 + "&parentcontact=" + parconts2 + "&parentrelation=" + parrelation2 + "&pemails=" + pemail2 + "&snamed=" + snamed + "&fnamed=" + fnamed + "&lnamed=" + lnamed;
                 datapass += "&occupation1=" + occupation1 + "&occupation2=" + occupation2 + "&medical_history=" + medical_history + "&clubs_in_sporters=" + clubs_in_sporters + "&previous_schools=" + previous_schools + "&doas=" + doas;
                 datapass += "&reason_for_leaving=" + reason_for_leaving+"&course_chosen="+course_chosen+"&course_level_hidden="+course_level_hidden+"&course_chosen_level_hidden="+course_chosen_level_hidden+"&existing_course_details="+existing_course;
-                datapass += "&intake_year_edit="+intake_year_edit+"&intake_month_edit="+intake_month_edit;
+                datapass += "&intake_year_edit="+intake_year_edit+"&intake_month_edit="+intake_month_edit+"&course_progress="+course_progress;
                 cObj("updateerrors").innerHTML = "";
                 sendData1("GET", "administration/admissions.php", datapass, cObj("updateerrors"));
                 setTimeout(() => {
@@ -3264,6 +3298,7 @@ cObj("updatestudinfor").onclick = function () {
                         }
                         if (cObj("loadings").classList.contains("hide")) {
                             cObj("coppy_cat_err").innerHTML = cObj("updateerrors").innerHTML;
+                            cObj("view"+valObj("adminnos")).click();
                             setTimeout(() => {
                                 cObj("updateerrors").innerHTML = "";
                                 cObj("coppy_cat_err").innerHTML = cObj("updateerrors").innerHTML;
@@ -9860,4 +9895,23 @@ cObj("close_Edit_course_window").onclick = function () {
 }
 cObj("close_edit_course_win").onclick = function () {
     cObj("edit_course_window").classList.add("hide");
+}
+
+cObj("add_modules").onclick = function () {
+    var datapass = "add_modules=true&student_id="+valObj("adminnos");
+    sendDataPost("POST", "ajax/administration/admissions.php", datapass, cObj("error_handler_course_progress"), cObj("add_course_modules_loader"));
+    setTimeout(() => {
+        var timeout = 0;
+        var ids = setInterval(() => {
+            timeout++;
+            //after two minutes of slow connection the next process wont be executed
+            if (timeout == 1200) {
+                stopInterval(ids);
+            }
+            if (cObj("save_course_progress_loader").classList.contains("hide")) {
+                cObj("view"+valObj("adminnos")).click();
+                stopInterval(ids);
+            }
+        }, 100);
+    }, 200);
 }

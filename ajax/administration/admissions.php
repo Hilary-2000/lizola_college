@@ -181,11 +181,12 @@
 
                         // loop through all courses to see if its the one in this level
                         $present = false;
-                        for($in = 0; $in < count($courses_levels); $in++){
-                            if($courses_levels[$in] == $course_id){
+                        if(isset($my_courses[$index]->course_level)){
+                            if($my_courses[$index]->course_level == $course_id){
                                 $present = true;
                             }
                         }
+
                         if($present){
                             $selector .= "<option ".($student_course_id == $my_courses[$index]->id ? "selected" : "")." value='".$my_courses[$index]->id."'>".$my_courses[$index]->course_name."</option>";
                         }
@@ -510,7 +511,7 @@
                                 }
 
                                 // course details
-                                $course_details->course_id = $c_i*1;
+                                $course_details->course_id = $c_i;
                                 $course_details->course_name = $c_n;
 
                                 // break
@@ -523,6 +524,7 @@
                         array_push($data_array,$mycourselist_raw);
                         array_push($data_array,$row['intake_year']);
                         array_push($data_array,$row['intake_month']);
+                        array_push($data_array,$row['course_progress_status']);
                     }else{
                     }
                 }else {
@@ -810,6 +812,7 @@
             $existing_course_details = $_GET['existing_course_details'];
             $intake_year_edit = $_GET['intake_year_edit'];
             $intake_month_edit = $_GET['intake_month_edit'];
+            $course_progress = $_GET['course_progress'];
             // echo $doas." in null";
 
             // process the student course progress
@@ -845,9 +848,12 @@
                                 $highest_id = $my_course_list[$ind]->id;
                             }
                         }
+                        
 
                         // get the level id
                         $level_id = null;
+                        $module_terms = 0;
+                        $module_period = "0 days";
                         $select = "SELECT * FROM `settings` WHERE `sett` = 'class';";
                         $stmt = $conn2->prepare($select);
                         $stmt->execute();
@@ -858,6 +864,30 @@
                                 for($index = 0; $index < count($valued); $index++){
                                     if($class == $valued[$index]->classes){
                                         $level_id = $valued[$index]->id;
+                                        $module_terms = isset($valued[$index]->no_of_terms) ? $valued[$index]->no_of_terms : 0;
+                                        $module_period = isset($valued[$index]->term_duration) ? $valued[$index]->term_duration ." ". $valued[$index]->duration_intervals : "0 days";
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        // get the level id
+                        $module_terms = 0;
+                        $module_period = "0 days";
+                        $term_cost = 0;
+                        $select = "SELECT * FROM `settings` WHERE `sett` = 'courses';";
+                        $stmt = $conn2->prepare($select);
+                        $stmt->execute();
+                        $res = $stmt->get_result();
+                        if($res){
+                            if($row = $res->fetch_assoc()){
+                                $courses = isJson_report($row['valued']) ? json_decode($row['valued']) : [];
+                                for($index = 0; $index < count($courses); $index++){
+                                    if($course_chosen == $courses[$index]->id){
+                                        $module_terms = isset($courses[$index]->no_of_terms) ? $courses[$index]->no_of_terms : 0;
+                                        $module_period = isset($courses[$index]->term_duration) ? $courses[$index]->term_duration ." ". $courses[$index]->duration_intervals : "0 days";
+                                        $term_cost = isset($courses[$index]->termly_fees) ? $courses[$index]->termly_fees : 0;
                                         break;
                                     }
                                 }
@@ -867,48 +897,26 @@
                         // ------------------------SET COURSE DETAILS----------------------------
 
                         // get the course name
-                        $course_id = $course_chosen;
+                        $course_name_chosen = $course_chosen;
 
                         // set up the course details
                         $course_detail = new stdClass();
                         $course_detail->course_level = $level_id;
-                        $course_detail->course_name = $course_id;
+                        $course_detail->course_name = $course_name_chosen;
                         $course_detail->course_status = 1;
                         $course_detail->id = $highest_id+1;
                         $course_detail->module_terms = [];
                         
-                        $module_terms = [];
-                        // term 1
-                        $terms = getTermV3($conn2);
-                        $academic_terms = getAcademicStartV1($conn2,$terms);
-                        $term = new stdClass();
-                        $term->id = 1;
-                        $term->term_name = "TERM_1";
-                        $term->status = 1;
-                        $term->start_date = date("YmdHis",strtotime($academic_terms[0]));
-                        $term->end_date = date("YmdHis",strtotime($academic_terms[1]));
-                        array_push($module_terms,$term);
-                        
-                        // term 2
-                        $term = new stdClass();
-                        $term->id = 2;
-                        $term->term_name = "TERM_2";
-                        $term->status = 0;
-                        $term->start_date = "";
-                        $term->end_date = "";
-                        array_push($module_terms,$term);
-
-                        // term 3
-                        $term = new stdClass();
-                        $term->id = 3;
-                        $term->term_name = "TERM_3";
-                        $term->status = 0;
-                        $term->start_date = "";
-                        $term->end_date = "";
-                        array_push($module_terms,$term);
-
-                        // push this module terms
-                        $course_detail->module_terms = $module_terms;
+                        for($index = 0; $index < $module_terms; $index++){
+                            $term = new stdClass();
+                            $term->id = $index + 1;
+                            $term->term_name = "MODULE ". ($index + 1);
+                            $term->status =  ($index == 0) ? 1 : 0;
+                            $term->start_date =  ($index == 0) ? date("YmdHis") : "";
+                            $term->end_date =  ($index == 0) ? date("YmdHis", strtotime("+".$module_period)) : "";
+                            $term->termly_cost = $term_cost;
+                            array_push($course_detail->module_terms, $term);
+                        }
 
                         // stringify the JSON data
                         // replace the course progress if its presnet
@@ -919,7 +927,8 @@
                                 $course_detail->id = $my_course_list[$in]->id;
                                 $my_course_list[$in] = $course_detail;
                                 $present = 1;
-                                break;
+                            }else{
+                                $my_course_list[$in]->course_status = 2;
                             }
                         }
 
@@ -927,6 +936,8 @@
                         if($present == 0){
                             array_push($my_course_list,$course_detail);
                         }
+
+                        // ----------------END OF SETTING COURSE DETAILS--------------
 
                         // $course_details_string = json_encode([$course_detail]);
 
@@ -941,9 +952,9 @@
             }
 
             // echo $previous_schools;
-            $update = "UPDATE `student_data` SET `year_of_study` = ?,`stud_class` = ?, `BCNo`= ?,`index_no` = ?,`gender` = ?, `disabled` = ? , `disable_describe` = ? , `address` = ? ,`parentName` = ?,`parentContacts` = ?,`parent_relation` = ?,`parent_email` = ?,`parent_name2` = ?,`parent_contact2` = ?, `parent_relation2` = ?, `parent_email2` = ?, `first_name` = ? ,`surname` = ? ,`second_name` = ? ,`primary_parent_occupation` = ?, `secondary_parent_occupation` = ?, `medical_history` = ?, `clubs_id` = ?, `prev_sch_attended` = ?,`D_O_A` = ?, `transfered_comment` = ?, `course_done` = ?,`intake_year` = ?, `intake_month` = ? WHERE `adm_no`=?";
+            $update = "UPDATE `student_data` SET `year_of_study` = ?,`stud_class` = ?, `BCNo`= ?,`index_no` = ?,`gender` = ?, `disabled` = ? , `disable_describe` = ? , `address` = ? ,`parentName` = ?,`parentContacts` = ?,`parent_relation` = ?,`parent_email` = ?,`parent_name2` = ?,`parent_contact2` = ?, `parent_relation2` = ?, `parent_email2` = ?, `first_name` = ? ,`surname` = ? ,`second_name` = ? ,`primary_parent_occupation` = ?, `secondary_parent_occupation` = ?, `medical_history` = ?, `clubs_id` = ?, `prev_sch_attended` = ?,`D_O_A` = ?, `transfered_comment` = ?, `course_done` = ?,`intake_year` = ?, `intake_month` = ?, `course_progress_status` = ? WHERE `adm_no`=?";
             $stmt = $conn2->prepare($update);
-            $stmt->bind_param("ssssssssssssssssssssssssssssss",$newYOS,$class,$bcnos,$index,$genders,$disabled,$describe,$address,$pnamed,$pcontacts,$prelation,$pemail,$parentname2,$parentcontact,$parentrelation,$pemails,$fnamed,$snamed,$lnamed,$occupation1,$occupation2,$medical_history,$clubs_in_sporters,$previous_schools,$doas,$reason_for_leaving,$course_chosen,$intake_year_edit,$intake_month_edit,$adminno);
+            $stmt->bind_param("sssssssssssssssssssssssssssssss",$newYOS,$class,$bcnos,$index,$genders,$disabled,$describe,$address,$pnamed,$pcontacts,$prelation,$pemail,$parentname2,$parentcontact,$parentrelation,$pemails,$fnamed,$snamed,$lnamed,$occupation1,$occupation2,$medical_history,$clubs_in_sporters,$previous_schools,$doas,$reason_for_leaving,$course_chosen,$intake_year_edit,$intake_month_edit,$course_progress,$adminno);
             if($stmt->execute()){
                 echo "<p style='color:green;font-size:12px;'>Student  data updated successfully!</p>";
                 $log_text = $fnamed." ".$lnamed." - of Reg No. (".$adminno.") data has been updated successfully!";
@@ -2138,7 +2149,7 @@
 
 
                     $counter = 0;
-                    $string_to_display = "<select class='form-control ' name='".$select_class_id."' id='".$select_class_id."'> <option value='' hidden>Select..</option>";
+                    $string_to_display = "<select class='form-control w-100' name='".$select_class_id."' id='".$select_class_id."'> <option value='' hidden>Select..</option>";
 
                     if($select_class_id == "selclass"){
                         $string_to_display.="<option value='others'>Other Students</option>";
@@ -5466,7 +5477,7 @@
                 $term->status = $course_module_terms == ($index+1) ? 1 : 0;
                 $term->start_date = $course_module_terms == ($index+1) ? date("YmdHis") : "";
                 $term->end_date = $course_module_terms == ($index+1) ? date("YmdHis", strtotime("+".$module_period)) : "";
-                $term->termly_cost = $course_module_terms == ($index+1) ? $term_cost : 0;
+                $term->termly_cost = $term_cost;
                 array_push($course_detail->module_terms, $term);
             }
 
@@ -6156,6 +6167,96 @@
                     }
                 }
             }
+        }elseif(isset($_POST['add_modules'])){
+            $student_admno = $_POST['student_id'];
+            // GET THE STUDENT DATA
+            $select = "SELECT * FROM `student_data` WHERE adm_no = ?";
+            $stmt = $conn2->prepare($select);
+            $stmt->bind_param("s", $student_admno);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $course_list = [];
+            if($result){
+                if($row = $result->fetch_assoc()){
+                    $course_list = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
+                }
+            }
+            
+            $module_index = 1;
+            $module_id = 1;
+            $module_termly_cost = 0;
+            foreach($course_list as $key_init => $course){
+                if($course->course_status == 1){
+                    $modules = $course->module_terms;
+                    foreach($modules as $key => $module){
+                        if($key == (count($modules)-1)){
+                            $module_index = $key+1;
+                            $module_id = $module->id;
+                            $module_termly_cost = $module->termly_cost;
+                        }
+                    }
+
+                    $term = new stdClass();
+                    $term->id = $module_id + 1;
+                    $term->term_name = "MODULE ". ($module_index + 1);
+                    $term->status = 0;
+                    $term->start_date = "";
+                    $term->end_date = "";
+                    $term->termly_cost = $module_termly_cost;
+
+                    // course list
+                    array_push($course_list[$key_init]->module_terms,$term);
+                    break;
+                }
+            }
+            
+            // UPDATE THE COURSE LIST
+            $update = "UPDATE student_data SET my_course_list = ? WHERE adm_no = ?";
+            $stmt = $conn2->prepare($update);
+            $my_course_list = json_encode($course_list);
+            $stmt->bind_param("ss", $my_course_list, $student_admno);
+            $stmt->execute();
+
+
+            echo "<p class='text-success'>Module has been added successfully!</p>";
+        }elseif(isset($_POST['delete_course_module'])){
+            $admission_number = $_POST['admission_number'];
+            // DELETE THE COURSE MODULE OF THE ACTIVE COURSE
+            $select = "SELECT * FROM student_data WHERE adm_no = ?";
+            $stmt = $conn2->prepare($select);
+            $stmt->bind_param("s", $admission_number);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $courses = [];
+            if($result){
+                if($row = $result->fetch_assoc()){
+                    $courses = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
+                }
+            }
+            
+            foreach($courses as $key => $course){
+                if($course->course_status == "1"){
+                    $modules = $course->module_terms;
+                    $new_modules = [];
+                    foreach($modules as $key_init => $module){
+                        if($key_init < (count($modules)-1)){
+                            array_push($new_modules, $module);
+                        }
+                    }
+                    $course->module_terms = $new_modules;
+
+                    $courses[$key]->module_terms = $new_modules;
+                    break;
+                }
+            }
+
+            $update = "UPDATE student_data SET my_course_list = ? WHERE adm_no = ?";
+            $stmt = $conn2->prepare($update);
+            $my_course = json_encode($courses);
+            $stmt->bind_param("ss", $my_course, $admission_number);
+            $stmt->execute();
+
+            echo "<p class='text-success'>Student term module has been deleted successfully!</p>";
         }elseif(isset($_POST['deregister_stud'])){
             $deregister_stud = $_POST['deregister_stud'];
             $select_term_deregister = $_POST['select_term_deregister'];

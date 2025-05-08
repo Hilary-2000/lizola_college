@@ -132,7 +132,7 @@
                     <div class="conts">
                         <label for="bcno">National ID number:</label>
                         <p id="bcnerr"></p>
-                        <input type="text" name="bcno" id="bcno" placeholder="Enter BC No">
+                        <input type="text" name="bcno" id="bcno" placeholder="Enter Id number">
                     </div>
                     <div class="conts">
                         <label for="address">Student residence: <span class="examples"> eg Kisumu,Kenya or Busia,Kenya</span></label><br>
