@@ -59,10 +59,15 @@
                         
                         // add course flag after looping through the course levele the course is offered
                         $proceed = false;
-                        for ($ind=0; $ind < count($course_levels); $ind++) { 
-                            if($course_levels[$ind] == $course_id){
+                        // for ($ind=0; $ind < count($course_levels); $ind++) { 
+                        //     if($course_levels[$ind] == $course_id){
+                        //         $proceed = true;
+                        //         break;
+                        //     }
+                        // }
+                        if(isset($valued[$index]->course_level)){
+                            if($valued[$index]->course_level == $course_id){
                                 $proceed = true;
-                                break;
                             }
                         }
 
@@ -4727,10 +4732,15 @@
                         
                         // add course flag after looping through the course levele the course is offered
                         $proceed = false;
-                        for ($ind=0; $ind < count($course_levels); $ind++) { 
-                            if($course_levels[$ind] == $course_id){
+                        // for ($ind=0; $ind < count($course_levels); $ind++) { 
+                        //     if($course_levels[$ind] == $course_id){
+                        //         $proceed = true;
+                        //         break;
+                        //     }
+                        // }
+                        if(isset($valued[$index]->course_level)){
+                            if($valued[$index]->course_level == $course_id){
                                 $proceed = true;
-                                break;
                             }
                         }
 

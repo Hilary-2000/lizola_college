@@ -105,7 +105,7 @@ function courseChange() {
 
     // if the level count is greater than zero it means that there is a term that has not been completed by the student
     if(level_count > 0 && this.value != valObj("course_chosen_level_hidden")){
-        cObj("course_chosen_error_window").innerHTML = "<p class='text-danger'>You have changed the student`s course without them completing. Make sure they have completed every term before moving them to any level.</p>";
+        cObj("course_chosen_error_window").innerHTML = "<p class='text-danger'>You have changed the student`s course without them completing. Make sure they have completed every module term before moving them to any level.</p>";
     }else{
         cObj("course_chosen_error_window").innerHTML = "";
     }
@@ -2685,6 +2685,8 @@ function setListenerBtnTab(id) {
     cObj(id).addEventListener("click", tablebtnlistener);
 }
 function tablebtnlistener() {
+    cObj("course_chosen_error_window").innerHTML = "";
+    cObj("course_level_error_window").innerHTML = "";
     // remove the course level window
     cObj("course_level_error_window").innerHTML = "";
     cObj("select_clubs_sports_def").selected = true;

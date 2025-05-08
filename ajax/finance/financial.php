@@ -1300,8 +1300,13 @@
 
                         // loop through all courses to see if its the one in this level
                         $present = false;
-                        for($in = 0; $in < count($courses_levels); $in++){
-                            if($courses_levels[$in] == $course_id){
+                        // for($in = 0; $in < count($courses_levels); $in++){
+                        //     if($courses_levels[$in] == $course_id){
+                        //         $present = true;
+                        //     }
+                        // }
+                        if(isset($my_courses[$index]->course_level)){
+                            if($my_courses[$index]->course_level == $course_id){
                                 $present = true;
                             }
                         }
@@ -1354,9 +1359,9 @@
                 $table.="<tr>
                         <th>No.</th>
                         <th>Votehead</th>
-                        <th>TERM ONE</th>
-                        <th>TERM TWO</th>
-                        <th>TERM THREE</th>
+                        <th>Module Term Amount</th>
+                        <th class='d-none'>TERM TWO</th>
+                        <th class='d-none'>TERM THREE</th>
                         <th>Role</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -1368,8 +1373,8 @@
                 while ($row = $res->fetch_assoc()) {
                     $table.="<tr><td><input hidden id='fees_structure_value_".$row['ids']."' value='".json_encode($row)."'>".$index."</td><td class='vote_heads' id = 'expense_name".$row['ids']."'>".$row['expenses']."</td>";
                     $table.="<td class = 't-one' id = 't_one".$row['ids']."'>".$row['TERM_1']."</td>";
-                    $table.="<td class = 't-two' id = 't_two".$row['ids']."'>".$row['TERM_2']."</td>";
-                    $table.="<td class = 't-three' id = 't_three".$row['ids']."'>".$row['TERM_3']."</td>";
+                    $table.="<td class = 't-two d-none' id = 't_two".$row['ids']."'>".$row['TERM_2']."</td>";
+                    $table.="<td class = 't-three d-none' id = 't_three".$row['ids']."'>".$row['TERM_3']."</td>";
                     $total1+=$row['TERM_1'];
                     $total2+=$row['TERM_2'];
                     $total3+=$row['TERM_3'];
@@ -1381,7 +1386,7 @@
                     $table.="<td>".$button."</td><td>".$button2."</td></tr>";
                     $index++;
                 }
-                $table.="<tr><td colspan='2'><b>Total</b></td><td>Ksh ".$total1."</td><td>Ksh ".$total2."</td><td>Ksh ".$total3."</td></tr><tr><td colspan='2' ><b>Grand total </b></td><td>Ksh ".($total1+$total2+$total3)."</td></tr></table></div>";
+                $table.="<tr><td colspan='2'><b>Total</b></td><td>Ksh ".number_format($total1)."</td><td class='d-none'>Ksh ".$total2."</td><td class='d-none'>Ksh ".$total3."</td></tr><tr><td colspan='2' ><b>Grand total </b></td><td>Ksh ".number_format($total1)."</td></tr></table></div>";
                 echo $table;
             }
         }elseif(isset($_GET['get_levels_fees_structure'])){
@@ -7056,46 +7061,6 @@
     }
 
     function getBalanceReports($admno,$term,$conn2){
-        // //get the fee balance from the latest transaction record if not found then calculate how much the students is to pay
-        // $lastbal = lastBalance($admno,$conn2);
-        // // get the student is enrolled in the transport system
-        // $is_trans = isTransport($conn2,$admno);
-        // $check_recent_boarding = checkNewlyBoard($admno,$conn2);
-        // // get the fees payment per term for the transport system
-        // $transport_payment = 0;
-        // if($is_trans == 1){
-        //     // $transport_payment = transportBalanceSinceAdmission($conn2,$admno);
-        // }
-        // // check if the student has made any payments before the term started
-        // $date_term_began = date("Ymd",strtotime(getTermStart($conn2,$term)));
-        // $last_paid_time  = date("Ymd",strtotime(getLastTimePaying($conn2,$admno)));
-        // // add next term balance
-        // $current_term = 0;
-        // if ($date_term_began > $last_paid_time) {
-        //     $daro_ss = getNameReport($admno,$conn2);
-        //     $getclass = explode("^",$daro_ss)[1];
-        //     $current_term = getFeesTerm($term,$conn2,$getclass,$admno);
-        //     // echo $current_term;
-        // }
-
-        // // IF THE CURRENT DATE IS PAST THE LAST ACADEMIC YEAR ADD THE BALANCE TO THIS YEAR
-        // $date_term_began = date("Ymd",strtotime(getTermStart($conn2,"TERM_1")));
-
-        // $last_paid_time  = date("Ymd",strtotime(getLastTimePaying($conn2,$admno)));
-
-        // $balanceds = 0;
-        // if($date_term_began > $last_paid_time){
-        //     $balanceds += getFeesAsPerTermBoarders($term,$conn2,$getclass,$admno);
-        // }
-
-        // if ($lastbal > 0 && !$check_recent_boarding) {
-        //     return $lastbal + $transport_payment ;
-        // }else {
-        //     $balance = calculatedBalanceReport($admno,$term,$conn2);
-        //     return $balance + $transport_payment + $balanceds;
-        // }
-        // $term = getTermV2($conn2);
-        // echo $term;
         $balance = calculatedBalanceReport($admno,$term,$conn2);
         return $balance;
     }

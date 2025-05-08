@@ -2630,16 +2630,16 @@ function checkPresnt($array, $string){
                             <p id="expe_err"></p>
                         </div>
                         <div class="conts">
-                            <label class="form-control-label" for="term_one">Term One Amount: <br></label>
-                            <input class="form-control" type="number" name="term_one" id="term_one" placeholder="Term One">
+                            <label class="form-control-label" for="term_one">Module Term Amount: <br></label>
+                            <input class="form-control" type="number" name="term_one" id="term_one" placeholder="Module Term Amount">
                         </div>
-                        <div class="conts">
+                        <div class="conts d-none">
                             <label class="form-control-label" for="term_two">Term Two Amount: <br></label>
-                            <input class="form-control" type="number" name="term_two" id="term_two" placeholder="Term Two">
+                            <input class="form-control" value="0" type="number" name="term_two" id="term_two" placeholder="Term Two">
                         </div>
-                        <div class="conts">
+                        <div class="conts d-none">
                             <label class="form-control-label" for="term_three">Term Three Amount: <br></label>
-                            <input class="form-control" type="number" name="term_three" id="term_three" placeholder="Term Three">
+                            <input class="form-control" value="0" type="number" name="term_three" id="term_three" placeholder="Term Three">
                         </div>
                         <div class="conts">
                             <label class="form-control-label" for="boarders_regular">Fees type: <br></label>
@@ -2652,7 +2652,7 @@ function checkPresnt($array, $string){
                         </div>
                         <div class="conts">
                             <label class="form-control-label" for="select_classes">Select Course Level: <img class="hide" src="images/ajax_clock_small.gif" id="loadings213111"><br></label>
-                            <div id="class_list_fees">
+                            <div id="class_list_fees" class="w-75">
                             </div>
                         </div>
                         <div class="conts">
@@ -3172,22 +3172,22 @@ function checkPresnt($array, $string){
                         <div class="conts">
                             <p class="hide" id="original_exp_name"></p>
                         </div>
-                        <div class="conts"><label class="form-control-label">Fees id: <span id="fee_id_s">0</span></label></div>
+                        <div class="conts"><label class="form-control-label d-none">Fees id: <span id="fee_id_s">0</span></label></div>
                         <div class="conts">
                             <label class="form-control-label" for="exp_name1">Votehead name: <br></label>
                             <input class="form-control" type="text" name="exp_name1" id="exp_name1" placeholder="Votehead Name">
                         </div>
                         <div class="conts">
-                            <label class="form-control-label" for="term_one1">Term One Amount: <br></label>
-                            <input class="form-control" type="number" name="term_one1" id="term_one1" placeholder="Term One">
+                            <label class="form-control-label" for="term_one1">Module Term Amount: <br></label>
+                            <input class="form-control" type="number" name="term_one1" id="term_one1" placeholder="Module Term Amount">
                         </div>
-                        <div class="conts">
+                        <div class="conts d-none">
                             <label class="form-control-label" for="term_two1">Term Two Amount: <br></label>
-                            <input class="form-control" type="number" name="term_two1" id="term_two1" placeholder="Term Two">
+                            <input class="form-control" value="0" type="number" name="term_two1" id="term_two1" placeholder="Term Two">
                         </div>
-                        <div class="conts">
+                        <div class="conts d-none">
                             <label class="form-control-label" for="term_three1">Term Three Amount: <br></label>
-                            <input class="form-control" type="number" name="term_three1" id="term_three1" placeholder="Term Three">
+                            <input class="form-control" value="0" type="number" name="term_three1" id="term_three1" placeholder="Term Three">
                         </div>
                         <div class="conts">
                             <label class="form-control-label" for="boarders1_regular1">Fees type: <br></label>
@@ -3201,7 +3201,7 @@ function checkPresnt($array, $string){
                         <input type="hidden" name="" id="course_id_edit">
                         <div class="conts">
                             <label class="form-control-label" for="fees_structure_edit_level">Select Course Levels: <img class="hide" src="images/ajax_clock_small.gif" id="load_course_levels_edit"><br></label>
-                            <div id="class_list_fees_update"></div>
+                            <div id="class_list_fees_update" class="w-75"></div>
                         </div>
                         <div class="conts">
                             <label class="form-control-label" for="course_chosen_fees_structure">Select Course: <img class="hide" src="images/ajax_clock_small.gif" id="course_list_edits_loader"><br></label>
