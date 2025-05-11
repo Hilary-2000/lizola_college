@@ -600,6 +600,44 @@ function voterHeads(classin,student_id) {
     var course_value = cObj("course_value_finance") != undefined ? valObj("course_value_finance") : "0";
     var datapass2 = "?payfordetails=true&class_use=" + classin+"&student_admission="+student_id+"&course_value="+course_value;
     sendData("GET", "finance/financial.php", datapass2, cObj("payments"));
+    setTimeout(() => {
+        var ids = setInterval(() => {
+            if (cObj("loadings").classList.contains("hide")) {
+                var votehead_checks = document.getElementsByClassName("votehead_checks");
+                for (let index = 0; index < votehead_checks.length; index++) {
+                    const element = votehead_checks[index];
+                    element.addEventListener("change", function () {
+                        if (this.checked) {
+                            cObj("votehead_amounts_"+this.id.substring(16, this.id.length)).classList.remove("disabled");
+                            cObj("votehead_amounts_"+this.id.substring(16, this.id.length)).disabled = false;
+                        }else{
+                            cObj("votehead_amounts_"+this.id.substring(16, this.id.length)).classList.add("disabled");
+                            cObj("votehead_amounts_"+this.id.substring(16, this.id.length)).disabled = true;
+                        }
+                    });
+                }
+
+                var votehead_amounts  = document.getElementsByClassName("votehead_amounts ");
+                for (let index = 0; index < votehead_amounts .length; index++) {
+                    const element = votehead_amounts [index];
+                    element.addEventListener("keyup", function () {
+                        var va = document.getElementsByClassName("votehead_amounts ");
+                        var total_fees = 0;
+                        for (let index = 0; index < va.length; index++) {
+                            const elem = va[index];
+                            if (!elem.classList.contains("disabled")) {
+                                total_fees += elem.value*1;
+                            }
+                        }
+                        console.log(total_fees);
+                        cObj("amount2").value = total_fees;
+                        cObj("amount1").value = total_fees;
+                    });
+                }
+                stopInterval(ids);
+            }
+        }, 100);
+    }, 1000);
 }
 function setReverselistener(className) {
     if (className.length > 0) {
@@ -645,6 +683,48 @@ cObj("makepayments").onclick = function () {
                 }
             }
             if (errs == 0) {
+                // get the payment for details
+                var total_fees_paid = 0;
+                var votehead_paid_for = [];
+                var votehead_amounts = document.getElementsByClassName("votehead_amounts");
+                for (let index = 0; index < votehead_amounts.length; index++) {
+                    const element = votehead_amounts[index];
+                    if (!element.classList.contains("disabled")) {
+                        var votehead_details = cObj("course_details_"+element.id.substring(17, element.id.length)).value;
+                        var json_votehead_details = hasJsonStructure(votehead_details) ? JSON.parse(votehead_details) : [];
+                        var payment_details = {
+                            id: json_votehead_details.length == 0 ? "_"+index : json_votehead_details.fees_id,
+                            name: json_votehead_details.length == 0 ? "Undefined Fees" : json_votehead_details.fees_name,
+                            amount_paid: element.value,
+                            roles: json_votehead_details.length == 0 ? "compulsory" : json_votehead_details.fees_role
+                        };
+                        votehead_paid_for.push(payment_details);
+                        total_fees_paid += element.value*1;
+                    }
+                }
+
+                if(votehead_paid_for.length == 0){
+                    cObj("geterrorpay").innerHTML = "<p class='text-danger'>No voteheads to pay for selected!</p>";
+                    return 0;
+                }
+
+                var collected_fees = valObj("modeofpay") == "mpesa" ? valObj("amount1") : valObj("amount2");
+                console.log(collected_fees +" "+ total_fees_paid);
+                if (total_fees_paid != collected_fees) {
+                    redBorder(cObj("amount1"));
+                    redBorder(cObj("amount2"));
+                    cObj("geterrorpay").innerHTML = "<p class='text-danger'>The total votehead amount does not match the total fees to be paid!</p>";
+                    return 0;
+                }else{
+                    grayBorder(cObj("amount1"));
+                    grayBorder(cObj("amount2"));
+                }
+                
+                // payment for
+                cObj("payment_for_details").value = JSON.stringify(votehead_paid_for);
+                
+
+                // student names
                 cObj("nameofstudents").innerText = cObj("std_names").innerText;
                 cObj("reprint").value = "false";
                 // display the confirmation window
@@ -765,10 +845,10 @@ cObj("confirmyes").onclick = function () {
         var time_of_payment_fees = valObj("time_of_payment_fees");
         var fees_payment_opt_holder = valObj("fees_payment_opt_holder");
         var supporting_documents_list = valObj("supporting_documents_list");
-        var datapass = "?insertpayments=true&stuadmin=" + valObj("presented") + "&transcode=" + trancode + "&amount=" + amount + "&payfor=" + valObj("payfor") + "&paidby=" + valObj("useriddds") + "&modeofpay=" + valObj("modeofpay") + "&balances=" + cObj("closed_balance").innerText + "&send_sms=" + send_sms+"&date_of_payments_fees="+date_of_payments_fees;
+        var datapass = "?insertpayments=true&stuadmin=" + valObj("presented") + "&transcode=" + trancode + "&amount=" + amount + "&payfor=" + valObj("payment_for_details") + "&paidby=" + valObj("useriddds") + "&modeofpay=" + valObj("modeofpay") + "&balances=" + cObj("closed_balance").innerText + "&send_sms=" + send_sms+"&date_of_payments_fees="+date_of_payments_fees;
         datapass+="&time_of_payment_fees="+time_of_payment_fees+"&fees_payment_opt_holder="+fees_payment_opt_holder+"&supporting_documents_list="+supporting_documents_list;
         sendData1("GET", "finance/financial.php", datapass, cObj("geterrorpay"));
-        var purpose_p = valObj("payfor");
+        var purpose_p = valObj("payment_for_details");
         cObj("confirmpayments").classList.add("hide");
         setTimeout(() => {
             var ids = setInterval(() => {
@@ -891,7 +971,7 @@ cObj("hideprocess1").onclick = function () {
 
 function checkErrors() {
     let errors = 0;
-    errors += checkBlank("payfor");
+    // errors += checkBlank("payfor");
     //check if cash, mpesa or bank is selected
     errors += checkBlank("modeofpay");
     if (checkBlank("modeofpay") == 0) {
@@ -2880,10 +2960,10 @@ function autocomplete(inp, arr, arr2, arr3, arr4, arr5) {
                 break;
             }
             /*check if the item starts with the same letters as the text field value:*/
-            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()
-                || arr2[i].substr(0, val.length).toUpperCase() == val.toUpperCase()
-                || arr3[i].substr(0, val.length).toUpperCase() == val.toUpperCase()
-                || arr5[i].substr(0, val.length) == val
+            if (arr[i].toUpperCase().includes(val.toUpperCase())
+                || arr2[i].toUpperCase().includes(val.toUpperCase())
+                || arr3[i].toUpperCase().includes(val.toUpperCase())
+                || arr5[i].toUpperCase().includes(val.toUpperCase())
             ) {
                 /*create a DIV element for each matching element:*/
                 b = document.createElement("DIV");

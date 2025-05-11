@@ -530,6 +530,7 @@
                         array_push($data_array,$row['intake_year']);
                         array_push($data_array,$row['intake_month']);
                         array_push($data_array,$row['course_progress_status']);
+                        array_push($data_array,$row['balance_carry_forward']);
                     }else{
                     }
                 }else {
@@ -934,6 +935,11 @@
                                 $present = 1;
                             }else{
                                 $my_course_list[$in]->course_status = 2;
+                                foreach($my_course_list[$in]->module_terms as $key => $module_term){
+                                    if($module_term->status == "1"){
+                                        $my_course_list[$in]->module_terms[$key]->status = 2;
+                                    }
+                                }
                             }
                         }
 
@@ -6086,6 +6092,75 @@
             // COURSE UPDATED
             $course_updated = isJson_report($_POST['course_updated']) ? json_decode($_POST['course_updated']) : json_decode("{}");
             $student_id = $_POST['student_id'];
+            // study the student`s course progress
+            
+            //GET THE ACTIVE MODULE
+            $active_module = new stdClass();
+            $active_module->course_id = null;
+            $active_module->active_term = null;
+            $active_module->status = 0;
+            $active_module->term_details = null;
+            $completed_modules = [];
+            $inactive_active_modules = [];
+
+            $student_data = "SELECT * FROM `student_data` WHERE `adm_no` = ?";
+            $stmt = $conn2->prepare($student_data);
+            $stmt->bind_param("s",$student_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $course_list = [];
+            $student_balance = 0;
+            if($result){
+                if($row = $result->fetch_assoc()){
+                    $course_list = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
+                    $student_balance = $row['balance_carry_forward'];
+                }
+            }
+
+            // flag to disable all active courses after the first active one following the
+            // principle that no two active courses can be at the same time.
+            $disable = false;
+            foreach($course_list as $key => $course){
+                if($course->course_status == 1){
+                    $modules = $course->module_terms;
+                    foreach($modules as $key_terms => $module_term){
+                        if($disable){
+                            if($course_list[$key]->module_terms[$key_terms]->status == 1){
+                                $course_list[$key]->module_terms[$key_terms]->status = 0;
+                            }
+                        }
+                        if($module_term->status == 1){ 
+                            $active_module->course_id = $course->id;
+                            $active_module->active_term = $module_term->id;
+                            $active_module->term_details = $module_term;
+                            $disable = true;
+                        }
+                    }
+                }
+
+                if($course->id == $course_updated->id){
+                    $module_term = $course->module_terms;
+                    foreach($module_term as $term){
+                        if($term->status == 2){
+                            array_push($completed_modules, $term->id);
+                        }else{
+                            array_push($inactive_active_modules, $term->id);
+                        }
+                    }
+                }
+            }
+            // echo json_encode($course_list);
+            // return 0;
+
+            // UPDATE THE COURSE BEFORE APPLYING NEW CHANGES
+            $update = "UPDATE student_data SET my_course_list= ? WHERE adm_no = ?";
+            $stmt = $conn2->prepare($update);
+            $course_list = json_encode($course_list);
+            $stmt->bind_param("ss", $course_list, $student_id);
+            $stmt->execute();
+
+            // PROCEED AND APPLY NEW CHANGES PUSHED BY THE USER!
+
 
             // get the courses
             $select = "SELECT * FROM `settings` WHERE sett = 'courses'";
@@ -6111,16 +6186,35 @@
             }
 
             // configure those that are active with date and those inactive remove the time
+            $deactivate = false; //THIS HOLDS THE FLAG TO DEACTIVATE OTHER MODULE TERMS AFTER THE FIRST ACTIVE ONE.
+            $updated_completed_modules = [];
+            $count_module_fees = 0;
+            $count_activated_modules_from_completed = 0;
             if($course_updated->module_terms != null){
                 $module_terms = $course_updated->module_terms;
                 for($index = 0; $index < count($module_terms); $index++){
+                    if($module_terms[$index]->status == 2 && !in_array($module_terms[$index]->id, $completed_modules)){
+                        array_push($updated_completed_modules, $module_terms[$index]->id);
+                        $count_module_fees += 1;
+                    }
+
+                    if($module_terms[$index]->status != 2 && in_array($module_terms[$index]->id, $completed_modules)){
+                        $count_activated_modules_from_completed+=1;
+                    }
+
                     // module terms
                     if($module_terms[$index]->status == 1){
                         // term
-                        $terms = getTermV3($conn2);
-                        $module_terms[$index]->start_date = date("YmdHis");
-                        $module_terms[$index]->end_date = date("YmdHis",strtotime($course_duration));
-                        $module_terms[$index]->termly_cost = $course_cost*1;
+                        if(!$deactivate){
+                            $module_terms[$index]->start_date = date("YmdHis");
+                            $module_terms[$index]->end_date = date("YmdHis",strtotime($course_duration));
+                            $module_terms[$index]->termly_cost = $course_cost*1;
+                        }else{
+                            $module_terms[$index]->start_date = "";
+                            $module_terms[$index]->end_date = "";
+                            $module_terms[$index]->termly_cost = $course_cost*1;
+                        }
+                        $deactivate = true;
                     }
 
                     // module terms
@@ -6128,54 +6222,81 @@
                         // term
                         $module_terms[$index]->start_date = "";
                         $module_terms[$index]->end_date = "";
-                        $module_terms[$index]->termly_cost = 0;
+                        $module_terms[$index]->termly_cost = $course_cost*1;
                     }
                 }
             }
 
-            // UPDATE THE STUDENT COURSE DETAILS
+            // go through the admin changes and see what courses have been deactivated and they were once active
+            $active_module_deactivated = false;
+            if($active_module->course_id == $course_updated->id){
+                $modules = $course_updated->module_terms;
+                foreach($modules as $key => $module){
+                    if($module->id == $active_module->active_term && $module->status == 2){
+                        $active_module_deactivated = true;
+                    }
+                    if($module->id == $active_module->active_term && $module->status == 1){
+                        $course_updated->module_terms[$key] = $active_module->term_details;
+                    }
+                }
+            }
+
             $student_data = "SELECT * FROM `student_data` WHERE `adm_no` = ?";
             $stmt = $conn2->prepare($student_data);
             $stmt->bind_param("s",$student_id);
             $stmt->execute();
             $result = $stmt->get_result();
+            $my_course_list = [];
+            $balance_cf = 0;
+            $class = "";
             if($result){
                 if($row = $result->fetch_assoc()){
-                    // FIRST GET THE COURSE ID
-                    $course_progress_id = isset($course_updated->id) ? $course_updated->id : null;
+                    $class = $row['stud_class'];
+                    $balance_cf = $row['balance_carry_forward']*1;
                     $my_course_list = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
-                    $present = 0;
-                    for ($index=0; $index < count($my_course_list); $index++) { 
-                        if(($my_course_list[$index]->id == $course_progress_id)){
-                            foreach($my_course_list[$index]->module_terms as $key => $module_terms){
-                                if($module_terms->status != $course_updated->module_terms[$key]->status){
-                                    $present +=1;
-                                }
-                            }
-                            if($present > 0){
-                                $my_course_list[$index] = $course_updated;
-                                break;
-                            }
-                        }
-                    }
-
-                    // update if present
-                    if($present > 0){
-                        // update the student data
-                        $update = "UPDATE `student_data` SET `my_course_list` = ? WHERE `adm_no` = ?";
-                        $my_course_list = json_encode($my_course_list);
-                        $stmt = $conn2->prepare($update);
-                        $stmt->bind_param("ss",$my_course_list,$student_id);
-                        $stmt->execute();
-
-                        // course updates
-                        echo "<p class='text-success'>Course updates have been done successfully!</p>";
-                        $log_text = ucwords(strtolower($row['first_name']." ".$row['second_name']))." - of Reg No. (".$row['adm_no'].") course data has been updated successfully!";
-                        log_administration($log_text);
-                    }else{
-                        echo "<p class='text-success'>No changes made!</p>";
-                    }
                 }
+            }
+            // my course list
+            foreach($my_course_list as $key => $course){
+                if($course->id == $course_updated->id){
+                    $my_course_list[$key] = $course_updated;
+                }
+            }
+
+            include("../finance/financial.php");
+
+            // GET FEES THE STUDENT PAYS PER TERM
+            $term = "TERM_1";
+            $fees_to_pay = getFeesAsFromTermAdmited($term,$conn2,$class,$student_id);
+
+            $balance_to_add = $count_module_fees*$fees_to_pay;
+            $balance_to_deduct = $count_activated_modules_from_completed*$fees_to_pay;
+
+            if($active_module_deactivated){
+                // update the user balance and course list
+                $term = "TERM_1";
+                // $student_balance = getBalanceReports($student_id,$term,$conn2);
+                $student_balance = $balance_to_add;
+                $student_balance-=$balance_to_deduct;
+                
+                // update the course modules alone incase its active or inactive
+                $update = "UPDATE `student_data` SET `my_course_list` = ?, `balance_carry_forward` = ? WHERE `adm_no` = ?";
+                $my_course_list = json_encode($my_course_list);
+                $stmt = $conn2->prepare($update);
+                $stmt->bind_param("sss",$my_course_list, $student_balance, $student_id);
+                $stmt->execute();
+                echo "<p class='text-success'>Course updates have been done successfully!</p>";
+            }else{
+                $balance_cf+=$balance_to_add;
+                $balance_cf-=$balance_to_deduct;
+                
+                // update the course modules alone incase its active or inactive
+                $update = "UPDATE `student_data` SET `my_course_list` = ?, `balance_carry_forward` = ?  WHERE `adm_no` = ?";
+                $my_course_list = json_encode($my_course_list);
+                $stmt = $conn2->prepare($update);
+                $stmt->bind_param("sss",$my_course_list,$balance_cf,$student_id);
+                $stmt->execute();
+                echo "<p class='text-success'>Course updates have been done successfully!</p>";
             }
         }elseif(isset($_POST['add_modules'])){
             $student_admno = $_POST['student_id'];
@@ -6186,38 +6307,93 @@
             $stmt->execute();
             $result = $stmt->get_result();
             $course_list = [];
+            $course_chosen = null;
             if($result){
                 if($row = $result->fetch_assoc()){
                     $course_list = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
+                    $course_chosen = $row['course_done'];
                 }
             }
             
-            $module_index = 1;
-            $module_id = 1;
-            $module_termly_cost = 0;
-            foreach($course_list as $key_init => $course){
-                if($course->course_status == 1){
-                    $modules = $course->module_terms;
-                    foreach($modules as $key => $module){
-                        if($key == (count($modules)-1)){
-                            $module_index = $key+1;
-                            $module_id = $module->id;
-                            $module_termly_cost = $module->termly_cost;
+            if(is_array($course_list) && count($course_list) > 0){
+                $module_index = 1;
+                $module_id = 1;
+                $module_termly_cost = 0;
+                foreach($course_list as $key_init => $course){
+                    if($course->course_status == 1){
+                        $modules = $course->module_terms;
+                        foreach($modules as $key => $module){
+                            if($key == (count($modules)-1)){
+                                $module_index = $key+1;
+                                $module_id = $module->id;
+                                $module_termly_cost = $module->termly_cost;
+                            }
                         }
+    
+                        $term = new stdClass();
+                        $term->id = $module_id + 1;
+                        $term->term_name = "MODULE ". ($module_index + 1);
+                        $term->status = 0;
+                        $term->start_date = "";
+                        $term->end_date = "";
+                        $term->termly_cost = $module_termly_cost;
+    
+                        // course list
+                        array_push($course_list[$key_init]->module_terms,$term);
+                        break;
                     }
-
-                    $term = new stdClass();
-                    $term->id = $module_id + 1;
-                    $term->term_name = "MODULE ". ($module_index + 1);
-                    $term->status = 0;
-                    $term->start_date = "";
-                    $term->end_date = "";
-                    $term->termly_cost = $module_termly_cost;
-
-                    // course list
-                    array_push($course_list[$key_init]->module_terms,$term);
-                    break;
                 }
+            }else{
+                // INSERT A BRAND NEW COURSE ACCORDING TO WHAT THE PURSUE
+                $select = "SELECT * FROM `settings` WHERE sett = 'courses'";
+                $stmt = $conn2->prepare($select);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $courses = [];
+                if($result){
+                    if($row = $result->fetch_assoc()){
+                        $courses = isJson_report($row['valued']) ? json_decode($row['valued']) : [];
+                    }
+                }
+
+                $no_of_term = 0;
+                $cost_per_term = 0;
+                $course_level = null;
+                $term_duration = 0;
+                $duration_intervals = "days";
+                foreach($courses as $course){
+                    if($course->id == $course_chosen){
+                        $course_level = $course->course_level;
+                        $no_of_term = $course->no_of_terms;
+                        $cost_per_term = $course->termly_fees;
+                        $duration_intervals = $course->duration_intervals;
+                        $term_duration = $course->term_duration;
+                    }
+                }
+                
+                $new_course = new stdClass();
+                $new_course->course_level = $course_level;
+                $new_course->course_name = $course_chosen;
+                $new_course->course_status = 1;
+                $new_course->id = 1;
+                $new_course->module_terms = [];
+                $module_terms = [];
+                for($index = 0; $index < $no_of_term; $index++){
+                    $new_module_term = new stdClass();
+                    $new_module_term->id = $index+1;
+                    $new_module_term->term_name = "MODULE ".$index+1;
+                    $new_module_term->status = $index == 0 ? 1 : 0;
+                    $new_module_term->start_date = $index == 0 ? date("YmdHis") : "";
+                    $new_module_term->end_date = $index == 0 ? date("YmdHis", strtotime($term_duration." ".$duration_intervals)) : "";
+                    $new_module_term->termly_cost = $cost_per_term;
+                    array_push($module_terms, $new_module_term);
+                }
+
+                // module_terms
+                $new_course->module_terms = $module_terms;
+
+                // course_list
+                array_push($course_list, $new_course);
             }
             
             // UPDATE THE COURSE LIST
@@ -6243,7 +6419,6 @@
                     $courses = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
                 }
             }
-            
             foreach($courses as $key => $course){
                 if($course->course_status == "1"){
                     $modules = $course->module_terms;

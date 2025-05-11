@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <p><b>Total Fees <small>as of <span id="current_term"></span></small>:</b></p>
+                                            <p><b>Total Fees <small class="d-none">as of <span id="current_term"></span></small>:</b></p>
                                         </div>
                                         <div class="col-md-6">
                                             <p id="total_amount_to_pay">Kes 10,000</p>
@@ -130,7 +130,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <p><b>Last Academic Year Balance:</b></p>
+                                            <p><b>Balance carry forward:</b></p>
                                         </div>
                                         <div class="col-md-6">
                                             <p><span id="lastyr_fees_balance">Kes 10,000</span><span class="link mx-2 <?php if ($_SESSION['authority'] == "1" || $_SESSION['authority'] == "0"){}else{echo "hide";}?>" id="edit_last_yr_academic_balance"><i class="fas fa-pen-fancy"></i></span></p>

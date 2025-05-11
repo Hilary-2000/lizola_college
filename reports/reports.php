@@ -7356,9 +7356,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->SetFont('Helvetica', '', 9);
             $pdf->Cell(200,7,"VOTEHEAD","TBLR",1,"C",true);
 
+            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->Cell(130,7,"VOTEHEAD NAME",1,0,"L",true);
+            $pdf->Cell(25,7,"ROLE",1,0,"L",true);
+            $pdf->Cell(45,7,"AMOUNT PAID",1,1,"L",true);
+            $pdf->SetFont('Helvetica', '', 9);
+            $counter = 0;
+
             // another row
-            $pdf->Cell(155,7,$payments_for,1,0,"L",false);
-            $pdf->Cell(45,7,$amount_paid_by_student,"BR",1,"L",false);
+            if(isJson_report($payments_for)){
+                $payments = json_decode($payments_for, true);
+                foreach($payments as $payment){
+                    $counter+=1;
+                    $pdf->Cell(130,7,ucwords(strtolower($payment['name'])),1,0,"L",false);
+                    $pdf->Cell(25,7,ucwords(strtolower($payment['roles'])),1,0,"L",false);
+                    $pdf->Cell(45,7,"Kes ".number_format($payment['amount_paid']),1,1,"R",false);
+                }
+                
+            }else{
+                $pdf->Cell(155,7,$payments_for,1,0,"L",false);
+                $pdf->Cell(45,7,$amount_paid_by_student,"BR",1,"L",false);
+            }
 
             // another row
             $pdf->SetFont('Helvetica', 'B', 9);
@@ -7373,7 +7391,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->SetFont('Helvetica', 'B', 9);
             $pdf->Cell(15,7,"Total:",1,0,"L",false);
             $pdf->SetFont('Helvetica', '', 9);
-            $pdf->Cell(30,7,"".$amount_paid_by_student."",1,1,"L",false);
+            $pdf->Cell(30,7,"".$amount_paid_by_student."",1,1,"R",false);
 
             // ANOTHER ROW
             $pdf->SetFont('Helvetica', 'B', 9);
@@ -7388,7 +7406,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->SetFont('Helvetica', 'B', 9);
             $pdf->Cell(15,7,"Balance:",1,0,"L",false);
             $pdf->SetFont('Helvetica', '', 9);
-            $pdf->Cell(30,7,"".$new_student_balance."",1,1,"L",false);
+            $pdf->Cell(30,7,"".$new_student_balance."",1,1,"R",false);
 
             // DISCLAIMER
             $pdf->SetFont('Helvetica', 'I', 9);
@@ -7404,30 +7422,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $json_data = $row['valued'];
                     if(isJson_reports($json_data)){
                         $json_data = json_decode($json_data);
-                        $counter = 1;
                         if(count($json_data) > 0){
                             $pdf->SetFont('Helvetica', 'U', 10);
                             $pdf->Cell(200,6,"Acceptable payment options","",1,"L",false);
                             $pdf->SetFont('Helvetica', '', 9);
                         }
+                        $indexes = 1;
                         for ($index=0; $index < count($json_data); $index++) { 
                             if($json_data[$index]->show == "true"){
-                                $pdf->Cell(10,4.5,($counter).". ","",0,"R",false); 
+                                $pdf->Cell(10,4.5,($indexes).". ","",0,"R",false); 
                                 $pdf->Cell(190,4.5,$json_data[$index]->description,"",1,"L",false);
                                 $counter++;
+                                $indexes++;
                             }
                         }
                     }
                 }
             }
             
-            $remaining_lines = 11-$counter;
+            $remaining_lines = 7-$counter;
 
             for($i = 0; $i < $remaining_lines; $i++){
                 $pdf->Ln();
             }
-            $pdf->Cell(200,0,"",1,1);
-            $pdf->Ln(5);
+            if($remaining_lines <= 0){
+                $pdf->AddPage();
+            }else{
+                $pdf->Cell(200,0,"",1,1);
+                $pdf->Ln(5);
+            }
             
             // space between
             $y = $pdf->GetY();
@@ -7562,9 +7585,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->SetFont('Helvetica', '', 9);
             $pdf->Cell(200,7,"VOTEHEAD","TBLR",1,"C",true);
 
+            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->Cell(130,7,"VOTEHEAD NAME",1,0,"L",true);
+            $pdf->Cell(25,7,"ROLE",1,0,"L",true);
+            $pdf->Cell(45,7,"AMOUNT PAID",1,1,"L",true);
+            $pdf->SetFont('Helvetica', '', 9);
+
             // another row
-            $pdf->Cell(155,7,$payments_for,1,0,"L",false);
-            $pdf->Cell(45,7,$amount_paid_by_student,"BR",1,"L",false);
+            if(isJson_report($payments_for)){
+                $payments = json_decode($payments_for, true);
+                foreach($payments as $payment){
+                    $pdf->Cell(130,7,ucwords(strtolower($payment['name'])),1,0,"L",false);
+                    $pdf->Cell(25,7,ucwords(strtolower($payment['roles'])),1,0,"L",false);
+                    $pdf->Cell(45,7,"Kes ".number_format($payment['amount_paid']),1,1,"R",false);
+                }
+                
+            }else{
+                $pdf->Cell(155,7,$payments_for,1,0,"L",false);
+                $pdf->Cell(45,7,$amount_paid_by_student,"BR",1,"L",false);
+            }
 
             // another row
             $pdf->SetFont('Helvetica', 'B', 9);

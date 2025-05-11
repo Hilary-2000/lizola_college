@@ -2952,6 +2952,8 @@ function tablebtnlistener() {
                             element.selected = true;
                         }
                     }
+
+                    cObj("lastyr_fees_balance").innerText = "Kes "+splitdata[47];
                 }
                 stopInterval(ids);
             }

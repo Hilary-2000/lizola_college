@@ -1,3 +1,35 @@
+11th May 2025 17:17:13PM : Mutiso Mutiso of adm no LC-2025-4  balance has been updated successfully! - {HILLARY NGIGE}
+11th May 2025 17:15:21PM : Mutiso Karama - of Reg No. (LC-2025-4) data has been updated successfully! - {HILLARY NGIGE}
+11th May 2025 11:19:48AM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+11th May 2025 11:19:46AM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+11th May 2025 11:19:44AM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+11th May 2025 11:19:42AM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+11th May 2025 11:19:40AM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+11th May 2025 08:26:01AM : Mutiso Karama - of Reg No. (LC-2025-4) course data has been updated successfully! - {HILLARY NGIGE}
+11th May 2025 08:24:29AM : Mutiso Karama - of Reg No. (LC-2025-4) course data has been updated successfully! - {HILLARY NGIGE}
+11th May 2025 08:24:27AM : Mutiso Karama - of Reg No. (LC-2025-4) course data has been updated successfully! - {HILLARY NGIGE}
+11th May 2025 08:24:25AM : Mutiso Karama - of Reg No. (LC-2025-4) course data has been updated successfully! - {HILLARY NGIGE}
+11th May 2025 08:20:41AM : Mutiso Karama - of Reg No. (LC-2025-4) course data has been updated successfully! - {HILLARY NGIGE}
+11th May 2025 08:20:36AM : Mutiso Karama - of Reg No. (LC-2025-4) course data has been updated successfully! - {HILLARY NGIGE}
+11th May 2025 08:19:51AM : Mutiso Karama - of Reg No. (LC-2025-4) course data has been updated successfully! - {HILLARY NGIGE}
+11th May 2025 08:18:54AM : Mutiso Karama - of Reg No. (LC-2025-4) course data has been updated successfully! - {HILLARY NGIGE}
+11th May 2025 08:05:03AM : Mutiso Karama - of Reg No. (LC-2025-4) course data has been updated successfully! - {HILLARY NGIGE}
+09th May 2025 17:11:33PM : HILLARY NGIGE successfully logged into the system as Principal - {HILLARY NGIGE}
+09th May 2025 12:45:18PM : Transaction for "Mutiso Karama" Reg No "LC-2025-4" has been completed successfully! - {HILLARY NGIGE}
+09th May 2025 11:44:53AM : Transaction for "Mutiso Karama" Reg No "LC-2025-4" has been completed successfully! - {HILLARY NGIGE}
+09th May 2025 11:44:19AM : Fees structure has been modified. Votehead "Admission Fees" has been added successfully! - {HILLARY NGIGE}
+09th May 2025 11:43:28AM : Transaction for "Mutiso Karama" Reg No "LC-2025-4" has been completed successfully! - {HILLARY NGIGE}
+09th May 2025 11:25:11AM : Transaction for "Mutiso Karama" Reg No "LC-2025-4" has been completed successfully! - {HILLARY NGIGE}
+09th May 2025 11:19:21AM : Transaction for "Mutiso Karama" Reg No "LC-2025-4" has been completed successfully! - {HILLARY NGIGE}
+08th May 2025 17:30:12PM : Transaction has been deleted successfully! - {HILLARY NGIGE}
+08th May 2025 16:09:52PM : Transaction for "Mutiso Karama" Reg No "LC-2025-4" has been completed successfully! - {HILLARY NGIGE}
+08th May 2025 13:53:00PM : Mutiso Karama - of Reg No. (LC-2025-4) data has been updated successfully! - {HILLARY NGIGE}
+08th May 2025 12:45:17PM : Mutiso Karama - of Reg No. (LC-2025-4) data has been updated successfully! - {HILLARY NGIGE}
+08th May 2025 10:55:14AM : MUTISO KARAMA has been admitted successfully - {HILLARY NGIGE}
+08th May 2025 10:54:43AM :   of Reg No (LC-2025-3) discounts have been updated successfully - {HILLARY NGIGE}
+08th May 2025 10:54:42AM : Mukisa Mukiso of Reg No (LC-2025-3) discounts have been updated successfully - {HILLARY NGIGE}
+08th May 2025 10:54:36AM : Viola Adede of Reg No (LC-2025-2) discounts have been updated successfully - {HILLARY NGIGE}
+08th May 2025 10:54:29AM : Kimani Muchatikha of Reg No (LC-2025-1) discounts have been updated successfully - {HILLARY NGIGE}
 08th May 2025 10:20:05AM : Course "FASHION ILLUSTRATOR" has been updated successfully! - {HILLARY NGIGE}
 08th May 2025 10:19:38AM : Course "STYLIST AND IMAGE CONSULTANT" has been updated successfully! - {HILLARY NGIGE}
 08th May 2025 10:19:19AM : Departments (Science and informatics) with a code of (SC-001) have been updated successfully! - {HILLARY NGIGE}

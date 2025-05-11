@@ -7,37 +7,63 @@
         "course_level": "1",
         "no_of_terms": "6",
         "termly_fees": "9000",
-        "term_duration": "3"
+        "term_duration": "3",
+        "duration_intervals": "months"
     },
     {
-        "id": 3,
+        "id": "3",
         "course_name": "GARMENT PRODUCTION SPECIALIST",
-        "course_levels": "[\"9\",\"8\",\"11\",\"1\",\"10\"]",
-        "department": ""
+        "course_levels": "[]",
+        "department": "ENG-001",
+        "course_level": "1",
+        "no_of_terms": "24",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
     },
     {
-        "id": 4,
+        "id": "4",
         "course_name": "PATTERN MAKER ",
-        "course_levels": "[\"9\",\"8\",\"11\",\"1\",\"10\"]",
-        "department": ""
+        "course_levels": "[]",
+        "department": "SC-001",
+        "course_level": "1",
+        "no_of_terms": "1",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
     },
     {
-        "id": 5,
+        "id": "5",
         "course_name": "TAILOR AND DRESS MAKER",
-        "course_levels": "[\"9\",\"8\",\"11\",\"1\",\"10\"]",
-        "department": ""
+        "course_levels": "[]",
+        "department": "ENG-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "6000",
+        "term_duration": "1",
+        "duration_intervals": "months"
     },
     {
-        "id": 6,
+        "id": "6",
         "course_name": "STYLIST AND IMAGE CONSULTANT",
-        "course_levels": "[\"9\",\"8\",\"11\",\"1\",\"10\"]",
-        "department": ""
+        "course_levels": "[]",
+        "department": "SC-001",
+        "course_level": "10",
+        "no_of_terms": "5",
+        "termly_fees": "15000",
+        "term_duration": "1",
+        "duration_intervals": "months"
     },
     {
-        "id": 7,
+        "id": "7",
         "course_name": "FASHION ILLUSTRATOR",
-        "course_levels": "[\"9\",\"8\",\"11\",\"1\",\"10\"]",
-        "department": ""
+        "course_levels": "[]",
+        "department": "SC-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
     },
     {
         "id": 8,
@@ -113,7 +139,8 @@
         "course_level": "8",
         "no_of_terms": "7",
         "termly_fees": "15000",
-        "term_duration": "3"
+        "term_duration": "3",
+        "duration_intervals": "week"
     },
     {
         "id": "22",
@@ -123,7 +150,8 @@
         "course_level": "9",
         "no_of_terms": "5",
         "termly_fees": "10000",
-        "term_duration": "5"
+        "term_duration": "5",
+        "duration_intervals": "months"
     },
     {
         "id": "26",
@@ -133,7 +161,8 @@
         "course_level": "8",
         "no_of_terms": "6",
         "termly_fees": "32000",
-        "term_duration": "6"
+        "term_duration": "6",
+        "duration_intervals": "year"
     },
     {
         "id": "27",
@@ -143,7 +172,8 @@
         "course_level": "8",
         "no_of_terms": "6",
         "termly_fees": "25000",
-        "term_duration": "6"
+        "term_duration": "6",
+        "duration_intervals": "months"
     },
     {
         "id": "28",
@@ -153,7 +183,8 @@
         "course_level": "8",
         "no_of_terms": "3",
         "termly_fees": "25000",
-        "term_duration": "3"
+        "term_duration": "3",
+        "duration_intervals": "months"
     },
     {
         "id": "29",
@@ -163,10 +194,11 @@
         "course_level": "8",
         "no_of_terms": "5",
         "termly_fees": "25000",
-        "term_duration": "10"
+        "term_duration": "10",
+        "duration_intervals": "months"
     },
     {
-        "id": 30,
+        "id": "30",
         "course_name": "Information Technology",
         "course_levels": "[]",
         "department": "ENG-001",
@@ -177,7 +209,7 @@
         "duration_intervals": "months"
     },
     {
-        "id": 31,
+        "id": "31",
         "course_name": "Information Technology",
         "course_levels": "[]",
         "department": "SC-001",

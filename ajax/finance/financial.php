@@ -25,44 +25,59 @@
                     $select.="</select>";
                     echo $select;
                 }else{
+                    $all_course_fees = [];
+                    // GET THE COURSE FEES, BALANCE AND DISCOUNTS
+                    $student_data = students_details($student_admission,$conn2);
+                    $course_fees = 0;
+                    $my_course_list = isJson($student_data['my_course_list']) ? json_decode($student_data['my_course_list']) : [];
+                    for($index = 0; $index < count($my_course_list); $index++){
+                        if($my_course_list[$index]->course_status == 1){
+                            // module terms
+                            $module_terms = $my_course_list[$index]->module_terms;
+                            for ($ind=0; $ind < count($module_terms); $ind++) {
+                                if($module_terms[$ind]->status == 1){
+                                    $course_fees = $module_terms[$ind]->termly_cost;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    $a_fee = new stdClass();
+                    $a_fee->fees_name = "Course Fees";
+                    $a_fee->fees_amount = $course_fees;
+                    $a_fee->fees_id = 0;
+                    $a_fee->fees_role = "Compulsory";
+                    array_push($all_course_fees, $a_fee);
+
+                    // STUDENT BALANCE
+                    $balance = $student_data['balance_carry_forward'];
                     $select = "SELECT * FROM `fees_structure` WHERE `course` = '".$course_value."' AND `classes` = ? and `activated` = 1";
                     $stmt = $conn2->prepare($select);
                     $stmt->bind_param("s",$class);
                     $stmt->execute();
                     $results = $stmt->get_result();
-                    $select = "<p style='color:green;'>There is no payment option set by the administrator</p>";
                     if($results){
-                        $select = "<select class='payments_options' id='$object_id'><option value='' hidden>Select option..</option>";
-                        $xs = 0;
-                        $pup = array();
                         while ($row = $results->fetch_assoc()) {
-                            $xs++;
-                            $in = 0;
-                            //first check if the array is present
-                            for ($i=0; $i < count($pup); $i++) { 
-                                if($pup[$i]== $row['expenses']){
-                                    $in=1;
-                                }
-                            }
-                            if ($in==0) {
-                                array_push($pup,$row['expenses']);
-                                $select.="<option value='".$row['expenses']."'>".ucwords(strtolower($row['expenses']))."</option>";
-                            }
-                        }
-                            
-                        if (isTransport($conn2,$student_admission) == true) {
-                            $termed = getTermV2($conn2);
-                            $get_route = routeName($conn2,$student_admission,$termed);
-                            $select.="<option value='Transport :".ucwords(strtolower($get_route[0]))."'><b>Transport</b> : ".ucwords(strtolower($get_route[0]))." @ Kes ".number_format($get_route[1])."</option>";
-                        }
-                        $select.="</select>";
-                        if($xs>0){
-                            echo $select;
-                        }else {
-                            echo "<p style='color:green;'>There is no payment option set by the administrator</p>";
+                            $a_fee = new stdClass();
+                            $a_fee->fees_name = ucwords(strtolower($row['expenses']));
+                            $a_fee->fees_amount = $row['TERM_1'];
+                            $a_fee->fees_id = $row['ids'];
+                            $a_fee->fees_role = $row['roles'] == "regular" ? "Compulsory" : $row['roles'];
+                            array_push($all_course_fees, $a_fee);
                         }
                     }else {
                         echo "<p style='color:green;'>There is no payment option set by the administrator</p>";
+                    }
+
+                    if(count($all_course_fees) > 0){
+                        $data_to_display = "<div class='tableme'><input type='hidden' id='payment_for_details' value='[]'><table id='".$object_id."' class='table'><tr><th>No. <input type='checkbox' id='votehead_checks'></th><th>Votehead</th><th>Role</th><th>Amount to pay</th><th>Amount</th></tr><tbody>";
+                        foreach ($all_course_fees as $key => $course_fees) {
+                            $data_to_display .= "<tr><td>".($key+1).". <input type='hidden' value='".json_encode($course_fees)."' id='course_details_".($key+1)."'><input type='checkbox' class='votehead_checks' id='votehead_checks_".($key+1)."'></td><td>".$course_fees->fees_name."</td><td><span class='badge bg-primary'>".$course_fees->fees_role."</span></td><td>Kes ".$course_fees->fees_amount."</td><td><input type='number' placeholder='Amount' class='form-control disabled votehead_amounts w-100' disabled='' id='votehead_amounts_".($key+1)."' value='0'></td></tr>";
+                        }
+                        $data_to_display .= "</tbody></table></div>";
+                        echo $data_to_display;
+                    }else{
+                        echo "<p class='text-danger'>There is no payment option set by the administrator</p>";
                     }
                 }
             }else {
@@ -104,84 +119,17 @@
             $student_admission = $_GET['student_admission'];
             $student_balance = $_GET['student_balance'];
 
+            // update balance
+            $update = "UPDATE student_data SET balance_carry_forward = ? WHERE adm_no = ?";
+            $stmt = $conn2->prepare($update);
+            $stmt->bind_param("ss", $student_balance, $student_admission);
+            $stmt->execute();
+            
             // get the student term they are in
             $student_data = students_details($student_admission,$conn2);
-            $term_they_are_in = "TERM_1";
-    
-            // decode the json format
-            $my_course_list = isJson($student_data['my_course_list']) ? json_decode($student_data['my_course_list']) : [];
-            for($index = 0; $index < count($my_course_list); $index++){
-                if($my_course_list[$index]->course_status == 1){
-                    // module terms
-                    $module_terms = $my_course_list[$index]->module_terms;
-                    for ($ind=0; $ind < count($module_terms); $ind++) {
-                        if($module_terms[$ind]->status == 1){
-                            $term_they_are_in = $module_terms[$ind]->term_name;
-                            break;
-                        }
-                    }
-                }
-            }
-            
-            // get when this academic year is starting
-            $SELECT = "SELECT * FROM `academic_calendar` WHERE `term` = '$term_they_are_in'";
-            $stmt = $conn2->prepare($SELECT);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $start_date = date("Y-m-d");
-            if ($result) {
-                if ($row = $result->fetch_assoc()) {
-                    $start_date = $row['start_time'];
-                }
-            }
-            // select
-            $select = "SELECT * FROM `finance` WHERE `stud_admin` = '".$student_admission."' AND `date_of_transaction` < '".$start_date."' ORDER BY `transaction_id` DESC LIMIT 1";
-            $stmt = $conn2->prepare($select);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $updated = 0;
-            if ($result) {
-                if ($row = $result->fetch_assoc()) {
-                    $transaction_id = $row['transaction_id'];
-                    echo "Updated successfully!";
-                    $updated = 1;
-
-                    // update the current tranasctio
-                    $update = "UPDATE `finance` SET `balance` = '".$student_balance."' WHERE `stud_admin` = '".$student_admission."' AND `transaction_id`  = '$transaction_id'";
-                    $stmt = $conn2->prepare($update);
-                    $stmt->execute();
-
-                    $student_data = students_details($student_admission,$conn2);
-                    $log_text = (is_array($student_data) ? ucwords(strtolower($student_data['first_name']." ". $student_data['first_name'])): "N/A") . " of adm no ".$student_admission." last year academic balance has been updated successfully!";
-                    log_finance($log_text);
-                }
-            }
-
-            // insert if not update
-            if($updated == 0){
-                // add date
-                $date = date_create($start_date);
-                date_add($date,date_interval_create_from_date_string("-1 day"));
-                $new_date = date_format($date,"Y-m-d");
-
-
-                // insert into finance and set the date of payment to the one above
-                $insert = "INSERT INTO `finance` (`stud_admin`,`time_of_transaction`,`date_of_transaction`,`transaction_code`,`amount`,`balance`,`payment_for`,`payBy`,`mode_of_pay`,`status`,`idsd`)";
-                $insert.=" VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-                $stmt = $conn2->prepare($insert);
-                $time = date("H:i:s");
-                $code ="cash";
-                $amount = 0;
-                $paymentfor = "update academic balance";
-                $status = 0;
-                $stmt->bind_param("sssssssssss",$student_admission,$time,$new_date,$code,$amount,$student_balance,$paymentfor,$_SESSION['userids'],$code,$status,$status);
-                $stmt->execute();
-                echo "<p class='text-success border border-success p-2 my-1'>Update done successfully!</p>";
-
-                $student_data = students_details($student_admission,$conn2);
-                $log_text = (is_array($student_data) ? ucwords(strtolower($student_data['first_name']." ". $student_data['second_name'])): "N/A") . " of adm no (".$student_admission.") last year academic balance has been updated successfully!";
-                log_finance($log_text);
-            }
+            $log_text = (is_array($student_data) ? ucwords(strtolower($student_data['first_name']." ". $student_data['first_name'])): "N/A") . " of adm no ".$student_admission."  balance has been updated successfully!";
+            log_finance($log_text);
+            echo "<p class='text-success'>Balance updated successfully!</p>";
         }elseif (isset($_GET['findadmno'])) {
             $admnos = $_GET['findadmno'];
             $admnopresent = checkadmno($admnos);
@@ -229,17 +177,8 @@
                     $term_report = "";
 
                     $fees_to_pay = getFeesAsFromTermAdmited($term,$conn2,$getclass,$admnos);
-                    $last_academic_balance = lastACADyrBal($admnos,$conn2);
-                    if ($date_term_began > $last_paid_time) {
-                        $current_term = $fees_to_pay - $balance;
-                        if ($last_academic_balance > 0) {
-                            $current_term = $fees_to_pay;
-                        }
-                        $term_report = "<hr><span class='text-primary'><b>".ucwords(strtolower($name))."</b> made their last payments on ".date("dS M Y",strtotime($last_paid_time)).". The payments was made before ".$term." started, as a result Fees of Kes ".number_format($current_term)." will be added to the existing balance so the new balance will be <b>Kes ".number_format($balance)."</b></span>";
-                        // echo $term_report;
-                        $fees_change .= $term_report;
-                    }
-                    $headings= strlen($fees_change)>5 ?"<h6 class='text-center'>Notice</h6>":"";
+                    $balance_cf = $student_data['balance_carry_forward'];
+                    $current_term_fees = $fees_to_pay - $balance_cf;
                     
                     // dont display the fees change information at the momment
                     $headings = "";
@@ -322,7 +261,7 @@
                                                 </tr>
                                             </table>
                                         </div><hr>";
-                    $tableinformation1 .= "<p style='margin:10px 0;' >As at <b>" . $times . "</b> on <b>" . $date . "</b> <br>Current Term Enrolled: <b>" . $term_enrolled . "</b><br><span style='color:gray;' ><b>Total Fees Paid this term (without provisionals) : Kes " . number_format($fees_paid) . "</b><br><span style='color:gray;' ><b>Last Active Term balance : Kes " . number_format($last_academic_balance) . "</b><br><span style='color:gray;' ><b>Total fees to be paid as per Current Term: <b>" . $term_enrolled . "</b>: " . $fees_to_pay . "</b></span><br><span style='color:gray;'><b>System calculated balance: Ksh</b> " . $balancecalc . ".</span>" . $headings . $fees_change . "<hr><strong>Current Balance is: Ksh <span id='closed_balance'  class='queried' title='click to change the student balance'>" . $balance . "</span></strong><input type='text' value='" . $admnos . "'  id='presented' hidden></p>";
+                    $tableinformation1 .= "<p style='margin:10px 0;' >As at <b>" . $times . "</b> on <b>" . $date . "</b> <br>Current Term Enrolled: <b>" . $term_enrolled . "</b><br><span style='color:gray;' ><b>Total Fees Paid this term (without provisionals) : Kes " . number_format($fees_paid) . "</b><br><span style='color:gray;' ><b>Balance Carry Forward : Kes " . number_format($balance_cf) . "</b><br><b>Current Term payment : Kes " . number_format($current_term_fees) . "</b><br><span style='color:gray;' ><b>Total fees to be paid as per Current Term: <b>" . $term_enrolled . "</b>: " . $fees_to_pay . "</b></span><br><span style='color:gray;'><b>System calculated balance: Ksh</b> " . $balancecalc . ".</span>" . $headings . $fees_change . "<hr><strong>Current Balance is: Ksh <span id='closed_balance'  class='queried' title='click to change the student balance'>" . $balance . "</span></strong><input type='text' value='" . $admnos . "'  id='presented' hidden></p>";
                     $tableinformation1 .= "<p class='red_notice fa-sm hide' id='read_note'>Changing of the student balance is not encouraged, its to be done only when the student is newly registered to the system or there is change in the fees structure</p><br>";
                     $tableinformation1 .= "<div class='hide' id='fee_balance_new'><input type='number' id='new_bala_ces' placeholder='Enter New Balance'> <div class='acc_rej'><p class = 'redAcc' id='accBalance'>✔</p><p class='greenRej' id='rejectBalances' >✖</p></div></div>";
                     $tableinformation = "<p>- Below are the last 5 transactions recorded or less<br>- Find all the transaction made by the student by clicking the <b>Manage transaction</b> button at the menu.</p><p id='reversehandler'></p><p style = 'font-weight:550;font-size:17px;text-align:center;'><u>Finance table</u></p>";
@@ -359,7 +298,7 @@
                             $tableinformation.="<td>".$row['date_of_transaction']."</td>";
                             $tableinformation.="<td>".$row['time_of_transaction']."</td>";
                             $tableinformation.="<td>".comma($row['balance'])."</td>";
-                            $tableinformation.="<td>".$row['payment_for']."</td>";
+                            $tableinformation.="<td>".listPaymentPurpose($row['payment_for'])."</td>";
                             $status = "<p>confirmed</p>";
                             if($row['date_of_transaction'] == date('Y-m-d') && $row['time_of_transaction'] > date("H:i:s",strtotime("30 minutes")) ){
                                 if ($row['mode_of_pay'] != "mpesa" && $statuses != "1") {
@@ -412,75 +351,28 @@
             $term = getTerm();
             $payfor = $_GET['payfor'];
             $balance = $_GET['balances'];
-            $newbalance = $balance-$amount;
             $supporting_documents_list = isset($_GET['supporting_documents_list']) ? $_GET['supporting_documents_list'] : "[]";
-
-            $getProvisionalPayments = getProvisionalPayments($studadmin,$conn2);
-            // var_dump($getProvisionalPayments);
-            if (isPresent($getProvisionalPayments,trim(strtolower($payfor)))) {
-                $newbalance = $balance;
-            }
             
-            // check if the last year academic balance is reduced and reduce it
-            // $last_academic_balance = lastACADyrBal($studadmin,$conn2);
-            // if ($last_academic_balance != 0 && !isPresent($getProvisionalPayments,trim(strtolower($payfor)))) {
-            //     // echo $amount." ".$last_academic_balance." ".$newbalance;
-            //     if ($amount > $last_academic_balance) {
-            //         // clear it to zero
-            //         $new_bal = 0;
-            //         // if the last academic balance is a negative
-            //         // deduct whats left and update the remeaining
-            //         $select = "SELECT * FROM `finance` WHERE `stud_admin` = ? AND `date_of_transaction` < ? ORDER BY `transaction_id` DESC LIMIT 1;";
-            //         $stmt = $conn2->prepare($select);
-            //         $beginyear = getTermStart($conn2,$term);
-            //         $stmt->bind_param("ss",$studadmin,$beginyear);
-            //         $stmt->execute();
-            //         $result = $stmt->get_result();
-            //         if ($result) {
-            //             if ($row = $result->fetch_assoc()) {
-            //                 if (isset($row['balance'])) {
-            //                     $transaction_id = $row['transaction_id'];
-            //                     $update = "UPDATE `finance` SET `balance` = '$new_bal' WHERE `transaction_id` = '$transaction_id'";
-            //                     $stmt = $conn2->prepare($update);
-            //                     $stmt->execute();
-            //                 }
-            //             }
-            //         }
-            //     }else {
-            //         // deduct whats left and update the remaining
-            //         $new_bal = $last_academic_balance - $amount;
-            //         $select = "SELECT * FROM `finance` WHERE `stud_admin` = ? AND `date_of_transaction` < ? ORDER BY `transaction_id` DESC LIMIT 1;";
-            //         $stmt = $conn2->prepare($select);
-            //         $beginyear = getTermStart($conn2,$term);
-            //         $stmt->bind_param("ss",$studadmin,$beginyear);
-            //         $stmt->execute();
-            //         $result = $stmt->get_result();
-            //         if ($result) {
-            //             if ($row = $result->fetch_assoc()) {
-            //                 if (isset($row['balance'])) {
-            //                     $transaction_id = $row['transaction_id'];
-            //                     $update = "UPDATE `finance` SET `balance` = '$new_bal' WHERE `transaction_id` = '$transaction_id'";
-            //                     $stmt = $conn2->prepare($update);
-            //                     $stmt->execute();
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
+            $pay_ment_for = $payfor;
+            if (isJson($payfor)) {
+                $pay_ment_for = "<ul>";
+                $pay_for_list = json_decode($payfor, true);
+                for ($index = 0; $index < count($pay_for_list); $index++) {
+                    if ($pay_for_list[$index]['roles'] == "provisional") {
+                        continue;
+                    }
+                    $pay_ment_for .= "<li>".$pay_for_list[$index]['name']."</li>";
+                    $balance -= ($pay_for_list[$index]['amount_paid'] * 1);
+                }
+                $pay_ment_for .= "</ul>";
+    
+                // new_balance
+                $newbalance = $balance;
+            } else {
+                $newbalance = $balance - $amount;
+            }
 
             $payby = isset($_GET['paidby']) ? $_GET['paidby'] : $_SESSION['userids'];
-            // // if the student last academic balance is less than zero this means its a balance carry forward
-            // if ($last_academic_balance < 0) {
-            //     $modeofpay = $_GET['modeofpay'];
-            //     $times = date("H:i:s");
-            //     $balance_carry_forward = $last_academic_balance * -1;
-            //     $insert = "INSERT INTO `finance` (`stud_admin`,`time_of_transaction`,`date_of_transaction`,`transaction_code`,`amount`,`balance`,`payment_for`,`payBy`,`mode_of_pay`,`support_document`) VALUES (?,?,?,?,?,?,?,?,?,?)";
-            //     $stmt = $conn2->prepare($insert);
-            //     $trans_code = "BCF";
-            //     $balances = $newbalance + $amount;
-            //     $stmt->bind_param("ssssssssss",$studadmin,$times,$date,$trans_code,$balance_carry_forward,$balances,$payfor,$payby,$modeofpay,$supporting_documents_list);
-            //     $stmt->execute();
-            // }
 
             $modeofpay = $_GET['modeofpay'];
             $insert = "INSERT INTO `finance` (`stud_admin`,`time_of_transaction`,`date_of_transaction`,`transaction_code`,`amount`,`balance`,`payment_for`,`payBy`,`mode_of_pay`,`support_document`) VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -490,7 +382,7 @@
                 $student_name = getName1($studadmin);
                 //administrator notification
                     $messageName = "Confirmed payment for ".$student_name."";
-                    $messagecontent = "Confirmed Ksh ".comma($amount)." has been recieved from ".$student_name." Adm No: ".$studadmin." for <b>".$payfor."</b>, on ".date("M-d-Y",strtotime($date))." at ".$time." hrs.<br>The payment mode used was <b>".$modeofpay."</b>";
+                    $messagecontent = "Confirmed Ksh ".comma($amount)." has been recieved from ".$student_name." Adm No: ".$studadmin." for <b>".$pay_ment_for."</b>, on ".date("M-d-Y",strtotime($date))." at ".$time." hrs.<br>The payment mode used was <b>".$modeofpay."</b>";
                     $notice_stat = "0";
                     $reciever_id = "all";
                     $reciever_auth = "1";
@@ -6760,11 +6652,11 @@
                 }
             }
             $total = $mpesa+$cash+$bank+$reverse;
-            $table1.="<tr><td>M-Pesa</td><td>".comma($mpesa)."</td></tr>";
-            $table1.="<tr><td>Cash</td><td>".comma($cash)."</td></tr>";
-            $table1.="<tr><td>Bank</td><td>".comma($bank)."</td></tr>";
-            $table1.="<tr><td>Reverse</td><td>".comma($reverse)."</td></tr>";
-            $table1.="<tr><td><b>Total</b></td><td>".comma($total)."</td></tr>";
+            $table1.="<tr><td>M-Pesa</td><td>".number_format($mpesa)."</td></tr>";
+            $table1.="<tr><td>Cash</td><td>".number_format($cash)."</td></tr>";
+            $table1.="<tr><td>Bank</td><td>".number_format($bank)."</td></tr>";
+            $table1.="<tr><td>Reverse</td><td>".number_format($reverse)."</td></tr>";
+            $table1.="<tr><td><b>Total</b></td><td>".number_format($total)."</td></tr>";
             $table1.="</table></div>";
             $table1.="<p id='purpose_values_in' class = 'hide' >{\"MPesa\":".$mpesa.",\"Cash\":".$cash.",\"Bank\":".$bank.",\"reverse\":".$reverse."}</p>";
             if($total>0){
@@ -6807,7 +6699,7 @@
             $jsonData = "";
             for ($i=0; $i < count($purpose1); $i++) { 
                 if ($purpose1[$i] != 0) {
-                    $table1.="<tr><td>".ucwords(strtolower($purposes[$i]))."</td><td>".comma($purpose1[$i])."</td></tr>";
+                    $table1.="<tr><td>".listPaymentPurpose($purposes[$i])."</td><td>".comma($purpose1[$i])."</td></tr>";
                     $jsonData.="\"".ucwords(strtolower($purposes[$i]))."\":\"".$purpose1[$i]."\",";
                 }
             }
@@ -7316,18 +7208,10 @@
         $feestopay = getFeesAsFromTermAdmited($term,$conn2,$dach,$admno);
         $feespaidbystud = getFeespaidByStudent($admno,$conn2);
 
-        // know if they paid this term
-        $lastbal = lastBalance($admno,$conn2);
-        // $lastacad = lastACADyrBal($admno,$conn2);
-
         // get balance
-        $feestopay += $lastbal;
         $balance = $feestopay - $feespaidbystud;
 
-        // if class is transfered or alumni last
-        if ($dach == "-2" || $dach == "-1") {
-            return $lastbal;
-        }
+        // return balance
         return $balance;
     }
 
@@ -7536,9 +7420,10 @@
     function getFeesAsFromTermAdmited($current_term,$conn2,$classes,$admno){
         // get the student term they are in
         $student_data = students_details($admno,$conn2);
-        $term_they_are_in = null;
-
-        // decode the json format
+        
+        // GET THE COURSE FEES
+        $course_fees = 0;
+        $active_course = false;
         $my_course_list = isJson($student_data['my_course_list']) ? json_decode($student_data['my_course_list']) : [];
         for($index = 0; $index < count($my_course_list); $index++){
             if($my_course_list[$index]->course_status == 1){
@@ -7546,59 +7431,57 @@
                 $module_terms = $my_course_list[$index]->module_terms;
                 for ($ind=0; $ind < count($module_terms); $ind++) {
                     if($module_terms[$ind]->status == 1){
-                        $term_they_are_in = $module_terms[$ind]->term_name;
+                        $course_fees = $module_terms[$ind]->termly_cost;
+                        $active_course = true;
                         break;
                     }
                 }
             }
         }
+        // echo json_encode($my_course_list[0]);
 
-        if ($term_they_are_in == null || $classes == "-2" || $classes == "-1") {
-            return 0;
-        }
+        // GET THE STUDENT STANDING BALANCE.
+        $student_balance = $student_data['balance_carry_forward'];
 
-        $class = "".$classes."";
-        $course_enrolled = $student_data['course_done'];
+        // FEES STRUCTURE FEES
+        $fees_structure = 0;
 
-        // get the term they are in
-        if($term_they_are_in == "TERM_1"){
+        if($active_course){
+            $class = "".$classes."";
+            $course_enrolled = $student_data['course_done'];
+    
+            // get the term they are in
             $select = "SELECT sum(`TERM_1`) AS 'TOTALS' FROM `fees_structure` WHERE `classes` = ? AND `course` = ? AND `activated` = 1  and `roles` = 'regular';";
-        }elseif($term_they_are_in == "TERM_2"){
-            $select = "SELECT sum(`TERM_2`) AS 'TOTALS' FROM `fees_structure`  WHERE `classes` = ? AND `course` = ? AND `activated` = 1  and `roles` = 'regular';";
-        }elseif($term_they_are_in == "TERM_3"){
-            $select = "SELECT sum(`TERM_3`) AS 'TOTALS' FROM `fees_structure`  WHERE `classes` = ? AND `course` = ? AND `activated` = 1  and `roles` = 'regular';";
-        }else{
-            $select = "SELECT sum(`TERM_1`) AS 'TOTALS' FROM `fees_structure` WHERE `classes` = ? AND `course` = ? AND `activated` = 1  and `roles` = 'regular';";
-        }
-        $stmt = $conn2->prepare($select);
-        $stmt->bind_param("ss",$class,$course_enrolled);
-        $stmt->execute();
-        $res = $stmt->get_result();
-        if($res){
-            if ($row = $res->fetch_assoc()) {
-                $fees_to_pay = $row['TOTALS'];
-                
-                // get dicounts
-                $discounts = getDiscount($admno,$conn2);
-                if ($discounts[0] > 0 || $discounts[1] > 0) {
-                    if ($discounts[0] > 0) {
-                        $discounts = 100 - $discounts[0];
-                        $fees_to_pay = round(($fees_to_pay * $discounts) / 100);
-                    }else{;
-                        $fees_to_pay = $fees_to_pay - $discounts[1];
-                    }
+            $stmt = $conn2->prepare($select);
+            $stmt->bind_param("ss",$class,$course_enrolled);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            if($res){
+                if ($row = $res->fetch_assoc()) {
+                    $fees_structure = $row['TOTALS'];
                 }
-
-                if (strlen($fees_to_pay) < 1) {
-                    return 0;
+            }
+            $stmt->close();
+    
+            // add fees structure fees to course fees
+            $fees_structure += $course_fees;
+                    
+            // get dicounts
+            $discounts = getDiscount($admno,$conn2);
+            if ($discounts[0] > 0 || $discounts[1] > 0) {
+                if ($discounts[0] > 0) {
+                    $discounts = 100 - $discounts[0];
+                    $fees_structure = round(($fees_structure * $discounts) / 100);
+                }else{;
+                    $fees_structure = $fees_structure - $discounts[1];
                 }
-                return $fees_to_pay;
-            }else{
-                return 0;
             }
         }
-        return 0;
-        $stmt->close();
+
+        // add student balance carry forward
+        $fees_structure += $student_balance;
+        
+        return $fees_structure;
     }
 
     function getFeesTerm($term,$conn2,$classes,$admno){
@@ -7681,40 +7564,40 @@
         
         // get the current term so that we start counting from there
         $my_course_list = isJson($student_data['my_course_list']) ? json_decode($student_data['my_course_list']) : [];
-        $start_time = date("Y-m-d");
+        $start_date = date("Y-m-d");
+        $end_date = date("Y-m-d");
         for ($index=0; $index < count($my_course_list); $index++) { 
             if($my_course_list[$index]->course_status == 1){
                 $module_terms = $my_course_list[$index]->module_terms;
                 for($ind = 0; $ind < count($module_terms); $ind++){
                     if($module_terms[$ind]->status == 1){
-                        $start_time = date("Y-m-d", strtotime($module_terms[$ind]->start_date));
+                        $start_date = date("Y-m-d", strtotime($module_terms[$ind]->start_date));
+                        $end_date = date("Y-m-d", strtotime($module_terms[$ind]->end_date));
                         break;
                     }
                 }
             }
         }
         
-        $select = "SELECT * FROM `finance` where `stud_admin` = ?  AND `date_of_transaction` BETWEEN ? and ? AND `payment_for` != 'admission fees'";
+        // $select = "SELECT * FROM `finance` where `stud_admin` = ?  AND `date_of_transaction` BETWEEN ? and ? AND `payment_for` != 'admission fees'";
+        $select = "SELECT * FROM `finance` WHERE finance.stud_admin = ? AND finance.date_of_transaction BETWEEN ? and ?";
         $stmt = $conn2->prepare($select);
-        
-        // echo $begin_term;
-        $currentdate = date("Y-m-d");
-        $stmt->bind_param("sss",$admno,$start_time,$currentdate);
+        $stmt->bind_param("sss",$admno,$start_date,$end_date);
         $stmt->execute();
         $res = $stmt->get_result();
-        $last_acad_balance  = lastACADyrBal($admno,$conn2);
         if($res){
             $total_amounts = 0;
             while($row = $res->fetch_assoc()){
-                $payment_for = strtolower($row['payment_for']);
-                // $prov_amount = provisionalPays($admno,$conn2,$prov_roles,$beginyear);
-                $provisonal_pays = getProvisionalPayments($admno,$conn2);
-                if (!isPresent($provisonal_pays,$payment_for)) {
+                $payment_for = isJson($row['payment_for']) ? json_decode($row['payment_for'], true) : [];
+                if (count($payment_for) > 0) {
+                    foreach ($payment_for as $key => $payment) {
+                        if($payment['roles'] != "provisional"){
+                            $total_amounts += ($payment['amount_paid']*1);
+                        }
+                    }
+                }else{
                     $total_amounts += ($row['amount']*1);
                 }
-            }
-            if ($last_acad_balance < 0) {
-                // $total_amounts -= $last_acad_balance;
             }
             return $total_amounts;
         }
@@ -9026,5 +8909,23 @@
             return array("years" => $difference_year, 'disposed_value' => $row['disposed_value'] , "new_value" => $balance_left, "reduction_amount" => $reduction, "original_value" => $original_value, "value_acquisition_method" => "Reducing Balance Method (+ve)", "value_acquisition" => "increase", "account" => $accounts);
         }else{
             return array("years" => $difference_year, 'disposed_value' => $row['disposed_value'] , "new_value" => $original_value, "reduction_amount" => 0, "original_value" => $original_value, "value_acquisition_method" => "No Method", "value_acquisition" => "increase", "account" => []);
+        }
+    }
+
+    function listPaymentPurpose($payment_purpose){
+        if(isJson($payment_purpose)){
+            $payment_purpose = json_decode($payment_purpose, true);
+            $data_to_display = "<ul>";
+            foreach ($payment_purpose as $key => $value) {
+                $data_to_display .= "<li>".ucwords(strtolower($value["name"]))." - Kes ".number_format($value["amount_paid"])."</li>";
+            }
+            $data_to_display .= "</ul>";
+            return $data_to_display;
+        }else {
+            $payment_purpose = json_decode($payment_purpose, true);
+            $data_to_display = "<ul>";
+            $data_to_display .= "<li>Undefined Fees</li>";
+            $data_to_display .= "</ul>";
+            return $data_to_display;
         }
     }

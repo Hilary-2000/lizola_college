@@ -2882,3 +2882,10 @@ select{
     color: black;
     max-width: 50px;
 }
+
+.disabled {
+    /* Your styles here */
+    background-color: #e6e6e6 !important;
+    color: #444444 !important;
+    border: 1px solid #ccc !important;
+}

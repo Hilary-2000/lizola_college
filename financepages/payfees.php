@@ -66,8 +66,8 @@
                     <h3>Pay here</h3>
                 </div>
                 <div class="conts">
-                    <label for="payfor"><b>Payment for:</b> <br></label>
-                    <p id='payments'></p>                    
+                    <label for="payfor"><b>Select what to pay for and enter the amount:</b> <br></label>
+                    <p id='payments'></p>
                 </div>
                 <div class="conts">
                     <label class="form-control-label" for="modeofpay"><b>Select mode of pay</b> <br></label>

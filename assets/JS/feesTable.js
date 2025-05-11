@@ -79,7 +79,7 @@ function reprintClick() {
     var amount_paid_by_student = cObj("fees_paid"+id_index).innerText;
     var new_student_balance = cObj("new_balance"+id_index).value;
     var mode_of_payments = cObj("mod"+id_index).innerText;
-    var payments_for = cObj("purpose"+id_index).innerText;
+    var payments_for = cObj("purpose_of_pay_"+id_index).value;
     var transaction_code = cObj("transaction_code"+id_index).value;
 
     cObj("check-parents-sms").disabled = true;
@@ -133,13 +133,25 @@ function viewTransactions() {
     // console.log(data);
     if (hasJsonStructure(data)) {
         data = JSON.parse(data);
+        // CREATE A LIST FOR THE PAYMENT OPTIONS
+        var list = hasJsonStructure(data[5]) ? JSON.parse(data[5]) : [];
+        var data_to_display = data[5];
+        if (list.length > 0) {
+            data_to_display = "<ul>";
+            for (let index = 0; index < list.length; index++) {
+                const element = list[index];
+                data_to_display += "<li>"+element.name+" - Kes "+element.amount_paid+"</li>";
+            }
+            data_to_display+="</ul>";
+        }
+        // payment description
         // console.log(data);
         cObj("payment_description_2").innerText = data[3];
         cObj("payment_description_3").innerText = data[12]+" : "+data[11];
         cObj("payment_description_4").innerText = data[4];
         cObj("payment_description_5").innerText = "Kes "+data[1];
         cObj("payment_description_6").innerText = data[9];
-        cObj("payment_description_7").innerText = data[5];
+        cObj("payment_description_7").innerHTML = data_to_display;
 
         // has json structure
         if (hasJsonStructure(data[14])) {
@@ -192,7 +204,17 @@ function deleteTransactions() {
     cObj("date_of_payments").innerHTML = valObj("masiku"+this_id)+" @ "+valObj("masaa"+this_id);
     cObj("transaction_pay_id").value = valObj("trans_id"+this_id);
     cObj("amounts_paid_trans").innerHTML = cObj("fees_paid"+this_id).innerText;
-    cObj("payments_for_info").innerHTML = cObj("purpose"+this_id).innerText;
+    var list = hasJsonStructure(cObj("purpose_of_pay_"+this_id).value) ? JSON.parse(cObj("purpose_of_pay_"+this_id).value) : [];
+    var data_to_display = cObj("purpose_of_pay_"+this_id).value;
+    if (list.length > 0) {
+        data_to_display = "<ul>";
+        for (let index = 0; index < list.length; index++) {
+            const element = list[index];
+            data_to_display += "<li>"+element.name+" - Kes "+element.amount_paid+"</li>";
+        }
+        data_to_display+="</ul>";
+    }
+    cObj("payments_for_info").innerHTML = data_to_display;
     cObj("confirm_transaction_delete").classList.remove("hide");
 }
 
@@ -207,14 +229,36 @@ function displayRecord_fees(start, finish, arrays) {
         //create a table of the 50 records
         var counter = start+1;
         for (let index = start; index < finish; index++) {
-            tableData += "<tr><input type='hidden' id='support_docs_"+index+"' value='"+(JSON.stringify(arrays[index]))+"'><input type='hidden' id='trans_id"+index+"' value='"+arrays[index][13]+"'><input type='hidden' id='masiku"+index+"' value='"+arrays[index][12]+"'><input type='hidden' id='masaa"+index+"' value='"+arrays[index][11]+"'><input type='hidden' id='new_balance"+index+"' value='"+arrays[index][9]+"'><input type='hidden' id='transaction_code"+index+"' value='"+arrays[index][10]+"'><td>"+arrays[index][8]+"</td><td><small class='text-sm' id='students_name_fin"+index+"'>"+arrays[index][3]+"</small> {<span id='adms_fin"+index+"'>"+arrays[index][0]+"</span>}</td><td id='fees_paid"+index+"'>Kes "+comma3(arrays[index][1])+"</td><td id='d_o_p"+index+"'>"+arrays[index][2]+"</td><td id='mod"+index+"'>"+arrays[index][4]+"</td><td id='purpose"+index+"'>"+arrays[index][5]+"</td><td><span class='link re-print' id='re-print"+index+"'><i class='fas fa-print'></i> Print</span><span class='link delete_trans mx-1' id='delete_trans"+index+"'><i class='fas fa-trash'></i> Delete</span><span class='link view_dets mx-1' id='view_dets_"+index+"'><i class='fas fa-eye'></i> View</span></td></tr>";
+            var data_to_show = arrays[index][5];
+            var data = arrays[index][5];
+            if (hasJsonStructure(data_to_show)) {
+                data_to_show = JSON.parse(arrays[index][5]);
+                data = "<ul>";
+                for (let index = 0; index < data_to_show.length; index++) {
+                    const element = data_to_show[index];
+                    data += "<li>"+(element.name != null ? element.name : element.real_name)+" Kes "+element.amount_paid+"</li>";
+                }
+                data += "</ul>";
+            }
+            tableData += "<tr><input type='hidden' id='support_docs_"+index+"' value='"+(JSON.stringify(arrays[index]))+"'><input type='hidden' id='trans_id"+index+"' value='"+arrays[index][13]+"'><input type='hidden' id='masiku"+index+"' value='"+arrays[index][12]+"'><input type='hidden' id='masaa"+index+"' value='"+arrays[index][11]+"'><input type='hidden' id='new_balance"+index+"' value='"+arrays[index][9]+"'><input type='hidden' id='transaction_code"+index+"' value='"+arrays[index][10]+"'><td>"+arrays[index][8]+"</td><td><small class='text-sm' id='students_name_fin"+index+"'>"+arrays[index][3]+"</small> {<span id='adms_fin"+index+"'>"+arrays[index][0]+"</span>}</td><td id='fees_paid"+index+"'>Kes "+comma3(arrays[index][1])+"</td><td id='d_o_p"+index+"'>"+arrays[index][2]+"</td><td id='mod"+index+"'>"+arrays[index][4]+"</td><td id='purpose"+index+"'><input type='hidden' id='purpose_of_pay_"+index+"' value='"+arrays[index][5]+"'>"+data+"</td><td><span class='link re-print' id='re-print"+index+"'><i class='fas fa-print'></i> Print</span><span class='link delete_trans mx-1' id='delete_trans"+index+"'><i class='fas fa-trash'></i> Delete</span><span class='link view_dets mx-1' id='view_dets_"+index+"'><i class='fas fa-eye'></i> View</span></td></tr>";
             counter++;
         }
     }else{
         //create a table of the 50 records
         var counter = start+1;
         for (let index = start; index < total; index++) {
-            tableData += "<tr><input type='hidden' id='support_docs_"+index+"' value='"+(JSON.stringify(arrays[index]))+"'><input type='hidden' id='trans_id"+index+"' value='"+arrays[index][13]+"'><input type='hidden' id='masiku"+index+"' value='"+arrays[index][12]+"'><input type='hidden' id='masaa"+index+"' value='"+arrays[index][11]+"'><input type='hidden' id='new_balance"+index+"' value='"+arrays[index][9]+"'><input type='hidden' id='transaction_code"+index+"' value='"+arrays[index][10]+"'><td>"+arrays[index][8]+"</td><td><small class='text-sm' id='students_name_fin"+index+"'>"+arrays[index][3]+"</small> {<span id='adms_fin"+index+"'>"+arrays[index][0]+"</span>}</td><td id='fees_paid"+index+"'>Kes "+comma3(arrays[index][1])+"</td><td id='d_o_p"+index+"'>"+arrays[index][2]+"</td><td id='mod"+index+"'>"+arrays[index][4]+"</td><td id='purpose"+index+"'>"+arrays[index][5]+"</td><td><span class='link re-print' id='re-print"+index+"'><i class='fas fa-print'></i> Print</span><span class='link delete_trans mx-1' id='delete_trans"+index+"'><i class='fas fa-trash'></i> Delete</span><span class='link view_dets mx-1' id='view_dets_"+index+"'><i class='fas fa-eye'></i> View</span></td></tr>";
+            var data_to_show = arrays[index][5];
+            var data = arrays[index][5];
+            if (hasJsonStructure(data_to_show)) {
+                data_to_show = JSON.parse(arrays[index][5]);
+                data = "<ul>";
+                for (let index = 0; index < data_to_show.length; index++) {
+                    const element = data_to_show[index];
+                    data += "<li>"+(element.name != null ? element.name : element.real_name)+" Kes "+element.amount_paid+"</li>";
+                }
+                data += "</ul>";
+            }
+            tableData += "<tr><input type='hidden' id='support_docs_"+index+"' value='"+(JSON.stringify(arrays[index]))+"'><input type='hidden' id='trans_id"+index+"' value='"+arrays[index][13]+"'><input type='hidden' id='masiku"+index+"' value='"+arrays[index][12]+"'><input type='hidden' id='masaa"+index+"' value='"+arrays[index][11]+"'><input type='hidden' id='new_balance"+index+"' value='"+arrays[index][9]+"'><input type='hidden' id='transaction_code"+index+"' value='"+arrays[index][10]+"'><td>"+arrays[index][8]+"</td><td><small class='text-sm' id='students_name_fin"+index+"'>"+arrays[index][3]+"</small> {<span id='adms_fin"+index+"'>"+arrays[index][0]+"</span>}</td><td id='fees_paid"+index+"'>Kes "+comma3(arrays[index][1])+"</td><td id='d_o_p"+index+"'>"+arrays[index][2]+"</td><td id='mod"+index+"'>"+arrays[index][4]+"</td><td id='purpose"+index+"'><input type='hidden' id='purpose_of_pay_"+index+"' value='"+arrays[index][5]+"'>"+data+"</td><td><span class='link re-print' id='re-print"+index+"'><i class='fas fa-print'></i> Print</span><span class='link delete_trans mx-1' id='delete_trans"+index+"'><i class='fas fa-trash'></i> Delete</span><span class='link view_dets mx-1' id='view_dets_"+index+"'><i class='fas fa-eye'></i> View</span></td></tr>";
             counter++;
         }
         fins = total;
