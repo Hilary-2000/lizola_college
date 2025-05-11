@@ -94,8 +94,17 @@
                         <select name="intake_months_reports" id="intake_months_reports" class="form-control">
                             <option value="" hidden>Select Month</option>
                             <option value="JAN">JAN</option>
+                            <option value="FEB">FEB</option>
+                            <option value="MAR">MAR</option>
+                            <option value="APR">APR</option>
                             <option value="MAY">MAY</option>
+                            <option value="JUN">JUN</option>
+                            <option value="JUL">JUL</option>
+                            <option value="AUG">AUG</option>
                             <option value="SEP">SEP</option>
+                            <option value="OCT">OCT</option>
+                            <option value="NOV">NOV</option>
+                            <option value="DEC">DEC</option>
                         </select>
                     </div>
                     <div class="col-md-4 intake hide">

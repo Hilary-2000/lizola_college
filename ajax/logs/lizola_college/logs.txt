@@ -1,3 +1,5 @@
+11th May 2025 17:25:30PM : Transaction for "Mutiso Karama" Reg No "LC-2025-4" has been completed successfully! - {HILLARY NGIGE}
+11th May 2025 17:21:23PM : Mutiso Mutiso of adm no LC-2025-4  balance has been updated successfully! - {HILLARY NGIGE}
 11th May 2025 17:17:13PM : Mutiso Mutiso of adm no LC-2025-4  balance has been updated successfully! - {HILLARY NGIGE}
 11th May 2025 17:15:21PM : Mutiso Karama - of Reg No. (LC-2025-4) data has been updated successfully! - {HILLARY NGIGE}
 11th May 2025 11:19:48AM : Transaction has been deleted successfully! - {HILLARY NGIGE}

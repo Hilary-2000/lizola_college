@@ -6758,10 +6758,9 @@
             for($index = 0; $index < count($course_list); $index++){
                 // course levels
                 $course_levels = isJson_report($course_list[$index]->course_levels) ? json_decode($course_list[$index]->course_levels) : [];
-
                 // check if the course is present in the array
                 $is_present = checkPresnt($course_levels,$level_id);
-                if($is_present){
+                if(isset($course_list[$index]->course_level) && $level_id == $course_list[$index]->course_level){
                     $data_to_display.="<option value='".$course_list[$index]->id."'>".$course_list[$index]->course_name."</option>";
                 }
             }

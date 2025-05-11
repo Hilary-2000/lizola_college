@@ -69,8 +69,17 @@
                         echo "<p style='color:green;'>There is no payment option set by the administrator</p>";
                     }
 
+                    if(($student_data['balance_carry_forward']*1) > 0){
+                        $a_fee = new stdClass();
+                        $a_fee->fees_name = "Balance Carry Forward";
+                        $a_fee->fees_amount = $student_data['balance_carry_forward']*1;
+                        $a_fee->fees_id = -1;
+                        $a_fee->fees_role = "Compulsory";
+                        array_push($all_course_fees, $a_fee);
+                    }
+
                     if(count($all_course_fees) > 0){
-                        $data_to_display = "<div class='tableme'><input type='hidden' id='payment_for_details' value='[]'><table id='".$object_id."' class='table'><tr><th>No. <input type='checkbox' id='votehead_checks'></th><th>Votehead</th><th>Role</th><th>Amount to pay</th><th>Amount</th></tr><tbody>";
+                        $data_to_display = "<div class='tableme'><input type='hidden' id='payment_for_details' value='[]'><table id='".$object_id."' class='table'><tr><th>No. <input type='checkbox' id='votehead_checks'></th><th>Votehead</th><th>Role</th><th>Total amount to pay</th><th>Amount</th></tr><tbody>";
                         foreach ($all_course_fees as $key => $course_fees) {
                             $data_to_display .= "<tr><td>".($key+1).". <input type='hidden' value='".json_encode($course_fees)."' id='course_details_".($key+1)."'><input type='checkbox' class='votehead_checks' id='votehead_checks_".($key+1)."'></td><td>".$course_fees->fees_name."</td><td><span class='badge bg-primary'>".$course_fees->fees_role."</span></td><td>Kes ".$course_fees->fees_amount."</td><td><input type='number' placeholder='Amount' class='form-control disabled votehead_amounts w-100' disabled='' id='votehead_amounts_".($key+1)."' value='0'></td></tr>";
                         }
