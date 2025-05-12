@@ -2646,7 +2646,7 @@ function checkPresnt($array, $string){
                             <select class="form-control" name="boarders_regular" id="boarders_regular">
                                 <option value="" hidden>Select..</option>
                                 <option value="regular">Regular</option>
-                                <option value="boarding">Boarder</option>
+                                <!-- <option value="boarding">Boarder</option> -->
                                 <option value="provisional">Provisional</option>
                             </select>
                         </div>
@@ -3194,7 +3194,7 @@ function checkPresnt($array, $string){
                             <select class="form-control" name="boarders1_regular1" id="boarders1_regular1">
                                 <option value="" hidden>Select..</option>
                                 <option value="regular" id="regular12">Regular</option>
-                                <option value="boarding" id="boarding12">Boarder</option>
+                                <!-- <option value="boarding" id="boarding12">Boarder</option> -->
                                 <option value="provisional" id="provisional12">Provisional</option>
                             </select>
                         </div>
@@ -3439,12 +3439,12 @@ function checkPresnt($array, $string){
                 </div>
                 <div class="conts" id="">
                     <div class="add_expense">
-                        <div class="form-control">
+                        <div class="form-group">
                             <label class="form-control-label" for="course_edit_input_text">Enter Course Name: <br></label>
                             <input type="hidden" id="course_id_holder">
-                            <input class="form-control w-100 mx-0" type="text" name="course_edit_input_text" id="course_edit_input_text" placeholder="eg: Information Technology">
+                            <input class="form-control mx-0" type="text" name="course_edit_input_text" id="course_edit_input_text" placeholder="eg: Information Technology">
                         </div>
-                        <div class="form-control">
+                        <div class="form-group">
                             <label for="level_lists" class="form-control-label">Level Available</label> (<small class="text-secondary">Select the level the course is to be offered!</small>)
                             <img src="images/ajax_clock_small.gif" class="" id="edit_course_clock">
                             <div id="level_available_course_name_edit">
@@ -3475,10 +3475,10 @@ function checkPresnt($array, $string){
                                 </div>
                             </div>
                         </div>
-                        <div class="form-control">
+                        <div class="form-group">
                             <label for="department_list" class="form-control-label">Course Department</label>
                             <img src="images/ajax_clock_small.gif" class="" id="display_my_departments_edit">
-                            <div id="department_list_window_edit">
+                            <div id="department_list_window_edit" class="w-75">
                                 <p class="text-danger">Set the course levels first before setting up courses!</p>
                             </div>
                             <p id="edit_course_outputtxt"></p>

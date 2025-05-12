@@ -681,6 +681,13 @@ cObj("makepayments").onclick = function () {
                 } else {
                     grayBorder(cObj("bankcode"));
                 }
+            } else if (cObj("modeofpay").value == "cash"){
+                if (cObj("amount3").innerText.length > 0) {
+                    errs++;
+                    redBorder(cObj("amount3"));
+                }else{
+                    grayBorder(cObj("amount3"));
+                }
             }
             if (errs == 0) {
                 // get the payment for details
@@ -2978,6 +2985,11 @@ function autocomplete(inp, arr, arr2, arr3, arr4, arr5) {
                     inp.value = this.getElementsByTagName("input")[0].value;
                     /*close the list of autocompleted values,
                     (or any other open lists of autocompleted values:*/
+
+                    /**Click the search button when the option is selected */
+                    if (inp.id == "studids") {
+                        cObj("searchfin1").click();
+                    }
                     closeAllLists();
                 });
                 a.appendChild(b);
@@ -3007,6 +3019,11 @@ function autocomplete(inp, arr, arr2, arr3, arr4, arr5) {
             if (currentFocus > -1) {
                 /*and simulate a click on the "active" item:*/
                 if (x) x[currentFocus].click();
+
+                /**Click the search button when the option is selected */
+                if (inp.id == "studids") {
+                    cObj("searchfin1").click();
+                }
             }
         }
     });

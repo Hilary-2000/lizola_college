@@ -1,3 +1,61 @@
+12th May 2025 13:10:40PM : Mutiso Mutiso of adm no LC-2025-4  balance has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 13:02:37PM : Mutiso Mutiso of adm no LC-2025-4  balance has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 12:54:29PM : HILLARY NGIGE successfully logged into the system as Principal - {HILLARY NGIGE}
+12th May 2025 09:18:44AM : Fees structure has been modified. Votehead "Registration Fee (payable Once)" has been added successfully! - {HILLARY NGIGE}
+12th May 2025 09:13:02AM : Fees structure has been modified. Votehead "Registration Fee (payable Once)" has been added successfully! - {HILLARY NGIGE}
+12th May 2025 09:08:41AM : Fees structure has been modified. Votehead "Registration Fee (payable Once)" has been added successfully! - {HILLARY NGIGE}
+12th May 2025 08:45:13AM : Fees structure has been modified. Votehead " Registration Fee (payable Once)" has been added successfully! - {HILLARY NGIGE}
+12th May 2025 08:43:14AM : Academic calender has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 08:09:49AM : Role has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 08:09:45AM : Role has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 08:09:43AM : Role has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 08:09:39AM : Role has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 08:09:37AM : Role has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 08:09:34AM : Role has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 08:00:19AM : Course "FASHION AND DESIGN" has been added successfully! - {HILLARY NGIGE}
+12th May 2025 07:55:37AM : Course "FASHION AND DESIGN" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:55:12AM : Course "FASHION AND DESIGN" has been added successfully! - {HILLARY NGIGE}
+12th May 2025 07:51:57AM : Course "FASHION AND DESIGN" has been added successfully! - {HILLARY NGIGE}
+12th May 2025 07:50:17AM : Course "MEDIA PRODUCTION" has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 07:50:14AM : Course "LAPTOP AND PHONE REPAIR" has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 07:50:11AM : Course "FILM PRODUCTION" has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 07:50:08AM : Course "ANIMATION AND DIGITAL MEDIA TECHNOLOGY" has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 07:50:05AM : Course "WEB PROGRAMMING" has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 07:48:12AM : Course "Information Technology" has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 07:48:09AM : Course "Information Technology" has been deleted successfully! - {HILLARY NGIGE}
+12th May 2025 07:39:34AM : Course "FINE ART (IN SIGN LANGUAGE)" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:39:14AM : Course "GRAPHIC DESIGN (IN SIGN LANGUAGE)" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:39:02AM : Course "MOBILE AND PHONE REPAIR" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:38:57AM : Course "MOBILE AND PHONE REPAIR" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:38:44AM : Course "PHOTOGRAPHY" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:38:32AM : Course "WEB DESIGN" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:38:15AM : Course "FINE ART" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:38:02AM : Course "GRAPHIC DESIGNER" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:37:45AM : Course "LECTURER/TRAINER" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:36:53AM : Course "TEXTILE DESIGNER" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:36:39AM : Course "FASHION MERCHANDISER" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:36:27AM : Course "COSTUME DESIGNER" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:36:15AM : Course "ENTREPRENEUR (BOTIQUE OWNER/BRAND FOUNDER)" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:36:08AM : Course "FASHION ILLUSTRATOR" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:36:01AM : Course "STYLIST AND IMAGE CONSULTANT" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:35:51AM : Course "STYLIST AND IMAGE CONSULTANT" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:35:39AM : Course "FASHION ILLUSTRATOR" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:35:33AM : Course "STYLIST AND IMAGE CONSULTANT" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:35:28AM : Course "PATTERN MAKER " has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:35:23AM : Course "GARMENT PRODUCTION SPECIALIST" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:35:18AM : Course "FASHION AND DESIGN" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:35:10AM : Course "TAILOR AND DRESS MAKER" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:33:54AM : Departments (DIGITAL ARTS AND TECHNOLOGY) with a code of (DAT-001) have been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:33:43AM : Departments (Fashion and Design) with a code of (FS-001) have been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:31:58AM : Departments (DIGITAL ARTS AND TECHNOLOGY) with a code of (ENG-001) have been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:31:31AM : Departments (Fashion and Design) with a code of (SC-001) have been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:30:47AM : Course "ENTREPRENEUR (BOTIQUE OWNER/BRAND FOUNDER)" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:30:18AM : Course "STYLIST AND IMAGE CONSULTANT" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:30:02AM : Course "PATTERN MAKER " has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 07:29:20AM : Course "FASHION AND DESIGN" has been updated successfully! - {HILLARY NGIGE}
+12th May 2025 06:31:45AM : Transaction for "Mutiso Karama" Reg No "LC-2025-4" has been completed successfully! - {HILLARY NGIGE}
+12th May 2025 06:30:46AM : Fees structure has been modified. Votehead "Admission Fees" has been added successfully! - {HILLARY NGIGE}
+12th May 2025 06:19:50AM : HILLARY NGIGE successfully logged into the system as Principal - {HILLARY NGIGE}
 11th May 2025 17:25:30PM : Transaction for "Mutiso Karama" Reg No "LC-2025-4" has been completed successfully! - {HILLARY NGIGE}
 11th May 2025 17:21:23PM : Mutiso Mutiso of adm no LC-2025-4  balance has been updated successfully! - {HILLARY NGIGE}
 11th May 2025 17:17:13PM : Mutiso Mutiso of adm no LC-2025-4  balance has been updated successfully! - {HILLARY NGIGE}

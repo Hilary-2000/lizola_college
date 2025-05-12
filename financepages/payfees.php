@@ -74,7 +74,7 @@
                     <select class="form-control" name="modeofpay" id="modeofpay">
                         <option value="" hidden>Select option..</option>
                         <option value="mpesa">M-PESA</option>
-                        <!-- <option value="cash">Cash</option> -->
+                        <option value="cash">Cash</option>
                         <option value="bank">Bank</option>
                     </select>
                 </div>

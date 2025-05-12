@@ -78,8 +78,8 @@ class PDF extends FPDF
     function Header()
     {
         // Logo
-        $this->Image(dirname(__FILE__) . $this->school_logo, 6, 6, 20);
-        $this->Image(dirname(__FILE__) . $this->arm_of_gov, ($this->school_header_position == 300 ? ($this->school_header_position - 30) : ($this->school_header_position - 15)), 6, 18);
+        $this->Image(dirname(__FILE__) . $this->school_logo, 5, 5, 30);
+        // $this->Image(dirname(__FILE__) . $this->arm_of_gov, ($this->school_header_position == 300 ? ($this->school_header_position - 30) : ($this->school_header_position - 15)), 6, 18);
         // Arial  15
         $this->SetFont('Arial', 'B', 13);
         // Title
@@ -330,6 +330,9 @@ class PDF extends FPDF
             $w[3]+=20;
         }
         for ($i = 0; $i < count($header); $i++) {
+            if($i == 7){
+                continue;
+            }
             if ($skip == true) {
                 if ($i != 4) {
                     $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
@@ -361,7 +364,7 @@ class PDF extends FPDF
             }
             $this->Cell($w[5], 6, $row[5], 1, 0, 'L', $fill);
             $this->Cell($w[6], 6, ucwords(strtolower($row[6])), 1, 0, 'L', $fill);
-            $this->Cell($w[7], 6, ($row[7]), 1, 0, 'R', $fill);
+            // $this->Cell($w[7], 6, ($row[7]), 1, 0, 'R', $fill);
             $this->Cell($w[8], 6, ($row[8]), 1, 0, 'R', $fill);
             $this->Cell($w[9], 6, ($row[9]), 1, 0, 'R', $fill);
             $this->Ln();
@@ -4011,7 +4014,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Cell(200, 8, "Fees Collection Table", 0, 0, 'C', false);
                     $pdf->Ln();
                     $pdf->SetFont('Helvetica', 'B', 8);
-                    $width = array(5, 20, 17, 22, 28, 13, 10, 35, 33, 18);
+                    $width = array(10, 20, 20, 22, 35, 20, 15, 35, 33, 20);
                     $skip = false;
                     $pdf->financeTable($header, $data, $width, $skip);
                     $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -4280,7 +4283,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                         // LAST ACADEMIC YEAR BALANCE
                         $last_acad_yr = lastACADyrBal($student_data[$index]['adm_no'], $conn2);
-                        $acad_balance = ($last_acad_yr);
+                        $acad_balance = ($student_data[$index]['balance_carry_forward']);
                         $border = isBoarding($student_data[$index]['adm_no'], $conn2) ? (getBoardingFees($conn2, $student_class_fin, "null", $student_data[$index]['adm_no']) * 1) : "Not-enrolled";
                         $transport = isTransport($conn2, $student_data[$index]['adm_no']) ? (transportBalanceSinceAdmission($conn2, $student_data[$index]['adm_no']) * 1) : "Not-enrolled";
                         $data = array($number, $Fullname, $student_data[$index]['adm_no'], $classes, $gender, $fees_paid, $balance, $acad_balance);
@@ -4328,7 +4331,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf = new PDF('P', 'mm', 'A4');
                         $pdf->setHeaderPos(200);
                         // Column headings
-                        $header = array('No', 'Fullname', 'Reg No.', 'Class', 'Sex', 'Fees paid', 'Balance', 'Last Yrs Bal');
+                        $header = array('No', 'Fullname', 'Reg No.', 'Class', 'Sex', 'Fees paid', 'Balance', 'Balance CF');
                         // Data loading
                         // $data = $pdf->LoadData('countries.txt');
                         $tittle = "Fees list for - " . classNameReport($student_class_fin)." ".$course_names;
@@ -4582,8 +4585,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 $get_height = round($pdf2->GetY());
                                 // echo $get_height."<br>";
                                 $old_x_pos+=5;
-                                $pdf2->Image($pdf2->school_logo,6,$old_x_pos,15);
-                                $pdf2->Image($pdf2->arm_of_gov,190,$old_x_pos,15);
+                                $pdf2->Image($pdf2->school_logo,6,$old_x_pos,25);
+                                // $pdf2->Image($pdf2->arm_of_gov,190,$old_x_pos,15);
                                 $old_x_pos = $get_height;
                                 $pdf2->ln();
                                 if ($counter == 3) {
@@ -4686,8 +4689,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                     $pdf2->Cell(180, 1, "", "B", 0, 0);
                                     $get_height = round($pdf2->GetY());
                                     $old_x_pos+=5;
-                                    $pdf2->Image($pdf2->school_logo,6,$old_x_pos,15);
-                                    $pdf2->Image($pdf2->arm_of_gov,190,$old_x_pos,15);
+                                    $pdf2->Image($pdf2->school_logo,6,$old_x_pos,25);
+                                    // $pdf2->Image($pdf2->arm_of_gov,190,$old_x_pos,15);
                                     $old_x_pos = $get_height;
                                     $pdf2->Ln();
                                     if ($counter == 3) {
@@ -4784,8 +4787,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf2->Cell(180, 1, "", "B", 0, 0);
                         $get_height = round($pdf2->GetY());
                         $old_x_pos=6;
-                        $pdf2->Image($pdf2->school_logo,6,$old_x_pos,15);
-                        $pdf2->Image($pdf2->arm_of_gov,190,$old_x_pos,15);
+                        $pdf2->Image($pdf2->school_logo,6,$old_x_pos,25);
+                        // $pdf2->Image($pdf2->arm_of_gov,190,$old_x_pos,15);
                         $old_x_pos = $get_height;
                         $pdf2->Output("I", str_replace(" ", "_", $pdf2->school_document_title) . ".pdf");
                     } else {
@@ -4903,8 +4906,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pdf2->feesStructure($header, $data, $width);
                             $pdf2->Ln();
                             $get_height = round($pdf2->GetY());
-                            $pdf2->Image($pdf2->school_logo,6,$old_x_pos,15);
-                            $pdf2->Image($pdf2->arm_of_gov,190,$old_x_pos,15);
+                            $pdf2->Image($pdf2->school_logo,6,$old_x_pos,25);
+                            // $pdf2->Image($pdf2->arm_of_gov,190,$old_x_pos,15);
                             $old_x_pos = $get_height+5;
                             if (($ind + 1) % $cuts != 0) {
                                 $pdf2->SetLineWidth(0.1);
@@ -5014,8 +5017,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                                     // insert logos
                                     $get_height = round($pdf2->GetY());
-                                    $pdf2->Image($pdf2->school_logo,6,$old_x_pos,15);
-                                    $pdf2->Image($pdf2->arm_of_gov,190,$old_x_pos,15);
+                                    $pdf2->Image($pdf2->school_logo,6,$old_x_pos,25);
+                                    // $pdf2->Image($pdf2->arm_of_gov,190,$old_x_pos,15);
                                     $old_x_pos = $get_height+5;
                                     if (($ind + 1) % $cuts != 0) {
                                         $pdf2->SetLineWidth(0.1);
@@ -7226,7 +7229,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $website_name = $school_info['website_name'];
 
             $pdf->Image($school_profile_image, 5, 10, 20, 20);
-            $pdf->Image($pdf->arm_of_gov, 100, 15, 12, 12);
+            // $pdf->Image($pdf->arm_of_gov, 100, 15, 12, 12);
             $pdf->SetFont('Helvetica', 'B', 14);
             $pdf->SetFillColor(100, 100, 100);
             $pdf->SetTitle("Receipt for ".$students_names." Reg No. ".$student_admission_no.".");
@@ -7455,7 +7458,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             // space between
             $y = $pdf->GetY();
             $pdf->Image($school_profile_image, 5, $y, 20, 20);
-            $pdf->Image($pdf->arm_of_gov, 100, $y+5, 12, 12);
+            // $pdf->Image($pdf->arm_of_gov, 100, $y+5, 12, 12);
             $pdf->SetFont('Helvetica', 'B', 14);
             $pdf->SetFillColor(100, 100, 100);
             $pdf->Cell(20, 10, "", 0, 0, "L", false);
@@ -14549,7 +14552,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $website_name = $school_info['website_name'];
 
         $pdf->Image($school_profile_image, 5, 10, 20, 20);
-        $pdf->Image($pdf->arm_of_gov, 100, 15, 12, 12);
+        // $pdf->Image($pdf->arm_of_gov, 100, 15, 12, 12);
         $pdf->SetFont('Helvetica', 'B', 14);
         $pdf->SetFillColor(100, 100, 100);
         $pdf->SetTitle("Receipt for ".$students_names." Reg No. ".$student_admission_no.".");
@@ -14724,7 +14727,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         // space between
         $y = $pdf->GetY();
         $pdf->Image($school_profile_image, 5, $y, 20, 20);
-        $pdf->Image($pdf->arm_of_gov, 100, $y+5, 12, 12);
+        // $pdf->Image($pdf->arm_of_gov, 100, $y+5, 12, 12);
         $pdf->SetFont('Helvetica', 'B', 14);
         $pdf->SetFillColor(100, 100, 100);
         $pdf->Cell(20, 10, "", 0, 0, "L", false);
@@ -15001,8 +15004,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $school_contact = $school_info['school_contact'];
         $website_name = $school_info['website_name'];
 
-        $pdf->Image($school_profile_image, 5, 10, 20, 20);
-        $pdf->Image($pdf->arm_of_gov, 100, 15, 12, 12);
+        $pdf->Image($school_profile_image, 5, 10, 40, 40);
+        // $pdf->Image($pdf->arm_of_gov, 100, 15, 12, 12);
         $pdf->SetFont('Helvetica', 'B', 14);
         $pdf->SetFillColor(100, 100, 100);
         $pdf->SetTitle("Payment Voucher for ".$students_names." Reg No. ".$student_admission_no.".");
@@ -15177,7 +15180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         // space between
         $y = $pdf->GetY();
         $pdf->Image($school_profile_image, 5, $y, 20, 20);
-        $pdf->Image($pdf->arm_of_gov, 100, $y+5, 12, 12);
+        // $pdf->Image($pdf->arm_of_gov, 100, $y+5, 12, 12);
         $pdf->SetFont('Helvetica', 'B', 14);
         $pdf->SetFillColor(100, 100, 100);
         $pdf->Cell(20, 10, "", 0, 0, "L", false);
