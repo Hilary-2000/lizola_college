@@ -630,6 +630,7 @@ function voterHeads(classin,student_id) {
                             }
                         }
                         console.log(total_fees);
+                        cObj("amount3").value = total_fees;
                         cObj("amount2").value = total_fees;
                         cObj("amount1").value = total_fees;
                     });

@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <p><b>Fees Paid as of <span id="current_term2"></span>:</b></p>
+                                            <p><b>Fees Paid <!--as of <span id="current_term2"></span>-->:</b></p>
                                         </div>
                                         <div class="col-md-6">
                                             <p id="fees_paid_this_term">Kes 10,000</p>
@@ -168,7 +168,7 @@
                                             <p id="total_paid_fees">Kes 56,000</p>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row d-none">
                                         <div class="col-md-6">
                                             <p><b>Transport Enrolled:</b></p>
                                         </div>
@@ -176,7 +176,7 @@
                                             <p id="transport_enrolled_std_infor">Yes</p>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row d-none">
                                         <div class="col-md-6">
                                             <p><b>Boarding Enrolled:</b></p>
                                         </div>
@@ -293,6 +293,14 @@
                                         <option value="1">Automated</option>
                                         <option value="0">Manual</option>
                                     </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="edit_student_contacts"><b>Student contacts:</b></label><br>
+                                    <input type="number" class="form-control w-100" name="edit_student_contacts" id="edit_student_contacts" placeholder="Kenyan contacts only">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="edit_student_email"><b>Student email:</b></label>
+                                    <input type="email" class="form-control w-100" name="edit_student_email" id="edit_student_email" placeholder = "Enter email">
                                 </div>
                             </div>
                             <div class="form-control d-flex flex-wrap my-2 rounded form-group row">

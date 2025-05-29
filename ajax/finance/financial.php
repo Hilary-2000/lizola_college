@@ -404,10 +404,14 @@
                         $phone_number = getPhoneNumber($conn2,$studadmin);
                         if ($phone_number != 0) {
                             if ($send_sms == "first_parent") {
-                                $phone_number = explode(",",$phone_number)[0];
-                            }else if ($send_sms == "second_parent") {
                                 $phone_number = explode(",",$phone_number)[1];
+                            }else if ($send_sms == "second_parent") {
+                                $phone_number = explode(",",$phone_number)[2];
+                            }elseif ($send_sms == "student_contact") {
+                                $phone_number = explode(",",$phone_number)[0];
                             }elseif ($send_sms == "both_parent") {
+                                $phone_number = explode(",",$phone_number)[1].",".explode(",",$phone_number)[2];
+                            }elseif ($send_sms == "all_three") {
                                 $phone_number = $phone_number;
                             }else {
                                 $phone_number = "";
@@ -8458,14 +8462,14 @@
         return 0;
     }
     function getPhoneNumber($conn2,$stud_id){
-        $select = "SELECT `parentContacts`,`parent_contact2` FROM `student_data` WHERE `adm_no` = ?";
+        $select = "SELECT `student_contact`, `parentContacts`,`parent_contact2` FROM `student_data` WHERE `adm_no` = ?";
         $stmt = $conn2->prepare($select);
         $stmt->bind_param("s",$stud_id);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result) {
             if ($row = $result->fetch_assoc()) {
-                return $row['parentContacts'].",".$row['parent_contact2'];
+                return $row['student_contact'].",".$row['parentContacts'].",".$row['parent_contact2'];
             }
         }
         return 0;

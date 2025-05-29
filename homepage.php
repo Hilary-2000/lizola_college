@@ -658,9 +658,11 @@ function checkPresnt($array, $string){
                     <!-- <input type="checkbox" id="check-parents-sms">  -->
                     <select class="form-control p-1" name="check-parents-sms" id="check-parents-sms">
                         <option value="" hidden>Select who to send SMS</option>
+                        <option value="student_contact">Student</option>
                         <option value="first_parent">Primary Parent</option>
                         <option value="second_parent">Second Parent</option>
                         <option value="both_parent">Both Parent</option>
+                        <option value="all_three">All Three</option>
                         <option value="none">None</option>
                     </select>
                 </p>
@@ -2012,10 +2014,10 @@ function checkPresnt($array, $string){
         </div>
         <div class="confirmpaymentwindow hide" id='change_last_academic_windows'>
             <div class="confirmpayment animate">
-                <h5 class="text-center">Change Last Academic Year Balance <img src="images/ajax_clock_small.gif" class="hide" id="change_balance_loaders"></h5>
+                <h5 class="text-center">Change Balance Carry Forward <img src="images/ajax_clock_small.gif" class="hide" id="change_balance_loaders"></h5>
                 <input type="hidden" name="students_admission_number" id="students_admission_number">
                 <label for="new_last_acad_bal" class="form-control-label text-bold">New balance</label>
-                <input type="number" class="form-control" id="new_last_acad_bal" placeholder="New last academic year balance">
+                <input type="number" class="form-control" id="new_last_acad_bal" placeholder="New Balance Carry Forward">
                 <p id="men_in_out"></p>
                 <div class="btns">
                     <button type='button' id='accept_last_yr_acad_bal'>Save</button>

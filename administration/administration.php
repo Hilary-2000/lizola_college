@@ -58,6 +58,10 @@
                         <input type="date" name="dob" id="dob" max = <?php echo date("Y-m-d",strtotime("-1 years"))?> value = <?php echo date("Y-m-d",strtotime("-2 years"))?>>
                     </div>
                     <div class="conts">
+                        <label class="form-control-label" for="doa">Select Date Of Admission:<span style = 'color:red;'>*</span><br></label>
+                        <input type="date" name="doa" id="doa"value = <?php echo date("Y-m-d")?>>
+                    </div>
+                    <div class="conts">
                         <label for="gender">Select gender:<span style = 'color:red;'>*</span><br></label>
                         <select name="gender" id="gender">
                             <option value="" hidden >Select..</option>
@@ -140,12 +144,24 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <p class="text-danger"><strong>Parent / Guardian information</strong></p>
+                    <p class="text-danger"><strong>Student Contacts</strong></p>
                     <!-- The first parent -->
-                    <p style="color:maroon;font-size:12px;"><u>Primary Parent / Guardian</u></p>
+                    <p style="color:maroon;font-size:12px;"><u>Student Contact Information</u></p>
+                    <div class="conts">
+                        <label for="student_contacts">Student contacts:<span style = 'color:blue;'>*</span> <span class="examples"> eg 0712345678 (Kenyan only) </span></label><br>
+                        <input type="number" name="student_contacts" id="student_contacts" placeholder="Kenyan contacts only">
+                    </div>
+                    <div class="conts">
+                        <label for="student_email">Student email: <span class="examples"> eg esmond@gmail.com</span></label>
+                        <input type="email" name="student_email" id="student_email" placeholder = "Enter email">
+                    </div>
+                    <hr class="p-0">
+                    <p class="text-danger"><strong>Guardian / Parent information</strong></p>
+                    <!-- The first parent -->
+                    <p style="color:maroon;font-size:12px;"><u>Primary Parent Contact Information</u></p>
                     <div class="conts">
                         <label for="parname">Primary Parent name:<span style = 'color:blue;'>*</span> <span class="examples"> eg Esmond Bwire</span></label><br>
-                        <input type="text" name="parname" id="parname" placeholder="Parent name">
+                        <input type="text" name="parname" id="parname" placeholder="Primary Parent name">
                     </div>
                     <div class="conts">
                         <label for="parconts">Primary Parent contacts:<span style = 'color:blue;'>*</span> <span class="examples"> eg 0712345678 (Kenyan only) </span></label><br>

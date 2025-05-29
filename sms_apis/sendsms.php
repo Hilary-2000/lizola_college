@@ -184,7 +184,9 @@
                         <label for="send_to_whom" class="form-control-label">Send to whom?</label>
                         <select name="send_to_whom" id="send_to_whom" class="form-control">
                             <option value="" hidden >Select an option</option>
+                            <option value="all_three">All Three</option>
                             <option value="both">Both Parents</option>
+                            <option value="student_contact">Student Only</option>
                             <option value="primary">Primary Parent</option>
                             <option value="secondary">Secondary Parent</option>
                         </select>

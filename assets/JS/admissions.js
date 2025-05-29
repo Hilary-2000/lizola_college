@@ -2824,7 +2824,7 @@ function tablebtnlistener() {
 
                     // fees summary
                     cObj("current_term").innerHTML = splitdata[33];
-                    cObj("current_term2").innerHTML = splitdata[33];
+                    // cObj("current_term2").innerHTML = splitdata[33];
                     cObj("total_amount_to_pay").innerHTML = splitdata[30];
                     cObj("lastyr_fees_balance").innerHTML = splitdata[29];
                     cObj("fees_paid_this_term").innerHTML = splitdata[28];
@@ -2882,26 +2882,7 @@ function tablebtnlistener() {
 
                     // proceed and make the table that will show the course history of the kid.
                     let course_history = splitdata[42];
-
-                    // course history is null
-                    if(course_history != null){
-                        // display that in the table.
-                        var data_to_display = "<h4 class='text-center'>Course Progress <input id='course_level_value' hidden value='"+JSON.stringify(splitdata[43])+"'></h4><table class='table'><tr><th>Course Level</th><th>Course Name</th><th>Module Terms</th><th>Status</th><th>period</th></tr>";
-                        data_to_display+="<tr><td rowspan='"+course_history.module_terms.length+"' style='vertical-align: middle;'><b>"+course_history.course_level_name+"</b></td><td rowspan='"+course_history.module_terms.length+"' style='vertical-align: middle;'><b>"+course_history.course_name+"</b></td><td>"+course_history.module_terms[0].term_name+"</td><td><label class='form-control-label' for='checked1' >Status : </label> <select class='form-control select_options' id='select_option_0'><option value='' hidden>Select Option</option><option value='0' "+(course_history.module_terms[0].status == 0 ? "selected" : "")+">In-Active</option><option "+(course_history.module_terms[0].status == 1 ? "selected" : "")+" value='1'>Active</option><option "+(course_history.module_terms[0].status == 2 ? "selected" : "")+" value='2'>Completed</option></select></td><td>"+(course_history.module_terms[0].start_date.length > 0 ? "Start Date : "+"<b>"+formatDate_1(course_history.module_terms[0].start_date)+"</b>"+"<br>End Date : "+"<b>"+formatDate_1(course_history.module_terms[0].end_date)+"</b>" : "In-Active") +"</td></tr>";
-
-                        // loop through the data
-                        for (let index = 1; index < course_history.module_terms.length; index++) {
-                            const element = course_history.module_terms[index];
-                            let delete_button = (index == (course_history.module_terms.length-1)) ? "<span class='btn btn-sm btn-outline-danger' id='delete_course_term_module'><i class='fa fa-trash'></i> Del</span>" : "";
-                            data_to_display+="<tr><td>"+course_history.module_terms[index].term_name+"<br>"+delete_button+"</td><td><label class='form-control-label' for='select_option_1' >Status : </label> <select class='form-control select_options' id='select_option_"+index+"'><option value='' hidden>Select Option</option><option value='0' "+(course_history.module_terms[index].status == 0 ? "selected" : "")+">In-Active</option><option "+(course_history.module_terms[index].status == 1 ? "selected" : "")+" value='1'>Active</option><option "+(course_history.module_terms[index].status == 2 ? "selected" : "")+" value='2'>Completed</option></select></td><td>"+(course_history.module_terms[index].start_date.length > 0 ? "Start Date : "+"<b>"+formatDate_1(course_history.module_terms[index].start_date)+"</b>"+"<br>End Date : "+"<b>"+formatDate_1(course_history.module_terms[index].end_date)+"</b>" : "In-Active") +"</td></tr>";
-                        }
-                        data_to_display += "</table>";
-
-                        // diplay the data of the course
-                        cObj("course_details_display").innerHTML = data_to_display;
-                    }else{
-                        cObj("course_details_display").innerHTML = "<h4 class='text-center'>Course Progress</h4><p class='text-danger text-center'>Your course progress will appear here!</p>";
-                    }
+                    display_course_list_table(course_history, splitdata[43]);
 
                     // intake month
                     var intake_year_edit = cObj("intake_year_edit").children;
@@ -2921,30 +2902,6 @@ function tablebtnlistener() {
                         }
                     }
                     
-                    if(cObj("delete_course_term_module") != undefined){
-                        cObj("delete_course_term_module").addEventListener("click", function () {
-                            var datapass = "delete_course_module=true&admission_number="+valObj("adminnos");
-                            sendDataPost("POST","ajax/administration/admissions.php", datapass, cObj("error_handler_course_progress"), cObj("save_course_progress_loader"));
-                            setTimeout(() => {
-                                var timeout = 0;
-                                var ids = setInterval(() => {
-                                    timeout++;
-                                    //after two minutes of slow connection the next process wont be executed
-                                    if (timeout == 1200) {
-                                        stopInterval(ids);
-                                    }
-                                    if (cObj("save_course_progress_loader").classList.contains("hide")) {
-                                        cObj("view"+valObj("adminnos")).click();
-                                        setTimeout(() => {
-                                            cObj("error_handler_course_progress").innerHTML = "";
-                                        }, 3000);
-                                        stopInterval(ids);
-                                    }
-                                }, 100);
-                            }, 200);
-                        });
-                    }
-                    
                     var course_progress_children = cObj("course_progress").children;
                     for (let index = 0; index < course_progress_children.length; index++) {
                         const element = course_progress_children[index];
@@ -2954,6 +2911,8 @@ function tablebtnlistener() {
                     }
 
                     cObj("lastyr_fees_balance").innerText = "Kes "+splitdata[47];
+                    cObj("edit_student_contacts").value = splitdata[48];
+                    cObj("edit_student_email").value = splitdata[49];
                 }
                 stopInterval(ids);
             }
@@ -2961,6 +2920,128 @@ function tablebtnlistener() {
     }, 200);
 }
 
+function display_course_list_table(course_history, json_data) {
+    // course history is null
+    if(course_history != null){
+        // display that in the table.
+        var index = 0;
+        var start_date = course_history.module_terms[0].start_date.length > 0 ? formatDate_2(course_history.module_terms[0].start_date) : "";
+        var end_date = course_history.module_terms[0].end_date.length > 0 ? formatDate_2(course_history.module_terms[0].end_date) : "";
+        var data_status = course_history.module_terms[0].status != 1 ? "d-none" : "";
+        var start_date_end_date = "<div class='row mt-1 "+data_status+"' id='start_date_end_date_window_"+index+"'><div class='col-md-9'><label class='form-control-label' for='start_date_"+index+"'><b>Start Date</b></label><input class='form-control start_date_selector' id='start_date_"+index+"' type='date' value='"+start_date+"'></div><div class='col-md-9 mt-1'><label class='form-control-label' for='end_date_"+index+"' ><b>End Date</b></label><input class='form-control end_date_selector' id='end_date_"+index+"' type='date' value='"+end_date+"'></div></div>";
+        var data_to_display = "<h4 class='text-center'>Course Progress <input id='course_level_invalue' hidden value='"+JSON.stringify(course_history)+"'><input id='course_level_value' hidden value='"+JSON.stringify(json_data)+"'></h4><table class='table'><tr><th>Course Level</th><th>Course Name</th><th>Module Terms</th><th>Status</th><th>period</th></tr>";
+        data_to_display+="<tr><td rowspan='"+course_history.module_terms.length+"' style='vertical-align: middle;'><b>"+course_history.course_level_name+"</b></td><td rowspan='"+course_history.module_terms.length+"' style='vertical-align: middle;'><b>"+course_history.course_name+"</b></td><td>"+course_history.module_terms[0].term_name+"</td><td><label class='form-control-label' for='checked1' >Status : </label> <select class='form-control select_options' id='select_option_0'><option value='' hidden>Select Option</option><option value='0' "+(course_history.module_terms[0].status == 0 ? "selected" : "")+">In-Active</option><option "+(course_history.module_terms[0].status == 1 ? "selected" : "")+" value='1'>Active</option><option "+(course_history.module_terms[0].status == 2 ? "selected" : "")+" value='2'>Completed</option></select>"+start_date_end_date+"</td><td>"+(course_history.module_terms[0].start_date.length > 0 ? "Start Date : "+"<b>"+formatDate_1(course_history.module_terms[0].start_date)+"</b>"+"<br>End Date : "+"<b>"+formatDate_1(course_history.module_terms[0].end_date)+"</b>" : "In-Active") +"</td></tr>";
+
+        // loop through the data
+        for (let index = 1; index < course_history.module_terms.length; index++) {
+            const element = course_history.module_terms[index];
+            var start_date = course_history.module_terms[index].start_date.length > 0 ? formatDate_2(course_history.module_terms[index].start_date) : "";
+            var end_date = course_history.module_terms[index].end_date.length > 0 ? formatDate_2(course_history.module_terms[index].end_date) : "";
+            var data_status = course_history.module_terms[index].status != 1 ? "d-none" : "";
+            var start_date_end_date = "<div class='row mt-1 "+data_status+"' id='start_date_end_date_window_"+index+"'><div class='col-md-9'><label class='form-control-label' for='start_date_"+index+"'><b>Start Date</b></label><input class='form-control start_date_selector' id='start_date_"+index+"' type='date' value='"+start_date+"'></div><div class='col-md-9 mt-1'><label class='form-control-label' for='end_date_"+index+"' ><b>End Date</b></label><input class='form-control end_date_selector' id='end_date_"+index+"' type='date' value='"+end_date+"'></div></div>";
+            let delete_button = (index == (course_history.module_terms.length-1)) ? "<span class='btn btn-sm btn-outline-danger' id='delete_course_term_module'><i class='fa fa-trash'></i> Del</span>" : "";
+            data_to_display+="<tr><td>"+course_history.module_terms[index].term_name+"<br>"+delete_button+"</td><td><label class='form-control-label' for='select_option_1' >Status : </label> <select class='form-control select_options' id='select_option_"+index+"'><option value='' hidden>Select Option</option><option value='0' "+(course_history.module_terms[index].status == 0 ? "selected" : "")+">In-Active</option><option "+(course_history.module_terms[index].status == 1 ? "selected" : "")+" value='1'>Active</option><option "+(course_history.module_terms[index].status == 2 ? "selected" : "")+" value='2'>Completed</option></select>"+start_date_end_date+"</td><td>"+(course_history.module_terms[index].start_date.length > 0 ? "Start Date : "+"<b>"+formatDate_1(course_history.module_terms[index].start_date)+"</b>"+"<br>End Date : "+"<b>"+formatDate_1(course_history.module_terms[index].end_date)+"</b>" : "In-Active") +"</td></tr>";
+        }
+        data_to_display += "</table>";
+
+        // diplay the data of the course
+        cObj("course_details_display").innerHTML = data_to_display;
+    }else{
+        cObj("course_details_display").innerHTML = "<h4 class='text-center'>Course Progress</h4><p class='text-danger text-center'>Your course progress will appear here!</p>";
+    }
+                    
+    if(cObj("delete_course_term_module") != undefined){
+        cObj("delete_course_term_module").addEventListener("click", function () {
+            var datapass = "delete_course_module=true&admission_number="+valObj("adminnos");
+            sendDataPost("POST","ajax/administration/admissions.php", datapass, cObj("error_handler_course_progress"), cObj("save_course_progress_loader"));
+            setTimeout(() => {
+                var timeout = 0;
+                var ids = setInterval(() => {
+                    timeout++;
+                    //after two minutes of slow connection the next process wont be executed
+                    if (timeout == 1200) {
+                        stopInterval(ids);
+                    }
+                    if (cObj("save_course_progress_loader").classList.contains("hide")) {
+                        cObj("view"+valObj("adminnos")).click();
+                        setTimeout(() => {
+                            cObj("error_handler_course_progress").innerHTML = "";
+                        }, 3000);
+                        stopInterval(ids);
+                    }
+                }, 100);
+            }, 200);
+        });
+    }
+
+    var select_options = document.getElementsByClassName("select_options");
+    for (let index = 0; index < select_options.length; index++) {
+        const element = select_options[index];
+        element.addEventListener("change", function () {
+            var course_level_invalue = cObj("course_level_invalue").value;
+            var default_date_set = false;
+            if (hasJsonStructure(course_level_invalue)) {
+                var course_list = JSON.parse(course_level_invalue);
+                var module_terms = course_list.module_terms;
+                for (let ind = 0; ind < module_terms.length; ind++) {
+                    const elem = module_terms[ind];
+                    if (ind == element.id.substring(14) && elem.start_date != "" && elem.end_date != "") {
+                        default_date_set = true;
+                    }
+                }
+            }
+            if (element.value == 1 && default_date_set) {
+                cObj("start_date_end_date_window_"+element.id.substring(14)).classList.remove("d-none");
+            }else{
+                cObj("start_date_end_date_window_"+element.id.substring(14)).classList.add("d-none");
+            }
+        });
+    }
+
+    var start_date_selector = document.getElementsByClassName("start_date_selector");
+    for (let index = 0; index < start_date_selector.length; index++) {
+        const element = start_date_selector[index];
+        element.addEventListener("change", function () {
+            var course_level_value = cObj("course_level_invalue").value;
+            if (hasJsonStructure(course_level_value)) {
+                var course_levels = JSON.parse(course_level_value);
+                var module_terms = course_levels.module_terms;
+                for (let ind = 0; ind < module_terms.length; ind++) {
+                    const elem = module_terms[ind];
+                    if (ind == element.id.substring(11)) {
+                        let date = element.value.replace(/-/g, "")+elem.start_date.substring(8);
+                        module_terms[ind].start_date = date;
+                        json_data.module_terms[ind].start_date = date;
+                    }
+                }
+                cObj("course_level_value").value = JSON.stringify(json_data);
+                display_course_list_table(course_levels, json_data);
+            }
+        });
+    }
+
+    var end_date_selector = document.getElementsByClassName("end_date_selector");
+    for (let index = 0; index < end_date_selector.length; index++) {
+        const element = end_date_selector[index];
+        element.addEventListener("change", function () {
+            var course_level_value = cObj("course_level_invalue").value;
+            if (hasJsonStructure(course_level_value)) {
+                var course_levels = JSON.parse(course_level_value);
+                var module_terms = course_levels.module_terms;
+                for (let ind = 0; ind < module_terms.length; ind++) {
+                    const elem = module_terms[ind];
+                    if (ind == element.id.substring(9)) {
+                        let date = element.value.replace(/-/g, "")+elem.end_date.substring(8);
+                        module_terms[ind].end_date = date;
+                        json_data.module_terms[ind].end_date = date;
+                    }
+                }
+                cObj("course_level_value").value = JSON.stringify(json_data);
+                display_course_list_table(course_levels, json_data);
+            }
+        });
+    }
+}
 cObj("save_course_progress").onclick = function () {
     if (cObj("course_level_value") != undefined) {
         var course_level_value = hasJsonStructure(valObj("course_level_value")) ? JSON.parse(valObj("course_level_value")) : [];
@@ -3268,6 +3349,8 @@ cObj("updatestudinfor").onclick = function () {
                 var doas = valObj("doas");
                 var reason_for_leaving = valObj("reason_for_leaving_desc");
                 var course_chosen = valObj("course_chosen_edit");
+                var edit_student_contacts = cObj("edit_student_contacts").value;
+                var edit_student_email = cObj("edit_student_email").value;
 
                 // var previous course
                 var course_level_hidden = valObj("course_level_hidden");
@@ -3290,6 +3373,7 @@ cObj("updatestudinfor").onclick = function () {
                 datapass += "&occupation1=" + occupation1 + "&occupation2=" + occupation2 + "&medical_history=" + medical_history + "&clubs_in_sporters=" + clubs_in_sporters + "&previous_schools=" + previous_schools + "&doas=" + doas;
                 datapass += "&reason_for_leaving=" + reason_for_leaving+"&course_chosen="+course_chosen+"&course_level_hidden="+course_level_hidden+"&course_chosen_level_hidden="+course_chosen_level_hidden+"&existing_course_details="+existing_course;
                 datapass += "&intake_year_edit="+intake_year_edit+"&intake_month_edit="+intake_month_edit+"&course_progress="+course_progress;
+                datapass += "&student_contacts="+edit_student_contacts+"&student_email="+edit_student_email
                 cObj("updateerrors").innerHTML = "";
                 sendData1("GET", "administration/admissions.php", datapass, cObj("updateerrors"));
                 setTimeout(() => {
@@ -3681,6 +3765,7 @@ cObj("submitbtn").onclick = function () {
                 var fname = valObj('fname');
                 var sname = valObj('sname');
                 var dob = valObj('dob');
+                var doa = valObj("doa");
                 var gender = valObj('gender');
                 var errolment = valObj('errolment');
                 var parname = valObj('parname');
@@ -3697,6 +3782,8 @@ cObj("submitbtn").onclick = function () {
                 var bcno = valObj('bcno');
                 var address = valObj('address');
                 var upis = valObj("upis");
+                var student_contacts = valObj("student_contacts");
+                var student_email = valObj("student_email");
                 var last_year_academic_balance = valObj("last_year_academic_balance");
                 var admno = "";
                 if (valObj("automated_amd") == "insertmanually") {
@@ -3709,11 +3796,12 @@ cObj("submitbtn").onclick = function () {
                 var parent_accupation1 = valObj("parent_accupation1").trim().length > 0 ? valObj("parent_accupation1").trim() : "none";
                 var parent_accupation2 = valObj("parent_accupation2").trim().length > 0 ? valObj("parent_accupation2").trim() : "none";
     
-                var datapass = "admit=true&surname=" + surname + "&fname=" + fname + "&sname=" + sname + "&dob=" + dob + "&gender=" + gender + "&enrolment=" + errolment + "&parentname=" + parname + "&parentconts=" + parconts + "&upis=" + upis;
+                var datapass = "admit=true&surname=" + surname + "&fname=" + fname + "&sname=" + sname +"&doa="+ doa +"&dob=" + dob + "&gender=" + gender + "&enrolment=" + errolment + "&parentname=" + parname + "&parentconts=" + parconts + "&upis=" + upis;
                 datapass += "&parentrela=" + parrelation + "&pemail=" + pemail + "&bcno=" + bcno + "&address=" + address + "&admnos=" + admno;
                 datapass += "&parentrela2=" + parrelation2 + "&pemail2=" + pemail2 + "&parentname2=" + parname2 + "&parentconts2=" + parconts2;
                 datapass += "&parent_accupation1=" + parent_accupation1 + "&parent_accupation2=" + parent_accupation2 + "&last_year_academic_balance=" + last_year_academic_balance;
                 datapass += "&course_chosen="+course_chosen+"&adm_option="+valObj("automated_amd");
+                datapass += "&student_contacts="+student_contacts+"&student_email="+student_email;
                 datapass += "&intake_year="+valObj("intake_year")+"&intake_month="+valObj("intake_month")+"&course_module_terms="+valObj("course_module_terms");
                 sendDataPost("POST", "ajax/administration/admissions.php", datapass, cObj("erroradm"),cObj("loadings"));
                 setTimeout(() => {
@@ -9102,6 +9190,17 @@ cObj("update_departments").onclick = function () {
             }, 100);
         }, 100);
     }
+}
+
+function formatDate_2(dateString) {
+    // Parse the input date string
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6); // Months are zero-based
+    const day = dateString.substring(6, 8);
+    const hour = parseInt(dateString.substring(8, 10));
+    const minute = parseInt(dateString.substring(10, 12));
+    const second = parseInt(dateString.substring(12, 14));
+    return year+"-"+month+"-"+day;
 }
 
 function formatDate_1(dateString) {

@@ -806,21 +806,30 @@
                 for ($index=0; $index < count($student_data); $index++) {
                     $primary_parent = $student_data[$index]['parentContacts'];
                     $secondary_parent = $student_data[$index]['parent_contact2'];
+                    $student_contact = $student_data[$index]['student_contact'];
                     $phone_number = null;
                     $message_count = 0;
                     $number_collection = [];
                     if ($which_parent == "both") {
                         $phone_number = $primary_parent.",".$secondary_parent;
                         $message_count = 2;
-                        array_push($number_collection,$primary_parent,$secondary_parent);
+                        array_push($number_collection,$phone_number);
                     }elseif ($which_parent == "primary") {
                         $phone_number = $primary_parent;
-                        array_push($number_collection,$primary_parent);
+                        array_push($number_collection,$phone_number);
                         $message_count = 1;
                     }elseif ($which_parent == "secondary") {
                         $phone_number = $secondary_parent;
-                        array_push($number_collection,$secondary_parent);
+                        array_push($number_collection,$phone_number);
                         $message_count = 1;
+                    }elseif ($which_parent == "student_contact") {
+                        $phone_number = $student_contact;
+                        array_push($number_collection,$phone_number);
+                        $message_count = 1;
+                    }elseif ($which_parent == "all_three") {
+                        $phone_number = $primary_parent.",".$secondary_parent.",".$student_contact;
+                        array_push($number_collection,$phone_number);
+                        $message_count = 3;
                     }else {
                         $phone_number = $primary_parent;
                         $message_count = 1;
@@ -828,15 +837,15 @@
                     if (checkPresnt($xeploded_data,$student_data[$index]['adm_no']) == 1) {
                         // process message
                         $message = $_GET['messages'];
-                        if ($which_parent == "both") {
+                        if ($which_parent == "both" || $which_parent == "all_three") {
                             $phone_number = explode(",",$phone_number);
                             $message1 = process_sms($student_data,$message,$student_data[$index]['adm_no'],$conn2,"primary");
                             $message2 = process_sms($student_data,$message,$student_data[$index]['adm_no'],$conn2,"secondary");
-                            // echo "<br>".$message1."<br>". $message2;
+                            $phone_number_1_3 = $which_parent == "both" ? $phone_number[0] : $phone_number[0].",".$phone_number[2];
                             
                             // SEND MESSAGE TO THE FIRST PARENT
-                            //send message to the numbers
-                            $output_name = sendSmsToClient($phone_number[0],$message1,$api_key,$partnerID,$shortcodes, $send_sms_url);
+                            $output_name = sendSmsToClient($phone_number_1_3,$message1,$api_key,$partnerID,$shortcodes, $send_sms_url);
+                            
                             //echo $output_name;
                             $json = json_decode($output_name);
                             if (strlen($output_name) > 0) {
@@ -863,7 +872,6 @@
                             // SEND MESSAGE TO THE SECOND PARENT
                             //send message to the numbers
                             $output_name = sendSmsToClient($phone_number[1],$message2,$api_key,$partnerID,$shortcodes, $send_sms_url);
-                            //echo $output_name;
                             $json = json_decode($output_name);
                             if (strlen($output_name) > 0) {
                                 try {
@@ -885,6 +893,7 @@
                                     break;
                                 } */
                             }
+
                             // save the data in the database
                             $insert = "INSERT INTO `sms_table` (`message_count`,`date_sent`,`message_sent_succesfully`,`message_undelivered`,`message_type`,`message_description`,`sender_no`,`message`,`number_collection`) VALUES (?,?,?,?,?,?,?,?,?)";
                             $stmt = $conn2->prepare($insert);
@@ -927,6 +936,7 @@
                                     break;
                                 } */
                             }
+
                             // save the data in the database
                             $insert = "INSERT INTO `sms_table` (`message_count`,`date_sent`,`message_sent_succesfully`,`message_undelivered`,`message_type`,`message_description`,`sender_no`,`message`,`number_collection`) VALUES (?,?,?,?,?,?,?,?,?)";
                             $stmt = $conn2->prepare($insert);
