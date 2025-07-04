@@ -57,22 +57,22 @@
                 "id": 1,
                 "term_name": "MODULE 1",
                 "status": 2,
-                "start_date": "20250511173658",
-                "end_date": "20250811173658",
+                "start_date": "20250501173658",
+                "end_date": "20250601173658",
                 "termly_cost": 9000
             },
             {
                 "id": 2,
                 "term_name": "MODULE 2",
                 "status": 1,
-                "start_date": "20250512130144",
-                "end_date": "20250612130144",
+                "start_date": "20250614115529",
+                "end_date": "20250714115529",
                 "termly_cost": 9000
             },
             {
                 "id": 3,
                 "term_name": "MODULE 3",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "termly_cost": 9000
