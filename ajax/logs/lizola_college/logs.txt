@@ -1,3 +1,26 @@
+24th Jul 2025 20:10:34PM : Role "Accountant" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 20:09:56PM : HILLARY NGIGE successfully logged into the system as Principal - {HILLARY NGIGE}
+24th Jul 2025 20:08:43PM : JAMES MUGOH successfully logged into the system as Accountant - {JAMES MUGOH}
+24th Jul 2025 20:07:16PM : Registration of JAMES MUGOH as <b>Accountant</b> has been done successfully - {HILLARY NGIGE}
+24th Jul 2025 20:06:18PM : Role "Accountant" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 20:01:47PM : Role "Supplier" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 19:56:19PM : Role "Accountant" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 19:54:31PM : Role "Accountant" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 19:53:56PM : Role "Supplier" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 15:02:55PM : Role "Supplier" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 15:02:48PM : Role "Supplier" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 15:02:40PM : Role "Supplier" has been added successfully! - {HILLARY NGIGE}
+24th Jul 2025 15:01:43PM : Role "New Role" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 14:05:26PM : Role "New Role" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 14:05:18PM : Role "New Role" has been added successfully! - {HILLARY NGIGE}
+24th Jul 2025 13:09:13PM : Role "Users" has been added successfully! - {HILLARY NGIGE}
+24th Jul 2025 13:08:15PM : Role "User Roles" has been added successfully! - {HILLARY NGIGE}
+24th Jul 2025 13:05:09PM : Role "User Role" has been added successfully! - {HILLARY NGIGE}
+24th Jul 2025 12:17:45PM : Role "Accountant" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 12:17:35PM : Role "Accountant" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 12:13:29PM : Role "Accountant" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 12:02:14PM : Role "Accountant" has been updated successfully! - {HILLARY NGIGE}
+24th Jul 2025 08:25:44AM : HILLARY NGIGE successfully logged into the system as Principal - {HILLARY NGIGE}
 14th Jun 2025 10:54:11AM : HILLARY NGIGE successfully logged into the system as Principal - {HILLARY NGIGE}
 29th May 2025 11:45:17AM : Mercy Kyalo - of Reg No. (LC-2025-5) data has been updated successfully! - {HILLARY NGIGE}
 29th May 2025 11:09:10AM : Transaction for "Mercy Kyalo" Reg No "LC-2025-5" has been completed successfully! - {HILLARY NGIGE}

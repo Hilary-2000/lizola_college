@@ -1057,11 +1057,11 @@
             if (strlen($clubs_sports) > 0) {
                 // decode it to json data
                 $clubs_data = json_decode($clubs_sports);
-                $data_to_display = "<table class='table'><tr><th>No.</th><th>Sports House / Clubs</th><th>Options</th></tr>";
+                $data_to_display = "<table class='table' id='department-club-table'><thead><tr><th>No.</th><th>Sports House / Clubs</th><th>Options</th></tr></thead><tbody>";
                 for ($indexed=0; $indexed < count($clubs_data); $indexed++) { 
                     $data_to_display.="<tr><td>".($indexed+1)."</td><td id='club_named".$clubs_data[$indexed]->id."'>".$clubs_data[$indexed]->Name."</td><td><span class='link edit_clubs' id='edit_clubs".$clubs_data[$indexed]->id."' ><i class='fa fa-pen'></i> Edit</span> <span class='link delete_clubs' id='delete_clubs".$clubs_data[$indexed]->id."'><i class='fa fa-trash'></i> Delete</span></td></tr>";
                 }
-                $data_to_display.="</table>";
+                $data_to_display.="</tbody></table>";
                 echo $data_to_display;
             }else {
                 "<p class = 'text-danger'>There are no clubs at the momment!</p>";
@@ -2206,12 +2206,12 @@
                     $class_list = isJson_report($row['valued']) ? json_decode($row['valued']) : [];
                     if (count($class_list) > 0) {
                         // create the data to display
-                        $data_to_display.="<div class='w-100 tableme'><div class='table_holder'><table class='table'><tr>
+                        $data_to_display.="<div class='w-100 tableme'><div class='table_holder'><table class='table' id='course-list-table-1'><thead><tr>
                                 <th>No.</th>
                                 <th>Class</th>
                                 <th>Arrange</th>
                                 <th>Options</th>
-                            </tr>";
+                            </tr></thead><tbody>";
                         for ($index=0; $index < count($class_list); $index++) { 
                             $select_options = "";
                             for ($ind=0; $ind < count($class_list); $ind++) {
@@ -2232,7 +2232,7 @@
                                                 <td><span class='link remove_class mx-2' = id='clm".$class_list[$index]->id."' style='font-size:12px; color:brown;'><i class='fa fa-trash'></i></span><span class='link change_classes' = id='change_classes".$class_list[$index]->id."' style='font-size:12px; color:brown;'><i class='fa fa-pen-fancy'></i></span></td>
                                                 </tr>";
                         }
-                        $data_to_display.="</table></div></div>";
+                        $data_to_display.="</tbody></table></div></div>";
                     }else {
                         $data_to_display.="<p class='red_notice'>No classes to display!</p>";
                     }
@@ -2929,7 +2929,7 @@
                 if($row = $result->fetch_assoc()){
                     $course_list = isJson_report($row['valued']) ? json_decode($row['valued']) : [];
                     $data_to_display = "<div class='w-100 table_holder p-0'>
-                                            <table class='table'>
+                                            <table class='table' id='course-list-table'>
                                                 <thead>
                                                     <tr>
                                                         <th>No.</th>
@@ -4167,13 +4167,13 @@
                     $exp_cat = trim($row['valued']);
                     $expense_cats = $exp_cat;
                     if(isJson_report($exp_cat)){
-                        $data_to_display = "<table class='table'><tr><th>No.</th><th>Revenue Category.</th><th>Revenue Sub-Category.</th><th>Actions.</th></tr>";
+                        $data_to_display = "<table class='table' id='revenue-category-table'><thead><tr><th>No.</th><th>Revenue Category.</th><th>Revenue Sub-Category.</th><th>Actions.</th></tr></thead><tbody>";
                         // get if the name is used before
                         $exp_cats = json_decode($exp_cat);
                         for ($index=0; $index < count($exp_cats); $index++) {
                             $data_to_display.="<tr><td>".($index+1).".<input type='hidden' id='revenue_note_".$exp_cats[$index]->category_id."' value='".(isset($exp_cats[$index]->revenue_notes) ? $exp_cats[$index]->revenue_notes : "0")."'> <input type='hidden' id=expense_sub_category_".$exp_cats[$index]->category_id." value='".((isset($exp_cats[$index]->sub_categories) ? json_encode($exp_cats[$index]->sub_categories) : "[]"))."'> </td><td id='revenue_name_".$exp_cats[$index]->category_id."'>".$exp_cats[$index]->category_name."</td><td>".count($exp_cats[$index]->sub_categories)." Sub Categories</td><td><p><span class='mx-1 link edit_revenue_cat' id='edit_revenue_cat_".$exp_cats[$index]->category_id."'><i class='fas fa-pen-fancy'></i></span> <span class='mx-1 link delete_revenue_cat' id = 'delete_revenue_cat_".$exp_cats[$index]->category_id."'><i class='fas fa-trash'></i></span></p></td></tr>";
                         }
-                        $data_to_display .= "</table>";
+                        $data_to_display .= "</tbody></table>";
                     }
                 }
             }
@@ -4219,7 +4219,7 @@
             $result = $stmt->get_result();
             $data_to_display = "<p class='text-danger border border-danger my-2 p-2'>Add expense categories, they will appear here.</p>";
             if($result){
-                $data_to_display = "<table class='table'><tr><th>No.</th><th>Expense Category</th><th>Maximum Budget</th><th>Used Budget (%)</th><th>Expense Sub-Categories</th><th>Actions.</th></tr>";
+                $data_to_display = "<table class='table' id='expense-category-table'><thead><tr><th>No.</th><th>Expense Category</th><th>Maximum Budget</th><th>Used Budget (%)</th><th>Expense Sub-Categories</th><th>Actions.</th></tr></thead><tbody>";
                 $index = 1;
                 while($row = $result->fetch_assoc()){
                     $selected = "SELECT SUM(`exp_amount`) AS 'expense_amount' FROM `expenses` WHERE `exp_category` = '".$row['expense_id']."' AND `expense_date` BETWEEN '".$row['start_date']."' AND '".$row['end_date']."'";
@@ -4245,7 +4245,7 @@
                     $data_to_display.="<tr><td>".($index).". </td><td><input type='hidden' value='".$row_value."' id='exp_name_".$row['expense_id']."'>".$row['expense_name']."</td><td>Kes ".(number_format($row['expense_budget']))."</td><td>Kes ".number_format($used_amount)." (".$percentage.")</td><td>".$subcategories." subcategories</td><td><p><span class='mx-1 link edit_exp_cat' id='edit_exp_cat_".$row['expense_id']."'><i class='fas fa-pen-fancy'></i></span> <span class='mx-1 link delete_exp_cat' id = 'delete_exp_cat_".$row['expense_id']."'><i class='fas fa-trash'></i></span></p></td></tr>";
                     $index++;
                 }
-                $data_to_display .= "</table>";
+                $data_to_display .= "</tbody></table>";
             }
             echo $data_to_display;
         }

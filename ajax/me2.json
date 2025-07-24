@@ -1,105 +1,305 @@
 [
     {
-        "course_level": "10",
-        "course_name": "6",
-        "course_status": 2,
-        "id": 1,
-        "module_terms": [
+        "name": "Accountant",
+        "roles": [
             {
-                "id": 1,
-                "term_name": "MODULE 1",
-                "status": 2,
-                "start_date": "20250511171505",
-                "end_date": "20250611171505",
-                "termly_cost": 15000
+                "name": "admit_student",
+                "Status": "yes"
             },
             {
-                "id": 2,
-                "term_name": "MODULE 2",
-                "status": "0",
-                "start_date": "",
-                "end_date": "",
-                "termly_cost": 15000
+                "name": "manage_student",
+                "Status": "yes"
             },
             {
-                "id": 3,
-                "term_name": "MODULE 3",
-                "status": "0",
-                "start_date": "",
-                "end_date": "",
-                "termly_cost": 15000
+                "name": "register_staff",
+                "Status": "yes"
             },
             {
-                "id": 4,
-                "term_name": "MODULE 4",
-                "status": "0",
-                "start_date": "",
-                "end_date": "",
-                "termly_cost": 15000
+                "name": "manage_staff",
+                "Status": "yes"
             },
             {
-                "id": 5,
-                "term_name": "MODULE 5",
-                "status": "0",
-                "start_date": "",
-                "end_date": "",
-                "termly_cost": 15000
+                "name": "pay_fees",
+                "Status": "yes"
+            },
+            {
+                "name": "find_transaction",
+                "Status": "yes"
+            },
+            {
+                "name": "mpesa_transactions",
+                "Status": "yes"
+            },
+            {
+                "name": "fees_structure",
+                "Status": "yes"
+            },
+            {
+                "name": "expenses",
+                "Status": "yes"
+            },
+            {
+                "name": "asset_management",
+                "Status": "yes"
+            },
+            {
+                "name": "supplier_account",
+                "Status": "yes"
+            },
+            {
+                "name": "finance_report",
+                "Status": "yes"
+            },
+            {
+                "name": "sms_broadcast",
+                "Status": "no"
+            },
+            {
+                "name": "update_school_profile",
+                "Status": "no"
+            },
+            {
+                "name": "update_personal_profile",
+                "Status": "yes"
+            },
+            {
+                "name": "settings",
+                "Status": "no"
+            },
+            {
+                "name": "general_reports",
+                "Status": "no"
             }
         ]
     },
     {
-        "course_level": 1,
-        "course_name": "1",
-        "course_status": 1,
-        "id": 2,
-        "module_terms": [
+        "name": "Users",
+        "roles": [
             {
-                "id": 1,
-                "term_name": "MODULE 1",
-                "status": 2,
-                "start_date": "20250501173658",
-                "end_date": "20250601173658",
-                "termly_cost": 9000
+                "name": "admit_student",
+                "Status": "yes"
             },
             {
-                "id": 2,
-                "term_name": "MODULE 2",
-                "status": 1,
-                "start_date": "20250614115529",
-                "end_date": "20250714115529",
-                "termly_cost": 9000
+                "name": "manage_student",
+                "Status": "yes"
             },
             {
-                "id": 3,
-                "term_name": "MODULE 3",
-                "status": "0",
-                "start_date": "",
-                "end_date": "",
-                "termly_cost": 9000
+                "name": "register_staff",
+                "Status": "yes"
             },
             {
-                "id": 4,
-                "term_name": "MODULE 4",
-                "status": "0",
-                "start_date": "",
-                "end_date": "",
-                "termly_cost": 9000
+                "name": "manage_staff",
+                "Status": "yes"
             },
             {
-                "id": 5,
-                "term_name": "MODULE 5",
-                "status": "0",
-                "start_date": "",
-                "end_date": "",
-                "termly_cost": 9000
+                "name": "pay_fees",
+                "Status": "no"
             },
             {
-                "id": 6,
-                "term_name": "MODULE 6",
-                "status": "0",
-                "start_date": "",
-                "end_date": "",
-                "termly_cost": 9000
+                "name": "find_transaction",
+                "Status": "no"
+            },
+            {
+                "name": "humanresource",
+                "Status": "no"
+            },
+            {
+                "name": "mpesa_transactions",
+                "Status": "no"
+            },
+            {
+                "name": "fees_structure",
+                "Status": "no"
+            },
+            {
+                "name": "expenses",
+                "Status": "yes"
+            },
+            {
+                "name": "asset_management",
+                "Status": "yes"
+            },
+            {
+                "name": "finance_report",
+                "Status": "no"
+            },
+            {
+                "name": "sms_broadcast",
+                "Status": "no"
+            },
+            {
+                "name": "update_school_profile",
+                "Status": "yes"
+            },
+            {
+                "name": "update_personal_profile",
+                "Status": "no"
+            },
+            {
+                "name": "settings",
+                "Status": "no"
+            },
+            {
+                "name": "general_reports",
+                "Status": "no"
+            },
+            {
+                "name": "my_reports",
+                "Status": "no"
+            }
+        ]
+    },
+    {
+        "name": "New Role",
+        "roles": [
+            {
+                "name": "admit_student",
+                "Status": "yes"
+            },
+            {
+                "name": "manage_student",
+                "Status": "yes"
+            },
+            {
+                "name": "register_staff",
+                "Status": "yes"
+            },
+            {
+                "name": "manage_staff",
+                "Status": "yes"
+            },
+            {
+                "name": "pay_fees",
+                "Status": "no"
+            },
+            {
+                "name": "find_transaction",
+                "Status": "no"
+            },
+            {
+                "name": "humanresource",
+                "Status": "no"
+            },
+            {
+                "name": "mpesa_transactions",
+                "Status": "no"
+            },
+            {
+                "name": "fees_structure",
+                "Status": "no"
+            },
+            {
+                "name": "expenses",
+                "Status": "yes"
+            },
+            {
+                "name": "asset_management",
+                "Status": "no"
+            },
+            {
+                "name": "supplier_account",
+                "Status": "yes"
+            },
+            {
+                "name": "finance_report",
+                "Status": "no"
+            },
+            {
+                "name": "sms_broadcast",
+                "Status": "no"
+            },
+            {
+                "name": "update_school_profile",
+                "Status": "no"
+            },
+            {
+                "name": "update_personal_profile",
+                "Status": "no"
+            },
+            {
+                "name": "settings",
+                "Status": "no"
+            },
+            {
+                "name": "general_reports",
+                "Status": "no"
+            },
+            {
+                "name": "my_reports",
+                "Status": "no"
+            }
+        ]
+    },
+    {
+        "name": "Supplier",
+        "roles": [
+            {
+                "name": "admit_student",
+                "Status": "yes"
+            },
+            {
+                "name": "manage_student",
+                "Status": "yes"
+            },
+            {
+                "name": "register_staff",
+                "Status": "yes"
+            },
+            {
+                "name": "manage_staff",
+                "Status": "yes"
+            },
+            {
+                "name": "pay_fees",
+                "Status": "yes"
+            },
+            {
+                "name": "find_transaction",
+                "Status": "yes"
+            },
+            {
+                "name": "mpesa_transactions",
+                "Status": "yes"
+            },
+            {
+                "name": "fees_structure",
+                "Status": "yes"
+            },
+            {
+                "name": "expenses",
+                "Status": "yes"
+            },
+            {
+                "name": "asset_management",
+                "Status": "yes"
+            },
+            {
+                "name": "supplier_account",
+                "Status": "yes"
+            },
+            {
+                "name": "finance_report",
+                "Status": "yes"
+            },
+            {
+                "name": "sms_broadcast",
+                "Status": "no"
+            },
+            {
+                "name": "update_school_profile",
+                "Status": "no"
+            },
+            {
+                "name": "update_personal_profile",
+                "Status": "no"
+            },
+            {
+                "name": "settings",
+                "Status": "no"
+            },
+            {
+                "name": "general_reports",
+                "Status": "no"
             }
         ]
     }

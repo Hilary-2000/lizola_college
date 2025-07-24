@@ -12,7 +12,7 @@
             $totals_num = 0;
             if ($result) {
                 if ($row = $result->fetch_assoc()) {
-                    $totals_num = $row['Total'];
+                    $totals_num = $row['Total'] > 9 ? "9+" : $row['Total'];
                 }
             }
             echo $totals_num;

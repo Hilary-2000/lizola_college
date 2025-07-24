@@ -83,58 +83,6 @@
             echo $data;
             $stmt->close();
             $conn2->close();
-        }elseif (isset($_GET['add_another_user'])) {
-            $select = "SELECT * FROM `settings` WHERE `sett` = 'user_roles'";
-            $stmt = $conn2->prepare($select);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $data = "";
-            $inside = 0;
-            if ($result) {
-                if ($row= $result->fetch_assoc()) {
-                    $data = $row['valued'];
-                    $inside = 1;
-                }
-            }
-            $role_name = $_GET['role_name'];
-            $role_doing = $_GET['role_doing'];
-            if(strlen($data) > 0){
-                $data = substr($data,0,(strlen($data)-1));
-                $data.=",{\"name\":\"".$role_name."\",\"roles\":".$role_doing."}]";
-                $update = "UPDATE `settings` SET `valued` = ? WHERE `sett` = 'user_roles'";
-                $stmt = $conn2->prepare($update);
-                $stmt->bind_param("s",$data);
-                if($stmt->execute()){
-                    echo "<p class='text-success'>Role Updates successfully!</p>";
-                }else{
-                    echo "<p class='text-success'>An error occured during update!</p>";
-                }
-            }else{
-                if ($inside == 1) {
-                    $data ="[{\"name\":\"".$role_name."\",\"roles\":".$role_doing."}]";
-                    $update = "UPDATE `settings` SET `valued` = ? WHERE `sett` = 'user_roles'";
-                    $stmt = $conn2->prepare($update);
-                    $stmt->bind_param("s",$data);
-                    if($stmt->execute()){
-                        echo "<p class='text-success'>Role Updates successfully!</p>";
-                    }else{
-                        echo "<p class='text-success'>An error occured during update!</p>";
-                    }
-                }else{
-                    $data ="[{\"name\":\"".$role_name."\",\"roles\":".$role_doing."}]";
-                    $insert = "INSERT INTO `settings` (`sett`,`valued`) VALUES ('user_roles',?)";
-                    $stmt = $conn2->prepare($insert);
-                    $stmt->bind_param("s",$data);
-                    if($stmt->execute()){
-                        echo "<p class='text-success'>Role Updates successfully!</p>";
-                    }else{
-                        echo "<p class='text-success'>An error occured during update!</p>";
-                    }
-                }
-            }
-            // create the log text
-            $log_text = "Role \"".ucwords(strtolower($role_name))."\" has been added successfully!";
-            log_academic($log_text);
         }elseif (isset($_GET['staff_roles'])) {
             $select = "SELECT * FROM `settings` WHERE `sett` = 'user_roles'";
             $stmt= $conn2->prepare($select);
@@ -3424,6 +3372,59 @@
             }else{
                 echo "<p class='text-danger'>We cannot save the timetable at the moment because of lack of enough information accompanied with it.</p>";
             }
+        }elseif (isset($_POST['add_another_user'])) {
+            include("../../connections/conn1.php");
+            include("../../connections/conn2.php");
+            $select = "SELECT * FROM `settings` WHERE `sett` = 'user_roles'";
+            $stmt = $conn2->prepare($select);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = "";
+            $inside = 0;
+            if ($result) {
+                if ($row= $result->fetch_assoc()) {
+                    $data = $row['valued'];
+                    $inside = 1;
+                }
+            }
+            $role_name = $_POST['role_name'];
+            $role_doing = $_POST['role_doing'];
+            if(strlen($data) > 0){
+                $data = substr($data,0,(strlen($data)-1));
+                $update = "UPDATE `settings` SET `valued` = ? WHERE `sett` = 'user_roles'";
+                $stmt = $conn2->prepare($update);
+                $stmt->bind_param("s",$role_doing);
+                if($stmt->execute()){
+                    echo "<p class='text-success'>Role Updates successfully!</p>";
+                }else{
+                    echo "<p class='text-success'>An error occured during update!</p>";
+                }
+            }else{
+                if ($inside == 1) {
+                    $data = $role_doing;
+                    $update = "UPDATE `settings` SET `valued` = ? WHERE `sett` = 'user_roles'";
+                    $stmt = $conn2->prepare($update);
+                    $stmt->bind_param("s",$data);
+                    if($stmt->execute()){
+                        echo "<p class='text-success'>Role Updates successfully!</p>";
+                    }else{
+                        echo "<p class='text-success'>An error occured during update!</p>";
+                    }
+                }else{
+                    $data = $role_doing;
+                    $insert = "INSERT INTO `settings` (`sett`,`valued`) VALUES ('user_roles',?)";
+                    $stmt = $conn2->prepare($insert);
+                    $stmt->bind_param("s",$data);
+                    if($stmt->execute()){
+                        echo "<p class='text-success'>Role Updates successfully!</p>";
+                    }else{
+                        echo "<p class='text-success'>An error occured during update!</p>";
+                    }
+                }
+            }
+            // create the log text
+            $log_text = "Role \"".ucwords(strtolower($role_name))."\" has been added successfully!";
+            log_academic($log_text);
         }elseif (isset($_POST['edit_another_user'])) {
             include("../../connections/conn1.php");
             include("../../connections/conn2.php");

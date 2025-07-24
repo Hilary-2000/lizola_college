@@ -218,26 +218,14 @@
                 </table> -->
             </div>
             <div class="setting_s">
-                <h6>Sports House / Clubs</h6>
+                <h6>Departments & Clubs</h6>
                 <p class="" id="clubs_sport_houses"></p>
                 <p id="clubs_errors"></p>
-                <p><b>Note:</b> Add Sport houses or clubs that will be assigned to students during admission</p>
-                <p style="width: fit-content;" class="link" id="add_sports_clubs"><i class="fa fa-plus"></i> Add Sports Houses / Clubs</p>
+                <p><b>Note:</b> Add Departments or clubs that will be assigned to students during admission</p>
+                <p style="width: fit-content;" class="link" id="add_sports_clubs"><i class="fa fa-plus"></i> Add Department</p>
                 <div class="container" id="clubs_house_tables">
 
                 </div>
-                <!-- <table class="table">
-                    <tr>
-                        <th>No.</th>
-                        <th>Sports House / Clubs</th>
-                        <th>Options</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Drama CLubs</td>
-                        <td><span class="link" ><i class="fa fa-pen"></i> Edit</span> <span class="link"><i class="fa fa-trash"></i> Delete</span></td>
-                    </tr>
-                </table> -->
             </div>
             <div class="setting_s">
                 <h6>Email Set-Up <span class="hide" id="load_email_setup"><img src="images/ajax_clock_small.gif" id=""></span></h6>
@@ -315,26 +303,7 @@
                 <div class="container my-1">
                     <p style="width: fit-content;" class="link" id="setup_payment_options"><i class="fa fa-plus"></i> Set-up Payment Options</p>
                     <div class="container my-2 tableme" id="pd_table_holder">
-                        <!-- <table class="table">
-                            <tr>
-                                <th>No.</th>
-                                <th>Payments Description.</th>
-                                <th>Arrange</th>
-                                <th title="Display in reciepts and invoices" >Show</th>
-                                <th>Actions.</th>
-                            </tr>
-                            <tr>
-                                <td>1. </td>
-                                <td>Direct deposit to KCB Account No. 1257951734 Account Ladybird School Mis</td>
-                                <td><select name="" id="" class="form-control">
-                                    <option value="">Select option</option>
-                                    <option value="">At the beginning</option>
-                                    <option value="">After Option 2</option>
-                                </select></td>
-                                <td><input type="checkbox" name="" id=""></td>
-                                <td><p><span class="mx-1 link"><i class="fas fa-pen-fancy"></i></span> <span class="mx-1 link"><i class="fas fa-trash"></i></span></p></td>
-                            </tr>
-                        </table> -->
+                        
                         <p class='text-danger border border-danger my-2 p-2'>Set up the payment options then proceed!.</p>
                     </div>
                     <span class="btn btn-success" id="save_changes_payment_opt"><i class="fas fa-save"></i> Save</span>
@@ -348,19 +317,7 @@
                 <div class="container my-1">
                     <p style="width: fit-content;" class="link" id="setup_expense_category"><i class="fa fa-plus"></i> Add Expense Category</p>
                     <div class="container my-2 tableme" style="overflow-y: auto; max-height: 300px;" id="expense_category_table_holder">
-                        <!-- <table class="table">
-                            <tr>
-                                <th>No.</th>
-                                <th>Expense Category.</th>
-                                <th>Actions.</th>
-                            </tr>
-                            <tr>
-                                <td>1. </td>
-                                <td>School Bus</td>
-                                <td><p><span class="mx-1 link"><i class="fas fa-pen-fancy"></i></span> <span class="mx-1 link"><i class="fas fa-trash"></i></span></p></td>
-                            </tr>
-                        </table>
-                        <p class='text-danger border border-success my-2 p-2'>Add expense categories, they will appear here.</p> -->
+                        
                     </div>
                     <p id="display_data_exp_category"></p>
                 </div>
@@ -371,7 +328,7 @@
                 <input type="hidden" name="" id="revenue_category_storage">
                 <div class="container my-1">
                     <p style="width: fit-content;" class="link" id="setup_revenue_category"><i class="fa fa-plus"></i> Add Revenue Category</p>
-                    <div class="container my-2 tableme" style="overflow-y: auto; max-height: 300px;" id="revenue_category_table_holder">
+                    <div class="container my-2 tableme" id="revenue_category_table_holder">
                         <table class="table">
                             <tr>
                                 <th>No.</th>

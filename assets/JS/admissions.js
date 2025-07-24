@@ -392,7 +392,7 @@ function displayPaymentOption(data) {
     if (data.length > 0) {
         if (hasJsonStructure(data)) {
             var json_data = JSON.parse(data);
-            var data_to_display = "<table class='table'><tr><th>No.</th><th>Payments Description.</th><th>Arrange</th><th title='Display in reciepts and invoices' >Show</th><th>Actions.</th></tr>";
+            var data_to_display = "<table class='table' id='display_payment_options'><thead><tr><th>No.</th><th>Payments Description.</th><th>Arrange</th><th title='Display in reciepts and invoices' >Show</th><th>Actions.</th></tr></thead><tbody>";
 
             for (let index = 0; index < json_data.length; index++) {
                 // get the select option
@@ -410,7 +410,7 @@ function displayPaymentOption(data) {
                 data_to_display += "<td>" + select + "</td>";
                 data_to_display += "<td><input type='checkbox' " + checked + " class='pd_show_' id='pd_show_" + (index + 1) + "'></td><td><p><span class='mx-1 link edit_pd' id='edit_pd_" + (index + 1) + "'> <i class='fas fa-pen-fancy'></i></span> <span class='mx-1 link delete_pd' id='delete_pd_" + (index + 1) + "'><i class='fas fa-trash'></i></span></p></td></tr>";
             }
-            data_to_display += "</table>";
+            data_to_display += "</tbody></table>";
             cObj("pd_table_holder").innerHTML = data_to_display;
 
             var arrange_pd = document.getElementsByClassName("arrange_pd");
@@ -433,6 +433,11 @@ function displayPaymentOption(data) {
                 const element = delete_pd[index];
                 element.addEventListener("click", deleteDescription);
             }
+            
+            // set the datatable
+            $(document).ready(function() {
+                $('#display_payment_options').DataTable();  // Just one line!
+            });
         } else {
             cObj("pd_table_holder").innerHTML = "<p class='text-danger border border-danger my-2 p-2'>An error has occured.</p>";
         }
@@ -1311,21 +1316,6 @@ window.onload = function () {
     for (let index = 0; index < finance12.length; index++) {
         const element = finance12[index];
         element.addEventListener("change", finance_check2);
-    }
-    var routesnvans12 = document.getElementsByClassName("routesnvans12");
-    for (let index = 0; index < routesnvans12.length; index++) {
-        const element = routesnvans12[index];
-        element.addEventListener("change", route_check2);
-    }
-    var academic_sect2 = document.getElementsByClassName("academic_sect2");
-    for (let index = 0; index < academic_sect2.length; index++) {
-        const element = academic_sect2[index];
-        element.addEventListener("change", academic_check2);
-    }
-    var boarding_sect2 = document.getElementsByClassName("boarding_sect2");
-    for (let index = 0; index < boarding_sect2.length; index++) {
-        const element = boarding_sect2[index];
-        element.addEventListener("change", boarding_check2);
     }
     var sms_broadcasted2 = document.getElementsByClassName("sms_broadcasted2");
     for (let index = 0; index < sms_broadcasted2.length; index++) {
@@ -4494,6 +4484,11 @@ function getMyClassList() {
                     const element = change_classes[index];
                     element.addEventListener("click", changeClassName);
                 }
+
+                // set the datatable
+                $(document).ready(function() {
+                    $('#course-list-table-1').DataTable();  // Just one line!
+                });
                 stopInterval(ids);
             }
         }, 100);
@@ -5569,21 +5564,6 @@ function finance_check() {
         cObj("all_finance_sect").checked = false;
     }
 }
-function route_check() {
-    var classin = document.getElementsByClassName("routesnvans1");
-    var count = 0;
-    for (let index = 0; index < classin.length; index++) {
-        const element = classin[index];
-        if (element.checked == true) {
-            count++;
-        }
-    }
-    if (count == classin.length) {
-        cObj("route_transport_section").checked = true;
-    } else {
-        cObj("route_transport_section").checked = false;
-    }
-}
 function academic_check() {
     var classin = document.getElementsByClassName("academic_sect");
     var count = 0;
@@ -5676,51 +5656,6 @@ function finance_check2() {
         cObj("all_finance_sect2").checked = false;
     }
 }
-function route_check2() {
-    var classin = document.getElementsByClassName("routesnvans12");
-    var count = 0;
-    for (let index = 0; index < classin.length; index++) {
-        const element = classin[index];
-        if (element.checked == true) {
-            count++;
-        }
-    }
-    if (count == classin.length) {
-        cObj("route_transport_section2").checked = true;
-    } else {
-        cObj("route_transport_section2").checked = false;
-    }
-}
-function academic_check2() {
-    var classin = document.getElementsByClassName("academic_sect2");
-    var count = 0;
-    for (let index = 0; index < classin.length; index++) {
-        const element = classin[index];
-        if (element.checked == true) {
-            count++;
-        }
-    }
-    if (count == classin.length) {
-        cObj("academic_section2").checked = true;
-    } else {
-        cObj("academic_section2").checked = false;
-    }
-}
-function boarding_check2() {
-    var classin = document.getElementsByClassName("boarding_sect2");
-    var count = 0;
-    for (let index = 0; index < classin.length; index++) {
-        const element = classin[index];
-        if (element.checked == true) {
-            count++;
-        }
-    }
-    if (count == classin.length) {
-        cObj("all_boarding_section2").checked = true;
-    } else {
-        cObj("all_boarding_section2").checked = false;
-    }
-}
 function all_sms_check2() {
     var classin = document.getElementsByClassName("sms_broadcasted2");
     var count = 0;
@@ -5782,48 +5717,6 @@ cObj("all_finance_sect").onchange = function () {
         }
     }
 }
-cObj("route_transport_section").onchange = function () {
-    var mychecks = document.getElementsByClassName("routesnvans1");
-    if (this.checked == true) {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = true;
-        }
-    } else {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = false;
-        }
-    }
-}
-cObj("academic_section").onchange = function () {
-    var mychecks = document.getElementsByClassName("academic_sect");
-    if (this.checked == true) {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = true;
-        }
-    } else {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = false;
-        }
-    }
-}
-cObj("all_boarding_section").onchange = function () {
-    var mychecks = document.getElementsByClassName("boarding_sect");
-    if (this.checked == true) {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = true;
-        }
-    } else {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = false;
-        }
-    }
-}
 cObj("all_sms_check").onchange = function () {
     var mychecks = document.getElementsByClassName("sms_broadcasted");
     if (this.checked == true) {
@@ -5871,48 +5764,6 @@ cObj("all_administration2").onchange = function () {
 
 cObj("all_finance_sect2").onchange = function () {
     var mychecks = document.getElementsByClassName("finance12");
-    if (this.checked == true) {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = true;
-        }
-    } else {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = false;
-        }
-    }
-}
-cObj("route_transport_section2").onchange = function () {
-    var mychecks = document.getElementsByClassName("routesnvans12");
-    if (this.checked == true) {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = true;
-        }
-    } else {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = false;
-        }
-    }
-}
-cObj("academic_section2").onchange = function () {
-    var mychecks = document.getElementsByClassName("academic_sect2");
-    if (this.checked == true) {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = true;
-        }
-    } else {
-        for (let index = 0; index < mychecks.length; index++) {
-            const element = mychecks[index];
-            element.checked = false;
-        }
-    }
-}
-cObj("all_boarding_section2").onchange = function () {
-    var mychecks = document.getElementsByClassName("boarding_sect2");
     if (this.checked == true) {
         for (let index = 0; index < mychecks.length; index++) {
             const element = mychecks[index];
@@ -6021,6 +5872,84 @@ function getStaffRole() {
 }
 
 /**Hey dont confuse this function to the one above */
+function getEditedStaffRoles(status = "new"){
+    var data = {
+        "name": status == "edit" ? valObj("role_name2") : valObj("role_name"),
+        "roles": [
+            {
+                "name": "admit_student",
+                "Status": status == "edit" ? (cObj("admit_student_sect2") != undefined ? (cObj("admit_student_sect2").checked ? "yes" : "no") : "no") : (cObj("admit_student_sect") != undefined ? (cObj("admit_student_sect").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "manage_student",
+                "Status": status == "edit" ? (cObj("manage_stud_sect2") != undefined ? (cObj("manage_stud_sect2").checked ? "yes" : "no") : "no") : (cObj("manage_stud_sect") != undefined ? (cObj("manage_stud_sect").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "register_staff",
+                "Status": status == "edit" ? (cObj("register_staff_sect2") != undefined ? (cObj("register_staff_sect2").checked ? "yes" : "no") : "no") : (cObj("register_staff_sect") != undefined ? (cObj("register_staff_sect").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "manage_staff",
+                "Status": status == "edit" ? (cObj("manage_staff_sect2") != undefined ? (cObj("manage_staff_sect2").checked ? "yes" : "no") : "no") : (cObj("manage_staff_sect") != undefined ? (cObj("manage_staff_sect").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "pay_fees",
+                "Status": status == "edit" ? (cObj("pay_fees-sector2") != undefined ? (cObj("pay_fees-sector2").checked ? "yes" : "no") : "no") : (cObj("pay_fees-sector") != undefined ? (cObj("pay_fees-sector").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "find_transaction",
+                "Status": status == "edit" ? (cObj("manage_transaction_sect2") != undefined ? (cObj("manage_transaction_sect2").checked ? "yes" : "no") : "no") : (cObj("manage_transaction_sect") != undefined ? (cObj("manage_transaction_sect").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "mpesa_transactions",
+                "Status": status == "edit" ? (cObj("mpesa_transaction_sect2") != undefined ? (cObj("mpesa_transaction_sect2").checked ? "yes" : "no") : "no") : (cObj("mpesa_transaction_sect") != undefined ? (cObj("mpesa_transaction_sect").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "fees_structure",
+                "Status": status == "edit" ? (cObj("fees_structures_sect2") != undefined ? (cObj("fees_structures_sect2").checked ? "yes" : "no") : "no") : (cObj("fees_structures_sect") != undefined ? (cObj("fees_structures_sect").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "expenses",
+                "Status": status == "edit" ? (cObj("expense_section2") != undefined ? (cObj("expense_section2").checked ? "yes" : "no") : "no") : (cObj("expense_section") != undefined ? (cObj("expense_section").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "asset_management",
+                "Status": status == "edit" ? (cObj("asset_management2") != undefined ? (cObj("asset_management2").checked ? "yes" : "no") : "no") : (cObj("asset_management") != undefined ? (cObj("asset_management").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "supplier_account",
+                "Status": status == "edit" ? (cObj("supplier_account_2") != undefined ? (cObj("supplier_account_2").checked ? "yes" : "no") : "no") : (cObj("supplier_account") != undefined ? (cObj("supplier_account").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "finance_report",
+                "Status": status == "edit" ? (cObj("financial_report_section2") != undefined ? (cObj("financial_report_section2").checked ? "yes" : "no") : "no") : (cObj("financial_report_section") != undefined ? (cObj("financial_report_section").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "sms_broadcast",
+                "Status": status == "edit" ? (cObj("sms_and_broadcast2") != undefined ? (cObj("sms_and_broadcast2").checked ? "yes" : "no") : "no") : (cObj("sms_and_broadcast") != undefined ? (cObj("sms_and_broadcast").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "update_school_profile",
+                "Status": status == "edit" ? (cObj("update_school_profile_sect2") != undefined ? (cObj("update_school_profile_sect2").checked ? "yes" : "no") : "no") : (cObj("update_school_profile_sect") != undefined ? (cObj("update_school_profile_sect").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "update_personal_profile",
+                "Status": status == "edit" ? (cObj("update_personal_profile_sect2") != undefined ? (cObj("update_personal_profile_sect2").checked ? "yes" : "no") : "no") : (cObj("update_personal_profile_sect") != undefined ? (cObj("update_personal_profile_sect").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "settings",
+                "Status": status == "edit" ? (cObj("settings_sect2") != undefined ? (cObj("settings_sect2").checked ? "yes" : "no") : "no") : (cObj("settings_sect") != undefined ? (cObj("settings_sect").checked ? "yes" : "no") : "no")
+            },
+            {
+                "name": "general_reports",
+                "Status": status == "edit" ? (cObj("my_school_reports2") != undefined ? (cObj("my_school_reports2").checked ? "yes" : "no") : "no") : (cObj("my_school_reports") != undefined ? (cObj("my_school_reports").checked ? "yes" : "no") : "no")
+            }
+        ]
+    };
+
+    // stringify
+    return data;
+}
 
 function getStaffRole2(role_index, role_name) {
     var role = "[";
@@ -6052,7 +5981,7 @@ function getStaffRole2(role_index, role_name) {
     role += "{\"name\":\"expenses_btn\",\"Status\":\"" + status + "\"},"
     status = cObj("financial_report_section2").checked == true ? "yes" : "no";
     role += "{\"name\":\"finance_report_btn\",\"Status\":\"" + status + "\"},"
-    status = cObj("payroll_section2").checked == true ? "yes" : "no";
+    status = cObj("asset_management2").checked == true ? "yes" : "no";
     role += "{\"name\":\"payroll_sys\",\"Status\":\"" + status + "\"},"
     status = cObj("route_n_van_sect2").checked == true ? "yes" : "no";
     role += "{\"name\":\"routes_n_trans\",\"Status\":\"" + status + "\"},"
@@ -6103,19 +6032,27 @@ function getStaffRole2(role_index, role_name) {
 }
 /**IT END HERE */
 cObj("add_role_btns").onclick = function () {
-    var role = getStaffRole();
+    var role = getEditedStaffRoles("new");
+    var roles = [];
+    if(hasJsonStructure(cObj("show_roles").innerText)){
+        roles = JSON.parse(cObj("show_roles").innerText);
+    }
+    roles.push(role);
+    roles = JSON.stringify(roles);
+    console.log(roles);
+
+    // error
     var err = checkBlank("role_name");
     if (err < 1) {
         cObj("allowance_err3_handler").innerHTML = "";
-        var datapass = "?add_another_user=true&role_name=" + encodeURIComponent(valObj("role_name")) + "&role_doing=" + encodeURIComponent(role);
-        sendData2("GET", "academic/academic.php", datapass, cObj("allowance_err3_handler"), cObj("add_user_roles_in"));
+        var datapass = "add_another_user=true&role_name=" + encodeURIComponent(valObj("role_name")) + "&role_doing=" + encodeURIComponent(roles);
+        sendDataPost("POST", "ajax/academic/academic.php", datapass, cObj("allowance_err3_handler"), cObj("add_user_roles_in"));
         setTimeout(() => {
             cObj("cancel_role_btn").click();
             cObj("allowance_err3_handler").innerHTML = "";
             cObj("role_name").value = "";
             cObj("set_btns").click();
         }, 1000);
-
     } else {
         cObj("allowance_err3_handler").innerHTML = "<p class='text-danger'>Fill all fields covered with red borders</p>";
     }
@@ -6125,8 +6062,24 @@ cObj("add_role_btns2").onclick = function () {
     var err = checkBlank("role_name2");
     if (err < 1) {
         cObj("allowance_err4_handler").innerHTML = "";
-        var role = getStaffRole2(role_index, valObj("role_name2"));
-        var datapass = "edit_another_user=true&role_name=" + encodeURIComponent(valObj("role_name2")) + "&old_role_name=" + encodeURIComponent(cObj("old_role_name").innerText) + "&role_values=" + encodeURIComponent(role);
+        var role = getEditedStaffRoles("edit");
+
+        // hasJsonStructure
+        var roles = [];
+        if(hasJsonStructure(cObj("show_roles").innerText)){
+            roles = JSON.parse(cObj("show_roles").innerText);
+            for (let index = 0; index < roles.length; index++) {
+                const element = roles[index];
+                if(element.name == valObj("role_name2")){
+                    roles[index] = role;
+                }
+            }
+        }else{
+            roles.push(role);
+        }
+        // roles
+        roles = JSON.stringify(roles);
+        var datapass = "edit_another_user=true&role_name=" + encodeURIComponent(valObj("role_name2")) + "&old_role_name=" + encodeURIComponent(cObj("old_role_name").innerText) + "&role_values=" + encodeURIComponent(roles);
         sendDataPost("POST", "ajax/academic/academic.php", datapass, cObj("allowance_err4_handler"), cObj("add_user_roles_in2"));
         setTimeout(() => {
             var timeout = 0;
@@ -6166,14 +6119,13 @@ function getRoleData() {
                 var data = cObj("show_roles").innerText;
                 if (data.length > 0) {
                     var obje = JSON.parse(data);
-                    var data_to_display = "<table class='table'><tr><th>No.</th><th>Role Name</th><th>Options</th></tr>";
+                    var data_to_display = "<table class='table' id='staff-roles-table'><thead><tr><th>No.</th><th>Role Name</th><th>Options</th></tr></thead><tbody>";
                     for (let index = 0; index < obje.length; index++) {
                         const element = obje[index];
                         // get the element data and display as a table
                         data_to_display += "<tr><td>" + (index + 1) + "</td><td>" + element.name + "</td><td><span class='link edit_role_' id='edit_role_" + index + "' ><i class='fa fa-pen'></i> Edit</span> <span class='link ml-2 delete_roles' id='delete_roles" + index + "'><i class='fa fa-trash'></i> Delete</span></td></tr>";
-
                     }
-                    data_to_display += "</table>";
+                    data_to_display += "</tbody></table>";
                     cObj("roles_holder").innerHTML = data_to_display;
                 } else {
                     cObj("roles_holder").innerHTML = "<p class='text-success'>There are no roles added to the system currently!</p>";
@@ -6188,6 +6140,10 @@ function getRoleData() {
                     const element = delete_roles[index];
                     element.addEventListener("click", deleteRoles_Present);
                 }
+                // set the datatable
+                $(document).ready(function() {
+                    $('#staff-roles-table').DataTable();  // Just one line!
+                });
                 stopInterval(ids);
             }
         }, 100);
@@ -6195,32 +6151,188 @@ function getRoleData() {
 }
 
 function editRoleListener() {
+    var roles_children = cObj("checkbox_holder_edit_role").children;
+    for (let index = 0; index < roles_children.length; index++) {
+        const element = roles_children[index];
+        console.log(element.tagName,element.type);
+        if(element.tagName === "DIV"){
+            for (let index = 0; index < element.children.length; index++) {
+                const element_2 = element.children[index];
+                if(element_2.type == "checkbox"){
+                    element_2.checked = false;
+                }
+            }
+        }
+        if (element.tagName === "INPUT" && element.type === "checkbox") {
+            element.checked = false;
+            console.log("Checkbox found:", element);
+        }
+    }
     var ids = this.id.substring(("edit_role_".length));
     var data = cObj("show_roles").innerText;
     var object = JSON.parse(data);
     var obj = object[ids];
     // create a window to display the data
     cObj("add_user_role_window2").classList.remove("hide");
-    var fill_data = document.getElementsByClassName("fill_data");
     var data2 = obj.roles;
     for (let index = 0; index < data2.length; index++) {
         const element = data2[index];
-        if (element.Status == "yes") {
-            fill_data[index].checked = true;
-        } else {
-            fill_data[index].checked = false;
-        }
+        checkRoles(element, "edit");
     }
     cObj("role_ids_in").innerText = ids;
     cObj("role_name2").value = obj.name;
     cObj("old_role_name").innerText = obj.name;
     administration_check2();
     finance_check2();
-    route_check2();
-    academic_check2();
-    boarding_check2();
-    all_sms_check2();
     all_account_settings2();
+}
+
+function checkRoles(roles, edit_status = "new") {
+    if(roles.name == "admit_student"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "admit_student_sect2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "manage_student"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "manage_stud_sect2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "register_staff"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "register_staff_sect2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "manage_staff"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "manage_staff_sect2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "pay_fees"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "pay_fees-sector2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "find_transaction"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "manage_transaction_sect2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "mpesa_transactions"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "mpesa_transaction_sect2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "find_transactions"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "manage_transaction_sect2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "fees_structure"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "fees_structures_sect2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "expenses"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "expense_section2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "asset_management"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "asset_management2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "supplier_account"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "supplier_account_2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "finance_report"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "financial_report_section2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "sms_broadcast"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "sms_and_broadcast2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "update_school_profile"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "update_school_profile_sect2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "update_personal_profile"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "update_personal_profile_sect2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "settings"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "settings_sect2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }else if(roles.name == "general_reports"){
+        var element_id = "";
+        if(edit_status == "edit"){
+            element_id = "my_school_reports2";
+        }
+        if(cObj(element_id) != undefined){ 
+            cObj(element_id).checked = roles.Status == "yes";
+        }
+    }
 }
 cObj("cancel_role_btn2").onclick = function () {
     cObj("add_user_role_window2").classList.add("hide");
@@ -6540,6 +6652,10 @@ function getClubHouses() {
                     const elem = delete_clubs[index];
                     elem.addEventListener("click", delete_club);
                 }
+                // set the datatable
+                $(document).ready(function() {
+                    $('#department-club-table').DataTable();  // Just one line!
+                });
                 stopInterval(idd);
             }
         }, 100);
@@ -7415,6 +7531,11 @@ function displayRevenueCategories() {
                     const element = edit_revenue_cat[index];
                     element.addEventListener("click", edit_revenue_category);
                 }
+
+                // set the datatable
+                $(document).ready(function() {
+                    $('#revenue-category-table').DataTable();  // Just one line!
+                });
                 stopInterval(ids);
             }
         }, 100);
@@ -7444,6 +7565,11 @@ function displayExpCategories() {
                     const element = edit_exp_cat[index];
                     element.addEventListener("click", edit_expense_category);
                 }
+
+                // set the datatable
+                $(document).ready(function() {
+                    $('#expense-category-table').DataTable();  // Just one line!
+                });
                 stopInterval(ids);
             }
         }, 100);
@@ -9845,6 +9971,10 @@ function get_courses() {
                     const element = remove_course[index];
                     element.addEventListener("click",deleteCourse);
                 }
+                // set the datatable
+                $(document).ready(function() {
+                    $('#course-list-table').DataTable();  // Just one line!
+                });
                 // stop
                 stopInterval(ids);
             }

@@ -6,34 +6,34 @@ date_default_timezone_set('Africa/Nairobi');
 function allowed($id){
     $auth = $_SESSION['auth'];
     if ($auth == 0) {
-        $allowed = ['admitbtn',"findstudsbtn",'callregister','regstaffs','managestaf','promoteStd','payfeess','findtrans','mpesaTrans','feestruct','expenses_btn','finance_report_btn','routes_n_trans','enroll_students','payroll_sys','humanresource','regsub','managesub','managetrnsub','generate_tt_btn','examanagement','exam_fill_btn','enroll_boarding_btn','maanage_dorm','dashbutn','send_feedback','sms_broadcast','update_school_profile','update_personal_profile','set_btns','my_reports'];
+        $allowed = ["admit_student", "manage_student", "register_staff", "manage_staff", "pay_fees", "find_transaction", "humanresource", "mpesa_transactions", "fees_structure", "asset_management", "finance_report", "sms_broadcast", "update_school_profile", "update_personal_profile", "settings", "general_reports"];
         return checkPresnt($allowed,$id) ? "" : "d-none";
     } else if ($auth == "1") {
-        $allowed = ['admitbtn',"findstudsbtn",'callregister','regstaffs','managestaf','promoteStd','payfeess','findtrans','mpesaTrans','feestruct','expenses_btn','finance_report_btn','routes_n_trans','enroll_students','payroll_sys','humanresource','regsub','managesub','managetrnsub','generate_tt_btn','examanagement','exam_fill_btn','enroll_boarding_btn','maanage_dorm','dashbutn','send_feedback','sms_broadcast','update_school_profile','update_personal_profile','set_btns','my_reports'];
+        $allowed = ["admit_student", "manage_student", "register_staff", "manage_staff", "pay_fees", "find_transaction", "humanresource", "mpesa_transactions", "fees_structure", "asset_management", "finance_report", "sms_broadcast", "update_school_profile", "update_personal_profile", "settings", "general_reports"];
         return checkPresnt($allowed,$id) ? "" : "d-none";
     } else if ($auth == "2") {
-        $allowed = ['',"",'','','','','','','','','','','','','','','regsub','managesub','managetrnsub','generate_tt_btn','examanagement','exam_fill_btn','','','','','sms_broadcast','','update_personal_profile','','my_reports'];
+        $allowed = ["sms_broadcast","update_personal_profile","general_reports"];
         return checkPresnt($allowed,$id) ? "" : "d-none";
     } else if ($auth == "3") {
-        $allowed = ['admitbtn',"findstudsbtn",'','regstaffs','managestaf','','','','','','','','','','','','','','','','','','','','','','','update_school_profile','update_personal_profile','','my_reports'];
+        $allowed = ["admit_student", "manage_student", "register_staff", "manage_staff","update_school_profile", "update_personal_profile", "general_reports"];
         return checkPresnt($allowed,$id) ? "" : "d-none";
     } else if ($auth == "4") {
-        $allowed = ['admitbtn',"findstudsbtn",'','regstaffs','managestaf','','','','','','','','','','','','','','','','','','','','','','','','update_personal_profile','','my_reports'];
+        $allowed = ["admit_student", "manage_student", "register_staff", "manage_staff", "update_personal_profile", "general_reports"];
         return checkPresnt($allowed,$id) ? "" : "d-none";
     } else if ($auth == "5") {
-        $allowed = ['admitbtn',"findstudsbtn",'','','','','payfeess','findtrans','mpesaTrans','feestruct','expenses_btn','finance_report_btn','','','payroll_sys','','','','','','','','','','','','','','','','my_reports'];
+        $allowed = ["admit_student", "manage_student", "pay_fees", "find_transaction", "mpesa_transactions", "fees_structure", "asset_management", "finance_report", "update_personal_profile","general_reports"];
         return checkPresnt($allowed,$id) ? "" : "d-none";
     } else if ($auth == "6") {
-        $allowed = ['',"",'','regstaffs','managestaf','','','','','','','','','','','','','','','','','','','','','send_feedback','sms_broadcast','','','','my_reports'];
+        $allowed = ["register_staff", "manage_staff","general_reports"];
         return checkPresnt($allowed,$id) ? "" : "d-none";
     } else if ($auth == "7") {
-        $allowed = ['',"",'','','','','','','','','','','','','','','regsub','managesub','managetrnsub','generate_tt_btn','examanagement','exam_fill_btn','','','','','','','','','my_reports'];
+        $allowed = ["update_personal_profile","general_reports"];
         return checkPresnt($allowed,$id) ? "" : "d-none";
     } else if ($auth == "8") {
-        $allowed = ['',"",'','','','','','','','','','','','','','','','','','generate_tt_btn','','exam_fill_btn','','','','','','','update_personal_profile','',''];
+        $allowed = ["update_personal_profile"];
         return checkPresnt($allowed,$id) ? "" : "d-none";
     } else if ($auth == "9") {
-        $allowed = ['admitbtn',"findstudsbtn",'','','','','','','','','','','','','','','','','','','','','','','','','','','','',''];
+        $allowed = ["admit_student", "manage_student"];
         return checkPresnt($allowed,$id) ? "" : "d-none";
     } else {
         // get the allowed fields
@@ -63,7 +63,6 @@ function allowed($id){
                 }
             }
         }
-        // $allowed = ['admitbtn',"findstudsbtn",'callregister','regstaffs','managestaf','promoteStd','payfeess','findtrans','mpesaTrans','feestruct','expenses_btn','finance_report_btn','routes_n_trans','enroll_students','payroll_sys','humanresource','regsub','managesub','managetrnsub','generate_tt_btn','examanagement','exam_fill_btn','enroll_boarding_btn','maanage_dorm','dashbutn','send_feedback','sms_broadcast','update_school_profile','update_personal_profile','set_btns','my_reports'];
         return checkPresnt($allowed,$id) ? "" : "d-none";
     }
     return "d-none";
@@ -134,6 +133,17 @@ function checkPresnt($array, $string){
     <!-- the customizable text editor documents -->
         <script src="https://cdn.tiny.cloud/1/if2hs0ax6hmgx2842yuozz7qt8lde0hvc8upqv9gmokdk2id/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <!-- ends here -->
+
+    <!-- START DATATABLES -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- END DATATABLES -->
 
     
   <!-- Google tag (gtag.js) -->
@@ -387,11 +397,11 @@ function checkPresnt($array, $string){
                 <button class="navButs tr_hides">Administration <span class="arrow rotate_right"></span> </button>
                 <div class="contsd">
                     <div class="contsc hide">
-                        <button type="button" class="sidebtns <?php echo allowed("admitbtn"); ?> htbtn" id="admitbtn"><span><img class="icons" src="images/register.png"></span> Admit students</button>
-                        <button type="button" class="sidebtns <?php echo allowed("findstudsbtn"); ?> tr_hides" id="findstudsbtn"><span><img class="icons" src="images/findstud.png"></span>Manage students</button>
+                        <button type="button" class="sidebtns <?php echo allowed("admit_student"); ?> htbtn" id="admitbtn"><span><img class="icons" src="images/register.png"></span> Admit students</button>
+                        <button type="button" class="sidebtns <?php echo allowed("manage_student"); ?> tr_hides" id="findstudsbtn"><span><img class="icons" src="images/findstud.png"></span>Manage students</button>
                         <button type='button' class="sidebtns <?php echo allowed("callregister"); ?> tr_hides d-none" id='callregister'><span><img class="icons" src="images/registercall.png"></span>Student Attendance</button>
-                        <button type='button' class="sidebtns <?php echo allowed("regstaffs"); ?> htbtn" id='regstaffs'><span><img class="icons" src="images/registerstaff.png"></span>Register staff</button>
-                        <button type='button' class="sidebtns <?php echo allowed("managestaf"); ?> htbtn" id='managestaf'><span><img class="icons" src="images/managestaff.png"></span>Manage staff</button>
+                        <button type='button' class="sidebtns <?php echo allowed("register_staff"); ?> htbtn" id='regstaffs'><span><img class="icons" src="images/registerstaff.png"></span>Register staff</button>
+                        <button type='button' class="sidebtns <?php echo allowed("manage_staff"); ?> htbtn" id='managestaf'><span><img class="icons" src="images/managestaff.png"></span>Manage staff</button>
                         <button type='button' class="sidebtns <?php echo allowed("promoteStd"); ?> htbtn d-none" id='promoteStd'><span><img class="icons" src="images/managestaff.png"></span>Promote Students</button>
                     </div>
                 </div>
@@ -400,14 +410,14 @@ function checkPresnt($array, $string){
                 <button class="navButs htbtn">Finance<span class="arrow rotate_right"></button>
                 <div class="contsd">
                     <div class="contsc hide">
-                        <button type='button' class="sidebtns <?php echo allowed("payfeess"); ?> htbtn" id='payfeess'><span><img class="icons" src="images/pay.png"></span>Collect Fees & Revenue</button>
-                        <button type='button' class="sidebtns <?php echo allowed("findtrans"); ?> htbtn" id='findtrans'><span><img class="icons" src="images/manage3.png"></span>Manage transaction</button>
-                        <button type='button' class="sidebtns <?php echo allowed("mpesaTrans"); ?> htbtn" id='mpesaTrans'><span><img class="icons" src="images/manage3.png"></span>MPESA transactions</button>
-                        <button type='button' class="sidebtns <?php echo allowed("feestruct"); ?> htbtn" id='feestruct'><span><img class="icons" src="images/feestructure.png"></span>Fees structure</button>
-                        <button type='button' class="sidebtns <?php echo allowed("expenses_btn"); ?> htbtn" id='expenses_btn'><span><img class="icons" src="images/feestructure.png"></span>Expenses & Approvals</button>
-                        <button type='button' class="sidebtns <?php echo allowed("expenses_btn"); ?> htbtn" id='supplier_btn'><span><img class="icons" src="images/findstud.png"></span> Supplier Accounts</button>
-                        <button type='button' class="sidebtns <?php echo allowed("expenses_btn"); ?> htbtn" id='asset_account_btn'><span><img class="icons" src="images/pay.png"></span> Asset Accounts</button>
-                        <button type='button' class="sidebtns <?php echo allowed("finance_report_btn"); ?> htbtn" id='finance_report_btn'><span><img class="icons" src="images/report.png"></span>Financial report</button>
+                        <button type='button' class="sidebtns <?php echo allowed("pay_fees"); ?> htbtn" id='payfeess'><span><img class="icons" src="images/pay.png"></span>Collect Fees & Revenue</button>
+                        <button type='button' class="sidebtns <?php echo allowed("find_transaction"); ?> htbtn" id='findtrans'><span><img class="icons" src="images/manage3.png"></span>Manage transaction</button>
+                        <button type='button' class="sidebtns <?php echo allowed("mpesa_transactions"); ?> htbtn" id='mpesaTrans'><span><img class="icons" src="images/manage3.png"></span>MPESA transactions</button>
+                        <button type='button' class="sidebtns <?php echo allowed("fees_structure"); ?> htbtn" id='feestruct'><span><img class="icons" src="images/feestructure.png"></span>Fees structure</button>
+                        <button type='button' class="sidebtns <?php echo allowed("expenses"); ?> htbtn" id='expenses_btn'><span><img class="icons" src="images/feestructure.png"></span>Expenses & Approvals</button>
+                        <button type='button' class="sidebtns <?php echo allowed("supplier_account"); ?> htbtn" id='supplier_btn'><span><img class="icons" src="images/findstud.png"></span> Supplier Accounts</button>
+                        <button type='button' class="sidebtns <?php echo allowed("asset_management"); ?> htbtn" id='asset_account_btn'><span><img class="icons" src="images/pay.png"></span> Asset Accounts</button>
+                        <button type='button' class="sidebtns <?php echo allowed("finance_report"); ?> htbtn" id='finance_report_btn'><span><img class="icons" src="images/report.png"></span>Financial report</button>
                     </div>
                 </div>
             </div>
@@ -479,8 +489,8 @@ function checkPresnt($array, $string){
                     <div class="contsc">
                         <button type='button' class="sidebtns <?php echo allowed("update_school_profile"); ?> htbtn" id='update_school_profile'><span><img class="icons" src="images/updateprofile.png"></span>Update school profile</button>
                         <button type='button' class="sidebtns <?php echo allowed("update_personal_profile"); ?> " id='update_personal_profile'><span><img class="icons" src="images/updateprofile.png"></span>Update personal profile</button>
-                        <button type='button' class="sidebtns <?php echo allowed("set_btns"); ?> htbtn" id='set_btns'><span><img class="icons" src="images/settings.png"></span>Settings</button>
-                        <button type='button' class="sidebtns <?php echo allowed("my_reports"); ?> htbtn" id='my_reports'><span><i class="fas fa-book text-dark"></i></span>Reports</button>
+                        <button type='button' class="sidebtns <?php echo allowed("settings"); ?> htbtn" id='set_btns'><span><img class="icons" src="images/settings.png"></span>Settings</button>
+                        <button type='button' class="sidebtns <?php echo allowed("general_reports"); ?> htbtn" id='my_reports'><span><i class="fas fa-book text-dark"></i></span>Reports</button>
                         <button id="logout" class="sidebtns" style='color:red'><span><img class="icons" src="images/logout.png"></span>Logout</button>
                         <p class="copyright1">Ladybird SMIS Copyright © 2020 - <?php echo date("Y"); ?> | All rights reserved</p>
                     </div>
@@ -1000,24 +1010,12 @@ function checkPresnt($array, $string){
                             <input class='administration1' type='checkbox' name='manage_stud_sect' id='manage_stud_sect'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='class_attendance_sect'>3. Class Attendance</label>
-                            <input class='administration1' type='checkbox' name='class_attendance_sect' id='class_attendance_sect'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='register_staff_sect'>4. Register Staff</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='register_staff_sect'>3. Register Staff</label>
                             <input class='administration1' type='checkbox' name='register_staff_sect' id='register_staff_sect'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='manage_staff_sect'>5. Manage Staff</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='manage_staff_sect'>4. Manage Staff</label>
                             <input class='administration1' type='checkbox' name='manage_staff_sect' id='manage_staff_sect'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='promote_students_sect'>6. Promote Student</label>
-                            <input class='administration1' type='checkbox' name='promote_students_sect' id='promote_students_sect'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='human_resource_sect'>7. Human Resource</label>
-                            <input class='administration1' type='checkbox' name='human_resource_sect' id='human_resource_sect'>
                         </div>
                         <hr>
                         <!-- staft of finance section -->
@@ -1026,7 +1024,7 @@ function checkPresnt($array, $string){
                             <input class='' type='checkbox' name='all_finance_sect' id='all_finance_sect'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='pay_fees-sector'>1. Pay Fees</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='pay_fees-sector'>1. Collect Fees & Revenue</label>
                             <input class='finance1' type='checkbox' name='pay_fees-sector' id='pay_fees-sector'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
@@ -1042,74 +1040,20 @@ function checkPresnt($array, $string){
                             <input class='finance1' type='checkbox' name='fees_structures_sect' id='fees_structures_sect'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='expense_section'>5. Expense</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='expense_section'>5. Expense & Approvals</label>
                             <input class='finance1' type='checkbox' name='expense_section' id='expense_section'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='financial_report_section'>6. Financial Reports</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='supplier_account'>6. Supplier Accounts</label>
+                            <input class='finance1' type='checkbox' name='supplier_account' id='supplier_account'>
+                        </div>
+                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='asset_management'>7. Asset Accounts</label>
+                            <input class='finance1' type='checkbox' name='asset_management' id='asset_management'>
+                        </div>
+                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='financial_report_section'>8. Financial Reports</label>
                             <input class='finance1' type='checkbox' name='financial_report_section' id='financial_report_section'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='payroll_section'>7. Payroll</label>
-                            <input class='finance1' type='checkbox' name='payroll_section' id='payroll_section'>
-                        </div>
-                        <hr>
-                        <!-- staft of finance section -->
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:15px;' for='route_transport_section'><b>Route & Transport</b></label>
-                            <input class='' type='checkbox' name='route_transport_section' id='route_transport_section'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='route_n_van_sect'>1. Route & Vans</label>
-                            <input class='routesnvans1' type='checkbox' name='route_n_van_sect' id='route_n_van_sect'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='enroll_students_sect'>2. Enroll Students</label>
-                            <input class='routesnvans1' type='checkbox' name='enroll_students_sect' id='enroll_students_sect'>
-                        </div>
-                        <hr>
-                        <!-- start of academic section -->
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:15px;' for='academic_section'><b>Academic Section</b></label>
-                            <input class='' type='checkbox' name='academic_section' id='academic_section'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='register_subject_sect'>1. Register Subject</label>
-                            <input class='academic_sect' type='checkbox' name='register_subject_sect' id='register_subject_sect'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='manage_subject_sect'>2. Manage Subject</label>
-                            <input class='academic_sect' type='checkbox' name='manage_subject_sect' id='manage_subject_sect'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='manage_teacher_sect'>3. Manage Teachers</label>
-                            <input class='academic_sect' type='checkbox' name='manage_teacher_sect' id='manage_teacher_sect'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='timetables_sect'>4. Timetable</label>
-                            <input class='academic_sect' type='checkbox' name='timetables_sect' id='timetables_sect'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='exam_management_sect'>5. Exam Management</label>
-                            <input class='academic_sect' type='checkbox' name='exam_management_sect' id='exam_management_sect'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='student_marks_entry'>6. Student Marks Entry</label>
-                            <input class='academic_sect' type='checkbox' name='student_marks_entry' id='student_marks_entry'>
-                        </div>
-                        <hr>
-                        <!-- staft of Boarding section -->
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:15px;' for='all_boarding_section'><b>Boarding Section</b></label>
-                            <input class='' type='checkbox' name='all_boarding_section' id='all_boarding_section'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='enroll_boarding_sect'>1. Enroll Boarding</label>
-                            <input class='boarding_sect' type='checkbox' name='enroll_boarding_sect' id='enroll_boarding_sect'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='manage_dormitory_sect'>2. Manage Dormitory</label>
-                            <input class='boarding_sect' type='checkbox' name='manage_dormitory_sect' id='manage_dormitory_sect'>
                         </div>
                         <hr>
                         <!-- staft of sms section -->
@@ -1118,7 +1062,7 @@ function checkPresnt($array, $string){
                             <input class='' type='checkbox' name='all_sms_check' id='all_sms_check'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='sms_and_broadcast'>1. SMS & Broadcast</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='sms_and_broadcast'>1. Broadcast Message</label>
                             <input class='sms_broadcasted' type='checkbox' name='sms_and_broadcast' id='sms_and_broadcast'>
                         </div>
                         <hr>
@@ -1163,7 +1107,7 @@ function checkPresnt($array, $string){
                 <label for="" class="form-control-label">Select Tasks the user will do.</label>
                 <p class="hide" id="role_ids_in"></p>
                 <div class="form-group my-2">
-                    <div class='classlist2 form-control' style='height:200px;overflow:auto;' name='' id=''>
+                    <div class='classlist2 form-control' id="checkbox_holder_edit_role" style='height:200px;overflow:auto;'>
                         <!-- administration section -->
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
                             <label style='margin-right:5px;cursor:pointer;font-size:15px;' for='all_administration2'><b>Administration Section</b></label>
@@ -1178,24 +1122,12 @@ function checkPresnt($array, $string){
                             <input class='fill_data administration12' type='checkbox' name='manage_stud_sect2' id='manage_stud_sect2'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='class_attendance_sect2'>3. Class Attendance</label>
-                            <input class='fill_data administration12' type='checkbox' name='class_attendance_sect2' id='class_attendance_sect2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='register_staff_sect2'>4. Register Staff</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='register_staff_sect2'>3. Register Staff</label>
                             <input class='fill_data administration12' type='checkbox' name='register_staff_sect2' id='register_staff_sect2'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='manage_staff_sect2'>5. Manage Staff</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='manage_staff_sect2'>4. Manage Staff</label>
                             <input class='fill_data administration12' type='checkbox' name='manage_staff_sect2' id='manage_staff_sect2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='promote_students_sect2'>6. Promote Student</label>
-                            <input class='fill_data administration12' type='checkbox' name='promote_students_sect2' id='promote_students_sect2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='human_resource_sect2'>7. Human Resource</label>
-                            <input class='fill_data administration12' type='checkbox' name='human_resource_sect2' id='human_resource_sect2'>
                         </div>
                         <hr>
                         <!-- staft of finance section -->
@@ -1204,7 +1136,7 @@ function checkPresnt($array, $string){
                             <input class='' type='checkbox' name='all_finance_sect2' id='all_finance_sect2'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='pay_fees-sector2'>1. Pay Fees</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='pay_fees-sector2'>1. Collect Fees & Revenue</label>
                             <input class='fill_data finance12' type='checkbox' name='pay_fees-sector2' id='pay_fees-sector2'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
@@ -1220,74 +1152,20 @@ function checkPresnt($array, $string){
                             <input class='fill_data finance12' type='checkbox' name='fees_structures_sect2' id='fees_structures_sect2'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='expense_section2'>5. Expense</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='expense_section2'>5. Expense & Approvals</label>
                             <input class='fill_data finance12' type='checkbox' name='expense_section2' id='expense_section2'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='financial_report_section2'>6. Financial Reports</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='supplier_account_2'>6. Supplier Account</label>
+                            <input class='fill_data finance12' type='checkbox' name='supplier_account_2' id='supplier_account_2'>
+                        </div>
+                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='asset_management2'>7. Asset Accounts</label>
+                            <input class='fill_data finance12' type='checkbox' name='asset_management2' id='asset_management2'>
+                        </div>
+                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='financial_report_section2'>8. Financial Reports</label>
                             <input class='fill_data finance12' type='checkbox' name='financial_report_section2' id='financial_report_section2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='payroll_section2'>7. Payroll</label>
-                            <input class='fill_data finance12' type='checkbox' name='payroll_section2' id='payroll_section2'>
-                        </div>
-                        <hr>
-                        <!-- staft of finance section -->
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:15px;' for='route_transport_section2'><b>Route & Transport</b></label>
-                            <input class='' type='checkbox' name='route_transport_section2' id='route_transport_section2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='route_n_van_sect2'>1. Route & Vans</label>
-                            <input class='fill_data routesnvans12' type='checkbox' name='route_n_van_sect2' id='route_n_van_sect2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='enroll_students_sect2'>2. Enroll Students</label>
-                            <input class='fill_data routesnvans12' type='checkbox' name='enroll_students_sect2' id='enroll_students_sect2'>
-                        </div>
-                        <hr>
-                        <!-- start of academic section -->
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:15px;' for='academic_section2'><b>Academic Section</b></label>
-                            <input class='' type='checkbox' name='academic_section2' id='academic_section2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='register_subject_sect2'>1. Register Subject</label>
-                            <input class='fill_data academic_sect2' type='checkbox' name='register_subject_sect2' id='register_subject_sect2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='manage_subject_sect2'>2. Manage Subject</label>
-                            <input class='fill_data academic_sect2' type='checkbox' name='manage_subject_sect2' id='manage_subject_sect2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='manage_teacher_sect2'>3. Manage Teachers</label>
-                            <input class='fill_data academic_sect2' type='checkbox' name='manage_teacher_sect2' id='manage_teacher_sect2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='timetables_sect2'>4. Timetable</label>
-                            <input class='fill_data academic_sect2' type='checkbox' name='timetables_sect2' id='timetables_sect2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='exam_management_sect2'>5. Exam Management</label>
-                            <input class='fill_data academic_sect2' type='checkbox' name='exam_management_sect2' id='exam_management_sect2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='student_marks_entry2'>6. Student Marks Entry</label>
-                            <input class='fill_data academic_sect2' type='checkbox' name='student_marks_entry2' id='student_marks_entry2'>
-                        </div>
-                        <hr>
-                        <!-- staft of Boarding section -->
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:15px;' for='all_boarding_section2'><b>Boarding Section</b></label>
-                            <input class='' type='checkbox' name='all_boarding_section2' id='all_boarding_section2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='enroll_boarding_sect2'>1. Enroll Boarding</label>
-                            <input class='fill_data boarding_sect2' type='checkbox' name='enroll_boarding_sect2' id='enroll_boarding_sect2'>
-                        </div>
-                        <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='manage_dormitory_sect2'>2. Manage Dormitory</label>
-                            <input class='fill_data boarding_sect2' type='checkbox' name='manage_dormitory_sect2' id='manage_dormitory_sect2'>
                         </div>
                         <hr>
                         <!-- staft of sms section -->
@@ -1296,7 +1174,7 @@ function checkPresnt($array, $string){
                             <input class='' type='checkbox' name='all_sms_check2' id='all_sms_check2'>
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
-                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='sms_and_broadcast2'>1. SMS & Broadcast</label>
+                            <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='sms_and_broadcast2'>1. Broadcast Message</label>
                             <input class='fill_data sms_broadcasted2' type='checkbox' name='sms_and_broadcast2' id='sms_and_broadcast2'>
                         </div>
                         <hr>
@@ -1319,7 +1197,7 @@ function checkPresnt($array, $string){
                         </div>
                         <div class='checkboxholder' style='margin:10px 0;padding:0px 0px;'>
                             <label style='margin-right:5px;cursor:pointer;font-size:13px;' for='my_school_reports2'>4. Reports</label>
-                            <input class='fill_data accounts_section' type='checkbox' name='my_school_reports2' id='my_school_reports2'>
+                            <input class='fill_data accounts_section2' type='checkbox' name='my_school_reports2' id='my_school_reports2'>
                         </div>
                     </div>
                 </div>
