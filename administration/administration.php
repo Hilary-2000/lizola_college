@@ -134,6 +134,15 @@
                         <input class="d-none" type="text" name="upis" id="upis" placeholder="Unique Personal Identifier">
                     </div>
                     <div class="conts">
+                        <label for="study_mode" class="form-control-label">Study Mode</label>
+                        <select name="study_mode" id="study_mode" class="form-control">
+                            <option value="" hidden>Select an Option</option>
+                            <option selected value="fulltime">Fulltime Mode</option>
+                            <option value="evening">Evening Mode</option>
+                            <option value="weekend">Saturday Mode</option>
+                        </select>
+                    </div>
+                    <div class="conts">
                         <label for="bcno">National ID number:</label>
                         <p id="bcnerr"></p>
                         <input type="text" name="bcno" id="bcno" placeholder="Enter Id number">

@@ -1,306 +1,796 @@
 [
     {
-        "name": "Accountant",
-        "roles": [
-            {
-                "name": "admit_student",
-                "Status": "yes"
-            },
-            {
-                "name": "manage_student",
-                "Status": "yes"
-            },
-            {
-                "name": "register_staff",
-                "Status": "yes"
-            },
-            {
-                "name": "manage_staff",
-                "Status": "yes"
-            },
-            {
-                "name": "pay_fees",
-                "Status": "yes"
-            },
-            {
-                "name": "find_transaction",
-                "Status": "yes"
-            },
-            {
-                "name": "mpesa_transactions",
-                "Status": "yes"
-            },
-            {
-                "name": "fees_structure",
-                "Status": "yes"
-            },
-            {
-                "name": "expenses",
-                "Status": "yes"
-            },
-            {
-                "name": "asset_management",
-                "Status": "yes"
-            },
-            {
-                "name": "supplier_account",
-                "Status": "yes"
-            },
-            {
-                "name": "finance_report",
-                "Status": "yes"
-            },
-            {
-                "name": "sms_broadcast",
-                "Status": "no"
-            },
-            {
-                "name": "update_school_profile",
-                "Status": "no"
-            },
-            {
-                "name": "update_personal_profile",
-                "Status": "yes"
-            },
-            {
-                "name": "settings",
-                "Status": "no"
-            },
-            {
-                "name": "general_reports",
-                "Status": "no"
-            }
-        ]
+        "id": "1",
+        "course_name": "FASHION AND DESIGN",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "fulltime_fees": "9000",
+        "weekend_fees": "7500",
+        "evening_fees": "8500",
+        "term_duration": "1",
+        "duration_intervals": "months"
     },
     {
-        "name": "Users",
-        "roles": [
-            {
-                "name": "admit_student",
-                "Status": "yes"
-            },
-            {
-                "name": "manage_student",
-                "Status": "yes"
-            },
-            {
-                "name": "register_staff",
-                "Status": "yes"
-            },
-            {
-                "name": "manage_staff",
-                "Status": "yes"
-            },
-            {
-                "name": "pay_fees",
-                "Status": "no"
-            },
-            {
-                "name": "find_transaction",
-                "Status": "no"
-            },
-            {
-                "name": "humanresource",
-                "Status": "no"
-            },
-            {
-                "name": "mpesa_transactions",
-                "Status": "no"
-            },
-            {
-                "name": "fees_structure",
-                "Status": "no"
-            },
-            {
-                "name": "expenses",
-                "Status": "yes"
-            },
-            {
-                "name": "asset_management",
-                "Status": "yes"
-            },
-            {
-                "name": "finance_report",
-                "Status": "no"
-            },
-            {
-                "name": "sms_broadcast",
-                "Status": "no"
-            },
-            {
-                "name": "update_school_profile",
-                "Status": "yes"
-            },
-            {
-                "name": "update_personal_profile",
-                "Status": "no"
-            },
-            {
-                "name": "settings",
-                "Status": "no"
-            },
-            {
-                "name": "general_reports",
-                "Status": "no"
-            },
-            {
-                "name": "my_reports",
-                "Status": "no"
-            }
-        ]
+        "id": "3",
+        "course_name": "GARMENT PRODUCTION SPECIALIST",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "1",
+        "no_of_terms": "24",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
     },
     {
-        "name": "New Role",
-        "roles": [
-            {
-                "name": "admit_student",
-                "Status": "yes"
-            },
-            {
-                "name": "manage_student",
-                "Status": "yes"
-            },
-            {
-                "name": "register_staff",
-                "Status": "yes"
-            },
-            {
-                "name": "manage_staff",
-                "Status": "yes"
-            },
-            {
-                "name": "pay_fees",
-                "Status": "no"
-            },
-            {
-                "name": "find_transaction",
-                "Status": "no"
-            },
-            {
-                "name": "humanresource",
-                "Status": "no"
-            },
-            {
-                "name": "mpesa_transactions",
-                "Status": "no"
-            },
-            {
-                "name": "fees_structure",
-                "Status": "no"
-            },
-            {
-                "name": "expenses",
-                "Status": "yes"
-            },
-            {
-                "name": "asset_management",
-                "Status": "no"
-            },
-            {
-                "name": "supplier_account",
-                "Status": "yes"
-            },
-            {
-                "name": "finance_report",
-                "Status": "no"
-            },
-            {
-                "name": "sms_broadcast",
-                "Status": "no"
-            },
-            {
-                "name": "update_school_profile",
-                "Status": "no"
-            },
-            {
-                "name": "update_personal_profile",
-                "Status": "no"
-            },
-            {
-                "name": "settings",
-                "Status": "no"
-            },
-            {
-                "name": "general_reports",
-                "Status": "no"
-            },
-            {
-                "name": "my_reports",
-                "Status": "no"
-            }
-        ]
+        "id": "4",
+        "course_name": "PATTERN MAKER ",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
     },
     {
-        "name": "Supplier",
-        "roles": [
-            {
-                "name": "admit_student",
-                "Status": "yes"
-            },
-            {
-                "name": "manage_student",
-                "Status": "yes"
-            },
-            {
-                "name": "register_staff",
-                "Status": "yes"
-            },
-            {
-                "name": "manage_staff",
-                "Status": "yes"
-            },
-            {
-                "name": "pay_fees",
-                "Status": "yes"
-            },
-            {
-                "name": "find_transaction",
-                "Status": "yes"
-            },
-            {
-                "name": "mpesa_transactions",
-                "Status": "yes"
-            },
-            {
-                "name": "fees_structure",
-                "Status": "yes"
-            },
-            {
-                "name": "expenses",
-                "Status": "yes"
-            },
-            {
-                "name": "asset_management",
-                "Status": "yes"
-            },
-            {
-                "name": "supplier_account",
-                "Status": "yes"
-            },
-            {
-                "name": "finance_report",
-                "Status": "yes"
-            },
-            {
-                "name": "sms_broadcast",
-                "Status": "no"
-            },
-            {
-                "name": "update_school_profile",
-                "Status": "no"
-            },
-            {
-                "name": "update_personal_profile",
-                "Status": "no"
-            },
-            {
-                "name": "settings",
-                "Status": "no"
-            },
-            {
-                "name": "general_reports",
-                "Status": "no"
-            }
-        ]
+        "id": "5",
+        "course_name": "TAILOR AND DRESS MAKER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "6",
+        "course_name": "STYLIST AND IMAGE CONSULTANT",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "7",
+        "course_name": "FASHION ILLUSTRATOR",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "8",
+        "course_name": "ENTREPRENEUR (BOTIQUE OWNER\/BRAND FOUNDER)",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "9",
+        "course_name": "COSTUME DESIGNER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "10",
+        "course_name": "FASHION MERCHANDISER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "11",
+        "course_name": "TEXTILE DESIGNER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "12",
+        "course_name": "LECTURER\/TRAINER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "13",
+        "course_name": "GRAPHIC DESIGNER",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "14",
+        "course_name": "FINE ART",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "15",
+        "course_name": "WEB DESIGN",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "16",
+        "course_name": "PHOTOGRAPHY",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "17",
+        "course_name": "MOBILE AND PHONE REPAIR",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "19",
+        "course_name": "GRAPHIC DESIGN (IN SIGN LANGUAGE)",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "20",
+        "course_name": "FINE ART (IN SIGN LANGUAGE)",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "1",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": 21,
+        "course_name": "FASHION AND DESIGN",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "22",
+        "course_name": "GARMENT PRODUCTION SPECIALIST",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "8",
+        "no_of_terms": "24",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "23",
+        "course_name": "PATTERN MAKER ",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "24",
+        "course_name": "TAILOR AND DRESS MAKER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "25",
+        "course_name": "STYLIST AND IMAGE CONSULTANT",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "26",
+        "course_name": "FASHION ILLUSTRATOR",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "27",
+        "course_name": "ENTREPRENEUR (BOTIQUE OWNER\/BRAND FOUNDER)",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "28",
+        "course_name": "COSTUME DESIGNER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "29",
+        "course_name": "FASHION MERCHANDISER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "30",
+        "course_name": "TEXTILE DESIGNER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "31",
+        "course_name": "LECTURER\/TRAINER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "32",
+        "course_name": "GRAPHIC DESIGNER",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "14",
+        "course_name": "FINE ART",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "33",
+        "course_name": "WEB DESIGN",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "34",
+        "course_name": "PHOTOGRAPHY",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "35",
+        "course_name": "MOBILE AND PHONE REPAIR",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "36",
+        "course_name": "GRAPHIC DESIGN (IN SIGN LANGUAGE)",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "37",
+        "course_name": "FINE ART (IN SIGN LANGUAGE)",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "8",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "38",
+        "course_name": "FASHION AND DESIGN",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "39",
+        "course_name": "GARMENT PRODUCTION SPECIALIST",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "11",
+        "no_of_terms": "24",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "40",
+        "course_name": "PATTERN MAKER ",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "41",
+        "course_name": "TAILOR AND DRESS MAKER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "42",
+        "course_name": "STYLIST AND IMAGE CONSULTANT",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "43",
+        "course_name": "FASHION ILLUSTRATOR",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "44",
+        "course_name": "ENTREPRENEUR (BOTIQUE OWNER\/BRAND FOUNDER)",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "45",
+        "course_name": "COSTUME DESIGNER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "46",
+        "course_name": "FASHION MERCHANDISER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "47",
+        "course_name": "TEXTILE DESIGNER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "48",
+        "course_name": "LECTURER\/TRAINER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "49",
+        "course_name": "GRAPHIC DESIGNER",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "50",
+        "course_name": "FINE ART",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "51",
+        "course_name": "WEB DESIGN",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "52",
+        "course_name": "PHOTOGRAPHY",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "53",
+        "course_name": "MOBILE AND PHONE REPAIR",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "54",
+        "course_name": "GRAPHIC DESIGN (IN SIGN LANGUAGE)",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "55",
+        "course_name": "FINE ART (IN SIGN LANGUAGE)",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "11",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": 56,
+        "course_name": "FASHION AND DESIGN",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "10",
+        "no_of_terms": "12",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "57",
+        "course_name": "GARMENT PRODUCTION SPECIALIST",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "10",
+        "no_of_terms": "24",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "58",
+        "course_name": "PATTERN MAKER ",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "59",
+        "course_name": "TAILOR AND DRESS MAKER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "60",
+        "course_name": "STYLIST AND IMAGE CONSULTANT",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "61",
+        "course_name": "FASHION ILLUSTRATOR",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "62",
+        "course_name": "ENTREPRENEUR (BOTIQUE OWNER\/BRAND FOUNDER)",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "63",
+        "course_name": "COSTUME DESIGNER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "64",
+        "course_name": "FASHION MERCHANDISER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "65",
+        "course_name": "TEXTILE DESIGNER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "66",
+        "course_name": "LECTURER\/TRAINER",
+        "course_levels": "[]",
+        "department": "FS-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "67",
+        "course_name": "GRAPHIC DESIGNER",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "68",
+        "course_name": "FINE ART",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "69",
+        "course_name": "WEB DESIGN",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "70",
+        "course_name": "PHOTOGRAPHY",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "71",
+        "course_name": "MOBILE AND PHONE REPAIR",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "72",
+        "course_name": "GRAPHIC DESIGN (IN SIGN LANGUAGE)",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
+    },
+    {
+        "id": "73",
+        "course_name": "FINE ART (IN SIGN LANGUAGE)",
+        "course_levels": "[]",
+        "department": "DAT-001",
+        "course_level": "10",
+        "no_of_terms": "6",
+        "termly_fees": "9000",
+        "term_duration": "1",
+        "duration_intervals": "months"
     }
 ]

@@ -2501,7 +2501,7 @@ function checkPresnt($array, $string){
                 <div class="conts" id="">
                     <div class="message_contents">
                         <label class="form-control-label"><u>Note:</u></label>
-                        <p>- Adding of a votehead for regular or boarder will result to an immediate change in student`s balances and an increase or decrease of what is charged.</p>
+                        <p>- Adding of a votehead for regular will result to an immediate change in student`s balances and an increase or decrease of what is charged.</p>
                     </div>
                     <form class="add_expense" id="exp_names">
                         <div class="conts">
@@ -2510,16 +2510,16 @@ function checkPresnt($array, $string){
                             <p id="expe_err"></p>
                         </div>
                         <div class="conts">
-                            <label class="form-control-label" for="term_one">Module Term Amount: <br></label>
-                            <input class="form-control" type="number" name="term_one" id="term_one" placeholder="Module Term Amount">
+                            <label class="form-control-label" for="term_one">Fulltime Amount: <br></label>
+                            <input class="form-control" value="0" type="number" name="term_one" id="term_one" placeholder="Fulltime Amount Amount">
                         </div>
-                        <div class="conts d-none">
-                            <label class="form-control-label" for="term_two">Term Two Amount: <br></label>
-                            <input class="form-control" value="0" type="number" name="term_two" id="term_two" placeholder="Term Two">
+                        <div class="conts">
+                            <label class="form-control-label" for="term_two">Evening Amount: <br></label>
+                            <input class="form-control" value="0" type="number" name="term_two" id="term_two" placeholder="Evening Amount">
                         </div>
-                        <div class="conts d-none">
-                            <label class="form-control-label" for="term_three">Term Three Amount: <br></label>
-                            <input class="form-control" value="0" type="number" name="term_three" id="term_three" placeholder="Term Three">
+                        <div class="conts">
+                            <label class="form-control-label" for="term_three">Saturday Amount: <br></label>
+                            <input class="form-control" value="0" type="number" name="term_three" id="term_three" placeholder="Saturday Amount">
                         </div>
                         <div class="conts">
                             <label class="form-control-label" for="boarders_regular">Fees type: <br></label>
@@ -3058,16 +3058,16 @@ function checkPresnt($array, $string){
                             <input class="form-control" type="text" name="exp_name1" id="exp_name1" placeholder="Votehead Name">
                         </div>
                         <div class="conts">
-                            <label class="form-control-label" for="term_one1">Module Term Amount: <br></label>
-                            <input class="form-control" type="number" name="term_one1" id="term_one1" placeholder="Module Term Amount">
+                            <label class="form-control-label" for="term_one1">Fulltime Amount: <br></label>
+                            <input class="form-control" type="number" name="term_one1" id="term_one1" placeholder="Fulltime Amount">
                         </div>
-                        <div class="conts d-none">
-                            <label class="form-control-label" for="term_two1">Term Two Amount: <br></label>
-                            <input class="form-control" value="0" type="number" name="term_two1" id="term_two1" placeholder="Term Two">
+                        <div class="conts">
+                            <label class="form-control-label" for="term_two1">Evening Amount: <br></label>
+                            <input class="form-control" value="0" type="number" name="term_two1" id="term_two1" placeholder="Evening Amount">
                         </div>
-                        <div class="conts d-none">
-                            <label class="form-control-label" for="term_three1">Term Three Amount: <br></label>
-                            <input class="form-control" value="0" type="number" name="term_three1" id="term_three1" placeholder="Term Three">
+                        <div class="conts">
+                            <label class="form-control-label" for="term_three1">Saturday Amount: <br></label>
+                            <input class="form-control" value="0" type="number" name="term_three1" id="term_three1" placeholder="Saturday Amount">
                         </div>
                         <div class="conts">
                             <label class="form-control-label" for="boarders1_regular1">Fees type: <br></label>
@@ -3260,7 +3260,11 @@ function checkPresnt($array, $string){
                     <p class="funga" id="close_add_course_win">&times</p>
                     <h6 class="text-center">Add Course</h6>
                 </div>
-                <div class="container border border-dark rounded p-2 w-75">
+                <div class="message_contents my-2">
+                    <label class="form-control-label"><u>Note:</u></label>
+                    <p>- Provide the correct data for the course.</p>
+                </div>
+                <div class="container mx-2 border border-dark rounded p-2 row add_expense" style="width: 90%;">
                     <div class="form-group">
                         <label class="form-control-label" for="course_input_text">Enter Course Name: <br></label>
                         <input class="form-control" type="text" name="course_input_text" id="course_input_text" placeholder="eg: Information Technology">
@@ -3268,7 +3272,7 @@ function checkPresnt($array, $string){
                     <div class="form-group">
                         <label for="level_lists" class="form-control-label">Level Available</label> (<small class="text-secondary">Select the level the course is to be offered!</small>)
                         <img src="images/ajax_clock_small.gif" class="" id="add_course_clock">
-                        <div id="level_available_course_name" class="w-75">
+                        <div id="level_available_course_name" class="ml-2">
                             <p class="text-danger">Set the course levels first before setting up courses!</p>
                         </div>
                     </div>
@@ -3277,29 +3281,33 @@ function checkPresnt($array, $string){
                         <input type="number" name="no_of_terms" id="no_of_terms" class="form-control" placeholder="No of Terms(5 terms)">
                     </div>
                     <div class="form-group">
-                        <label for="termly_fees" class="form-control-label">Termly Fees</label>
-                        <input type="number" name="termly_fees" id="termly_fees" class="form-control" placeholder="Termly fees(Kes 20,000)">
+                        <label for="fulltime_fees" class="form-control-label">Fulltime Fees</label>
+                        <input type="number" name="fulltime_fees" value="0" id="fulltime_fees" class="form-control" placeholder="Fulltime Fees(Kes 20,000)">
                     </div>
-                    <div class="form-group my-2">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="duration_in_figures" class="form-control-label">Term Durations</label>
-                                <input type="number" name="term_duration" id="term_duration" class="form-control" placeholder="Duration e.g, 10 months">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="duration_intervals" class="form-control-label">Duration Intervals</label>
-                                <select name="duration_intervals" id="duration_intervals" class="form-control">
-                                    <option value="year">Years</option>
-                                    <option value="months" selected>Months</option>
-                                    <option value="week">Weeks</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="evening_fees" class="form-control-label">Evening Fees</label>
+                        <input type="number" name="evening_fees" value="0" id="evening_fees" class="form-control" placeholder="Evening Fees(Kes 20,000)">
+                    </div>
+                    <div class="form-group">
+                        <label for="weekend_fees" class="form-control-label">Weekend Fees</label>
+                        <input type="number" name="weekend_fees" value="0" id="weekend_fees" class="form-control" placeholder="Weekend Fees(Kes 20,000)">
+                    </div>
+                    <div class="form-group">
+                        <label for="duration_in_figures" class="form-control-label">Term Durations</label>
+                        <input type="number" name="term_duration" id="term_duration" class="form-control" placeholder="Duration e.g, 10 months">
+                    </div>
+                    <div class="form-group">
+                        <label for="duration_intervals" class="form-control-label">Duration Intervals</label>
+                        <select name="duration_intervals" id="duration_intervals" class="form-control ml-2 w-75">
+                            <option value="year">Years</option>
+                            <option value="months" selected>Months</option>
+                            <option value="week">Weeks</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="department_list" class="form-control-label">Course Department</label>
                         <img src="images/ajax_clock_small.gif" class="" id="display_my_departments">
-                        <div id="department_list_window" class="w-75">
+                        <div id="department_list_window" class="w-75 ml-2">
                             <p class="text-danger">Set the course departments!</p>
                         </div>
                         <p id="add_course_outputtxt"></p>
@@ -3336,24 +3344,28 @@ function checkPresnt($array, $string){
                             <input type="number" name="edit_no_of_terms" id="edit_no_of_terms" class="form-control" placeholder="No of Terms(5 terms)">
                         </div>
                         <div class="form-group">
-                            <label for="edit_termly_fees" class="form-control-label">Termly Fees</label>
-                            <input type="number" name="edit_termly_fees" id="edit_termly_fees" class="form-control" placeholder="Termly fees(Kes 20,000)">
+                            <label for="edit_fulltime_fees" class="form-control-label">Fulltime Fees</label>
+                            <input type="number" name="edit_fulltime_fees" value="0" id="edit_fulltime_fees" class="form-control" placeholder="Fulltime Fees(Kes 20,000)">
                         </div>
-                        <div class="form-group my-2">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="edit_term_duration" class="form-control-label">Term Durations</label>
-                                    <input type="number" name="edit_term_duration" id="edit_term_duration" class="form-control" placeholder="Duration e.g, 10 months">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="edit_duration_intervals" class="form-control-label">Duration Intervals</label>
-                                    <select name="edit_duration_intervals" id="edit_duration_intervals" class="form-control">
-                                        <option value="year">Years</option>
-                                        <option value="months" selected>Months</option>
-                                        <option value="week">Weeks</option>
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="edit_evening_fees" class="form-control-label">Evening Fees</label>
+                            <input type="number" name="edit_evening_fees" value="0" id="edit_evening_fees" class="form-control" placeholder="Evening Fees(Kes 20,000)">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_weekend_fees" class="form-control-label">Weekend Fees</label>
+                            <input type="number" name="edit_weekend_fees" value="0" id="edit_weekend_fees" class="form-control" placeholder="Weekend Fees(Kes 20,000)">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_term_duration" class="form-control-label">Term Durations</label>
+                            <input type="number" name="edit_term_duration" id="edit_term_duration" class="form-control" placeholder="Duration e.g, 10 months">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_duration_intervals" class="form-control-label">Duration Intervals</label>
+                            <select name="edit_duration_intervals" id="edit_duration_intervals" class="form-control">
+                                <option value="year">Years</option>
+                                <option value="months" selected>Months</option>
+                                <option value="week">Weeks</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="department_list" class="form-control-label">Course Department</label>

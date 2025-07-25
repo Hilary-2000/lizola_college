@@ -36,7 +36,7 @@
                             $module_terms = $my_course_list[$index]->module_terms;
                             for ($ind=0; $ind < count($module_terms); $ind++) {
                                 if($module_terms[$ind]->status == 1){
-                                    $course_fees = $module_terms[$ind]->termly_cost;
+                                    $course_fees = $student_data['study_mode'] == "weekend" ? ($module_terms[$ind]->weekend_cost ?? 0) : ($student_data['study_mode'] == "evening" ? ($module_terms[$ind]->evening_cost ?? 0) : ($student_data['study_mode'] == "fulltime" ? ($module_terms[$ind]->fulltime_cost ?? 0) : ($module_terms[$ind]->termly_cost ?? 0)));
                                     break;
                                 }
                             }
@@ -60,7 +60,8 @@
                         while ($row = $results->fetch_assoc()) {
                             $a_fee = new stdClass();
                             $a_fee->fees_name = ucwords(strtolower($row['expenses']));
-                            $a_fee->fees_amount = $row['TERM_1'];
+                            $study_mode = $student_data['study_mode'] == "weekend" ? "sum(`TERM_3`)" : ($student_data['study_mode'] == "evening" ? "sum(`TERM_2`)" : "sum(`TERM_1`)");
+                            $a_fee->fees_amount = $student_data['study_mode'] == "weekend" ? $row['TERM_3'] : ($student_data['study_mode'] == "evening" ? $row['TERM_2'] : $row['TERM_1']);
                             $a_fee->fees_id = $row['ids'];
                             $a_fee->fees_role = $row['roles'] == "regular" ? "Compulsory" : $row['roles'];
                             array_push($all_course_fees, $a_fee);
@@ -1264,9 +1265,9 @@
                 $table.="<tr>
                         <th>No.</th>
                         <th>Votehead</th>
-                        <th>Module Term Amount</th>
-                        <th class='d-none'>TERM TWO</th>
-                        <th class='d-none'>TERM THREE</th>
+                        <th>Fulltime Amount</th>
+                        <th>Evening Amount</th>
+                        <th>Weekend Amount</th>
                         <th>Role</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -1278,8 +1279,8 @@
                 while ($row = $res->fetch_assoc()) {
                     $table.="<tr><td><input hidden id='fees_structure_value_".$row['ids']."' value='".json_encode($row)."'>".$index."</td><td class='vote_heads' id = 'expense_name".$row['ids']."'>".$row['expenses']."</td>";
                     $table.="<td class = 't-one' id = 't_one".$row['ids']."'>".$row['TERM_1']."</td>";
-                    $table.="<td class = 't-two d-none' id = 't_two".$row['ids']."'>".$row['TERM_2']."</td>";
-                    $table.="<td class = 't-three d-none' id = 't_three".$row['ids']."'>".$row['TERM_3']."</td>";
+                    $table.="<td class = 't-two' id = 't_two".$row['ids']."'>".$row['TERM_2']."</td>";
+                    $table.="<td class = 't-three' id = 't_three".$row['ids']."'>".$row['TERM_3']."</td>";
                     $total1+=$row['TERM_1'];
                     $total2+=$row['TERM_2'];
                     $total3+=$row['TERM_3'];
@@ -1291,7 +1292,7 @@
                     $table.="<td>".$button."</td><td>".$button2."</td></tr>";
                     $index++;
                 }
-                $table.="<tr><td colspan='2'><b>Total</b></td><td>Ksh ".number_format($total1)."</td><td class='d-none'>Ksh ".$total2."</td><td class='d-none'>Ksh ".$total3."</td></tr><tr><td colspan='2' ><b>Grand total </b></td><td>Ksh ".number_format($total1)."</td></tr></table></div>";
+                $table.="<tr><td colspan='2'><b>Total</b></td><td>Ksh ".number_format($total1)."</td><td class=''>Ksh ".$total2."</td><td class=''>Ksh ".$total3."</td></tr><tr><td colspan='2' ><b>Grand total </b></td><td>Ksh ".number_format($total1)."</td></tr></table></div>";
                 echo $table;
             }
         }elseif(isset($_GET['get_levels_fees_structure'])){
@@ -7444,7 +7445,8 @@
                 $module_terms = $my_course_list[$index]->module_terms;
                 for ($ind=0; $ind < count($module_terms); $ind++) {
                     if($module_terms[$ind]->status == 1){
-                        $course_fees = $module_terms[$ind]->termly_cost;
+                        $course_fees = $student_data['study_mode'] == "weekend" ? ($module_terms[$ind]->weekend_cost ?? 0) : ($student_data['study_mode'] == "evening" ? ($module_terms[$ind]->evening_cost ?? 0) : ($student_data['study_mode'] == "fulltime" ? ($module_terms[$ind]->fulltime_cost ?? 0) : ($module_terms[$ind]->termly_cost ?? 0)));
+                        // $course_fees = $module_terms[$ind]->termly_cost;
                         $active_course = true;
                         break;
                     }
@@ -7464,7 +7466,8 @@
             $course_enrolled = $student_data['course_done'];
     
             // get the term they are in
-            $select = "SELECT sum(`TERM_1`) AS 'TOTALS' FROM `fees_structure` WHERE `classes` = ? AND `course` = ? AND `activated` = 1  and `roles` = 'regular';";
+            $study_mode = $student_data['study_mode'] == "weekend" ? "sum(`TERM_3`)" : ($student_data['study_mode'] == "evening" ? "sum(`TERM_2`)" : "sum(`TERM_1`)");
+            $select = "SELECT $study_mode AS 'TOTALS' FROM `fees_structure` WHERE `classes` = ? AND `course` = ? AND `activated` = 1  and `roles` = 'regular';";
             $stmt = $conn2->prepare($select);
             $stmt->bind_param("ss",$class,$course_enrolled);
             $stmt->execute();

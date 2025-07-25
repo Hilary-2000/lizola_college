@@ -1,3 +1,20 @@
+25th Jul 2025 15:00:04PM : Skima Jeremiah - of Reg No. (LC-2025-7) data has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 14:59:54PM : Ham Makanga - of Reg No. (LC-2025-8) data has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 14:59:38PM : Skima Jeremiah - of Reg No. (LC-2025-7) data has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 14:59:07PM : Skima Jeremiah - of Reg No. (LC-2025-7) data has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 14:53:34PM : Ham Makanga - of Reg No. (LC-2025-8) data has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 14:35:28PM : Ham Makanga - of Reg No. (LC-2025-8) data has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 14:24:33PM : HAM MAKANGA with admission number LC-2025-8 has been admitted successfully - {HILLARY NGIGE}
+25th Jul 2025 14:22:22PM : Course "FASHION AND DESIGN" has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 14:22:04PM : Course "FASHION AND DESIGN" has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 14:21:34PM : Course "FASHION AND DESIGN" has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 14:16:34PM : SKIMA JEREMIAH with admission number LC-2025-7 has been admitted successfully - {HILLARY NGIGE}
+25th Jul 2025 13:43:13PM : Course "FASHION AND DESIGN" has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 13:08:54PM : Course "TEXTILE DESIGNER" has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 12:51:15PM : James Mwingi - of Reg No. (LC-2025-6) data has been updated successfully! - {HILLARY NGIGE}
+25th Jul 2025 11:08:28AM : JAMES MWINGI with admission number LC-2025-6 has been admitted successfully - {HILLARY NGIGE}
+25th Jul 2025 10:52:30AM : Fees structure has been modified. Votehead " Registration Fee (payable Once)" changed successfully! - {HILLARY NGIGE}
+25th Jul 2025 09:19:00AM : HILLARY NGIGE successfully logged into the system as Principal - {HILLARY NGIGE}
 24th Jul 2025 20:10:34PM : Role "Accountant" has been updated successfully! - {HILLARY NGIGE}
 24th Jul 2025 20:09:56PM : HILLARY NGIGE successfully logged into the system as Principal - {HILLARY NGIGE}
 24th Jul 2025 20:08:43PM : JAMES MUGOH successfully logged into the system as Accountant - {JAMES MUGOH}

@@ -287,6 +287,15 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4">
+                                    <label for="edit_study_mode" class="form-control-label"><b>Study Mode</b></label>
+                                    <select name="edit_study_mode" id="edit_study_mode" class="form-control w-100">
+                                        <option value="" hidden>Select an Option</option>
+                                        <option selected value="fulltime">Fulltime Mode</option>
+                                        <option value="evening">Evening Mode</option>
+                                        <option value="weekend">Saturday Mode</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
                                     <label for="course_progress" class="form-control-label"><b>Course Progress</b></label>
                                     <select name="course_progress" id="course_progress" class="form-control w-100">
                                         <option value="" hidden>Select how you wish the student progress</option>

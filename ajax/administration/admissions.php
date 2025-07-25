@@ -533,6 +533,7 @@
                         array_push($data_array,$row['balance_carry_forward']);
                         array_push($data_array,$row['student_contact']);
                         array_push($data_array,$row['student_email']);
+                        array_push($data_array,$row['study_mode']);
                     }else{
                     }
                 }else {
@@ -805,6 +806,7 @@
             $snamed = $_GET['snamed'];
             $fnamed = $_GET['fnamed'];
             $lnamed = $_GET['lnamed'];
+            $study_mode = $_GET['study_mode'];
             // &parentname2="+parname2+"&parentcontact="+parconts2+"&parentrelation="+parrelation2+"&pemails="+pemail2
             $parentname2 = $_GET['parentname2'];
             $parentcontact = $_GET['parentcontact'];
@@ -885,7 +887,9 @@
                         // get the level id
                         $module_terms = 0;
                         $module_period = "0 days";
-                        $term_cost = 0;
+                        $fulltime_cost = 0;
+                        $evening_cost = 0;
+                        $weekend_cost = 0;
                         $select = "SELECT * FROM `settings` WHERE `sett` = 'courses';";
                         $stmt = $conn2->prepare($select);
                         $stmt->execute();
@@ -897,7 +901,9 @@
                                     if($course_chosen == $courses[$index]->id){
                                         $module_terms = isset($courses[$index]->no_of_terms) ? $courses[$index]->no_of_terms : 0;
                                         $module_period = isset($courses[$index]->term_duration) ? $courses[$index]->term_duration ." ". $courses[$index]->duration_intervals : "0 days";
-                                        $term_cost = isset($courses[$index]->termly_fees) ? $courses[$index]->termly_fees : 0;
+                                        $fulltime_cost = isset($courses[$index]->fulltime_fees) ? $courses[$index]->fulltime_fees : 0;
+                                        $evening_cost = isset($courses[$index]->evening_fees) ? $courses[$index]->evening_fees : 0;
+                                        $weekend_cost = isset($courses[$index]->weekend_fees) ? $courses[$index]->weekend_fees : 0;
                                         break;
                                     }
                                 }
@@ -924,7 +930,9 @@
                             $term->status =  ($index == 0) ? 1 : 0;
                             $term->start_date =  ($index == 0) ? date("YmdHis") : "";
                             $term->end_date =  ($index == 0) ? date("YmdHis", strtotime("+".$module_period)) : "";
-                            $term->termly_cost = $term_cost;
+                            $term->fulltime_cost = $fulltime_cost;
+                            $term->evening_cost = $evening_cost;
+                            $term->weekend_cost = $weekend_cost;
                             array_push($course_detail->module_terms, $term);
                         }
 
@@ -967,9 +975,9 @@
             }
 
             // echo $previous_schools;
-            $update = "UPDATE `student_data` SET `year_of_study` = ?,`stud_class` = ?, `BCNo`= ?,`index_no` = ?,`gender` = ?, `disabled` = ? , `disable_describe` = ? , `address` = ? ,`parentName` = ?,`parentContacts` = ?,`parent_relation` = ?,`parent_email` = ?,`parent_name2` = ?,`parent_contact2` = ?, `parent_relation2` = ?, `parent_email2` = ?, `first_name` = ? ,`surname` = ? ,`second_name` = ? ,`primary_parent_occupation` = ?, `secondary_parent_occupation` = ?, `medical_history` = ?, `clubs_id` = ?, `prev_sch_attended` = ?,`D_O_A` = ?, `transfered_comment` = ?, `course_done` = ?,`intake_year` = ?, `intake_month` = ?, `course_progress_status` = ?, `student_email` = ?, `student_contact` = ? WHERE `adm_no`=?";
+            $update = "UPDATE `student_data` SET `study_mode` = ?, `year_of_study` = ?,`stud_class` = ?, `BCNo`= ?,`index_no` = ?,`gender` = ?, `disabled` = ? , `disable_describe` = ? , `address` = ? ,`parentName` = ?,`parentContacts` = ?,`parent_relation` = ?,`parent_email` = ?,`parent_name2` = ?,`parent_contact2` = ?, `parent_relation2` = ?, `parent_email2` = ?, `first_name` = ? ,`surname` = ? ,`second_name` = ? ,`primary_parent_occupation` = ?, `secondary_parent_occupation` = ?, `medical_history` = ?, `clubs_id` = ?, `prev_sch_attended` = ?,`D_O_A` = ?, `transfered_comment` = ?, `course_done` = ?,`intake_year` = ?, `intake_month` = ?, `course_progress_status` = ?, `student_email` = ?, `student_contact` = ? WHERE `adm_no`=?";
             $stmt = $conn2->prepare($update);
-            $stmt->bind_param("sssssssssssssssssssssssssssssssss",$newYOS,$class,$bcnos,$index,$genders,$disabled,$describe,$address,$pnamed,$pcontacts,$prelation,$pemail,$parentname2,$parentcontact,$parentrelation,$pemails,$fnamed,$snamed,$lnamed,$occupation1,$occupation2,$medical_history,$clubs_in_sporters,$previous_schools,$doas,$reason_for_leaving,$course_chosen,$intake_year_edit,$intake_month_edit,$course_progress,$student_email,$student_contacts,$adminno);
+            $stmt->bind_param("ssssssssssssssssssssssssssssssssss",$study_mode, $newYOS,$class,$bcnos,$index,$genders,$disabled,$describe,$address,$pnamed,$pcontacts,$prelation,$pemail,$parentname2,$parentcontact,$parentrelation,$pemails,$fnamed,$snamed,$lnamed,$occupation1,$occupation2,$medical_history,$clubs_in_sporters,$previous_schools,$doas,$reason_for_leaving,$course_chosen,$intake_year_edit,$intake_month_edit,$course_progress,$student_email,$student_contacts,$adminno);
             if($stmt->execute()){
                 echo "<p style='color:green;font-size:12px;'>Student  data updated successfully!</p>";
                 $log_text = $fnamed." ".$lnamed." - of Reg No. (".$adminno.") data has been updated successfully!";
@@ -2752,7 +2760,10 @@
             $course_id = $_GET['course_id'];
             $course_level = $_GET['course_level'];
             $no_of_terms = $_GET['no_of_terms'];
-            $termly_fees = $_GET['termly_fees'];
+            // $termly_fees = $_GET['termly_fees'];
+            $fulltime_fees = $_GET['fulltime_fees'];
+            $evening_fees = $_GET['evening_fees'];
+            $weekend_fees = $_GET['weekend_fees'];
             $term_duration = $_GET['term_duration'];
             $duration_intervals = $_GET['duration_intervals'];
 
@@ -2770,7 +2781,9 @@
                     $new_courses->department = $department_name;
                     $new_courses->course_level = $course_level;
                     $new_courses->no_of_terms = $no_of_terms;
-                    $new_courses->termly_fees = $termly_fees;
+                    $new_courses->fulltime_fees = $fulltime_fees;
+                    $new_courses->weekend_fees = $weekend_fees;
+                    $new_courses->evening_fees = $evening_fees;
                     $new_courses->term_duration = $term_duration;
                     $new_courses->duration_intervals = $duration_intervals;
 
@@ -2847,7 +2860,10 @@
                     $new_course->department = $_GET['department_name'];
                     $new_course->course_level = $_GET['course_level'];
                     $new_course->no_of_terms = $_GET['no_of_terms'];
-                    $new_course->termly_fees = $_GET['termly_fees'];
+                    // $new_course->termly_fees = $_GET['termly_fees'];
+                    $new_course->fulltime_fees = $_GET['fulltime_fees'];
+                    $new_course->evening_fees = $_GET['evening_fees'];
+                    $new_course->weekend_fees = $_GET['weekend_fees'];
                     $new_course->term_duration = $_GET['term_duration'];
                     $new_course->duration_intervals = $_GET['duration_intervals'];
 
@@ -2869,7 +2885,10 @@
                     $new_course->department = $_GET['department_name'];
                     $new_course->course_level = $_GET['course_level'];
                     $new_course->no_of_terms = $_GET['no_of_terms'];
-                    $new_course->termly_fees = $_GET['termly_fees'];
+                    // $new_course->termly_fees = $_GET['termly_fees'];
+                    $new_course->fulltime_fees = $_GET['fulltime_fees'];
+                    $new_course->evening_fees = $_GET['evening_fees'];
+                    $new_course->weekend_fees = $_GET['weekend_fees'];
                     $new_course->term_duration = $_GET['term_duration'];
                     $new_course->duration_intervals = $_GET['duration_intervals'];
 
@@ -5435,6 +5454,7 @@
             $parent_accupation2 = $_POST['parent_accupation2'];
             $intake_year = $_POST['intake_year'];
             $intake_month = $_POST['intake_month'];
+            $study_mode = $_POST['study_mode'];
 
             // get the level id
             $level_id = null;
@@ -5461,7 +5481,9 @@
             // get the level id
             $module_terms = 0;
             $module_period = "0 days";
-            $term_cost = 0;
+            $fulltime_cost = 0;
+            $evening_cost = 0;
+            $weekend_cost = 0;
             $select = "SELECT * FROM `settings` WHERE `sett` = 'courses';";
             $stmt = $conn2->prepare($select);
             $stmt->execute();
@@ -5473,7 +5495,10 @@
                         if($course_chosen == $courses[$index]->id){
                             $module_terms = isset($courses[$index]->no_of_terms) ? $courses[$index]->no_of_terms : 0;
                             $module_period = isset($courses[$index]->term_duration) ? $courses[$index]->term_duration ." ". $courses[$index]->duration_intervals : "0 days";
-                            $term_cost = isset($courses[$index]->termly_fees) ? $courses[$index]->termly_fees : 0;
+                            // $term_cost = isset($courses[$index]->termly_fees) ? $courses[$index]->termly_fees : 0;
+                            $fulltime_cost = isset($courses[$index]->fulltime_fees) ? $courses[$index]->fulltime_fees : 0;
+                            $evening_cost = isset($courses[$index]->evening_fees) ? $courses[$index]->evening_fees : 0;
+                            $weekend_cost = isset($courses[$index]->weekend_fees) ? $courses[$index]->weekend_fees : 0;
                             break;
                         }
                     }
@@ -5501,7 +5526,9 @@
                 $term->start_date = $course_module_terms == ($index+1) ? date("Ymd", strtotime($doa)).date("His") : "";
                 $end_date = addPeriod(date("Ymd", strtotime($doa)).date("His"), $module_period);
                 $term->end_date = $course_module_terms == ($index+1) ? $end_date : "";
-                $term->termly_cost = $term_cost;
+                $term->fulltime_cost = $fulltime_cost;
+                $term->evening_cost = $evening_cost;
+                $term->weekend_cost = $weekend_cost;
                 array_push($course_detail->module_terms, $term);
             }
 
