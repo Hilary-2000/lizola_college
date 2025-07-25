@@ -9,11 +9,9 @@
                 "id": 1,
                 "term_name": "MODULE 1",
                 "status": 1,
-                "start_date": "20250725142433",
-                "end_date": "20250825142433",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "start_date": "20250725110828",
+                "end_date": "20250825110828",
+                "termly_cost": "9000"
             },
             {
                 "id": 2,
@@ -21,9 +19,7 @@
                 "status": 0,
                 "start_date": "",
                 "end_date": "",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "termly_cost": "9000"
             },
             {
                 "id": 3,
@@ -31,9 +27,7 @@
                 "status": 0,
                 "start_date": "",
                 "end_date": "",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "termly_cost": "9000"
             },
             {
                 "id": 4,
@@ -41,9 +35,7 @@
                 "status": 0,
                 "start_date": "",
                 "end_date": "",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "termly_cost": "9000"
             },
             {
                 "id": 5,
@@ -51,9 +43,7 @@
                 "status": 0,
                 "start_date": "",
                 "end_date": "",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "termly_cost": "9000"
             },
             {
                 "id": 6,
@@ -61,9 +51,7 @@
                 "status": 0,
                 "start_date": "",
                 "end_date": "",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "termly_cost": "9000"
             },
             {
                 "id": 7,
@@ -71,9 +59,7 @@
                 "status": 0,
                 "start_date": "",
                 "end_date": "",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "termly_cost": "9000"
             },
             {
                 "id": 8,
@@ -81,9 +67,7 @@
                 "status": 0,
                 "start_date": "",
                 "end_date": "",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "termly_cost": "9000"
             },
             {
                 "id": 9,
@@ -91,9 +75,7 @@
                 "status": 0,
                 "start_date": "",
                 "end_date": "",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "termly_cost": "9000"
             },
             {
                 "id": 10,
@@ -101,9 +83,7 @@
                 "status": 0,
                 "start_date": "",
                 "end_date": "",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "termly_cost": "9000"
             },
             {
                 "id": 11,
@@ -111,9 +91,7 @@
                 "status": 0,
                 "start_date": "",
                 "end_date": "",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "termly_cost": "9000"
             },
             {
                 "id": 12,
@@ -121,9 +99,7 @@
                 "status": 0,
                 "start_date": "",
                 "end_date": "",
-                "fulltime_cost": "9000",
-                "evening_cost": "8500",
-                "weekend_cost": "7500"
+                "termly_cost": "9000"
             }
         ]
     }

@@ -5,8 +5,10 @@
     }
     date_default_timezone_set('Africa/Nairobi');
 
-    include "../../connections/conn1.php";
-    include "../../connections/conn2.php";
+    $_SESSION['databasename'] = 'lizola_college';
+    include("/var/www/html/lizola_college/college_sims/connections/conn2.php");
+    // include "../../connections/conn1.php";
+    // include "../../connections/conn2.php";
 
     if($conn2){
         $course_list = [];
@@ -53,9 +55,9 @@
                 }
 
                 // update the student course list
-                // $update = "UPDATE student_data SET my_course_list = '".json_encode($my_course_list)."' WHERE adm_no = '".$row['adm_no']."'";
-                // $statement = $conn2->prepare($update);
-                // $statement->execute();
+                $update = "UPDATE student_data SET my_course_list = '".json_encode($my_course_list)."' WHERE adm_no = '".$row['adm_no']."'";
+                $statement = $conn2->prepare($update);
+                $statement->execute();
             }
         }
     }
