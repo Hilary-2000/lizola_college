@@ -2636,6 +2636,7 @@ function setListenerBtnTab(id) {
     cObj(id).addEventListener("click", tablebtnlistener);
 }
 function tablebtnlistener() {
+    cObj("topsearch2").innerHTML = "";
     cObj("course_chosen_error_window").innerHTML = "";
     cObj("course_level_error_window").innerHTML = "";
     // remove the course level window
@@ -2872,6 +2873,8 @@ function tablebtnlistener() {
                     cObj("lastyr_fees_balance").innerText = "Kes "+splitdata[47];
                     cObj("edit_student_contacts").value = splitdata[48];
                     cObj("edit_student_email").value = splitdata[49];
+                }else{
+                    cObj("topsearch2").innerHTML = "<p class='text-danger'>An error has occured, refresh your page and try again!</p>";
                 }
                 stopInterval(ids);
             }

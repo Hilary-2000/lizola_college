@@ -70,9 +70,9 @@
             <div class="">
                 <div class="otherbtn hide" id="resultsbody">
                 </div>
-                    <div class="back_button animate hide" id="back_btns" title="Click to dismis">
-                        <button class = "my_back_button"  type="button" id="go_back_1" ><img src="images/back.png" alt="back"></button>
-                    </div>
+                <div class="back_button animate hide" id="back_btns" title="Click to dismis">
+                    <button class = "my_back_button"  type="button" id="go_back_1" ><img src="images/back.png" alt="back"></button>
+                </div>
                 <div class="staffinformed form-group rounded hide" id="viewinformation" >
                     <div class="conts">
                         <!--<h3 class='infortitle' viewinformation><strong>Student information</strong></h3>-->
