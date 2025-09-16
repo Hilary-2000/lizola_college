@@ -217,7 +217,9 @@ cObj("findstudsbtn").onclick = function () {
                 stopInterval(ids);
             }
             if (cObj("course_list_edit_loader").classList.contains("hide")) {
-                cObj("selclass").addEventListener("change",select_courses_edit);
+                if(cObj("selclass") != null && cObj("selclass") != undefined){
+                    cObj("selclass").addEventListener("change",select_courses_edit);
+                }
                 stopInterval(ids);
             }
         }, 100);

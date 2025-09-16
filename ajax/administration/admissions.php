@@ -6136,6 +6136,7 @@
             $active_module->term_details = null;
             $completed_modules = [];
             $inactive_active_modules = [];
+            $completed_new_modules = [];
 
             $student_data = "SELECT * FROM `student_data` WHERE `adm_no` = ?";
             $stmt = $conn2->prepare($student_data);
@@ -6144,10 +6145,12 @@
             $result = $stmt->get_result();
             $course_list = [];
             $student_balance = 0;
+            $study_mode = "fulltime";
             if($result){
                 if($row = $result->fetch_assoc()){
                     $course_list = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
                     $student_balance = $row['balance_carry_forward'];
+                    $study_mode = $row['study_mode'];
                 }
             }
 
@@ -6183,8 +6186,12 @@
                     }
                 }
             }
-            // echo json_encode($course_list);
-            // return 0;
+
+            foreach($course_updated->module_terms as $module){
+                if($module->status == 2){
+                    array_push($completed_new_modules, $module->id);
+                }
+            }
 
             // UPDATE THE COURSE BEFORE APPLYING NEW CHANGES
             $update = "UPDATE student_data SET my_course_list= ? WHERE adm_no = ?";
@@ -6210,11 +6217,16 @@
             
             $course_duration = "0 days";
             $course_cost = 0;
-            if(count($courses) > 0 && isset($course_updated->id)){
+            $fulltime_cost = 0;
+            $evening_cost = 0;
+            $weekend_cost = 0;
+            if(!empty($course_updated)){
                 foreach($courses as $course){
                     if($course->id == $course_updated->course_name){
                         $course_duration = $course->term_duration." ".$course->duration_intervals;
-                        $course_cost = $course->termly_fees;
+                        $fulltime_cost = isset($course->fulltime_fees) ? $course->fulltime_fees : 0;
+                        $evening_cost = isset($course->evening_fees) ? $course->evening_fees : 0;
+                        $weekend_cost = isset($course->weekend_fees) ? $course->weekend_fees : 0;
                     }
                 }
             }
@@ -6227,7 +6239,7 @@
             if($course_updated->module_terms != null){
                 $module_terms = $course_updated->module_terms;
                 for($index = 0; $index < count($module_terms); $index++){
-                    if($module_terms[$index]->status == 2 && !in_array($module_terms[$index]->id, $completed_modules)){
+                    if($module_terms[$index]->status == 2 && in_array($module_terms[$index]->id, $completed_modules)){
                         array_push($updated_completed_modules, $module_terms[$index]->id);
                         $count_module_fees += 1;
                     }
@@ -6242,11 +6254,17 @@
                         if(!$deactivate){
                             $module_terms[$index]->start_date = $module_terms[$index]->start_date != "" ? $module_terms[$index]->start_date : date("YmdHis");
                             $module_terms[$index]->end_date = $module_terms[$index]->end_date != "" ? $module_terms[$index]->end_date : date("YmdHis",strtotime($course_duration));
-                            $module_terms[$index]->termly_cost = $course_cost*1;
+                            // $module_terms[$index]->termly_cost = $course_cost*1;
+                            $module_terms[$index]->fulltime_cost = $fulltime_cost*1;
+                            $module_terms[$index]->evening_cost = $evening_cost*1;
+                            $module_terms[$index]->weekend_cost = $weekend_cost*1;
                         }else{
                             $module_terms[$index]->start_date = "";
                             $module_terms[$index]->end_date = "";
-                            $module_terms[$index]->termly_cost = $course_cost*1;
+                            // $module_terms[$index]->termly_cost = $course_cost*1;
+                            $module_terms[$index]->fulltime_cost = $fulltime_cost*1;
+                            $module_terms[$index]->evening_cost = $evening_cost*1;
+                            $module_terms[$index]->weekend_cost = $weekend_cost*1;
                         }
                         $deactivate = true;
                     }
@@ -6256,7 +6274,10 @@
                         // term
                         $module_terms[$index]->start_date = "";
                         $module_terms[$index]->end_date = "";
-                        $module_terms[$index]->termly_cost = $course_cost*1;
+                        // $module_terms[$index]->termly_cost = $course_cost*1;
+                        $module_terms[$index]->fulltime_cost = $fulltime_cost*1;
+                        $module_terms[$index]->evening_cost = $evening_cost*1;
+                        $module_terms[$index]->weekend_cost = $weekend_cost*1;
                     }
                 }
                 $course_updated->module_terms = $module_terms;
@@ -6303,16 +6324,16 @@
             // GET FEES THE STUDENT PAYS PER TERM
             $term = "TERM_1";
             $fees_to_pay = getFeesAsFromTermAdmited($term,$conn2,$class,$student_id);
+            $this_module_fees = $fees_to_pay - $balance_cf; 
 
-            $balance_to_add = $count_module_fees*$fees_to_pay;
-            $balance_to_deduct = $count_activated_modules_from_completed*$fees_to_pay;
-
+            $balance_to_deduct = $count_module_fees*$this_module_fees;
+            $balance_to_add = $count_activated_modules_from_completed*$this_module_fees;
             if($active_module_deactivated){
                 // update the user balance and course list
                 $term = "TERM_1";
                 // $student_balance = getBalanceReports($student_id,$term,$conn2);
-                $student_balance = $balance_to_add;
-                $student_balance-=$balance_to_deduct;
+                $student_balance = count($completed_new_modules) * $this_module_fees;
+                // $student_balance-=$balance_to_deduct;
                 
                 // update the course modules alone incase its active or inactive
                 $update = "UPDATE `student_data` SET `my_course_list` = ?, `balance_carry_forward` = ? WHERE `adm_no` = ?";
@@ -6322,8 +6343,9 @@
                 $stmt->execute();
                 echo "<p class='text-success'>Course updates have been done successfully!</p>";
             }else{
-                $balance_cf+=$balance_to_add;
-                $balance_cf-=$balance_to_deduct;
+                // $balance_cf+=$balance_to_add;
+                // echo $balance_cf." - ".$balance_to_add."<br>";
+                $balance_cf-=$balance_to_add;
                 
                 // update the course modules alone incase its active or inactive
                 $update = "UPDATE `student_data` SET `my_course_list` = ?, `balance_carry_forward` = ?  WHERE `adm_no` = ?";

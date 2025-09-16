@@ -131,6 +131,7 @@ function checkPresnt($array, $string){
 
     
     <!-- the customizable text editor documents -->
+        <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
         <script src="https://cdn.tiny.cloud/1/if2hs0ax6hmgx2842yuozz7qt8lde0hvc8upqv9gmokdk2id/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <!-- ends here -->
 
@@ -3784,40 +3785,87 @@ function checkPresnt($array, $string){
     <script src="assets/JS/chartconfig.js"></script>
 
     <script>
-        tinymce.init({
-        selector: '#email_messages',
-        plugins: 'anchor autolink charmap codesample emoticons link lists searchreplace table visualblocks wordcount',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-        menubar: true,
-        toolbar: true
-        });
+        // tinymce.init({
+        //     selector: '#email_messages',
+        //     plugins: 'anchor autolink charmap codesample emoticons link lists searchreplace table visualblocks wordcount',
+        //     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        //     menubar: true,
+        //     toolbar: true
+        // });
         
-        tinymce.init({
-            selector: '#email_editored',
-            plugins: ["link","code","media","image","emoticons"],
-            // plugins: 'anchor autolink charmap codesample emoticons link lists searchreplace table visualblocks wordcount',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-            menubar: true,
-            toolbar: true,
-            setup : function(ed) {
-                ed.on('keyup', function(e) {
-                    working_onit(ed);
-                });
-            }
-        });
+        // tinymce.init({
+        //     selector: '#email_editored',
+        //     plugins: ["link","code","media","image","emoticons"],
+        //     // plugins: 'anchor autolink charmap codesample emoticons link lists searchreplace table visualblocks wordcount',
+        //     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        //     menubar: true,
+        //     toolbar: true,
+        //     setup : function(ed) {
+        //         ed.on('keyup', function(e) {
+        //             working_onit(ed);
+        //         });
+        //     }
+        // });
         
-        tinymce.init({
-            selector: '#email_contents_exam_reports',
-            plugins: ["link","code","media","image","emoticons"],
-            // plugins: 'anchor autolink charmap codesample emoticons link lists searchreplace table visualblocks wordcount',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-            menubar: true,
-            toolbar: true,
-            setup : function(ed) {
-                ed.on('keyup', function(e) {
-                    editSamplesData(ed);
-                });
-            }
+        // tinymce.init({
+        //     selector: '#email_contents_exam_reports',
+        //     plugins: ["link","code","media","image","emoticons"],
+        //     // plugins: 'anchor autolink charmap codesample emoticons link lists searchreplace table visualblocks wordcount',
+        //     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        //     menubar: true,
+        //     toolbar: true,
+        //     setup : function(ed) {
+        //         ed.on('keyup', function(e) {
+        //             editSamplesData(ed);
+        //         });
+        //     }
+        // });
+
+        // email_messages
+        CKEDITOR.replace('email_messages', {
+            height: 400,
+            toolbar: [
+                { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline' ] },
+                { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
+                { name: 'insert', items: [ 'Image', 'Table', 'Link' ] }
+            ]
+        });
+
+        // email_contents_exam_reports
+        CKEDITOR.replace('email_contents_exam_reports', {
+            height: 400,
+            toolbar: [
+                { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline' ] },
+                { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
+                { name: 'insert', items: [ 'Image', 'Table', 'Link' ] }
+            ]
+        });
+        CKEDITOR.instances.email_contents_exam_reports.on('contentDom', function () {
+            this.document.on('keyup', function () {
+                var sample_message = CKEDITOR.instances.email_contents_exam_reports.getData();
+                if (sample_message.length > 0) {
+                    cObj("email_contents_exam_reports_preview").innerHTML = sample_message;
+                }else{
+                    cObj("email_contents_exam_reports_preview").innerHTML = "Sample Appear here ..";
+                }
+                html_messageData(CKEDITOR.instances.email_contents_exam_reports.getData());
+            });
+        });
+
+
+        // email_editored
+        CKEDITOR.replace('email_editored', {
+            height: 400,
+            toolbar: [
+                { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline' ] },
+                { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
+                { name: 'insert', items: [ 'Image', 'Table', 'Link' ] }
+            ]
+        });
+        CKEDITOR.instances.email_editored.on('contentDom', function () {
+            this.document.on('keyup', function () {
+                html_messageData(CKEDITOR.instances.email_editored.getData());
+            });
         });
     </script>
 </body>

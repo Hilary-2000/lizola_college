@@ -161,6 +161,7 @@
                 $date = date("Y-m-d");
                 $times = date("H:i:s");
                 $balance = getBalance($admnos,$term,$conn2);
+                // echo $balance;
                 $student_data = students_details($admnos,$conn2);
                 $select = "SELECT `stud_admin` , `transaction_id`, `status`, `transaction_code`, `mode_of_pay` , (SELECT(concat(`first_name`,' ',`second_name`)) FROM `student_data` WHERE `adm_no` = `stud_admin`) AS 'Name' ,  `date_of_transaction` , `time_of_transaction` , `amount` , `balance`, `payment_for` FROM `finance` WHERE `stud_admin` = ? ORDER BY `transaction_id` DESC LIMIT 5 ";
                 $stmt = $conn2->prepare($select);
@@ -7445,15 +7446,16 @@
                 $module_terms = $my_course_list[$index]->module_terms;
                 for ($ind=0; $ind < count($module_terms); $ind++) {
                     if($module_terms[$ind]->status == 1){
-                        $course_fees = $student_data['study_mode'] == "weekend" ? ($module_terms[$ind]->weekend_cost ?? 0) : ($student_data['study_mode'] == "evening" ? ($module_terms[$ind]->evening_cost ?? 0) : ($student_data['study_mode'] == "fulltime" ? ($module_terms[$ind]->fulltime_cost ?? 0) : ($module_terms[$ind]->termly_cost ?? 0)));
+                        $course_fees += $student_data['study_mode'] == "weekend" ? ($module_terms[$ind]->weekend_cost ?? 0) : ($student_data['study_mode'] == "evening" ? ($module_terms[$ind]->evening_cost ?? 0) : ($student_data['study_mode'] == "fulltime" ? ($module_terms[$ind]->fulltime_cost ?? 0) : ($module_terms[$ind]->termly_cost ?? 0)));
                         // $course_fees = $module_terms[$ind]->termly_cost;
-                        $active_course = true;
-                        break;
+                        if($module_terms[$ind]->status == 1){
+                            $active_course = true;
+                        }
+                        // break;
                     }
                 }
             }
         }
-        // echo json_encode($my_course_list[0]);
 
         // GET THE STUDENT STANDING BALANCE.
         $student_balance = $student_data['balance_carry_forward'];
@@ -7478,7 +7480,7 @@
                 }
             }
             $stmt->close();
-    
+
             // add fees structure fees to course fees
             $fees_structure += $course_fees;
                     
@@ -7594,7 +7596,6 @@
                 }
             }
         }
-        
         // $select = "SELECT * FROM `finance` where `stud_admin` = ?  AND `date_of_transaction` BETWEEN ? and ? AND `payment_for` != 'admission fees'";
         $select = "SELECT * FROM `finance` WHERE finance.stud_admin = ? AND finance.date_of_transaction BETWEEN ? and ?";
         $stmt = $conn2->prepare($select);
