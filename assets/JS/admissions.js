@@ -1516,37 +1516,21 @@ cObj("display_my_students").onclick = function () {
     //show the students by class
     var datapassing = "?find=true" + "&classes=" + valObj("class_assigned_tr");
     //showPleasewait();
-    sendData1("GET", "administration/admissions.php", datapassing, cObj("resultsbody"));
-    setTimeout(() => {
-        cObj("resultsbody").classList.remove("hide");
-        cObj("viewinformation").classList.add("hide");
-        var timeout = 0;
-        var ids = setInterval(() => {
-            timeout++;
-            //after two minutes of slow connection the next process wont be executed
-            if (timeout == 1200) {
-                stopInterval(ids);
-            }
-            if (cObj("loadings").classList.contains("hide")) {
-                var btns = document.getElementsByClassName("view_students");
-                for (let index = 0; index < btns.length; index++) {
-                    const element = btns[index];
-                    setListenerBtnTab(element.id);
-                }
-                if (valObj("sach") == "allstuds") {
-                    var obj = document.getElementsByClassName("viewclass");
-                    setListenerViewbtn1(obj);
-                } else {
-                }
-                if (cObj("search_student_tables") != undefined && cObj("search_student_tables") != null) {
-                    cObj("search_student_tables").addEventListener("keyup", showStudentData);
-                }
-                //removePleasewait();
-                stopInterval(ids);
-            }
-        }, 100);
-    }, 200);
-
+    sendData1("GET", "administration/admissions.php", datapassing, cObj("resultsbody"), function () {
+        var btns = document.getElementsByClassName("view_students");
+        for (let index = 0; index < btns.length; index++) {
+            const element = btns[index];
+            setListenerBtnTab(element.id);
+        }
+        if (valObj("sach") == "allstuds") {
+            var obj = document.getElementsByClassName("viewclass");
+            setListenerViewbtn1(obj);
+        } else {
+        }
+        if (cObj("search_student_tables") != undefined && cObj("search_student_tables") != null) {
+            cObj("search_student_tables").addEventListener("keyup", showStudentData);
+        }
+    });
 }
 
 function createTimetabe(id) {
@@ -2214,34 +2198,21 @@ cObj("findingstudents").onclick = function () {
         if (erroro == 0) {
             //showPleasewait();
             // console.log("No error!");
-            sendData1("GET", "administration/admissions.php", datapassing, cObj("resultsbody"));
-            setTimeout(() => {
-                var timeout = 0;
-                var ids = setInterval(() => {
-                    timeout++;
-                    //after two minutes of slow connection the next process wont be executed
-                    if (timeout == 1200) {
-                        stopInterval(ids);
-                    }
-                    if (cObj("loadings").classList.contains("hide")) {
-                        var btns = document.getElementsByClassName("view_students");
-                        for (let index = 0; index < btns.length; index++) {
-                            const element = btns[index];
-                            setListenerBtnTab(element.id);
-                        }
-                        if (valObj("sach") == "allstuds") {
-                            var obj = document.getElementsByClassName("viewclass");
-                            setListenerViewbtn1(obj);
-                        } else {
-                        }
-                        if (cObj("search_student_tables") != undefined && cObj("search_student_tables") != null) {
-                            cObj("search_student_tables").addEventListener("keyup", showStudentData);
-                        }
-                        //removePleasewait();
-                        stopInterval(ids);
-                    }
-                }, 100);
-            }, 200);
+            sendData1("GET", "administration/admissions.php", datapassing, cObj("resultsbody"),function () {
+                var btns = document.getElementsByClassName("view_students");
+                for (let index = 0; index < btns.length; index++) {
+                    const element = btns[index];
+                    setListenerBtnTab(element.id);
+                }
+                if (valObj("sach") == "allstuds") {
+                    var obj = document.getElementsByClassName("viewclass");
+                    setListenerViewbtn1(obj);
+                } else {
+                }
+                if (cObj("search_student_tables") != undefined && cObj("search_student_tables") != null) {
+                    cObj("search_student_tables").addEventListener("keyup", showStudentData);
+                }
+            });
         }
     } else {
         redBorder(cObj("sach"));
@@ -2311,25 +2282,13 @@ function viewlisteners() {
     var datapassing = "?find=true";
     datapassing += "&classes=" + ids;
     //showPleasewait();
-    sendData1("GET", "administration/admissions.php", datapassing, cObj("resultsbody")); setTimeout(() => {
-        var timeout = 0;
-        var ids = setInterval(() => {
-            timeout++;
-            //after two minutes of slow connection the next process wont be executed
-            if (timeout == 1200) {
-                stopInterval(ids);
-            }
-            if (cObj("loadings").classList.contains("hide")) {
-                var btns = document.getElementsByClassName("view_students");
-                for (let index = 0; index < btns.length; index++) {
-                    const element = btns[index];
-                    setListenerBtnTab(element.id);
-                }
-                //removePleasewait();
-                stopInterval(ids);
-            }
-        }, 100);
-    }, 200);
+    sendData1("GET", "administration/admissions.php", datapassing, cObj("resultsbody"), function () {
+        var btns = document.getElementsByClassName("view_students");
+        for (let index = 0; index < btns.length; index++) {
+            const element = btns[index];
+            setListenerBtnTab(element.id);
+        }
+    });
 }
 cObj("name").onkeyup = function () {
     var name = this.value;
@@ -2338,25 +2297,14 @@ cObj("name").onkeyup = function () {
     if (name.length > 0) {
         //query the server
         var datapass = "?find=true&bynametype=" + name;
-        sendData2("GET", "administration/admissions.php", datapass, cObj("resultsbody"), cObj("names_loaders_find"));
-        setTimeout(() => {
-            var timeout = 0;
-            var ids = setInterval(() => {
-                timeout++;
-                //after two minutes of slow connection the next process wont be executed
-                if (timeout == 1200) {
-                    stopInterval(ids);
-                }
-                if (cObj("names_loaders_find").classList.contains("hide")) {
-                    var btns = document.getElementsByClassName("view_students");
-                    for (let index = 0; index < btns.length; index++) {
-                        const element = btns[index];
-                        setListenerBtnTab(element.id);
-                    }
-                    stopInterval(ids);
-                }
-            }, 100);
-        }, 100);
+        sendData2("GET", "administration/admissions.php", datapass, cObj("resultsbody"), cObj("names_loaders_find"), function () {
+            var btns = document.getElementsByClassName("view_students");
+            for (let index = 0; index < btns.length; index++) {
+                const element = btns[index];
+                // element.addEventListener("click", tablebtnlistener);
+                setListenerBtnTab(element.id);
+            }
+        });
     }
 }
 
@@ -2621,16 +2569,17 @@ cObj("clasregno").onclick = function () {
 
 cObj("bcnosd").onkeyup = function () {
     var bcn = this.value;
+    cObj("resultsbody").classList.remove("hide");
+    cObj("viewinformation").classList.add("hide");
     if (bcn.length > 0) {
         var datapass = "?find=true&bybcntype=" + bcn;
-        sendData("GET", "administration/admissions.php", datapass, cObj("resultsbody"));
-        setTimeout(() => {
+        sendData1("GET", "administration/admissions.php", datapass, cObj("resultsbody"), function () {
             var btns = document.getElementsByClassName("view_students");
             for (let index = 0; index < btns.length; index++) {
                 const element = btns[index];
                 setListenerBtnTab(element.id);
             }
-        }, 2000);
+        });
     }
 }
 
@@ -3465,25 +3414,13 @@ cObj("admno").onkeyup = function () {
     cObj("viewinformation").classList.add("hide");
     if (admissionno.length > 0) {
         var datapass = "?find=true&admnoincomplete=" + admissionno;
-        sendData2("GET", "administration/admissions.php", datapass, cObj("resultsbody"), cObj("admnos_loaders_find"));
-        setTimeout(() => {
-            var timeout = 0;
-            var ids = setInterval(() => {
-                timeout++;
-                //after two minutes of slow connection the next process wont be executed
-                if (timeout == 1200) {
-                    stopInterval(ids);
-                }
-                if (cObj("admnos_loaders_find").classList.contains("hide")) {
-                    var btns = document.getElementsByClassName("view_students");
-                    for (let index = 0; index < btns.length; index++) {
-                        const element = btns[index];
-                        setListenerBtnTab(element.id);
-                    }
-                    stopInterval(ids);
-                }
-            }, 100);
-        }, 100);
+        sendData2("GET", "administration/admissions.php", datapass, cObj("resultsbody"), cObj("admnos_loaders_find"), function () {
+            var btns = document.getElementsByClassName("view_students");
+            for (let index = 0; index < btns.length; index++) {
+                const element = btns[index];
+                setListenerBtnTab(element.id);
+            }
+        });
     }
 }
 cObj("returnfind").onclick = function () {

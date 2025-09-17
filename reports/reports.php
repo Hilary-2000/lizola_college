@@ -320,25 +320,22 @@ class PDF extends FPDF
     {
         // Colors, line width and bold font
         $this->SetFillColor(157, 183, 184);
-        // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
-        // $this->SetFont('','B');
         // Header
         $w = $width;
         if ($skip == true) {
             $w[3]+=20;
         }
         for ($i = 0; $i < count($header); $i++) {
-            if($i == 7){
-                continue;
-            }
             if ($skip == true) {
                 if ($i != 4) {
                     $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
                 }
             } else {
-                $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
+                if($i != 6){
+                    $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
+                }
             }
         }
 
@@ -355,18 +352,35 @@ class PDF extends FPDF
             // for ($$index=0; $$index < count($row); $$index++) { 
             //     $this->Cell($w[$index], 6, $row[$index], 1, 0, 'L', $fill);
             // }
-            $this->Cell($w[0], 6, $row[0], 1, 0, 'L', $fill);
-            $this->Cell($w[1], 6, "Kes " . number_format($row[1]), 1, 0, 'L', $fill);
-            $this->Cell($w[2], 6, "Kes " . number_format($row[2]), 1, 0, 'L', $fill);
-            $this->Cell($w[3], 6, ($row[3]), 1, 0, 'C', $fill);
-            if ($skip == false) {
-                $this->Cell($w[4], 6, $row[4], 1, 0, 'L', $fill);
+
+            $vhs = [];
+            $row_count = 0;
+            if (isJson_report($row[6])) {
+                foreach(json_decode($row[6], true) as $ind => $vh){
+                    array_push($vhs, ($ind+1)."). ".$vh['name']." Kes".number_format($vh['amount_paid'])." ".$vh['roles']);
+                    $row_count+=1;
+                }
+            }else{
+                $row_count+=1;
+                // $vhs = $row[8];
+                array_push($vhs, $row[8]);
             }
-            $this->Cell($w[5], 6, $row[5], 1, 0, 'L', $fill);
-            $this->Cell($w[6], 6, ucwords(strtolower($row[6])), 1, 0, 'L', $fill);
-            // $this->Cell($w[7], 6, ($row[7]), 1, 0, 'R', $fill);
-            $this->Cell($w[8], 6, ($row[8]), 1, 0, 'R', $fill);
-            $this->Cell($w[9], 6, ($row[9]), 1, 0, 'R', $fill);
+            $row_count = 1;
+            $this->Cell($w[0], (6*$row_count), $row[0], 1, 0, 'L', $fill);
+            $this->Cell($w[1], (6*$row_count), "Kes " . number_format($row[1]), 1, 0, 'L', $fill);
+            $this->Cell($w[2], (6*$row_count), "Kes " . number_format($row[2]), 1, 0, 'L', $fill);
+            $this->Cell($w[3], (6*$row_count), ($row[3]), 1, 0, 'C', $fill);
+            if ($skip == false) {
+                $this->Cell($w[4], (6*$row_count), $row[4], 1, 0, 'L', $fill);
+            }
+            $this->Cell($w[5], (6*$row_count), $row[5], 1, 0, 'L', $fill);
+            // $this->MultiCell($w[6], 6, ucwords(strtolower(join(", ", $vhs))), 1, 'L', $fill);
+            $this->Cell($w[6], (6*$row_count), count($vhs)." Voteheads", 1, 0, 'L', $fill);
+            // $this->Cell($w[7], (6*$row_count), ($row[7]), 1, 0, 'R', $fill);
+            $this->Cell($w[8], (6*$row_count), ($row[8]), 1, 0, 'R', $fill);
+            if(!empty($row[9])){
+                $this->Cell($w[9], (6*$row_count), ($row[9]), 1, 0, 'R', $fill);
+            }
             $this->Ln();
             $fill = !$fill;
             $balance += $row[2];
@@ -4014,7 +4028,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Cell(200, 8, "Fees Collection Table", 0, 0, 'C', false);
                     $pdf->Ln();
                     $pdf->SetFont('Helvetica', 'B', 8);
-                    $width = array(10, 20, 20, 22, 35, 20, 15, 35, 33, 20);
+                    $width = array(5, 20, 20, 22, 25, 25, 25, 25, 33, 18);
                     $skip = false;
                     $pdf->financeTable($header, $data, $width, $skip);
                     $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -4076,7 +4090,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf = new PDF('P', 'mm', 'A4');
                     $pdf->setHeaderPos(200);
                     // Column headings
-                    $header = array('No', 'Fees Paid', 'Balance', 'Code', 'Student Name', 'Reg-No.' ,'Mode', 'Votehead', 'Date', 'Served By');
+                    $header = array('No', 'Fees Paid', 'Balance', 'Code', 'Student Name', 'Reg-No.', 'Mode', 'Votehead', 'Date', 'Served By');
                     // Data loading
                     // $data = $pdf->LoadData('countries.txt');
                     $tittle = "Fees recieved on " . date("dS M Y", strtotime($specific_date_finance));
@@ -4120,7 +4134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Cell(200, 8, "Fees Collection Table", 0, 0, 'C', false);
                     $pdf->Ln();
                     $pdf->SetFont('Helvetica', 'B', 8);
-                    $width = array(5, 20, 17, 22, 28, 13, 10, 35, 33, 18);
+                    $width = array(5, 20, 20, 22, 25, 25, 25, 25, 33, 18);
                     $skip = false;
                     $pdf->financeTable($header, $data, $width, $skip);
                     $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -4237,7 +4251,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(200, 8, "Fees Collection Table", 0, 0, 'C', false);
                         $pdf->Ln();
                         $pdf->SetFont('Helvetica', 'B', 8);
-                        $width = array(8, 22, 22, 20, 28, 13, 35, 33, 18);
+                        $width = array(5, 20, 20, 22, 35, 30, 30, 30, 33, 18);
                         $pdf->financeTable($header, $data, $width);
                         $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
                     } else {

@@ -116,57 +116,54 @@
                                 <p>Student Personal Data</p>
                             </div>
                             <div class="mx-1 row border border-secondary py-2 bg-light">
-                                <div class="col-md-8 bg-infor">
+                                <div class="col-md-6 bg-infor">
                                     <div class="container">
                                         <h6 class="text-center">Finance Summary</h6>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p><b>Total Fees <small class="d-none">as of <span id="current_term"></span></small>:</b></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p id="total_amount_to_pay">Kes 10,000</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p><b>Balance carry forward:</b></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p><span id="lastyr_fees_balance">Kes 10,000</span><span class="link mx-2 <?php if ($_SESSION['authority'] == "1" || $_SESSION['authority'] == "0"){}else{echo "hide";}?>" id="edit_last_yr_academic_balance"><i class="fas fa-pen-fancy"></i></span></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p><b>Fees Discount: <i class="fas fa-info-circle" title="This discount only affects the Regular & Boarding Fees only!. Transport fees won`t be affected by this discount"></i> </b></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p><span id="fees_discount">10</span><span class="link mx-2 <?php if ($_SESSION['authority'] == "1" || $_SESSION['authority'] == "0"){}else{echo "hide";}?>" id="edit_discounts"><i class="fas fa-pen-fancy"></i></span></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p><b>Fees Paid <!--as of <span id="current_term2"></span>-->:</b></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p id="fees_paid_this_term">Kes 10,000</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p><b>Fees Balance:</b></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p id="fees_balances">Kes 10,000</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p><b>Tot Paid Since Joining:</b></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p id="total_paid_fees">Kes 56,000</p>
-                                        </div>
+                                    <div class="container">
+                                        <table class="table">
+                                            <tr class="d-none"><td><b>Total Fees <small class="d-none">as of <span id="current_term"></span></small>:</b></td> <td><p id="total_amount_to_pay">Kes 10,000</p></td></tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Balance carry forward</b>
+                                                </td>
+                                                <td>
+                                                    <span id="lastyr_fees_balance">Kes 10,000</span><span class="link mx-2 <?php if ($_SESSION['authority'] == "1" || $_SESSION['authority'] == "0"){}else{echo "hide";}?>" id="edit_last_yr_academic_balance"><i class="fas fa-pen-fancy"></i></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Fees Discount: <i class="fas fa-info-circle" title="This discount only affects the Regular & Boarding Fees only!. Transport fees won`t be affected by this discount"></i> </b>
+                                                </td>
+                                                <td>
+                                                    <span id="fees_discount">10</span><span class="link mx-2 <?php if ($_SESSION['authority'] == "1" || $_SESSION['authority'] == "0"){}else{echo "hide";}?>" id="edit_discounts"><i class="fas fa-pen-fancy"></i></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Fees Paid <!--as of <span id="current_term2"></span>--></b>
+                                                </td>
+                                                <td>
+                                                    <p id="fees_paid_this_term">Kes 10,000</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Fees Balance:</b>
+                                                </td>
+                                                <td>
+                                                    <p id="fees_balances">Kes 10,000</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p><b>Tot Paid Since Joining:</b></p>
+                                                </td>
+                                                <td>
+                                                    <p id="total_paid_fees">Kes 56,000</p>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                     <div class="row d-none">
                                         <div class="col-md-6">
@@ -185,7 +182,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <h6 class="text-center">Attendance Statistics</h6>
                                     <div class="row">
                                         <div class="col-md-6">

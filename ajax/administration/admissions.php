@@ -446,10 +446,16 @@
                         array_push($data_array,$row['primary_parent_occupation']);
                         array_push($data_array,$row['secondary_parent_occupation']);
                         $term = getTerm();
-                        array_push($data_array,"Kes ".number_format(getFeespaidByStudent($row['adm_no'],$conn2)));
+                        $fees_paid_by_student = getFeespaidByStudent($row['adm_no'],$conn2)*1;
+                        $last_year_bal = lastACADyrBal($row['adm_no'],$conn2);
+                        $balance = getBalance($row['adm_no'],$term,$conn2);
+                        $total_fees = $fees_paid_by_student+$balance;
+                        $percentage_paid = number_format(round($fees_paid_by_student / $total_fees * 100))."%";
+                        $percentage_balance = number_format(round($balance / $total_fees * 100))."%";
+                        array_push($data_array,"Kes ".number_format($fees_paid_by_student)." - <small>(".$percentage_paid.")</small>");
                         array_push($data_array,"Kes ".number_format(lastACADyrBal($row['adm_no'],$conn2)));
                         array_push($data_array,"Kes ".number_format(getFeesAsPerTermBoarders($term,$conn2,$row['stud_class'],$row['adm_no'])));
-                        array_push($data_array,"Kes ".number_format(getBalance($row['adm_no'],$term,$conn2)));
+                        array_push($data_array,"Kes ".number_format(getBalance($row['adm_no'],$term,$conn2))." - <small>(".$percentage_balance.")</small>");
                         array_push($data_array,"Kes ".number_format(total_fees_paid($row['adm_no'],$conn2)));
                         array_push($data_array,$term);
                         array_push($data_array,(isTransport($conn2,$row['adm_no'])?"<b>Yes</b> : ".getRouteEnrolled($conn2,$row['adm_no']):"No"));
@@ -3438,9 +3444,10 @@
                             $prefix = $valued;
                         }
                     }
+                    $admno *= 1;
 
                     // prefix
-                    echo $prefix.$admno;
+                    echo $prefix. ($admno > 100 ? $admno : ($admno > 10 ? "0".$admno : "00".$admno));
                 }
             }
         }elseif (isset($_GET['genmanuall'])) {

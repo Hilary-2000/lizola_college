@@ -175,7 +175,7 @@ cObj("back_btns").onmouseleave = function () {
     this.style.cursor = "grab";
 }
  */
-function sendData1(method, file, datapassing, object) {
+function sendData1(method, file, datapassing, object, callback = null) {
     // console.log("ajax/" + file + datapassing);
     // datapassing = escape(datapassing);
     //make the loading window show
@@ -185,6 +185,11 @@ function sendData1(method, file, datapassing, object) {
         if (this.readyState == 4 && this.status == 200) {
             object.innerHTML = this.responseText;
             cObj("loadings").classList.add("hide");
+
+            // ✅ Run the callback after updating DOM
+            if (typeof callback === "function") {
+                callback();
+            }
         } else if (this.status == 500) {
             cObj("loadings").classList.add("hide");
             object.innerHTML = "<p class='red_notice'>Cannot establish connection to server.<br>Try reloading your page</p>";
@@ -228,7 +233,7 @@ function isPresent(array, value) {
     return false;
 }
 
-function sendData2(method, file, datapassing, object1, object2) {
+function sendData2(method, file, datapassing, object1, object2, callback = null) {
     // datapassing = escape(datapassing);
     //make the loading window show
     object2.classList.remove("hide");
@@ -237,6 +242,11 @@ function sendData2(method, file, datapassing, object1, object2) {
         if (this.readyState == 4 && this.status == 200) {
             object1.innerHTML = this.responseText;
             object2.classList.add("hide");
+
+            // ✅ Run the callback after updating DOM
+            if (typeof callback === "function") {
+                callback();
+            }
         } else if (this.status == 500) {
             object2.classList.add("hide");
             cObj("loadings").classList.add("hide");

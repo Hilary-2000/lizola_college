@@ -1916,11 +1916,11 @@ function checkPresnt($array, $string){
                 </select>
                 <div class="container p-0 hide" id="discount_value_window">
                     <label for="new_discount_value" class="form-control-label text-bold">New Discount Value <small>e.g 10000</small></label>
-                    <input type="number" class="form-control" value="0" id="new_discount_value" min="0" placeholder="Discount Value">
+                    <input type="number" class="form-control w-75" value="0" id="new_discount_value" min="0" placeholder="Discount Value">
                 </div>
                 <div class="container p-0" id="discount_percentage_window">
                     <label for="new_discount_percentage" class="form-control-label text-bold">New Discount Percentage <small>e.g 35% <span class="text-danger">Dont include <b>%</b></span></small></label>
-                    <input type="number" class="form-control" value="0" id="new_discount_percentage" min="0" max="100" placeholder="New Discount Value">
+                    <input type="number" class="form-control w-75" value="0" id="new_discount_percentage" min="0" max="100" placeholder="New Discount Value">
                 </div>
                 <p id="new_discount_error"></p>
                 <div class="btns">
