@@ -2824,6 +2824,9 @@ function tablebtnlistener() {
                     cObj("lastyr_fees_balance").innerText = "Kes "+splitdata[47];
                     cObj("edit_student_contacts").value = splitdata[48];
                     cObj("edit_student_email").value = splitdata[49];
+                    cObj("total_course_fees").innerText = splitdata[51];
+                    cObj("this_module_fees").innerText = splitdata[52];
+                    cObj("starter_pack_n_otherpayments").innerText = splitdata[53];
                 }else{
                     cObj("topsearch2").innerHTML = "<p class='text-danger'>An error has occured, refresh your page and try again!</p>";
                 }

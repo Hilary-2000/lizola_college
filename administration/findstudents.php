@@ -118,10 +118,10 @@
                             <div class="mx-1 row border border-secondary py-2 bg-light">
                                 <div class="col-md-6 bg-infor">
                                     <div class="container">
-                                        <h6 class="text-center">Finance Summary</h6>
-                                    </div>
-                                    <div class="container">
                                         <table class="table">
+                                            <tr>
+                                                <th colspan="2">Finance Summary</th>
+                                            </tr>
                                             <tr class="d-none"><td><b>Total Fees <small class="d-none">as of <span id="current_term"></span></small>:</b></td> <td><p id="total_amount_to_pay">Kes 10,000</p></td></tr>
                                             <tr>
                                                 <td>
@@ -133,7 +133,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <b>Fees Discount: <i class="fas fa-info-circle" title="This discount only affects the Regular & Boarding Fees only!. Transport fees won`t be affected by this discount"></i> </b>
+                                                    <b>Fees Discount: <i class="fas fa-info-circle d-none" title="This discount only affects the Regular & Boarding Fees only!. Transport fees won`t be affected by this discount"></i> </b>
                                                 </td>
                                                 <td>
                                                     <span id="fees_discount">10</span><span class="link mx-2 <?php if ($_SESSION['authority'] == "1" || $_SESSION['authority'] == "0"){}else{echo "hide";}?>" id="edit_discounts"><i class="fas fa-pen-fancy"></i></span>
@@ -141,7 +141,23 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <b>Fees Paid <!--as of <span id="current_term2"></span>--></b>
+                                                    <b>Course Fees <!--as of <span id="current_term2"></span>--></b>
+                                                </td>
+                                                <td>
+                                                    <p id="total_course_fees">Kes 10,000</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>This Month Fees <!--as of <span id="current_term2"></span>--></b>
+                                                </td>
+                                                <td>
+                                                    <p id="this_module_fees">Kes 10,000</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Fees Paid this Month<!--as of <span id="current_term2"></span>--></b>
                                                 </td>
                                                 <td>
                                                     <p id="fees_paid_this_term">Kes 10,000</p>
@@ -149,10 +165,18 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <b>Fees Balance:</b>
+                                                    <b>Current Fees Balance <!--as of <span id="current_term2"></span>--></b>
                                                 </td>
                                                 <td>
                                                     <p id="fees_balances">Kes 10,000</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Starter Pack & Other Payments <!--as of <span id="current_term2"></span>--></b>
+                                                </td>
+                                                <td>
+                                                    <p id="starter_pack_n_otherpayments">Kes 10,000</p>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -182,7 +206,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6 d-none">
                                     <h6 class="text-center">Attendance Statistics</h6>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -316,13 +341,13 @@
                                         <tr>
                                             <th>Course Level</th>
                                             <th>Course Name</th>
-                                            <th>Module Terms</th>
+                                            <th>Month Terms</th>
                                             <th>Status</th>
                                             <th>Completed</th>
                                             <th>Period</th>
                                         </tr>
                                         <tr>
-                                            <td rowspan="3" style="vertical-align: middle;"><b>Diploma Module 1</b></td>
+                                            <td rowspan="3" style="vertical-align: middle;"><b>Diploma Month 1</b></td>
                                             <td rowspan="3" style="vertical-align: middle;"><b>Engineering</b></td>
                                             <td>Term 1</td>
                                             <td>In-Active</td>

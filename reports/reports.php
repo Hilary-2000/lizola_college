@@ -77,16 +77,20 @@ class PDF extends FPDF
     // Page header
     function Header()
     {
+        $this->AddFont('Nunito', '', 'Nunito-Regular.php');
+        $this->AddFont('Nunito', 'B', 'Nunito-Bold.php');
+        $this->AddFont('Nunito', 'BI', 'Nunito-Bold.php');
+        $this->AddFont('Nunito', 'I', 'Nunito-Bold.php');
         // Logo
         $this->Image(dirname(__FILE__) . $this->school_logo, 5, 5, 30);
         // $this->Image(dirname(__FILE__) . $this->arm_of_gov, ($this->school_header_position == 300 ? ($this->school_header_position - 30) : ($this->school_header_position - 15)), 6, 18);
-        // Arial  15
-        $this->SetFont('Arial', 'B', 13);
+        // Nunito  15
+        $this->SetFont('Nunito', 'B', 13);
         // Title
         $this->Cell($this->school_header_position, 5, strtoupper($this->school_name), 0, 0, 'C');
         $this->Ln();
-        // Arial  15
-        $this->SetFont('Arial', '', 8);
+        // Nunito  15
+        $this->SetFont('Nunito', '', 8);
         $this->Cell($this->school_header_position, 5, "P.O Box : " . $this->school_po . "-" . $this->school_BOX_CODE, 0, 0, 'C');
         $this->Ln();
         $this->Cell($this->school_header_position, 5, "Contact Us: " . $this->school_contact, 0, 0, 'C');
@@ -95,7 +99,7 @@ class PDF extends FPDF
         if (isset($_SESSION['school_mail'])) {
             $this->Cell($this->school_header_position, 5, "Mail Us: " . $_SESSION['school_mail'], 0, 1, 'C');
         }
-        $this->SetFont('Arial', 'BU', 10);
+        $this->SetFont('Nunito', 'BU', 10);
         $this->Ln();
         $this->Cell($this->school_header_position, 5,
         /** "Report Title: " . **/
@@ -117,12 +121,12 @@ class PDF extends FPDF
     {
         // Position at 1.5 cm from bottom
         $this->SetY(-15);
-        // Arial italic 8
-        $this->SetFont('Arial', 'I', 8);
+        // Nunito italic 8
+        $this->SetFont('Nunito', 'I', 8);
         // Page number
         $this->Cell(0, 5, 'Page ' . $this->PageNo() . '', 0, 0, 'C');
         $this->Ln();
-        $this->SetFont('Arial', 'I', 8);
+        $this->SetFont('Nunito', 'I', 8);
         $this->Cell($this->school_header_position, 7, "If found please return to " . ucwords(strtolower(trim($this->school_name))) . " or contact " . $this->school_contact . "",0,0,"C");
     }
 
@@ -135,7 +139,7 @@ class PDF extends FPDF
     function FancyTable($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
@@ -146,9 +150,10 @@ class PDF extends FPDF
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        // LADYBIRD DEFAULT COLORS
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 8);
+        $this->SetFont('Nunito', '', 8);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -195,7 +200,7 @@ class PDF extends FPDF
 
         // echo $highest_len;
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
@@ -222,7 +227,7 @@ class PDF extends FPDF
         // Color and font restoration
         $this->SetFillColor(245, 245, 245);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 7);
+        $this->SetFont('Nunito', '', 7);
         // Data
         $fill = false;
         for ($ind = 0; $ind < count($data); $ind++) {
@@ -269,11 +274,11 @@ class PDF extends FPDF
     function feesStructure($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
-        $this->SetFont('Arial', 'B', 9);
+        $this->SetFont('Nunito', 'B', 9);
         // Header
         $w = $width;
         $this->Cell(5, 8, "", 0, 0, 'C', 0);
@@ -281,9 +286,9 @@ class PDF extends FPDF
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Arial', '', 9);
+        $this->SetFont('Nunito', '', 9);
         // Data
         $fill = false;
         $term1 = 0;
@@ -303,7 +308,7 @@ class PDF extends FPDF
             $term2 += $row[3];
             $term3 += $row[4];
         }
-        $this->SetFont('Helvetica', 'B', 9);
+        $this->SetFont('Nunito', 'B', 9);
         $this->Cell(5, 6, "", 0, 0, 'C', 0);
         $this->Cell($w[0], 6, "", 1, 0, 'L', false);
         $this->Cell($w[1], 6, "Total", 1, 0, 'L', false);
@@ -319,7 +324,8 @@ class PDF extends FPDF
     function financeTable($header, $data, $width, $skip = true)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
+        // $this->SetFillColor(243, 151, 205);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
         // Header
@@ -329,11 +335,11 @@ class PDF extends FPDF
         }
         for ($i = 0; $i < count($header); $i++) {
             if ($skip == true) {
-                if ($i != 4) {
+                if ($i != 4 && $i != 8) {
                     $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
                 }
             } else {
-                if($i != 6){
+                if($i != 6 && $i != 9){
                     $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
                 }
             }
@@ -341,9 +347,9 @@ class PDF extends FPDF
 
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 8);
+        $this->SetFont('Nunito', '', 8);
         // Data
         $fill = false;
         $recieved = 0;
@@ -355,8 +361,15 @@ class PDF extends FPDF
 
             $vhs = [];
             $row_count = 0;
+            $compulsory = 0;
+            $provisional = 0;
             if (isJson_report($row[6])) {
                 foreach(json_decode($row[6], true) as $ind => $vh){
+                    if($vh['roles'] == "provisional"){
+                        $provisional += $vh['amount_paid'];
+                    }else{
+                        $compulsory += $vh['amount_paid'];
+                    }
                     array_push($vhs, ($ind+1)."). ".$vh['name']." Kes".number_format($vh['amount_paid'])." ".$vh['roles']);
                     $row_count+=1;
                 }
@@ -374,20 +387,22 @@ class PDF extends FPDF
                 $this->Cell($w[4], (6*$row_count), $row[4], 1, 0, 'L', $fill);
             }
             $this->Cell($w[5], (6*$row_count), $row[5], 1, 0, 'L', $fill);
-            // $this->MultiCell($w[6], 6, ucwords(strtolower(join(", ", $vhs))), 1, 'L', $fill);
-            $this->Cell($w[6], (6*$row_count), count($vhs)." Voteheads", 1, 0, 'L', $fill);
-            // $this->Cell($w[7], (6*$row_count), ($row[7]), 1, 0, 'R', $fill);
-            $this->Cell($w[8], (6*$row_count), ($row[8]), 1, 0, 'R', $fill);
+            $this->Cell($w[6], (6*$row_count), "Compulsory Kes ".number_format($compulsory).", Provisional : Kes ".$provisional."", 1, 0, 'L', $fill);
+            if(!$skip){
+                $this->Cell($w[8], (6*$row_count), ($row[8]), 1, 0, 'R', $fill);
+            }else{
+                $this->Cell($w[7], (6*$row_count), ($row[7]), 1, 0, 'R', $fill);
+            }
             if(!empty($row[9])){
-                $this->Cell($w[9], (6*$row_count), ($row[9]), 1, 0, 'R', $fill);
+                // $this->Cell($w[9], (6*$row_count), ($row[9]), 1, 0, 'R', $fill);
             }
             $this->Ln();
             $fill = !$fill;
             $balance += $row[2];
             $recieved += $row[1];
         }
-        $this->SetFont('Helvetica', 'BI', 8);
-        $this->Cell($w[0], 6, "Tot", 1, 0, 'L', $fill);
+        $this->SetFont('Nunito', 'BI', 8);
+        $this->Cell($w[0], 6, ":", 1, 0, 'L', $fill);
         $this->Cell($w[1], 6, "Kes " . number_format($recieved), 1, 0, 'L', $fill);
         // $this->Cell($w[2], 6, "Kes " . number_format($balance), 1, 0, 'L', $fill);
         // Closing line
@@ -397,7 +412,7 @@ class PDF extends FPDF
     function expenseTable($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
@@ -411,9 +426,9 @@ class PDF extends FPDF
         $this->Ln();
         // Color and font restoration
         // $header = array('No', 'Expense', 'Category','Units', 'Unit Price', 'Total',  'Date');
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 8);
+        $this->SetFont('Nunito', '', 8);
         // Data
         $fill = false;
         $index = 1;
@@ -432,7 +447,7 @@ class PDF extends FPDF
             $fill = !$fill;
             $index++;
         }
-        // $this->SetFont('Helvetica', 'BI', 8);
+        // $this->SetFont('Nunito', 'BI', 8);
         // $this->Cell($w[0], 6, "Tot", 1, 0, 'L', $fill);
         // $this->Cell($w[1], 6, "Kes " . number_format($recieved), 1, 0, 'L', $fill);
         // $this->Cell($w[2], 6, "Kes " . number_format($balance), 1, 0, 'L', $fill);
@@ -443,7 +458,7 @@ class PDF extends FPDF
     function exams_results($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
@@ -454,9 +469,9 @@ class PDF extends FPDF
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 8);
+        $this->SetFont('Nunito', '', 8);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -481,7 +496,7 @@ class PDF extends FPDF
         }
         $this->Cell($w[0], 6, "", "LB", 0, 'L', false);
         $this->Cell($w[1], 6, "", "B", 0, 'L', false);
-        $this->SetFont('Helvetica', 'B', 8);
+        $this->SetFont('Nunito', 'B', 8);
         $this->Cell($w[2], 6, "Mean : ", "B", 0, 'L', false);
         // get the array to store the data
         $data_holder = [];
@@ -550,7 +565,7 @@ class PDF extends FPDF
     function balancesTable($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
@@ -563,9 +578,9 @@ class PDF extends FPDF
             }
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 7);
+        $this->SetFont('Nunito', '', 7);
         // Data
         $fill = false;
         $total_1 = 0;
@@ -591,7 +606,7 @@ class PDF extends FPDF
             $total_2 += is_integer($row[6]) ? $row[6] : 0;
             $total_3 += is_integer($row[7]) ? $row[7] : 0;
         }
-        $this->SetFont('Helvetica', 'BI', 7);
+        $this->SetFont('Nunito', 'BI', 7);
         $this->Cell(($w[0] + $w[1] + $w[2]), 6, "", 0, 0, "R");
         $this->Cell(($w[4]), 6, "Tot", 1, 0, "R");
         $this->Cell(($w[5]), 6, "Kes " . number_format($total_1), 1, 0, "L");
@@ -605,7 +620,7 @@ class PDF extends FPDF
     function AttendanceTable($header, $data, $present_status)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
@@ -616,9 +631,9 @@ class PDF extends FPDF
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 8);
+        $this->SetFont('Nunito', '', 8);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -638,7 +653,7 @@ class PDF extends FPDF
     function StaffData($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
@@ -649,9 +664,9 @@ class PDF extends FPDF
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 8);
+        $this->SetFont('Nunito', '', 8);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -676,7 +691,7 @@ class PDF extends FPDF
     function logTables($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
@@ -687,9 +702,9 @@ class PDF extends FPDF
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 8);
+        $this->SetFont('Nunito', '', 8);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -713,7 +728,7 @@ class PDF extends FPDF
     function classTrData($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
@@ -724,9 +739,9 @@ class PDF extends FPDF
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 9);
+        $this->SetFont('Nunito', '', 9);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -750,7 +765,7 @@ class PDF extends FPDF
     function salaryTables($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
@@ -761,9 +776,9 @@ class PDF extends FPDF
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 9);
+        $this->SetFont('Nunito', '', 9);
         // Data
         $fill = false;
         $total_earnings = 0;
@@ -796,7 +811,7 @@ class PDF extends FPDF
     function receipt_table($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
@@ -807,9 +822,9 @@ class PDF extends FPDF
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 8);
+        $this->SetFont('Nunito', '', 8);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -835,20 +850,20 @@ class PDF extends FPDF
     function NSSF_TABLE($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
-        $this->SetFont('Helvetica', 'B', 8);
+        $this->SetFont('Nunito', 'B', 8);
         // Header
         $w = $width;
         for ($i = 0; $i < count($header); $i++)
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 8);
+        $this->SetFont('Nunito', '', 8);
         // Data
         $fill = false;
         $counter = 1;
@@ -878,7 +893,7 @@ class PDF extends FPDF
         }
         // ADD SOME CELLS TO GET THE TOTAL AMOUNTS
         // indent cell
-        $this->SetFont('Helvetica', 'BI', 8);
+        $this->SetFont('Nunito', 'BI', 8);
         $this->Cell(($w[0] + $w[1] + $w[2] + $w[3]));
         $this->Cell($w[4], 6, "Total", 1, 0, "R", true);
         $this->Cell($w[5], 6, "Kes " . comma($total_1), 1, 0, "L", true);
@@ -891,21 +906,21 @@ class PDF extends FPDF
     function NHIF_TABLE($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
         // $this->SetFont('','B');
         // Header
         $w = $width;
-        $this->SetFont('Helvetica', 'B', 8);
+        $this->SetFont('Nunito', 'B', 8);
         for ($i = 0; $i < count($header); $i++)
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 8);
+        $this->SetFont('Nunito', '', 8);
         // Data
         $fill = false;
         $counter = 1;
@@ -938,8 +953,8 @@ class PDF extends FPDF
         }
         // ADD SOME CELLS TO GET THE TOTAL AMOUNTS
         // indent cell
-        // $this->SetFont('Helvetica', 'i', 9);
-        $this->SetFont('Helvetica', 'BI', 8);
+        // $this->SetFont('Nunito', 'i', 9);
+        $this->SetFont('Nunito', 'BI', 8);
         $this->Cell(($w[0] + $w[1]));
         $this->Cell($w[2], 6, "Total", 1, 0, "L", true);
         $this->Cell($w[3], 6, "Kes " . comma($total_1), 1, 0, "L", true);
@@ -953,21 +968,21 @@ class PDF extends FPDF
     function KRA_TABLE($header, $data, $width)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(157, 183, 184);
+        $this->SetFillColor(243, 151, 205);
         // $this->SetTextColor(255);
         $this->SetDrawColor(0, 0, 0);
         $this->SetLineWidth(.1);
         // $this->SetFont('','B');
-        $this->SetFont('Helvetica', 'B', 8);
+        $this->SetFont('Nunito', 'B', 8);
         // Header
         $w = $width;
         for ($i = 0; $i < count($header); $i++)
             $this->Cell($w[$i], 8, $header[$i], 1, 0, 'C', true);
         $this->Ln();
         // Color and font restoration
-        $this->SetFillColor(205, 211, 218);
+        $this->SetFillColor(253, 228, 243);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 8);
+        $this->SetFont('Nunito', '', 8);
         // Data
         $fill = false;
         $counter = 1;
@@ -1003,7 +1018,7 @@ class PDF extends FPDF
         }
         // ADD SOME CELLS TO GET THE TOTAL AMOUNTS
         // indent cell
-        $this->SetFont('Helvetica', 'BI', 8);
+        $this->SetFont('Nunito', 'BI', 8);
         $this->Cell(($w[0]));
         $this->Cell($w[1], 6, "Total", 1, 0, "R", true);
         $this->Cell($w[2], 6, "Kes " . comma($total_4), 1, 0, "L", true);
@@ -1081,7 +1096,7 @@ class PDF_Diag extends PDF_Sector
 
     function BarDiagram($w, $h, $data, $format, $color = null, $maxVal = 0, $nbDiv = 4)
     {
-        $this->SetFont('Times', '', 9);
+        $this->SetFont('Nunito', '', 9);
         $this->SetLegends($data, $format);
 
         $XPage = $this->GetX();
@@ -1108,7 +1123,7 @@ class PDF_Diag extends PDF_Sector
         $this->SetLineWidth(0.2);
         $this->Rect($XDiag, $YDiag, $lDiag, $hDiag);
 
-        $this->SetFont('Times', '', 9);
+        $this->SetFont('Nunito', '', 9);
         $this->SetFillColor($color[0], $color[1], $color[2]);
         $i = 0;
         foreach ($data as $val) {
@@ -1459,7 +1474,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->AddPage();
                         $pdf->Cell(40, 10, "Population", 0, 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Times', 'I', 9);
+                        $pdf->SetFont('Nunito', 'I', 9);
                         if($select_gender_option == "all" || $select_gender_option == "male"){
                             $pdf->Cell(20, 5, "Male :", 0, 0, 'L', false);
                             $pdf->Cell(20, 5, $boys . " Student(s)", 0, 0, 'L', false);
@@ -1474,7 +1489,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(20, 5, ($girls + $boys) . " Student(s)", 'T', 0, 'L', false);
                         $pdf->Ln();
                         $pdf->Ln();
-                        $pdf->SetFont('Helvetica', 'B', 8);
+                        $pdf->SetFont('Nunito', 'B', 8);
                         $width = array(7, 30, 17, 10, 45, 25, 45, 25, 20, 45,15);
                         $pdf->FancyTable($header, $data, $width);
                         $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -1639,7 +1654,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 $pdf->AddPage();
                                 $pdf->Cell(40, 10, "Population", 0, 0, 'L', false);
                                 $pdf->Ln();
-                                $pdf->SetFont('Times', 'I', 9);
+                                $pdf->SetFont('Nunito', 'I', 9);
                                 if($select_gender_option == "all" || $select_gender_option == "male"){
                                     $pdf->Cell(20, 5, "Male :", 0, 0, 'L', false);
                                     $pdf->Cell(20, 5, $boys . " Student(s)", 0, 0, 'L', false);
@@ -1654,10 +1669,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 $pdf->Cell(20, 5, ($girls + $boys) . " Student(s)", 'T', 0, 'L', false);
                                 $pdf->Ln();
                                 $pdf->Ln();
-                                $pdf->SetFont('Helvetica', 'BU', 9);
+                                $pdf->SetFont('Nunito', 'BU', 9);
                                 $pdf->Cell(50, 10, classNameReport($school_classes[$index]), 0, 0, 'L', false);
                                 $pdf->Ln();
-                                $pdf->SetFont('Helvetica', 'B', 8);
+                                $pdf->SetFont('Nunito', 'B', 8);
                                 $width = array(7, 30, 17, 10, 45, 25, 45, 25, 20, 45,15);
                                 $pdf->FancyTable($header, $data, $width);
                             }
@@ -1781,7 +1796,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pdf->AddPage();
                             $pdf->Cell(40, 10, "Population", 0, 0, 'L', false);
                             $pdf->Ln();
-                            $pdf->SetFont('Times', 'I', 9);
+                            $pdf->SetFont('Nunito', 'I', 9);
                             if($select_gender_option == "all" || $select_gender_option == "male"){
                                 $pdf->Cell(20, 5, "Male :", 0, 0, 'L', false);
                                 $pdf->Cell(20, 5, $boys . " Student(s)", 0, 0, 'L', false);
@@ -1796,7 +1811,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pdf->Cell(20, 5, ($girls + $boys) . " Student(s)", 'T', 0, 'L', false);
                             $pdf->Ln();
                             $pdf->Ln();
-                            $pdf->SetFont('Helvetica', 'B', 8);
+                            $pdf->SetFont('Nunito', 'B', 8);
                             $width = array(7, 45, 17, 10, 45, 25, 45, 25, 20, 45);
                             $pdf->FancyTable($header, $data, $width);
                             $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -1910,7 +1925,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pdf->AddPage();
                             $pdf->Cell(40, 10, "Population", 0, 0, 'L', false);
                             $pdf->Ln();
-                            $pdf->SetFont('Times', 'I', 9);
+                            $pdf->SetFont('Nunito', 'I', 9);
                             if($select_gender_option == "all" || $select_gender_option == "male"){
                                 $pdf->Cell(20, 5, "Male :", 0, 0, 'L', false);
                                 $pdf->Cell(20, 5, $boys . " Student(s)", 0, 0, 'L', false);
@@ -1925,7 +1940,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pdf->Cell(20, 5, ($girls + $boys) . " Student(s)", 'T', 0, 'L', false);
                             $pdf->Ln();
                             $pdf->Ln();
-                            $pdf->SetFont('Helvetica', 'B', 8);
+                            $pdf->SetFont('Nunito', 'B', 8);
                             $width = array(7, 45, 17, 10, 45, 25, 45, 25, 20, 45);
                             $pdf->FancyTable($header, $data, $width);
                             $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -2005,7 +2020,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         // statistic table
                         $pdf->Cell(40, 10, "Statistics", 0, 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Times', 'I', 10);
+                        $pdf->SetFont('Nunito', 'I', 10);
                         $pdf->Cell(20, 5, "Present :", 0, 0, 'L', false);
                         $pdf->Cell(20, 5, count($present_data) . " Student(s)", 0, 0, 'L', false);
                         $pdf->Ln();
@@ -2014,19 +2029,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Ln();
                         $pdf->Ln();
                         // display present students
-                        $pdf->SetFont('Helvetica', 'BU', 10);
+                        $pdf->SetFont('Nunito', 'BU', 10);
                         $pdf->Cell(50, 10, "Present List", 0, 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Helvetica', '', 10);
+                        $pdf->SetFont('Nunito', '', 10);
                         // the a present attendance table
                         $pdf->AttendanceTable($header, $present_data, "Present");
                         $pdf->Ln();
                         $pdf->Ln();
                         // display present students
-                        $pdf->SetFont('Helvetica', 'BU', 10);
+                        $pdf->SetFont('Nunito', 'BU', 10);
                         $pdf->Cell(50, 10, "Absent List", 0, 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Helvetica', '', 10);
+                        $pdf->SetFont('Nunito', '', 10);
                         // the a present attendance table
                         $pdf->AttendanceTable($header, $absent_data, "Absent");
                         $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -2095,7 +2110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 // statistic table
                                 $pdf->Cell(40, 10, "Statistics", 0, 0, 'L', false);
                                 $pdf->Ln();
-                                $pdf->SetFont('Times', 'I', 9);
+                                $pdf->SetFont('Nunito', 'I', 9);
                                 $pdf->Cell(20, 5, "Present :", 0, 0, 'L', false);
                                 $pdf->Cell(20, 5, count($present_data) . " Student(s)", 0, 0, 'L', false);
                                 $pdf->Ln();
@@ -2103,14 +2118,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 $pdf->Cell(20, 5, count($absent_data) . " Student(s)", 0, 0, 'L', false);
                                 $pdf->Ln();
                                 $pdf->Ln();
-                                $pdf->SetFont('Helvetica', 'BU', 11);
+                                $pdf->SetFont('Nunito', 'BU', 11);
                                 $pdf->Cell(50, 10, classNameReport($school_classes[$ind]), 0, 0, 'L', false);
                                 $pdf->Ln();
                                 // display present students
-                                $pdf->SetFont('Helvetica', 'BU', 10);
+                                $pdf->SetFont('Nunito', 'BU', 10);
                                 $pdf->Cell(50, 10, "Present List", 0, 0, 'L', false);
                                 $pdf->Ln();
-                                $pdf->SetFont('Helvetica', 'B', 9);
+                                $pdf->SetFont('Nunito', 'B', 9);
                                 // the a present attendance table
                                 $pdf->AttendanceTable($header, $present_data, "Present");
                                 $pdf->Ln();
@@ -2118,11 +2133,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 $pdf->Ln();
                                 $pdf->Ln();
                                 // display present students
-                                $pdf->SetFont('Helvetica', 'BU', 10);
+                                $pdf->SetFont('Nunito', 'BU', 10);
                                 $pdf->Cell(50, 10, "Absent List", 0, 0, 'L', false);
                                 $pdf->Ln();
-                                $pdf->SetFont('Helvetica', '', 10);
-                                $pdf->SetFont('Helvetica', 'B', 9);
+                                $pdf->SetFont('Nunito', '', 10);
+                                $pdf->SetFont('Nunito', 'B', 9);
                                 // the a present attendance table
                                 $pdf->AttendanceTable($header, $absent_data, "Absent");
                             }
@@ -2241,7 +2256,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $pdf->AddPage();
                 $pdf->Cell(40, 10, "Population", 0, 0, 'L', false);
                 $pdf->Ln();
-                $pdf->SetFont('Times', 'I', 11);
+                $pdf->SetFont('Nunito', 'I', 11);
                 $pdf->Cell(20, 5, "Male :", 0, 0, 'L', false);
                 $pdf->Cell(20, 5, $boys . " Student(s)", 0, 0, 'L', false);
                 $pdf->Ln();
@@ -2252,7 +2267,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $pdf->Cell(20, 5, ($girls + $boys) . " Student(s)", 'T', 0, 'L', false);
                 $pdf->Ln();
                 $pdf->Ln();
-                $pdf->SetFont('Helvetica', 'B', 8);
+                $pdf->SetFont('Nunito', 'B', 8);
                 $width = array(7, 45, 17, 10, 45, 25, 45, 25, 20, 45);
                 $pdf->FancyTable($header, $data, $width);
                 $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -2312,7 +2327,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->AddPage();
                     $pdf->Cell(40, 10, "Population", 0, 0, 'L', false);
                     $pdf->Ln();
-                    $pdf->SetFont('Times', 'I', 11);
+                    $pdf->SetFont('Nunito', 'I', 11);
                     $pdf->Cell(20, 5, "Male :", 0, 0, 'L', false);
                     $pdf->Cell(20, 5, $boys . " Staff(s)", 0, 0, 'L', false);
                     $pdf->Ln();
@@ -2323,7 +2338,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Cell(20, 5, ($girls + $boys) . " Staff(s)", 'T', 0, 'L', false);
                     $pdf->Ln();
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'B', 9);
+                    $pdf->SetFont('Nunito', 'B', 9);
                     $width = array(7, 50, 15, 25, 10, 20, 20, 30, 17, 40, 40);
                     $pdf->StaffData($header, $data, $width);
                     $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -2372,12 +2387,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->AddPage();
                         $pdf->Cell(40, 10, "Population", 0, 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Times', 'I', 10);
+                        $pdf->SetFont('Nunito', 'I', 10);
                         $pdf->Cell(20, 5, "Total Active : ", 'T', 0, 'L', false);
                         $pdf->Cell(20, 5, $all_active . " Staffs", 'T', 0, 'R', false);
                         $pdf->Ln();
                         $pdf->Ln();
-                        $pdf->SetFont('Helvetica', '', 9);
+                        $pdf->SetFont('Nunito', '', 9);
                         $width = array(10, 35, 35, 20, 20, 20, 25, 25);
                         $pdf->logTables($header, $data, $width);
                         $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -2439,10 +2454,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->set_school_box_code($_SESSION['box_codes']);
                     $pdf->set_school_contact($_SESSION['school_contact']);
                     $pdf->AddPage();
-                    $pdf->SetFont('Times', 'UI', 13);
+                    $pdf->SetFont('Nunito', 'UI', 13);
                     $pdf->Cell(150, 8, "Class Teacher Table", 0, 0, 'C', false);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', '', 10);
+                    $pdf->SetFont('Nunito', '', 10);
                     $width = array(10, 40, 10, 35, 35, 35);
                     $pdf->classTrData($header, $data, $width);
                     $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -3990,9 +4005,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
 
                     if ($period_selection == "specific_date") {
-                        $tittle = classNameReport($student_class_fin) . " ".$course_names." - Fees list on " . date("dS M Y", strtotime($specific_date_finance));
+                        $tittle = classNameReport($student_class_fin) . " ".$course_names." - Fees Statement on " . date("dS M Y", strtotime($specific_date_finance));
                     } elseif ($period_selection == "period") {
-                        $tittle = classNameReport($student_class_fin) . " ".$course_names." - Fees list from " . date("dS M Y", strtotime($from_date_finance)) . " to " . date("dS M Y", strtotime($to_date_finance));
+                        $tittle = classNameReport($student_class_fin) . " ".$course_names." - Fees Statement from " . date("dS M Y", strtotime($from_date_finance)) . " to " . date("dS M Y", strtotime($to_date_finance));
                     } else {
                         $tittle = "No records to display";
                     }
@@ -4007,7 +4022,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->AddPage();
                     $pdf->Cell(40, 10, "Statistics", 0, 0, 'L', false);
                     $pdf->Ln();
-                    $pdf->SetFont('Times', 'I', 9);
+                    $pdf->SetFont('Nunito', 'I', 9);
                     $pdf->Cell(30, 5, "Cash :", 0, 0, 'L', false);
                     $pdf->Cell(30, 5, "Kes " . number_format($cash), 0, 0, 'L', false);
                     $pdf->Ln();
@@ -4023,12 +4038,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Cell(30, 5, "Total Recieved:", 'T', 0, 'L', false);
                     $pdf->Cell(30, 5, "Kes " . number_format($cash + $mpesa + $bank + $reversed), 'T', 0, 'L', false);
                     $pdf->Ln();
-                    $pdf->SetFont('Times', 'IU', 13);
+                    $pdf->SetFont('Nunito', 'IU', 13);
                     $pdf->Ln();
                     $pdf->Cell(200, 8, "Fees Collection Table", 0, 0, 'C', false);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'B', 8);
-                    $width = array(5, 20, 20, 22, 25, 25, 25, 25, 33, 18);
+                    $pdf->SetFont('Nunito', 'B', 8);
+                    $width = array(5, 20, 20, 20, 25, 25, 60, 60, 35, 18);
                     $skip = false;
                     $pdf->financeTable($header, $data, $width, $skip);
                     $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -4113,7 +4128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->AddPage();
                     $pdf->Cell(40, 10, "Statistics", 0, 0, 'L', false);
                     $pdf->Ln();
-                    $pdf->SetFont('Times', 'I', 9);
+                    $pdf->SetFont('Nunito', 'I', 9);
                     $pdf->Cell(40, 5, "Cash :", 0, 0, 'L', false);
                     $pdf->Cell(40, 5, "Kes " . number_format($cash), 0, 0, 'L', false);
                     $pdf->Ln();
@@ -4129,12 +4144,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Cell(40, 5, "Total Recieved:", 'T', 0, 'L', false);
                     $pdf->Cell(40, 5, "Kes " . number_format($cash + $mpesa + $bank + $reversed), 'T', 0, 'L', false);
                     $pdf->Ln();
-                    $pdf->SetFont('Times', 'IU', 13);
+                    $pdf->SetFont('Nunito', 'IU', 13);
                     $pdf->Ln();
                     $pdf->Cell(200, 8, "Fees Collection Table", 0, 0, 'C', false);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'B', 8);
-                    $width = array(5, 20, 20, 22, 25, 25, 25, 25, 33, 18);
+                    $pdf->SetFont('Nunito', 'B', 8);
+                    $width = array(5, 18, 18, 20, 25, 20, 60, 60, 35, 18);
                     $skip = false;
                     $pdf->financeTable($header, $data, $width, $skip);
                     $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -4207,9 +4222,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     // $data = $pdf->LoadData('countries.txt');
                     $title = "No data to display!";
                     if ($period_selection == "specific_date") {
-                        $tittle = $student_name . " Fees list on " . date("dS M Y", strtotime($specific_date_finance));
+                        $tittle = $student_name . " Fees Statement on " . date("dS M Y", strtotime($specific_date_finance));
                     } else {
-                        $tittle = $student_name . " Fees list from " . date("dS M Y", strtotime($from_date_finance)) . " to " . date("dS M Y", strtotime($to_date_finance));
+                        $tittle = $student_name . " Fees Statement from " . date("dS M Y", strtotime($from_date_finance)) . " to " . date("dS M Y", strtotime($to_date_finance));
                     }
                     $data = $finance_list;
                     if (count($data) > 0) {
@@ -4219,39 +4234,77 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->set_school_po($_SESSION['po_boxs']);
                         $pdf->set_school_box_code($_SESSION['box_codes']);
                         $pdf->set_school_contact($_SESSION['school_contact']);
-                        // $pdf->SetMargins(5,5);
+                        $pdf->SetMargins(5,5);
                         $pdf->AddPage();
                         $pdf->Cell(40, 10, "Balance", 0, 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Times', 'I', 8);
+                        $pdf->SetFont('Nunito', 'I', 9);
                         $pdf->Cell(40, 5, "Last Balance :", 0, 0, 'L', false);
                         $pdf->Cell(40, 5, $capture_balance, 0, 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Helvetica', 'U', 8);
-                        $pdf->Cell(40, 10, "Statistics", 0, 0, 'L', false);
+                        // $pdf->SetFont('Nunito', 'U', 8);
+                        // $pdf->Cell(40, 10, "Statistics", 0, 0, 'L', false);
+                        // $pdf->Ln();
+                        // $pdf->SetFont('Nunito', 'I', 8);
+                        // $pdf->Cell(40, 5, "Cash :", 0, 0, 'L', false);
+                        // $pdf->Cell(40, 5, "Kes " . number_format($cash), 0, 0, 'L', false);
+                        // $pdf->Ln();
+                        // $pdf->Cell(40, 5, "M-Pesa :", 0, 0, 'L', false);
+                        // $pdf->Cell(40, 5, "Kes " . number_format($mpesa), 0, 0, 'L', false);
+                        // $pdf->Ln();
+                        // $pdf->Cell(40, 5, "Bank :", 0, 0, 'L', false);
+                        // $pdf->Cell(40, 5, "Kes " . number_format($bank), 0, 0, 'L', false);
+                        // $pdf->Ln();
+                        // $pdf->Cell(40, 5, "Reversed :", 0, 0, 'L', false);
+                        // $pdf->Cell(40, 5, "Kes " . number_format($reversed), 0, 0, 'L', false);
+                        $pdf->Cell(190, 1, "", "T", 1, 'C', false);
+                        $pdf->Ln(2);
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(100, 5, "Finance Summary", 'TLR', 0, 'C', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Times', 'I', 8);
-                        $pdf->Cell(40, 5, "Cash :", 0, 0, 'L', false);
-                        $pdf->Cell(40, 5, "Kes " . number_format($cash), 0, 0, 'L', false);
+
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(60, 5, "Course Fees:", 'TLR', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(40, 5, "Kes 0", 'TR', 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->Cell(40, 5, "M-Pesa :", 0, 0, 'L', false);
-                        $pdf->Cell(40, 5, "Kes " . number_format($mpesa), 0, 0, 'L', false);
+
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(60, 5, "This Month Fees:", 'TLR', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(40, 5, "Kes 0", 'TR', 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->Cell(40, 5, "Bank :", 0, 0, 'L', false);
-                        $pdf->Cell(40, 5, "Kes " . number_format($bank), 0, 0, 'L', false);
+
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(60, 5, "Fees Paid this Month:", 'TLR', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(40, 5, "Kes 0", 'TR', 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->Cell(40, 5, "Reversed :", 0, 0, 'L', false);
-                        $pdf->Cell(40, 5, "Kes " . number_format($reversed), 0, 0, 'L', false);
+
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(60, 5, "Current Fees Balance:", 'TLR', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(40, 5, "Kes 0", 'TR', 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->Cell(40, 5, "Total Recieved:", 'T', 0, 'L', false);
-                        $pdf->Cell(40, 5, "Kes " . number_format($cash + $mpesa + $bank + $reversed), 'T', 0, 'L', false);
+
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(60, 5, "Starter Pack & Other Payments:", 'TLRB', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(40, 5, "Kes 0", 'TR', 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Times', 'IU', 13);
+
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(60, 5, "Tot Paid Since Joining:", 'TLRB', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(40, 5, "Kes 0", 'TRB', 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->Cell(200, 8, "Fees Collection Table", 0, 0, 'C', false);
+
+                        $pdf->SetFont('Nunito', 'IU', 13);
                         $pdf->Ln();
-                        $pdf->SetFont('Helvetica', 'B', 8);
-                        $width = array(5, 20, 20, 22, 35, 30, 30, 30, 33, 18);
+                        $pdf->Cell(200, 8, "Fees Collection List", 0, 0, 'C', false);
+                        $pdf->Ln();
+                        $pdf->SetFont('Nunito', 'B', 8);
+                        $width = array(5, 20, 20, 10, 25, 15, 70, 35, 20, 18);
                         $pdf->financeTable($header, $data, $width);
                         $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
                     } else {
@@ -4297,7 +4350,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                         // LAST ACADEMIC YEAR BALANCE
                         $last_acad_yr = lastACADyrBal($student_data[$index]['adm_no'], $conn2);
-                        $acad_balance = ($student_data[$index]['balance_carry_forward']);
+                        $acad_balance = ($last_acad_yr);
                         $border = isBoarding($student_data[$index]['adm_no'], $conn2) ? (getBoardingFees($conn2, $student_class_fin, "null", $student_data[$index]['adm_no']) * 1) : "Not-enrolled";
                         $transport = isTransport($conn2, $student_data[$index]['adm_no']) ? (transportBalanceSinceAdmission($conn2, $student_data[$index]['adm_no']) * 1) : "Not-enrolled";
                         $data = array($number, $Fullname, $student_data[$index]['adm_no'], $classes, $gender, $fees_paid, $balance, $acad_balance);
@@ -4348,7 +4401,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $header = array('No', 'Fullname', 'Reg No.', 'Class', 'Sex', 'Fees paid', 'Balance', 'Balance CF');
                         // Data loading
                         // $data = $pdf->LoadData('countries.txt');
-                        $tittle = "Fees list for - " . classNameReport($student_class_fin)." ".$course_names;
+                        $tittle = "Fees Statement for - " . classNameReport($student_class_fin)." ".$course_names;
                         $data = $stud_data;
                         $pdf->set_document_title($tittle);
                         $pdf->setSchoolLogo("../../" . schoolLogo($conn));
@@ -4357,16 +4410,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->set_school_box_code($_SESSION['box_codes']);
                         $pdf->set_school_contact($_SESSION['school_contact']);
                         $pdf->AddPage();
-                        $pdf->SetFont('Times', 'BU', 10);
+                        $pdf->SetFont('Nunito', 'BU', 10);
                         $pdf->Cell(40, 5, "Note :", 0, 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Times', 'I', 10);
-                        $pdf->Cell(200, 5, "- The balances are " . "as of " . ucwords(strtolower($term)) . " inclusive of the previous academic years balance.", 0, 0, 'L', false);
-                        $pdf->Ln();
+                        $pdf->SetFont('Nunito', '', 10);
                         $pdf->Cell(200, 5, "- When you sum the \"Balance\" and the \"Fees paid\" you get the total amount the student is supposed to pay.", 0, 0, 'L', false);
                         $pdf->Cell(40, 10, "Statistics", 0, 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Times', 'I', 10);
+                        $pdf->SetFont('Nunito', '', 10);
                         $pdf->Cell(40, 5, "Fees Paid :", 0, 0, 'L', false);
                         $pdf->Cell(40, 5, "Kes " . number_format($fees_repo_paid), 0, 0, 'L', false);
                         $pdf->Ln();
@@ -4376,11 +4427,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(40, 5, "Fees To be paid :", 0, 0, 'L', false);
                         $pdf->Cell(40, 5, "Kes " . number_format($total_fees), "T", 0, 'L', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Times', 'IU', 12);
+                        $pdf->SetFont('Nunito', 'IU', 12);
                         $pdf->Ln();
-                        $pdf->Cell(200, 8, "Fees Balances for - " . classNameReport($student_class_fin) . "".$course_names. " - as of " . ucwords(strtolower($term)), 0, 0, 'C', false);
+                        $pdf->Cell(200, 8, "Fees Balances for - " . classNameReport($student_class_fin) . " ".$course_names, 0, 0, 'C', false);
                         $pdf->Ln();
-                        $pdf->SetFont('Helvetica', 'B', 8);
+                        $pdf->SetFont('Nunito', 'B', 8);
                         $width = array(8, 33, 18, 15, 8, 38, 38, 38);
                         $pdf->balancesTable($header, $data, $width);
                         $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -4395,7 +4446,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         // create the pdf file
                         $pdf = new PDF('P', 'mm', 'A4');
                         $pdf->setHeaderPos(200);
-                        $tittle = "Fees list for whole school";
+                        $tittle = "Fees Statement for whole school";
                         $pdf->set_document_title($tittle);
                         $pdf->setSchoolLogo("../../" . schoolLogo($conn));
                         $pdf->set_school_name($_SESSION['schname']);
@@ -4437,7 +4488,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $course_names = strlen($course_name) > 0 ? " in ".$courses_name : null;
 
                         // Column headings
-                        $header = array('No', 'Fullname', 'Reg No.', 'Class', 'Sex', 'Fees paid', 'Balance', 'Last Yrs Bal');
+                        $header = array('No', 'Fullname', 'Reg No.', 'Class', 'Sex', 'Fees paid', 'Tot Balance', 'Payable Fees');
                         for ($ind = 0; $ind < count($school_classes); $ind++) {
                             // get per class
                             $student_class_fin = $school_classes[$ind];
@@ -4467,7 +4518,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 $acad_balance = ($last_acad_yr);
                                 $border = isBoarding($student_data[$index]['adm_no'], $conn2) ? (getBoardingFees($conn2, $student_class_fin) * 1) : "Not-enrolled";
                                 $transport = isTransport($conn2, $student_data[$index]['adm_no']) ? (transportBalanceSinceAdmission($conn2, $student_data[$index]['adm_no']) * 1) : "Not-enrolled";
-                                $data = array($number, $Fullname, $student_data[$index]['adm_no'], $classes, $gender, $fees_paid, $balance, $acad_balance);
+                                $data = array($number, $Fullname, $student_data[$index]['adm_no'], $classes, $gender, $fees_paid, $balance, ($fees_paid+$balance));
                                 array_push($stud_data, $data);
                                 $number++;
                             }
@@ -4476,16 +4527,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 // $data = $pdf->LoadData('countries.txt');
                                 $data = $stud_data;
                                 $pdf->AddPage();
-                                $pdf->SetFont('Times', 'BU', 10);
+                                $pdf->SetFont('Nunito', 'BU', 10);
                                 $pdf->Cell(40, 5, "Note :", 0, 0, 'L', false);
                                 $pdf->Ln();
-                                $pdf->SetFont('Times', 'I', 10);
-                                $pdf->Cell(200, 5, "- The balances are " . "as of " . ucwords(strtolower($term)) . " inclusive of the previous academic years balance.", 0, 0, 'L', false);
-                                $pdf->Ln();
+                                $pdf->SetFont('Nunito', '', 10);
                                 $pdf->Cell(200, 5, "- When you sum the \"Balance\" and the \"Fees paid\" you get the total amount the student is supposed to pay.", 0, 0, 'L', false);
                                 $pdf->Cell(40, 10, "Statistics", 0, 0, 'L', false);
                                 $pdf->Ln();
-                                $pdf->SetFont('Times', 'I', 10);
+                                $pdf->SetFont('Nunito', '', 10);
                                 $pdf->Cell(40, 5, "Fees Paid :", 0, 0, 'L', false);
                                 $pdf->Cell(40, 5, "Kes " . number_format($fees_repo_paid), 0, 0, 'L', false);
                                 $pdf->Ln();
@@ -4495,11 +4544,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 $pdf->Cell(40, 5, "Fees To be paid :", 0, 0, 'L', false);
                                 $pdf->Cell(40, 5, "Kes " . number_format($total_fees), "T", 0, 'L', false);
                                 $pdf->Ln();
-                                $pdf->SetFont('Times', 'IU', 12);
+                                $pdf->SetFont('Nunito', 'IU', 12);
                                 $pdf->Ln();
-                                $pdf->Cell(200, 8, "Fees Balances for " . classNameReport($student_class_fin) . "".$course_names."" . " as of " . ucwords(strtolower($term)), 0, 0, 'C', false);
+                                $pdf->Cell(200, 8, "Fees Balances for " . classNameReport($student_class_fin) . "".$course_names." ", 0, 0, 'C', false);
                                 $pdf->Ln();
-                                $pdf->SetFont('Helvetica', 'B', 8);
+                                $pdf->SetFont('Nunito', 'B', 8);
                                 $width = array(8, 33, 18, 15, 8, 38, 38, 38);
                                 $pdf->balancesTable($header, $data, $width);
                             }
@@ -4540,56 +4589,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 $reminder_msg = reminderMsg($students[$indexes], $reminder_message, $conn2);
                                 // EDIT THE INFORMATION TO DISPLAY FOR THE REMINDER
                                 // $pdf2->Image(dirname(__FILE__) . $pdf2->school_logo, 6, 6, 20);
-                                // Arial  15
-                                // $pdf2->SetFont('Arial', '', 15);
+                                // Nunito  15
+                                // $pdf2->SetFont('Nunito', '', 15);
                                 // Title
                                 $pdf2->Cell($pdf2->school_header_position, 5, "", 0, 0, 'C');
                                 $pdf2->Ln();
-                                $pdf2->SetFont('Arial', '', 15);
+                                $pdf2->SetFont('Nunito', '', 15);
                                 $pdf2->Cell($pdf2->school_header_position, 5, strtoupper(trim($pdf2->school_name)), 0, 0, 'C');
-                                // Arial  15
+                                // Nunito  15
                                 $pdf2->Ln();
-                                $pdf2->SetFont('Arial', '', 9);
+                                $pdf2->SetFont('Nunito', '', 9);
                                 $pdf2->Cell($pdf2->school_header_position, 5, "P.O Box : " . $pdf2->school_po . "-" . $pdf2->school_BOX_CODE, 0, 0, 'C');
                                 $pdf2->Ln();
                                 $pdf2->Cell($pdf2->school_header_position, 5, "Contact us: " . $pdf2->school_contact, 0, 0, 'C');
                                 // Line break
                                 $pdf2->Ln();
-                                $pdf2->SetFont('Arial', 'U', 9);
+                                $pdf2->SetFont('Nunito', 'U', 9);
                                 $pdf2->Cell($pdf2->school_header_position, 5, $pdf2->school_document_title . "", 0, 0, 'C');
                                 $pdf2->SetTitle($pdf2->school_document_title);
                                 $pdf2->SetFont('', '');
                                 $pdf2->SetAuthor($_SESSION['username']);
                                 // Line break
                                 $pdf2->Ln(5);
-                                $pdf2->SetFont('Arial', '', 10);
+                                $pdf2->SetFont('Nunito', '', 10);
                                 $pdf2->Cell(30, 5, "Student Name : ", 0, 0, 'L', 0);
-                                $pdf2->SetFont('Arial', '', 9);
+                                $pdf2->SetFont('Nunito', '', 9);
                                 $pdf2->Cell(30, 5, ucwords(strtolower($students[$indexes]['first_name'] . " " . $students[$indexes]['second_name'])), 0, 0, 'L', 0);
                                 $pdf2->Ln();
-                                $pdf2->SetFont('Arial', '', 10);
+                                $pdf2->SetFont('Nunito', '', 10);
                                 $pdf2->Cell(30, 5, "Student Reg No : ", 0, 0, 'L', 0);
-                                $pdf2->SetFont('Arial', '', 9);
+                                $pdf2->SetFont('Nunito', '', 9);
                                 $pdf2->Cell(30, 5, $students[$indexes]['adm_no'], 0, 0, 'L', 0);
                                 $pdf2->Ln();
-                                $pdf2->SetFont('Arial', '', 10);
+                                $pdf2->SetFont('Nunito', '', 10);
                                 $pdf2->Cell(30, 5, "Student Level : ", 0, 0, 'L', 0);
-                                $pdf2->SetFont('Arial', '', 9);
+                                $pdf2->SetFont('Nunito', '', 9);
                                 $pdf2->Cell(30, 5, classNameReport($students[$indexes]['stud_class']), 0, 0, 'L', 0);
                                 $pdf2->Ln(10);
-                                $pdf2->SetFont('Arial', '', 9);
+                                $pdf2->SetFont('Nunito', '', 9);
                                 $pdf2->Cell(30, 5, "Dear Parent/Guardian,", 0, 0, 'L', 0);
                                 $pdf2->Ln();
                                 $pdf2->Write(5, $reminder_msg);
                                 // ouput the pdf generated
                                 $pdf2->Ln(10);
-                                $pdf2->SetFont('Arial', '', 9);
+                                $pdf2->SetFont('Nunito', '', 9);
                                 $pdf2->Cell(30, 5, "Yours Faithfull", 0, 0, 'L', 0);
                                 $pdf2->Ln();
-                                $pdf2->SetFont('Arial', '', 9);
+                                $pdf2->SetFont('Nunito', '', 9);
                                 $pdf2->Cell(30, 5, "Headteacher,", 0, 0, 'L', 0);
                                 $pdf2->Ln();
-                                $pdf2->SetFont('Arial', '', 9);
+                                $pdf2->SetFont('Nunito', '', 9);
                                 $pdf2->Cell(30, 5, trim(ucwords(strtolower($pdf2->school_name))), 0, 0, 'L', 0);
                                 $pdf2->Ln();
                                 $pdf2->SetDrawColor(194, 200, 200);
@@ -4646,56 +4695,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                     $reminder_msg = reminderMsg($students[$indexes], $reminder_message, $conn2);
                                     // EDIT THE INFORMATION TO DISPLAY FOR THE REMINDER
                                     // $pdf2->Image(dirname(__FILE__) . $pdf2->school_logo, 6, 6, 20);
-                                    // Arial  15
-                                    // $pdf2->SetFont('Arial', '', 15);
+                                    // Nunito  15
+                                    // $pdf2->SetFont('Nunito', '', 15);
                                     // Title
                                     $pdf2->Cell($pdf2->school_header_position, 5, "", 0, 0, 'C');
                                     $pdf2->Ln();
-                                    $pdf2->SetFont('Arial', '', 15);
+                                    $pdf2->SetFont('Nunito', '', 15);
                                     $pdf2->Cell($pdf2->school_header_position, 5, strtoupper(trim($pdf2->school_name)), 0, 0, 'C');
-                                    // Arial  15
+                                    // Nunito  15
                                     $pdf2->Ln();
-                                    $pdf2->SetFont('Arial', '', 9);
+                                    $pdf2->SetFont('Nunito', '', 9);
                                     $pdf2->Cell($pdf2->school_header_position, 5, "P.O Box : " . $pdf2->school_po . "-" . $pdf2->school_BOX_CODE, 0, 0, 'C');
                                     $pdf2->Ln();
                                     $pdf2->Cell($pdf2->school_header_position, 5, "Contact us: " . $pdf2->school_contact, 0, 0, 'C');
                                     // Line break
                                     $pdf2->Ln();
-                                    $pdf2->SetFont('Arial', 'U', 9);
+                                    $pdf2->SetFont('Nunito', 'U', 9);
                                     $pdf2->Cell($pdf2->school_header_position, 5, $pdf2->school_document_title . "", 0, 0, 'C');
                                     $pdf2->SetTitle($pdf2->school_document_title);
                                     $pdf2->SetFont('', '');
                                     $pdf2->SetAuthor($_SESSION['username']);
                                     // Line break
                                     $pdf2->Ln(5);
-                                    $pdf2->SetFont('Arial', '', 10);
+                                    $pdf2->SetFont('Nunito', '', 10);
                                     $pdf2->Cell(30, 5, "Student Name : ", 0, 0, 'L', 0);
-                                    $pdf2->SetFont('Arial', '', 9);
+                                    $pdf2->SetFont('Nunito', '', 9);
                                     $pdf2->Cell(30, 5, ucwords(strtolower($students[$indexes]['first_name'] . " " . $students[$indexes]['second_name'])), 0, 0, 'L', 0);
                                     $pdf2->Ln();
-                                    $pdf2->SetFont('Arial', '', 10);
+                                    $pdf2->SetFont('Nunito', '', 10);
                                     $pdf2->Cell(30, 5, "Student Reg No : ", 0, 0, 'L', 0);
-                                    $pdf2->SetFont('Arial', '', 9);
+                                    $pdf2->SetFont('Nunito', '', 9);
                                     $pdf2->Cell(30, 5, $students[$indexes]['adm_no'], 0, 0, 'L', 0);
                                     $pdf2->Ln();
-                                    $pdf2->SetFont('Arial', '', 10);
+                                    $pdf2->SetFont('Nunito', '', 10);
                                     $pdf2->Cell(30, 5, "Student Level : ", 0, 0, 'L', 0);
-                                    $pdf2->SetFont('Arial', '', 9);
+                                    $pdf2->SetFont('Nunito', '', 9);
                                     $pdf2->Cell(30, 5, classNameReport($students[$indexes]['stud_class']), 0, 0, 'L', 0);
                                     $pdf2->Ln(10);
-                                    $pdf2->SetFont('Arial', '', 9);
+                                    $pdf2->SetFont('Nunito', '', 9);
                                     $pdf2->Cell(30, 5, "Dear Parent/Guardian,", 0, 0, 'L', 0);
                                     $pdf2->Ln();
                                     $pdf2->Write(5, $reminder_msg);
                                     // ouput the pdf generated
                                     $pdf2->Ln(10);
-                                    $pdf2->SetFont('Arial', '', 9);
+                                    $pdf2->SetFont('Nunito', '', 9);
                                     $pdf2->Cell(30, 5, "Yours Faithfull", 0, 0, 'L', 0);
                                     $pdf2->Ln();
-                                    $pdf2->SetFont('Arial', '', 9);
+                                    $pdf2->SetFont('Nunito', '', 9);
                                     $pdf2->Cell(30, 5, "Headteacher,", 0, 0, 'L', 0);
                                     $pdf2->Ln();
-                                    $pdf2->SetFont('Arial', '', 9);
+                                    $pdf2->SetFont('Nunito', '', 9);
                                     $pdf2->Cell(30, 5, trim(strtoupper($pdf2->school_name)), 0, 0, 'L', 0);
                                     $pdf2->Ln();
                                     $pdf2->SetDrawColor(194, 200, 200);
@@ -4744,56 +4793,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $reminder_msg = reminderMsg($student_data, $reminder_message, $conn2);
                         // EDIT THE INFORMATION TO DISPLAY FOR THE REMINDER
                         // $pdf2->Image(dirname(__FILE__) . $pdf2->school_logo, 6, 6, 20);
-                        // Arial  15
-                        // $pdf2->SetFont('Arial', '', 15);
+                        // Nunito  15
+                        // $pdf2->SetFont('Nunito', '', 15);
                         // Title
                         $pdf2->Cell($pdf2->school_header_position, 5, "", 0, 0, 'C');
                         $pdf2->Ln();
-                        $pdf2->SetFont('Arial', '', 15);
+                        $pdf2->SetFont('Nunito', '', 15);
                         $pdf2->Cell($pdf2->school_header_position, 5, strtoupper(trim($pdf2->school_name)), 0, 0, 'C');
-                        // Arial  15
+                        // Nunito  15
                         $pdf2->Ln();
-                        $pdf2->SetFont('Arial', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell($pdf2->school_header_position, 5, "P.O Box : " . $pdf2->school_po . "-" . $pdf2->school_BOX_CODE, 0, 0, 'C');
                         $pdf2->Ln();
                         $pdf2->Cell($pdf2->school_header_position, 5, "Contact us: " . $pdf2->school_contact, 0, 0, 'C');
                         // Line break
                         $pdf2->Ln();
-                        $pdf2->SetFont('Arial', 'U', 9);
+                        $pdf2->SetFont('Nunito', 'U', 9);
                         $pdf2->Cell($pdf2->school_header_position, 5, $pdf2->school_document_title . "", 0, 0, 'C');
                         $pdf2->SetTitle($pdf2->school_document_title);
                         $pdf2->SetFont('', '');
                         $pdf2->SetAuthor($_SESSION['username']);
                         // Line break
                         $pdf2->Ln(5);
-                        $pdf2->SetFont('Arial', '', 10);
+                        $pdf2->SetFont('Nunito', '', 10);
                         $pdf2->Cell(30, 5, "Student Name : ", 0, 0, 'L', 0);
-                        $pdf2->SetFont('Arial', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, ucwords(strtolower($student_data['first_name'] . " " . $student_data['second_name'])), 0, 0, 'L', 0);
                         $pdf2->Ln();
-                        $pdf2->SetFont('Arial', '', 10);
+                        $pdf2->SetFont('Nunito', '', 10);
                         $pdf2->Cell(30, 5, "Student Reg No : ", 0, 0, 'L', 0);
-                        $pdf2->SetFont('Arial', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, $student_data['adm_no'], 0, 0, 'L', 0);
                         $pdf2->Ln();
-                        $pdf2->SetFont('Arial', '', 10);
+                        $pdf2->SetFont('Nunito', '', 10);
                         $pdf2->Cell(30, 5, "Student Level : ", 0, 0, 'L', 0);
-                        $pdf2->SetFont('Arial', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, classNameReport($student_data['stud_class']), 0, 0, 'L', 0);
                         $pdf2->Ln(10);
-                        $pdf2->SetFont('Arial', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, "Dear Parent/Guardian,", 0, 0, 'L', 0);
                         $pdf2->Ln();
                         $pdf2->Write(5, $reminder_msg);
                         // ouput the pdf generated
                         $pdf2->Ln(10);
-                        $pdf2->SetFont('Arial', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, "Yours Faithfull", 0, 0, 'L', 0);
                         $pdf2->Ln();
-                        $pdf2->SetFont('Arial', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, "Headteacher,", 0, 0, 'L', 0);
                         $pdf2->Ln();
-                        $pdf2->SetFont('Arial', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, trim(strtoupper($pdf2->school_name)), 0, 0, 'L', 0);
                         $pdf2->Ln();
                         $pdf2->SetDrawColor(194, 200, 200);
@@ -4899,17 +4948,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         for ($ind = 0; $ind < $cuts; $ind++) {
                             $pdf2->Cell($pdf2->school_header_position, 5, "", 0, 0, 'C');
                             $pdf2->Ln();
-                            $pdf2->SetFont('Arial', '', 12);
+                            $pdf2->SetFont('Nunito', '', 12);
                             $pdf2->Cell($pdf2->school_header_position, 5, strtoupper(trim($pdf2->school_name)), 0, 0, 'C');
-                            // Arial  15
+                            // Nunito  15
                             $pdf2->Ln();
-                            $pdf2->SetFont('Arial', '', 8);
+                            $pdf2->SetFont('Nunito', '', 8);
                             $pdf2->Cell($pdf2->school_header_position, 4, "P.O Box : " . $pdf2->school_po . "-" . $pdf2->school_BOX_CODE, 0, 0, 'C');
                             $pdf2->Ln();
                             $pdf2->Cell($pdf2->school_header_position, 4, "Contact us: " . $pdf2->school_contact, 0, 0, 'C');
                             // Line break
                             $pdf2->Ln(10);
-                            $pdf2->SetFont('Arial', 'U', 10);
+                            $pdf2->SetFont('Nunito', 'U', 10);
                             $pdf2->Cell($pdf2->school_header_position, 5, $pdf2->school_document_title . "", 0, 0, 'C');
                             $pdf2->SetTitle($pdf2->school_document_title);
                             $pdf2->SetFont('', '');
@@ -5008,17 +5057,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 for ($ind = 0; $ind < $cuts; $ind++) {
                                     $pdf2->Cell($pdf2->school_header_position, 4, "", 0, 0, 'C');
                                     $pdf2->Ln();
-                                    $pdf2->SetFont('Arial', '', 13);
+                                    $pdf2->SetFont('Nunito', '', 13);
                                     $pdf2->Cell($pdf2->school_header_position, 4, strtoupper(trim($pdf2->school_name)), 0, 0, 'C');
-                                    // Arial  15
+                                    // Nunito  15
                                     $pdf2->Ln();
-                                    $pdf2->SetFont('Arial', '', 8);
+                                    $pdf2->SetFont('Nunito', '', 8);
                                     $pdf2->Cell($pdf2->school_header_position, 4, "P.O Box : " . $pdf2->school_po . "-" . $pdf2->school_BOX_CODE, 0, 0, 'C');
                                     $pdf2->Ln();
                                     $pdf2->Cell($pdf2->school_header_position, 4, "Contact us: " . $pdf2->school_contact, 0, 0, 'C');
                                     // Line break
                                     $pdf2->Ln(10);
-                                    $pdf2->SetFont('Arial', 'U', 10);
+                                    $pdf2->SetFont('Nunito', 'U', 10);
                                     $pdf2->Cell($pdf2->school_header_position, 5, $pdf2->school_document_title . "", 0, 0, 'C');
                                     $pdf2->SetTitle($pdf2->school_document_title);
                                     $pdf2->SetFont('', '');
@@ -5091,29 +5140,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     // set the title for the student
                     $pdf->Ln();
                     $pdf->SetFillColor(245, 245, 245);
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Student Name : ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, ucwords(strtolower($student_infor['first_name'] . " " . $student_infor['second_name'] . " " . $student_infor['surname'])), 1, 0, 'L', 0);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Student Reg No : ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, $student_infor['adm_no'], 1, 0, 'L', 0);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Student Level : ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, classNameReport($student_infor['stud_class']), 1, 0, 'L', 0);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Boarding : ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, $isBoarder ? "Enrolled {" . $dorm_name . "}" : "Not - Enrolled", 1, 0, 'L', 0);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Transport : ", 'LR', 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     // $pdf->Cell(153, 6, $isTransport ? "Enrolled {" . $tran_route_infor . "}" : "Not - Enrolled", 1, 0, 'L', 0);
                     if($isTransport){
                         if (count($trans_infor)) {
@@ -5143,23 +5192,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(153, 6, "Not - Enrolled", 1, 0, 'L', 0);
                     }
                     // $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Amount Paid : ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, "Kes " . number_format($feespaidbystud), 1, 0, 'L', 0);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
-                    $pdf->Cell(37, 6, "Balance as of " . $term . ": ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
+                    $pdf->Cell(37, 6, "Balance: ", 1, 0, 'R', true);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, "Kes " . number_format($balance), 1, 0, 'L', 0);
                     $pdf->Ln();
                     $last_acad_yr = lastACADyrBal($student_infor['adm_no'], $conn2);
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Last Academic Yr Bal: ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, "Kes " . number_format($last_acad_yr), 1, 0, 'L', 0);
                     $pdf->Ln(10);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     // get the feestructure depending on the student class and boarding section
                     $select = "SELECT `expenses`,`roles` ,`TERM_1`,`TERM_2`,`TERM_3`,`classes`,`activated`,`ids` FROM fees_structure WHERE `classes` LIKE ?";
                     $daros = "%|" . $stud_class . "|%";
@@ -5207,11 +5256,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $header = array('No', 'Votehead', 'TERM 1', 'TERM 2', 'TERM 3', 'Role');
                     $width = array(8, 35, 35, 35, 35, 35);
                     $pdf->Ln();
-                    $pdf->SetFont('Times', 'BU', 10);
+                    $pdf->SetFont('Nunito', 'BU', 10);
                     $pdf->Cell(190, 5, "Fees Structure", 0, 0, 'C', 0);
                     $pdf->Ln();
                     $pdf->Ln();
-                    $pdf->SetFont('Times', 'BU', 10);
+                    $pdf->SetFont('Nunito', 'BU', 10);
                     $pdf->feesStructure($header, $data, $width);
                     $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
                 } else {
@@ -5264,47 +5313,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf2->set_school_contact($_SESSION['school_contact']);
                         $pdf2->AddPage();
                         // Line break
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, "Staff Name : ", 0, 0, 'L', 0);
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, ucwords(strtolower($selected_staff['fullname'])), 0, 0, 'L', 0);
                         $pdf2->Ln();
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, "Age : ", 0, 0, 'L', 0);
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $date1 = date_create($selected_staff['dob']);
                         $date2 = date_create(date("Y-m-d"));
                         $diff = date_diff($date1, $date2);
                         $diffs = $diff->format("%y Yr(s)");
                         $pdf2->Cell(30, 5, $diffs, 0, 0, 'L', 0);
                         $pdf2->Ln();
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, "Staff Role : ", 0, 0, 'L', 0);
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, authority($selected_staff['auth']), 0, 0, 'L', 0);
                         $pdf2->Ln();
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, "I`d No : ", 0, 0, 'L', 0);
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, $selected_staff['nat_id'], 0, 0, 'L', 0);
                         $pdf2->Ln();
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, "Staff Netpay : ", 0, 0, 'L', 0);
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $number = 1;
                         $deductions = getSalaryDeductionDetails($conn2, $selected_staff['user_id'], $number);
                         $salary_amount -= $_SESSION['total_advances'];
                         unset($_SESSION['total_advances']);
                         $pdf2->Cell(30, 5, "Kes " . number_format($salary_amount), 0, 0, 'L', 0);
                         $pdf2->Ln();
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, "Last Month Paid : ", 0, 0, 'L', 0);
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, $current_balance_monNyear, 0, 0, 'L', 0);
                         $pdf2->Ln();
-                        $pdf2->SetFont('Helvetica', '', 10);
+                        $pdf2->SetFont('Nunito', '', 10);
                         $pdf2->Cell(30, 5, "Salary Balance : ", 0, 0, 'L', 0);
-                        $pdf2->SetFont('Helvetica', '', 9);
+                        $pdf2->SetFont('Nunito', '', 9);
                         $pdf2->Cell(30, 5, "Kes " . number_format($current_balance), 0, 0, 'L', 0);
                         $pdf2->Ln();
                         $pdf2->Cell(190, 5, "", 'B', 0, 'L', 0);
@@ -5312,17 +5361,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         // earnings
                         // get the staff earnings and allowances
                         $pdf2->Ln();
-                        $pdf2->SetFont('Helvetica', 'BU', 10);
+                        $pdf2->SetFont('Nunito', 'BU', 10);
                         $pdf2->Cell(30, 5, "Earnings & Reliefs", 0, 0, 'L', 0);
                         $pdf2->Ln();
-                        $pdf2->SetFont('Helvetica', 'B', 10);
+                        $pdf2->SetFont('Nunito', 'B', 10);
                         $earnings = getSalaryEarningsDetails($conn2, $selected_staff['user_id'], $number);
                         $header = array("No.", "Earnings & Reliefs", "Amount", "Working Days", "Total");
                         $w = array(15, 70, 30, 30, 30);
                         $pdf2->salaryTables($header, $earnings, $w);
                         // get the staff deductions
                         $pdf2->Ln(10);
-                        $pdf2->SetFont('Helvetica', 'BU', 10);
+                        $pdf2->SetFont('Nunito', 'BU', 10);
                         $pdf2->Cell(30, 5, "Deductions", 0, 0, 'L', 0);
                         $number = 1;
                         $header = array("No.", "Deductions", "Amount", "Working Days", "Total");
@@ -5330,7 +5379,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf2->Ln();
                         $pdf2->salaryTables($header, $deductions, $w);
                         $pdf2->Ln(10);
-                        $pdf2->SetFillColor(157, 183, 184);
+                        $pdf2->SetFillColor(243, 151, 205);
                         $pdf2->Cell(85, 1, '', 0, 0, 0, 0);
                         $pdf2->Cell(45, 6, 'Net Pay', 1, 0, 'L', true);
                         $pdf2->Cell(45, 6, "Kes " . number_format($salary_amount), 1, 0, 'L', true);
@@ -5384,47 +5433,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             }
                             $pdf2->AddPage();
                             // Line break
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $pdf2->Cell(30, 5, "Staff Name : ", 0, 0, 'L', 0);
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $pdf2->Cell(30, 5, ucwords(strtolower($selected_staff['fullname'])), 0, 0, 'L', 0);
                             $pdf2->Ln();
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $pdf2->Cell(30, 5, "Age : ", 0, 0, 'L', 0);
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $date1 = date_create($selected_staff['dob']);
                             $date2 = date_create(date("Y-m-d"));
                             $diff = date_diff($date1, $date2);
                             $diffs = $diff->format("%y Yr(s)");
                             $pdf2->Cell(30, 5, $diffs, 0, 0, 'L', 0);
                             $pdf2->Ln();
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $pdf2->Cell(30, 5, "Staff Role : ", 0, 0, 'L', 0);
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $pdf2->Cell(30, 5, authority($selected_staff['auth']), 0, 0, 'L', 0);
                             $pdf2->Ln();
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $pdf2->Cell(30, 5, "I`d No : ", 0, 0, 'L', 0);
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $pdf2->Cell(30, 5, $selected_staff['nat_id'], 0, 0, 'L', 0);
                             $pdf2->Ln();
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $pdf2->Cell(30, 5, "Staff Netpay : ", 0, 0, 'L', 0);
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $number = 1;
                             $deductions = getSalaryDeductionDetails($conn2, $selected_staff['user_id'], $number);
                             $salary_amount -= $_SESSION['total_advances'];
                             unset($_SESSION['total_advances']);
                             $pdf2->Cell(30, 5, "Kes " . number_format($salary_amount), 0, 0, 'L', 0);
                             $pdf2->Ln();
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $pdf2->Cell(30, 5, "Last Month Paid : ", 0, 0, 'L', 0);
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $pdf2->Cell(30, 5, $current_balance_monNyear, 0, 0, 'L', 0);
                             $pdf2->Ln();
-                            $pdf2->SetFont('Helvetica', '', 10);
+                            $pdf2->SetFont('Nunito', '', 10);
                             $pdf2->Cell(30, 5, "Salary Balance : ", 0, 0, 'L', 0);
-                            $pdf2->SetFont('Helvetica', '', 9);
+                            $pdf2->SetFont('Nunito', '', 9);
                             $pdf2->Cell(30, 5, "Kes " . number_format($current_balance), 0, 0, 'L', 0);
                             $pdf2->Ln();
                             $pdf2->Cell(190, 5, "", 'B', 0, 'L', 0);
@@ -5432,10 +5481,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             // earnings
                             // get the staff earnings and allowances
                             $pdf2->Ln();
-                            $pdf2->SetFont('Helvetica', 'BU', 10);
+                            $pdf2->SetFont('Nunito', 'BU', 10);
                             $pdf2->Cell(30, 5, "Earnings & Reliefs", 0, 0, 'L', 0);
                             $pdf2->Ln();
-                            $pdf2->SetFont('Helvetica', 'B', 10);
+                            $pdf2->SetFont('Nunito', 'B', 10);
                             $number = 1;
                             $earnings = getSalaryEarningsDetails($conn2, $selected_staff['user_id'], $number);
                             $header = array("No.", "Earnings & Reliefs", "Amount", "Working Days", "Total");
@@ -5443,14 +5492,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pdf2->salaryTables($header, $earnings, $w);
                             // get the staff deductions
                             $pdf2->Ln(10);
-                            $pdf2->SetFont('Helvetica', 'BU', 10);
+                            $pdf2->SetFont('Nunito', 'BU', 10);
                             $pdf2->Cell(30, 5, "Deductions", 0, 0, 'L', 0);
                             $header = array("No.", "Deductions", "Amount", "Working Days", "Total");
                             $w = array(15, 70, 30, 30, 30);
                             $pdf2->Ln();
                             $pdf2->salaryTables($header, $deductions, $w);
                             $pdf2->Ln(10);
-                            $pdf2->SetFillColor(157, 183, 184);
+                            $pdf2->SetFillColor(243, 151, 205);
                             $pdf2->Cell(85, 1, '', 0, 0, 0, 0);
                             $pdf2->Cell(45, 6, 'Net Pay', 1, 0, 'L', true);
                             $pdf2->Cell(45, 6, "Kes " . number_format($salary_amount), 1, 0, 'L', true);
@@ -5534,7 +5583,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $pdf->AddPage();
                 $pdf->Cell(40, 10, "Statistics", 0, 0, 'L', false);
                 $pdf->Ln();
-                $pdf->SetFont('Times', 'I', 9);
+                $pdf->SetFont('Nunito', 'I', 9);
                 $pdf->Cell(30, 5, "Total Expenses :", 0, 0, 'L', false);
                 $pdf->Cell(30, 5, "Kes " . number_format($total_expense), 0, 0, 'L', false);
                 $pdf->Ln();
@@ -5543,7 +5592,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 // echo json_encode($expense_data);
                 $width = array(8, 40, 40, 20, 25, 25, 35);
                 $pdf->Ln();
-                $pdf->SetFont('Helvetica', 'B', 8);
+                $pdf->SetFont('Nunito', 'B', 8);
                 $pdf->expenseTable($header, $expense_data, $width);
                 $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
 
@@ -5666,9 +5715,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     }
                     $tittle = "No records to display";
                     if ($period_selection == "specific_date") {
-                        $tittle = classNameReport($student_class_fin) . " Fees list on " . date("dS M Y", strtotime($specific_date_finance));
+                        $tittle = classNameReport($student_class_fin) . " Fees Statement on " . date("dS M Y", strtotime($specific_date_finance));
                     } elseif ($period_selection == "period") {
-                        $tittle = classNameReport($student_class_fin) . " Fees list from " . date("dS M Y", strtotime($from_date_finance)) . " to " . date("dS M Y", strtotime($to_date_finance));
+                        $tittle = classNameReport($student_class_fin) . " Fees Statement from " . date("dS M Y", strtotime($from_date_finance)) . " to " . date("dS M Y", strtotime($to_date_finance));
                     } else {
                         $tittle = "No records to display";
                     }
@@ -5937,9 +5986,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     // $data = $pdf->LoadData('countries.txt');
                     $title = "No data to display!";
                     if ($period_selection == "specific_date") {
-                        $tittle = $student_name . " Fees list on " . date("dS M Y", strtotime($specific_date_finance));
+                        $tittle = $student_name . " Fees Statement on " . date("dS M Y", strtotime($specific_date_finance));
                     } else {
-                        $tittle = $student_name . " Fees list from " . date("dS M Y", strtotime($from_date_finance)) . " to " . date("dS M Y", strtotime($to_date_finance));
+                        $tittle = $student_name . " Fees Statement from " . date("dS M Y", strtotime($from_date_finance)) . " to " . date("dS M Y", strtotime($to_date_finance));
                     }
                     $data = $finance_list;
                     if (count($data) > 0) {
@@ -6055,10 +6104,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     }
                     if (count($stud_data) > 0) {
                         // Column headings
-                        $header = array('No', 'Fullname', 'Reg No.', 'Class', 'Sex', 'Fees paid', 'Balance', 'Bording', 'Transport', 'Last Yrs Bal');
+                        $header = array('No', 'Fullname', 'Reg No.', 'Class', 'Sex', 'Fees paid', 'Balance', 'Bording', 'Transport', 'Balance CF');
                         // Data loading
                         // $data = $pdf->LoadData('countries.txt');
-                        $tittle = "Fees list for " . classNameReport($student_class_fin);
+                        $tittle = "Fees Statement for " . classNameReport($student_class_fin);
                         // Create new Spreadsheet object
                         $spreadsheet = new Spreadsheet();
 
@@ -6126,7 +6175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     if (count($school_classes) > 0) {
                         $term = getTermV2($conn2);
                         // display the data
-                        $tittle = "Fees list for whole school";
+                        $tittle = "Fees Statement for whole school";
                         // Create new Spreadsheet object
                         $spreadsheet = new Spreadsheet();
 
@@ -6143,7 +6192,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         // Column headings
                         // sheet counter
                         $sheet_counter = 0;
-                        $header = array('No', 'Fullname', 'Reg No.', 'Class', 'Sex', 'Fees paid', 'Balance', 'Bording', 'Transport', 'Last Yrs Bal');
+                        $header = array('No', 'Fullname', 'Reg No.', 'Class', 'Sex', 'Fees paid', 'Balance', 'Bording', 'Transport', 'Balance CF');
                         for ($ind = 0; $ind < count($school_classes); $ind++) {
                             // get per class
                             $student_class_fin = $school_classes[$ind];
@@ -6496,29 +6545,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     // set the title for the student
                     $pdf->Ln();
                     $pdf->SetFillColor(245, 245, 245);
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Student Name : ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, ucwords(strtolower($student_infor['first_name'] . " " . $student_infor['second_name'] . " " . $student_infor['surname'])), 1, 0, 'L', 0);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Student Reg No : ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, $student_infor['adm_no'], 1, 0, 'L', 0);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Student Level : ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, classNameReport($student_infor['stud_class']), 1, 0, 'L', 0);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Boarding : ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, $isBoarder ? "Enrolled {" . $dorm_name . "}" : "Not - Enrolled", 1, 0, 'L', 0);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Transport : ", 'LR', 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     // $pdf->Cell(153, 6, $isTransport ? "Enrolled {" . $tran_route_infor . "}" : "Not - Enrolled", 1, 0, 'L', 0);
                     if($isTransport){
                         if (count($trans_infor)) {
@@ -6548,23 +6597,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(153, 6, "Not - Enrolled", 1, 0, 'L', 0);
                     }
                     // $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Amount Paid : ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, "Kes " . number_format($feespaidbystud), 1, 0, 'L', 0);
                     $pdf->Ln();
-                    $pdf->SetFont('Helvetica', 'BI', 8);
-                    $pdf->Cell(37, 6, "Balance as of " . $term . ": ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
+                    $pdf->Cell(37, 6, "Balance : ", 1, 0, 'R', true);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, "Kes " . number_format($balance), 1, 0, 'L', 0);
                     $pdf->Ln();
                     $last_acad_yr = lastACADyrBal($student_infor['adm_no'], $conn2);
-                    $pdf->SetFont('Helvetica', 'BI', 8);
+                    $pdf->SetFont('Nunito', 'BI', 8);
                     $pdf->Cell(37, 6, "Last Academic Yr Bal: ", 1, 0, 'R', true);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     $pdf->Cell(153, 6, "Kes " . number_format($last_acad_yr), 1, 0, 'L', 0);
                     $pdf->Ln(10);
-                    $pdf->SetFont('Arial', '', 8);
+                    $pdf->SetFont('Nunito', '', 8);
                     // get the feestructure depending on the student class and boarding section
                     $select = "SELECT `expenses`,`roles` ,`TERM_1`,`TERM_2`,`TERM_3`,`classes`,`activated`,`ids` FROM fees_structure WHERE `classes` LIKE ?";
                     $daros = "%|" . $stud_class . "|%";
@@ -6612,11 +6661,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $header = array('No', 'Votehead', 'TERM 1', 'TERM 2', 'TERM 3', 'Role');
                     $width = array(8, 35, 35, 35, 35, 35);
                     $pdf->Ln();
-                    $pdf->SetFont('Times', 'BU', 10);
+                    $pdf->SetFont('Nunito', 'BU', 10);
                     $pdf->Cell(190, 5, "Fees Structure", 0, 0, 'C', 0);
                     $pdf->Ln();
                     $pdf->Ln();
-                    $pdf->SetFont('Times', 'BU', 10);
+                    $pdf->SetFont('Nunito', 'BU', 10);
                     $pdf->feesStructure($header, $data, $width);
                     $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
                 } else {
@@ -7140,50 +7189,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->AddPage();
             $pdf->Cell(40, 10, "Student Data", 0, 0, 'L', false);
             $pdf->Ln();
-            $pdf->SetFont('Times', 'I', 11);
+            $pdf->SetFont('Nunito', 'I', 11);
             $pdf->Cell(40, 5, "Student Name :", 0, 0, 'L', false);
-            $pdf->SetFont('Times', '', 11);
+            $pdf->SetFont('Nunito', '', 11);
             $pdf->Cell(40, 5, $students_names, 0, 0, 'L', false);
             $pdf->Ln();
-            $pdf->SetFont('Times', 'I', 11);
+            $pdf->SetFont('Nunito', 'I', 11);
             $pdf->Cell(40, 5, "Student Reg No. :", 0, 0, 'L', false);
-            $pdf->SetFont('Times', '', 11);
+            $pdf->SetFont('Nunito', '', 11);
             $pdf->Cell(40, 5, $student_admission_no, 0, 0, 'L', false);
             $pdf->Ln();
-            $pdf->SetFont('Times', 'I', 11);
+            $pdf->SetFont('Nunito', 'I', 11);
             $pdf->Cell(40, 5, "Date Of Transaction. :", 0, 0, 'L', false);
-            $pdf->SetFont('Times', '', 11);
+            $pdf->SetFont('Nunito', '', 11);
             $pdf->Cell(40, 5, $_POST['reprint'] == "false" ? $date_of_payments_fees : $_POST['masiku'], 0, 0, 'L', false);
             $pdf->Ln();
-            $pdf->SetFont('Times', 'I', 11);
+            $pdf->SetFont('Nunito', 'I', 11);
             $pdf->Cell(40, 5, "Time of Transaction. :", 0, 0, 'L', false);
-            $pdf->SetFont('Times', '', 11);
+            $pdf->SetFont('Nunito', '', 11);
             $pdf->Cell(40, 5, $_POST['reprint'] == "false" ? $time_of_payment_fees : $_POST['masaa'], 0, 0, 'L', false);
             $pdf->Ln();
             $pdf->Ln(10);
             $width = array(8, 60, 30, 45, 40, 40);
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             include_once("../ajax/finance/financial.php");
             $term = getTermV2($conn2);
             $pdf->SetFillColor(219, 219, 219);
             $pdf->Cell(45, 6, "Title :", 1, 0, 'C', true);
             $pdf->Cell(150, 6, "Description", 1, 1, 'C', false);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
             $pdf->Cell(45, 6, "Payment For :", 1, 0, 'L', true);
             $pdf->Cell(150, 6, $payments_for, 1, 1, 'L', false);
             $pdf->Cell(45, 6, "Amount Paid :", 1, 0, 'L', true);
             $pdf->Cell(150, 6, $amount_paid_by_student, 1, 1, 'L', false);
-            $pdf->Cell(45, 6, "Balance (as of " . $term . "):", 1, 0, 'L', true);
+            $pdf->Cell(45, 6, "Balance :", 1, 0, 'L', true);
             $pdf->Cell(150, 6, $new_student_balance, 1, 1, 'L', false);
             $pdf->Cell(45, 6, "Transaction Code :", 1, 0, 'L', true);
             $pdf->Cell(150, 6, $transaction_codes, 1, 1, 'L', false);
             $pdf->Cell(45, 6, "Mode of Payment :", 1, 0, 'L', true);
             $pdf->Cell(150, 6, $mode_of_payments, 1, 1, 'L', false);
-            // $header = array("No.", "Payment For", "Amount Paid", "Balance (as of " . $term . ")", "Transaction Code", "Mode of Payment");
+            // $header = array("No.", "Payment For", "Amount Paid", "Balance", "Transaction Code", "Mode of Payment");
             // $data = [array("1", $payments_for, $amount_paid_by_student, $new_student_balance, $transaction_codes, $mode_of_payments)];
             // $pdf->receipt_table($header, $data, $width);
             $pdf->Ln(10);
-            $pdf->SetFont('Helvetica', '', 11);
+            $pdf->SetFont('Nunito', '', 11);
             $pdf->Cell(40, 5, "Description: ", 0, 0, 'L', false);
             $pdf->Ln(10);
             $pdf->Cell(190, 0, "", 1, 0, 'L', false);
@@ -7194,20 +7243,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->Ln(5);
             $pdf->Cell(120, 0, "", 1, 0, 'L', false);
             $pdf->Ln(5);
-            $pdf->SetFont('Helvetica', 'BU', 11);
+            $pdf->SetFont('Nunito', 'BU', 11);
             $pdf->Cell(190, 10, "OFFICIAL USE ONLY!", 0, 0, 'C', false);
             $pdf->Ln();
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(70, 5, "School principal / Accountant Signature", 0, 0, 'L', false);
             $pdf->Ln(15);
             $pdf->Cell(120, 0, "", 1, 0, 'L', false);
             $pdf->Ln(10);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(120, 5, "School Stamp", 0, 0, 'L', false);
             $pdf->Ln();
             $pdf->Cell(70, 50, "", 1, 0, 'L', false);
             $pdf->Ln(60);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
             $pdf->Cell(120, 5, "Note:", 0, 0, 'L', false);
             $pdf->Ln();
             $pdf->Cell(120, 5, "- This is a computer generated document, it is not valid without a school rubber stamp.", 0, 0, 'L', false);
@@ -7244,7 +7293,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
             $pdf->Image($school_profile_image, 5, 10, 20, 20);
             // $pdf->Image($pdf->arm_of_gov, 100, 15, 12, 12);
-            $pdf->SetFont('Helvetica', 'B', 14);
+            $pdf->SetFont('Nunito', 'B', 14);
             $pdf->SetFillColor(100, 100, 100);
             $pdf->SetTitle("Receipt for ".$students_names." Reg No. ".$student_admission_no.".");
             $pdf->Cell(15, 10, "", 0, 0, "L", false);
@@ -7254,7 +7303,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->SetXY($X, $y + 5);
 
             $pdf->Cell(100, 6, $school_name, 0, 0, "L", false);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
 
             $X = $pdf->GetX();
             $y = $pdf->GetY();
@@ -7267,38 +7316,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y + 5);
 
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(20, 10, "", 0, 0, "L", false);
             $pdf->Cell(100, 10, $school_motto, 0, 0, "L", false);
 
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y - 5);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
             $pdf->Cell(80, 4, $physicall_address, 0, 1, "R", false);
 
 
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y + 5);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(20, 5, "", 0, 0, "L", false);
             $pdf->Cell(100, 5, "", 0, 0, "L", false);
 
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y - 5);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
             $pdf->Cell(80, 4, "Tel: " . $school_contact, 0, 1, "R", false);
 
 
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y + 5);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(20, 5, "", 0, 0, "L", false);
             $pdf->Cell(100, 5, "", 0, 0, "L", false);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y - 5);
@@ -7309,10 +7358,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y + 5);
 
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(20, 5, "", 0, 0, "L", false);
             $pdf->Cell(100, 5, "", 0, 0, "L", false);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y - 5);
@@ -7324,60 +7373,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->SetFillColor(240, 240, 240);
 
             // start the receipt details
-            $pdf->SetFont('Helvetica', '', 10);
+            $pdf->SetFont('Nunito', '', 10);
             $pdf->Cell(65, 10, "FEES PAYMENT RECEIPT", 0, 0, "C", false);
             $pdf->Cell(65, 10, "** SCHOOL COPY **", 0, 0, "C", false);
             $pdf->Cell(65, 10, "** ORIGINAL **", 0, 1, "C", false);
 
             // RECEIPT DETAILS
             // row 1
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(25, 6, "Receipt No. : ", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(60, 6, $last_receipt_id_take, 1, 0, "L");
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(20, 6, "Date : ", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(30, 6, $_POST['reprint'] == "false" ? $date_of_payments_fees : date("D dS-M-Y", strtotime($_POST['masiku'] . " " . $_POST['masaa'])), 1, 0, "L",false);
             
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(25, 6, "Time : ", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(40, 6, $_POST['reprint'] == "false" ? $time_of_payment_fees : date("H:i:s", strtotime($_POST['masaa'])), "RTB", 1, "L",false);
             // $pdf->Cell(53, 6, "", "RBT", 1, "L");
 
             // row 2
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(30, 6, "Student Name. : ", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(70, 6, $students_names, 1, 0, "L");
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(25, 6, "Adm No. : ", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(75, 6, $student_admission_no, 1, 1, "L");
 
             // THIRD ROW
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(22, 6, "Amount", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(20, 6, $amount_paid_by_student, 1, 0, "L");
             $new_numbers = new NUmbers();
             $new_number = returnNumbers($amount_paid_by_student)*1;
             $my_number = $new_number< 0 ? $new_numbers->convert_number($new_number*-1):$new_numbers->convert_number($new_number);
             $prefix = $new_number < 0? "Negative ":"";
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(158, 6, "** ".$prefix." ".$my_number." Kenya Shillings Only **", "BR", 1, "L");
 
             // voteheads paid for
             $pdf->SetFillColor(240, 240, 240);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(200,7,"VOTEHEAD","TBLR",1,"C",true);
 
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(130,7,"VOTEHEAD NAME",1,0,"L",true);
             $pdf->Cell(25,7,"ROLE",1,0,"L",true);
             $pdf->Cell(45,7,"AMOUNT PAID",1,1,"L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $counter = 0;
 
             // another row
@@ -7396,37 +7445,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             }
 
             // another row
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(20,7,"Served By : ",1,0,"L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $staff_infor = getStaffInformations_report($conn,$_SESSION['userids']);
             $pdf->Cell(45,7,explode(" ",ucwords(strtolower($staff_infor['fullname'])))[0],1,0,"L",false);
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(30,7,"Transaction Code:",1,0,"L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(60,7,"".$transaction_codes."",1,0,"L",false);
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(15,7,"Total:",1,0,"L",false);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(30,7,"".$amount_paid_by_student."",1,1,"R",false);
 
             // ANOTHER ROW
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(30,7,"Payment Mode : ",1,0,"L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(35,7,$mode_of_payments,1,0,"L",false);
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(30,7,"Acc No. : ",1,0,"L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(30,7,$student_admission_no,"B",0,"L",false);
             $pdf->Cell(30,7,"","BR",0,"L",false);
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(15,7,"Balance:",1,0,"L",false);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(30,7,"".$new_student_balance."",1,1,"R",false);
 
             // DISCLAIMER
-            $pdf->SetFont('Helvetica', 'I', 9);
+            $pdf->SetFont('Nunito', 'I', 9);
             $pdf->Cell(200,7,"** Receipts are not valid unless signed OR Stamped with the Official School Stamp  **","",1,"C",false);
             // $pdf->Ln(5);
             // get the school payment option
@@ -7440,9 +7489,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     if(isJson_reports($json_data)){
                         $json_data = json_decode($json_data);
                         if(count($json_data) > 0){
-                            $pdf->SetFont('Helvetica', 'U', 10);
+                            $pdf->SetFont('Nunito', 'U', 10);
                             $pdf->Cell(200,6,"Acceptable payment options","",1,"L",false);
-                            $pdf->SetFont('Helvetica', '', 9);
+                            $pdf->SetFont('Nunito', '', 9);
                         }
                         $indexes = 1;
                         for ($index=0; $index < count($json_data); $index++) { 
@@ -7473,7 +7522,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $y = $pdf->GetY();
             $pdf->Image($school_profile_image, 5, $y, 20, 20);
             // $pdf->Image($pdf->arm_of_gov, 100, $y+5, 12, 12);
-            $pdf->SetFont('Helvetica', 'B', 14);
+            $pdf->SetFont('Nunito', 'B', 14);
             $pdf->SetFillColor(100, 100, 100);
             $pdf->Cell(20, 10, "", 0, 0, "L", false);
 
@@ -7482,7 +7531,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->SetXY($X, $y + 5);
 
             $pdf->Cell(100, 6, $school_name, 0, 0, "L", false);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
 
             $X = $pdf->GetX();
             $y = $pdf->GetY();
@@ -7495,38 +7544,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y + 5);
 
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(20, 10, "", 0, 0, "L", false);
             $pdf->Cell(100, 10, $school_motto, 0, 0, "L", false);
 
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y - 5);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
             $pdf->Cell(80, 4, $physicall_address, 0, 1, "R", false);
 
 
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y + 5);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(20, 5, "", 0, 0, "L", false);
             $pdf->Cell(100, 5, "", 0, 0, "L", false);
 
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y - 5);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
             $pdf->Cell(80, 4, "Tel: " . $school_contact, 0, 1, "R", false);
 
 
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y + 5);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(20, 5, "", 0, 0, "L", false);
             $pdf->Cell(100, 5, "", 0, 0, "L", false);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y - 5);
@@ -7537,10 +7586,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y + 5);
 
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(20, 5, "", 0, 0, "L", false);
             $pdf->Cell(100, 5, "", 0, 0, "L", false);
-            $pdf->SetFont('Helvetica', '', 8);
+            $pdf->SetFont('Nunito', '', 8);
             $X = $pdf->GetX();
             $y = $pdf->GetY();
             $pdf->SetXY($X, $y - 5);
@@ -7552,61 +7601,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->SetFillColor(240, 240, 240);
 
             // start the receipt details
-            $pdf->SetFont('Helvetica', '', 10);
+            $pdf->SetFont('Nunito', '', 10);
             $pdf->Cell(65, 10, "FEES PAYMENT RECEIPT", 0, 0, "C", false);
             $pdf->Cell(65, 10, "** STUDENT COPY **", 0, 0, "C", false);
             $pdf->Cell(65, 10, "** ORIGINAL **", 0, 1, "C", false);
 
             // RECEIPT DETAILS
             // row 1
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(25, 6, "Receipt No. : ", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(60, 6, $last_receipt_id_take, 1, 0, "L");
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(20, 6, "Date : ", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(30, 6, $_POST['reprint'] == "false" ? $date_of_payments_fees : date("D dS-M-Y", strtotime($_POST['masiku'] . " " . $_POST['masaa'])), 1, 0, "L",false);
 
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(25, 6, "Time : ", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(40, 6, $_POST['reprint'] == "false" ? $time_of_payment_fees : date("H:i:s", strtotime($_POST['masaa'])), "RTB", 1, "L",false);
             // $pdf->Cell(53, 6, "", "RBT", 1, "L");
 
             // row 2
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(30, 6, "Student Name. : ", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(70, 6, $students_names, 1, 0, "L");
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(25, 6, "Adm No. : ", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(75, 6, $student_admission_no, 1, 1, "L");
 
             // THIRD ROW
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(22, 6, "Amount", 1, 0, "L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(20, 6, $amount_paid_by_student, 1, 0, "L");
             $new_numbers = new NUmbers();
             $new_number = returnNumbers($amount_paid_by_student)*1;
             $my_number = $new_number< 0 ? $new_numbers->convert_number($new_number*-1):$new_numbers->convert_number($new_number);
             // $my_number = $new_numbers->convert_number($new_number);
             $prefix = $new_number < 0? "Negative ":"";
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(158, 6, "** ".$prefix." ".$my_number." Kenya Shillings Only **", "BR", 1, "L");
 
             // voteheads paid for
             $pdf->SetFillColor(240, 240, 240);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(200,7,"VOTEHEAD","TBLR",1,"C",true);
 
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(130,7,"VOTEHEAD NAME",1,0,"L",true);
             $pdf->Cell(25,7,"ROLE",1,0,"L",true);
             $pdf->Cell(45,7,"AMOUNT PAID",1,1,"L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
 
             // another row
             if(isJson_report($payments_for)){
@@ -7623,38 +7672,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             }
 
             // another row
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(20,7,"Served By : ",1,0,"L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $staff_infor = getStaffInformations_report($conn,$_SESSION['userids']);
             $pdf->Cell(45,7,explode(" ",ucwords(strtolower($staff_infor['fullname'])))[0],1,0,"L",false);
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(30,7,"Transaction Code:",1,0,"L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(60,7,"".$transaction_codes."",1,0,"L",false);
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(15,7,"Total:",1,0,"L",false);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(30,7,"".$amount_paid_by_student."",1,1,"L",false);
 
             // ANOTHER ROW
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(30,7,"Payment Mode : ",1,0,"L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(35,7,$mode_of_payments,1,0,"L",false);
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(30,7,"Acc No. : ",1,0,"L",true);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(30,7,$student_admission_no,"B",0,"L",false);
             // $pdf->Cell(75,7,"","BR",1,"L",false);
             $pdf->Cell(30,7,"","BR",0,"L",false);
-            $pdf->SetFont('Helvetica', 'B', 9);
+            $pdf->SetFont('Nunito', 'B', 9);
             $pdf->Cell(15,7,"Balance:",1,0,"L",false);
-            $pdf->SetFont('Helvetica', '', 9);
+            $pdf->SetFont('Nunito', '', 9);
             $pdf->Cell(30,7,"".$new_student_balance."",1,1,"L",false);
 
             // DISCLAIMER
-            $pdf->SetFont('Helvetica', 'I', 9);
+            $pdf->SetFont('Nunito', 'I', 9);
             $pdf->Cell(200,7,"** Receipts are not valid unless signed OR Stamped with the Official School Stamp  **","",1,"C",false);
             // $pdf->Ln(5);
             // get the school payment option
@@ -7669,9 +7718,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $json_data = json_decode($json_data);
                         $counter = 1;
                         if(count($json_data) > 0){
-                            $pdf->SetFont('Helvetica', 'U', 10);
+                            $pdf->SetFont('Nunito', 'U', 10);
                             $pdf->Cell(200,6,"Acceptable payment options","",1,"L",false);
-                            $pdf->SetFont('Helvetica', '', 9);
+                            $pdf->SetFont('Nunito', '', 9);
                         }
                         for ($index=0; $index < count($json_data); $index++) { 
                             if($json_data[$index]->show == "true"){
@@ -7688,7 +7737,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         }
     } elseif (isset($_POST['timetable_generation'])) {
         // process lesson
-        // set times
+        // set Nunito
         $first_lesson = $_POST['first_lesson'];
         $lesson_time = $_POST['lesson_time'];
         $breaks_lists = $_POST['breaks_lists'];
@@ -7759,7 +7808,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf = new PDF('L', 'mm', 'A4');
                         $tittle = "CLASS TIMETABLE.";
                         $pdf->SetMargins(3,3);
-                        $pdf->SetFont('Times', '', 11);
+                        $pdf->SetFont('Nunito', '', 11);
                         $pdf->set_document_title($tittle);
                         $pdf->setSchoolLogo("../../" . schoolLogo($conn));
                         $pdf->set_school_name($_SESSION['schname']);
@@ -7781,7 +7830,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pdf->AddPage();
                             // echo $highest_len;
                             // Colors, line width and bold font
-                            $pdf->SetFillColor(157, 183, 184);
+                            $pdf->SetFillColor(243, 151, 205);
                             // $pdf->SetTextColor(255);
                             $pdf->SetDrawColor(0, 0, 0);
                             $pdf->SetLineWidth(.1);
@@ -7796,9 +7845,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                     array_push($subjects2, $subjects[$i]);
                                 }
                             }
-                            $pdf->SetFont('Times', 'U', 10);
+                            $pdf->SetFont('Nunito', 'U', 10);
                             $pdf->Cell(40, 6, $classname, 0, 1, 'C', false);
-                            $pdf->SetFont('Times', '', 9);
+                            $pdf->SetFont('Nunito', '', 9);
                             $subjects = $subjects2;
                             $teachers = $metadata[2]->teachers;
                             $pdf->Cell(10, 5, "#", 1, 0, "C", true);
@@ -7845,10 +7894,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             // $pdf->SetXY($x + 25, $y);
                             // $pdf->MultiCell(25,5,"My name is HIllary I come from Kirintage                    ","LTRB","L",false);
                             $pdf->Ln();
-                            // $pdf->SetFillColor(205, 211, 218);
-                            $pdf->SetFont('Times', 'U', 10);
+                            // $pdf->SetFillColor(253, 228, 243);
+                            $pdf->SetFont('Nunito', 'U', 10);
                             $pdf->Cell(40, 10, "Class Timetable", 0, 1, 'C', false);
-                            // $pdf->SetFont('Times', 'BU', 11);
+                            // $pdf->SetFont('Nunito', 'BU', 11);
                             $widths_cut = [];
                             for ($index2 = 0; $index2 < count($daysoftheweek); $index2++) {
                                 $lesson_data = [date("D", strtotime($daysoftheweek[$index2]->Day))];
@@ -7878,7 +7927,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 // break;
                             }
                             // var_dump($week_lesson[0][0]);
-                            $pdf->SetFont('Helvetica', '', 6);
+                            $pdf->SetFont('Nunito', '', 6);
                             $pdf->timeTable_create($timetable_titles, $week_lesson, $widths_cut);
                             // break;
                         }
@@ -7928,7 +7977,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         // display metadata $pdf = new PDF('P', 'mm', 'A4');// create the pdf file
                         $pdf = new PDF('L', 'mm', 'A4');
                         $tittle = "BLOCK TIMETABLE.";
-                        $pdf->SetFont('Times', '', 11);
+                        $pdf->SetFont('Nunito', '', 11);
                         $pdf->SetMargins(3,3);
                         $pdf->set_document_title($tittle);
                         $pdf->setSchoolLogo("../../" . schoolLogo($conn));
@@ -7948,7 +7997,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pdf->AddPage();
                             // echo $highest_len;
                             // Colors, line width and bold font
-                            $pdf->SetFillColor(157, 183, 184);
+                            $pdf->SetFillColor(243, 151, 205);
                             // $pdf->SetTextColor(255);
                             $pdf->SetDrawColor(0, 0, 0);
                             $pdf->SetLineWidth(.1);
@@ -7963,9 +8012,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                     array_push($subjects2, $subjects[$i]);
                                 }
                             }
-                            $pdf->SetFont('Times', 'U', 10);
+                            $pdf->SetFont('Nunito', 'U', 10);
                             $pdf->Cell(40, 10, $Day, 0, 1, 'C', false);
-                            $pdf->SetFont('Times', '', 9);
+                            $pdf->SetFont('Nunito', '', 9);
                             $subjects = $subjects2;
                             $teachers = $metadata[2]->teachers;
                             $pdf->Cell(10, 5, "#", 1, 0, "C", true);
@@ -8012,10 +8061,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             // $pdf->SetXY($x + 25, $y);
                             // $pdf->MultiCell(25,5,"My name is HIllary I come from Kirintage                    ","LTRB","L",false);
                             // $pdf->Ln();
-                            // $pdf->SetFillColor(205, 211, 218);
-                            $pdf->SetFont('Times', 'U', 10);
+                            // $pdf->SetFillColor(253, 228, 243);
+                            $pdf->SetFont('Nunito', 'U', 10);
                             $pdf->Cell(40, 10, "Block Timetable", 0, 1, 'C', false);
-                            // $pdf->SetFont('Times', 'BU', 11);
+                            // $pdf->SetFont('Nunito', 'BU', 11);
                             $widths_cut = [];
                             for ($index2 = 0; $index2 < count($classes); $index2++) {
                                 $lesson_data = [$classes[$index2]->classname];
@@ -8045,7 +8094,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 // break;
                             }
                             // var_dump($week_lesson[0][0]);
-                            $pdf->SetFont('Helvetica', '', 6);
+                            $pdf->SetFont('Nunito', '', 6);
                             $pdf->timeTable_create($timetable_titles, $week_lesson, $widths_cut);
                             // break;
                         }
@@ -8099,7 +8148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                             // $lessons = [];
                             // display metadata $pdf = new PDF('P', 'mm', 'A4');// create the pdf file
-                            // $pdf->SetFont('Times', '', 11);
+                            // $pdf->SetFont('Nunito', '', 11);
                             $teachers = $metadata[2]->teachers;
                             $tr_full_name = "Null";
                             for ($inde = 0; $inde < count($teachers); $inde++) {
@@ -8111,7 +8160,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             }
                             $pdf = new PDF('L', 'mm', 'A4');
                             $tittle = "BLOCK TIMETABLE.";
-                            $pdf->SetFont('Times', '', 11);
+                            $pdf->SetFont('Nunito', '', 11);
                             $pdf->setSchoolLogo("../../" . schoolLogo($conn));
                             $pdf->set_document_title("Week Timetable for " . ucwords(strtolower($tr_full_name)));
                             $pdf->set_school_name($_SESSION['schname']);
@@ -8119,7 +8168,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pdf->set_school_box_code($_SESSION['box_codes']);
                             $pdf->set_school_contact($_SESSION['school_contact']);
                             $pdf->AddPage();
-                            $pdf->SetFont('Times', 'U', 9);
+                            $pdf->SetFont('Nunito', 'U', 9);
                             $pdf->Cell(40, 10, "Week Timetable", 0, 1, 'C', false);
 
                             // get the days of the week
@@ -8191,18 +8240,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 $all_lessons[$number_of_lessons[$index2]]++;
                             }
                             // var_dump($week_lesson[0][0]);
-                            $pdf->SetFont('Helvetica', '', 6);
+                            $pdf->SetFont('Nunito', '', 6);
                             $pdf->timeTable_create($timetable_titles, $teacher_tt_data, $widths_cut);
 
                             $pdf->Ln(10);
-                            $pdf->SetFillColor(157, 183, 184);
-                            $pdf->SetFont('Helvetica', 'B', 8);
+                            $pdf->SetFillColor(243, 151, 205);
+                            $pdf->SetFont('Nunito', 'B', 8);
                             $pdf->Cell(10,6,"No.",1,0,"L",true);
                             $pdf->Cell(40,6,"Lesson Name.",1,0,"L",true);
                             $pdf->Cell(20,6,"Lessons.",1,1,"L",true);
                             $index = 1;
-                            $pdf->SetFillColor(157, 183, 184);
-                            $pdf->SetFont('Helvetica', '', 8);
+                            $pdf->SetFillColor(243, 151, 205);
+                            $pdf->SetFont('Nunito', '', 8);
                             $indexes = 0;
                             foreach ($all_lessons as $key => $value) {
                                 $pdf->Cell(10,6,$index,1,0,"L",false);
@@ -8220,7 +8269,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                 $indexes+=$value;
                                 $index++;
                             }
-                            $pdf->SetFont('Helvetica', 'B', 8);
+                            $pdf->SetFont('Nunito', 'B', 8);
                             $pdf->Cell(10,6,"",0,0,"L",false);
                             $pdf->Cell(40,6,"Total.",1,0,"L",false);
                             $pdf->Cell(20,6,$indexes." Lessons",1,1,"L",false);
@@ -8334,7 +8383,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             array_push($in_data, "");
                             array_push($all_data, $in_data);
                         }
-                        $pdf->SetFont("Helvetica", "", 7);
+                        $pdf->SetFont("Nunito", "", 7);
                         $pdf->setConn($conn2);
                         $pdf->exams_results($header, $all_data, $width);
 
@@ -8481,11 +8530,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             }
                             $counter++;
                         }
-                        $pdf->SetFont("Helvetica", "", 7);
+                        $pdf->SetFont("Nunito", "", 7);
                         $pdf->setConn($conn2);
                         $pdf->exams_results($header, $arrayed, $width);
                         $pdf->Ln(10);
-                        $pdf->SetFont('Helvetica', 'U', 10);
+                        $pdf->SetFont('Nunito', 'U', 10);
                         $pdf->Cell(30, 5, "Class Teacher Remarks", 0, 1, 'L', false);
                         $pdf->Cell(190, 5, "", 'B', 1, 'C', false);
                         $pdf->Cell(190, 5, "", 'B', 1, 'C', false);
@@ -8611,7 +8660,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                                     $pdf->Image(dirname(__FILE__) . "../../.." . "/sims/assets/img/female.png", 120, 50, 20);
                                 }
                             }
-                            $pdf->SetFont('Helvetica', '', 9);
+                            $pdf->SetFont('Nunito', '', 9);
                             $pdf->Cell(30, 5, "Name: ", 0, 0, 'L', false);
                             $pdf->Cell(60, 5, ucwords(strtolower($full_name)), 'R', 0, 'L', false);
                             $pdf->Ln();
@@ -8631,12 +8680,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pdf->Cell(60, 5, ucwords(strtolower($student_classteacher)), 'R', 0, 'L', false);
                             $pdf->Ln();
                             $pdf->Ln(5);
-                            $pdf->SetFont('Helvetica', 'U', 12);
+                            $pdf->SetFont('Nunito', 'U', 12);
                             $pdf->Cell(190, 5, "Subject Scores", 0, 0, 'C', false);
                             $pdf->Ln(10);
-                            $pdf->SetFont('Times', 'B', 10);
+                            $pdf->SetFont('Nunito', 'B', 10);
                             // Colors, line width and bold font
-                            $pdf->SetFillColor(157, 183, 184);
+                            $pdf->SetFillColor(243, 151, 205);
                             // $pdf->SetTextColor(255);
                             $pdf->SetDrawColor(0, 0, 0);
                             $pdf->SetLineWidth(.1);
@@ -8648,9 +8697,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pdf->Ln();
                             // get the subject marks for the student
                             $fill = false;
-                            $pdf->SetFillColor(205, 211, 218);
+                            $pdf->SetFillColor(253, 228, 243);
                             $pdf->SetTextColor(0);
-                            $pdf->SetFont('Helvetica', '', 8);
+                            $pdf->SetFont('Nunito', '', 8);
                             for ($index2 = 0; $index2 < count($subjects_present); $index2++) {
                                 $sub_dets = subjectsDetails($conn2, $subjects_present[$index2], $our_staff);
                                 $scores = exam_grade($conn2, $exam_ids_printing, $subjects_present[$index2]);
@@ -8664,7 +8713,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             }
                             // 
                             $pdf->Ln(10);
-                            $pdf->SetFont('Helvetica', 'U', 10);
+                            $pdf->SetFont('Nunito', 'U', 10);
                             $pdf->Cell(30, 5, "Class Teacher Remarks", 0, 1, 'L', false);
                             $pdf->Cell(190, 5, "", 'B', 1, 'C', false);
                             $pdf->Cell(190, 5, "", 'B', 1, 'C', false);
@@ -8705,7 +8754,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $pdf = new PDF2('P', 'mm', 'A4');
 
                 $tittle = "Invoice";
-                $pdf->SetFont('Times', '', 11);
+                $pdf->SetFont('Nunito', '', 11);
                 $pdf->setSchoolLogo("../../" . schoolLogo($conn));
                 $pdf->SetTitle($tittle);
                 $pdf->set_school_name($_SESSION['schname']);
@@ -8797,43 +8846,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->AddPage();
                         $pdf->setHeaderPos(190);
                         $pdf->Image(dirname(__FILE__) . "../../" . schoolLogo($conn), 170, 3, 30);
-                        $pdf->SetFont("Arial", "", 40);
+                        $pdf->SetFont("Nunito", "", 40);
                         $pdf->Cell(100, 30, "INVOICE", 0, 1, "L");
-                        $pdf->SetFont("Arial", "B", 9);
+                        $pdf->SetFont("Nunito", "B", 9);
                         $pdf->Cell(50, 5, "INVOICE NUMBER");
                         $pdf->Cell(50, 5, "DATE OF ISSUE ", 0, 1);
-                        $pdf->SetFont("Arial", "", 8);
+                        $pdf->SetFont("Nunito", "", 8);
                         $pdf->Cell(50, 5, date("YmdHi") . "#" . $admission_number);
                         $pdf->Cell(50, 5, date("D dS M Y"), 0, 1);
 
                         // BILL FOR
                         $pdf->Ln(10);
-                        $pdf->SetFont("Arial", "B", 9);
+                        $pdf->SetFont("Nunito", "B", 9);
                         $pdf->Cell(50, 5, "BILLED TO:", 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, trim(ucwords(strtolower($pdf->school_name))), 0, 1);
 
                         // student details
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, $student_name, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "P.0 Box " . $pdf->school_po . " - " . $pdf->school_BOX_CODE, 0, 1);
 
 
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, "Reg No. : " . $admission_number, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "Contact us : " . $pdf->school_contact . "", 0, 1);
 
 
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, "Course Level : " . $student_class, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "Email us : " . $_SESSION['school_mail'] . "", 0, 1);
 
                         // here we have the description of all the VOTEHEADS the student is supposed to pay.
                         $pdf->Ln(20);
-                        $pdf->SetFont("Arial", "B", 10);
+                        $pdf->SetFont("Nunito", "B", 10);
                         $pdf->SetTextColor(120, 120, 120);
                         $pdf->SetLineWidth(0.5);
                         $pdf->Cell(10, 5, "#", "B", 0);
@@ -8842,7 +8891,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(30, 5, "Amount", "B", 1);
 
                         // change the text color
-                        $pdf->SetFont("Helvetica", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->SetTextColor(10, 10, 10);
                         $pdf->SetLineWidth(0.1);
                         // here we set the payments to be paid
@@ -8861,7 +8910,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         }
 
                         // total
-                        $pdf->SetFont("Arial", "B", 10);
+                        $pdf->SetFont("Nunito", "B", 10);
                         $pdf->Cell(10, 8, "", "", 0);
                         $pdf->Cell(120, 8, "", "", 0);
                         $pdf->Cell(30, 8, "Total Balance ", "B", 0);
@@ -8870,17 +8919,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                         // payment information
                         $pdf->Ln(10);
-                        $pdf->SetFont("Arial", "", 10);
+                        $pdf->SetFont("Nunito", "", 10);
                         $pdf->Cell(40, 7, "Payment Information: ", 0, 0);
-                        $pdf->SetFont("Arial", "BI", 9);
+                        $pdf->SetFont("Nunito", "BI", 9);
                         $pdf->MultiCell(130, 7, $_POST['invoice_email_message'], 0, "J");
 
 
                         // footer
                         // Position at 1.5 cm from bottom
                         $pdf->SetY(260);
-                        // Arial italic 8
-                        $pdf->SetFont('Arial', 'I', 8);
+                        // Nunito italic 8
+                        $pdf->SetFont('Nunito', 'I', 8);
                         $pdf->Cell(190, 0, "", "T", 1);
                         $pdf->Cell(190, 7, "----- Fees Once Paid are not refundable OR transferable -------", 0, 1, 'C');
                         $pdf->Cell(190, 7, "Page No " . $pdf->PageNo(), 0, 1, 'C');
@@ -8897,43 +8946,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->AddPage();
                         $pdf->setHeaderPos(190);
                         $pdf->Image(dirname(__FILE__) . "../../" . schoolLogo($conn), 170, 3, 30);
-                        $pdf->SetFont("Arial", "", 40);
+                        $pdf->SetFont("Nunito", "", 40);
                         $pdf->Cell(100, 30, "INVOICE", 0, 1, "L");
-                        $pdf->SetFont("Arial", "B", 9);
+                        $pdf->SetFont("Nunito", "B", 9);
                         $pdf->Cell(50, 5, "INVOICE NUMBER");
                         $pdf->Cell(50, 5, "DATE OF ISSUE", 0, 1);
-                        $pdf->SetFont("Arial", "", 8);
+                        $pdf->SetFont("Nunito", "", 8);
                         $pdf->Cell(50, 5, date("YmdHi") . "#" . $admission_number);
                         $pdf->Cell(50, 5, date("D dS M Y"), 0, 1);
 
                         // BILL FOR
                         $pdf->Ln(10);
-                        $pdf->SetFont("Arial", "B", 9);
+                        $pdf->SetFont("Nunito", "B", 9);
                         $pdf->Cell(50, 5, "BILLED TO:", 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, trim(ucwords(strtolower($pdf->school_name))), 0, 1);
 
                         // student details
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, $student_name, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "P.0 Box " . $pdf->school_po . " - " . $pdf->school_BOX_CODE, 0, 1);
 
 
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, "Reg No. : " . $admission_number, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "Contact us : " . $pdf->school_contact . "", 0, 1);
 
 
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, "Course Level : " . $student_class, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "Email us : " . $_SESSION['school_mail'] . "", 0, 1);
 
                         // here we have the description of all the VOTEHEADS the student is supposed to pay.
                         $pdf->Ln(20);
-                        $pdf->SetFont("Arial", "B", 10);
+                        $pdf->SetFont("Nunito", "B", 10);
                         $pdf->SetTextColor(120, 120, 120);
                         $pdf->SetLineWidth(0.5);
                         $pdf->Cell(10, 5, "#", "B", 0);
@@ -8942,7 +8991,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(30, 5, "Amount", "B", 1);
                         
                         // change the text color
-                        $pdf->SetFont("Helvetica", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->SetTextColor(10, 10, 10);
                         $pdf->SetLineWidth(0.1);
                         // here we set the payments to be paid
@@ -8961,7 +9010,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         }
 
                         // add another row of amount paid
-                        $pdf->SetFont("Arial", "B", 10);
+                        $pdf->SetFont("Nunito", "B", 10);
                         $pdf->Cell(10, 8, "", "", 0);
                         $pdf->Cell(120, 8, "", "", 0);
                         $pdf->Cell(30, 8, "Fees Paid ", "B", 0);
@@ -8969,7 +9018,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(30, 8, "Kes " . number_format($feespaidbystud), "B", 1);
 
                         // total
-                        $pdf->SetFont("Arial", "B", 10);
+                        $pdf->SetFont("Nunito", "B", 10);
                         $pdf->Cell(10, 8, "", "", 0);
                         $pdf->Cell(120, 8, "", "", 0);
                         $pdf->Cell(30, 8, "Total Balance ", "B", 0);
@@ -8978,22 +9027,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                         // payment information
                         $pdf->Ln(10);
-                        $pdf->SetFont("Arial", "", 10);
+                        $pdf->SetFont("Nunito", "", 10);
                         $pdf->Cell(40, 7, "Payment Information: ", 0, 0);
-                        $pdf->SetFont("Arial", "BI", 9);
+                        $pdf->SetFont("Nunito", "BI", 9);
                         $pdf->MultiCell(130, 7, $_POST['invoice_email_message'], 0, "J");
 
 
                         // footer
                         // Position at 1.5 cm from bottom
                         $pdf->SetY(250);
-                        // Arial italic 8
-                        $pdf->SetFont('Arial', 'I', 10);
+                        // Nunito italic 8
+                        $pdf->SetFont('Nunito', 'I', 10);
                         $pdf->Cell(190, 0, "", "T", 1);
                         $pdf->Cell(190, 7, "----- Fees Once Paid are not refundable OR transferable -------", 0, 1, 'C');
-                        $pdf->SetFont('Arial', 'I', 5);
+                        $pdf->SetFont('Nunito', 'I', 5);
                         $pdf->Cell(190, 7, "----- Fees balance on each votehead is calculated by the percentage of the total balance-------", 0, 1, 'C');
-                        $pdf->SetFont('Arial', 'I', 10);
+                        $pdf->SetFont('Nunito', 'I', 10);
                         $pdf->Cell(190, 7, "Page No " . $pdf->PageNo(), 0, 1, 'C');
                     }
                     // break;
@@ -9037,7 +9086,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf = new PDF2('P', 'mm', 'A4');
 
                     $tittle = "Invoice";
-                    $pdf->SetFont('Times', '', 11);
+                    $pdf->SetFont('Nunito', '', 11);
                     $pdf->SetTitle($tittle);
                     $pdf->setSchoolLogo("../../" . schoolLogo($conn));
                     $pdf->set_school_name($_SESSION['schname']);
@@ -9127,43 +9176,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->AddPage();
                         $pdf->setHeaderPos(190);
                         $pdf->Image(dirname(__FILE__) . "../../" . schoolLogo($conn), 170, 3, 30);
-                        $pdf->SetFont("Arial", "", 40);
+                        $pdf->SetFont("Nunito", "", 40);
                         $pdf->Cell(100, 30, "INVOICE", 0, 1, "L");
-                        $pdf->SetFont("Arial", "B", 9);
+                        $pdf->SetFont("Nunito", "B", 9);
                         $pdf->Cell(50, 5, "INVOICE NUMBER");
                         $pdf->Cell(50, 5, "DATE OF ISSUE ", 0, 1);
-                        $pdf->SetFont("Arial", "", 8);
+                        $pdf->SetFont("Nunito", "", 8);
                         $pdf->Cell(50, 5, date("YmdHi") . "#" . $admission_number);
                         $pdf->Cell(50, 5, date("D dS M Y"), 0, 1);
 
                         // BILL FOR
                         $pdf->Ln(10);
-                        $pdf->SetFont("Arial", "B", 9);
+                        $pdf->SetFont("Nunito", "B", 9);
                         $pdf->Cell(50, 5, "BILLED TO:", 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, trim(ucwords(strtolower($pdf->school_name))), 0, 1);
 
                         // student details
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, $student_name, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "P.0 Box " . $pdf->school_po . " - " . $pdf->school_BOX_CODE, 0, 1);
 
 
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, "Reg No. : " . $admission_number, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "Contact us : " . $pdf->school_contact . "", 0, 1);
 
 
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, "Course Level : " . $student_class, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "Email us : " . $_SESSION['school_mail'] . "", 0, 1);
 
                         // here we have the description of all the VOTEHEADS the student is supposed to pay.
                         $pdf->Ln(20);
-                        $pdf->SetFont("Arial", "B", 10);
+                        $pdf->SetFont("Nunito", "B", 10);
                         $pdf->SetTextColor(120, 120, 120);
                         $pdf->SetLineWidth(0.5);
                         $pdf->Cell(10, 5, "#", "B", 0);
@@ -9172,7 +9221,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(30, 5, "Amount", "B", 1);
 
                         // change the text color
-                        $pdf->SetFont("Helvetica", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->SetTextColor(10, 10, 10);
                         $pdf->SetLineWidth(0.1);
                         // here we set the payments to be paid
@@ -9191,7 +9240,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         }
 
                         // total
-                        $pdf->SetFont("Arial", "B", 10);
+                        $pdf->SetFont("Nunito", "B", 10);
                         $pdf->Cell(10, 8, "", "", 0);
                         $pdf->Cell(120, 8, "", "", 0);
                         $pdf->Cell(30, 8, "Total Balance", "B", 0);
@@ -9199,17 +9248,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                         // payment information
                         $pdf->Ln(10);
-                        $pdf->SetFont("Arial", "", 10);
+                        $pdf->SetFont("Nunito", "", 10);
                         $pdf->Cell(40, 7, "Payment Information: ", 0, 0);
-                        $pdf->SetFont("Arial", "BI", 9);
+                        $pdf->SetFont("Nunito", "BI", 9);
                         $pdf->MultiCell(130, 7, $_POST['invoice_email_message'], 0, "J");
 
 
                         // footer
                         // Position at 1.5 cm from bottom
                         $pdf->SetY(260);
-                        // Arial italic 8
-                        $pdf->SetFont('Arial', 'I', 10);
+                        // Nunito italic 8
+                        $pdf->SetFont('Nunito', 'I', 10);
                         $pdf->Cell(190, 0, "", "T", 1);
                         $pdf->Cell(190, 7, "----- Fees Once Paid are not refundable OR transferable -------", 0, 1, 'C');
                         $pdf->Cell(190, 7, "Page No " . $pdf->PageNo(), 0, 1, 'C');
@@ -9226,43 +9275,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->AddPage();
                         $pdf->setHeaderPos(190);
                         $pdf->Image(dirname(__FILE__) . "../../" . schoolLogo($conn), 170, 3, 30);
-                        $pdf->SetFont("Arial", "", 40);
+                        $pdf->SetFont("Nunito", "", 40);
                         $pdf->Cell(100, 30, "INVOICE", 0, 1, "L");
-                        $pdf->SetFont("Arial", "B", 9);
+                        $pdf->SetFont("Nunito", "B", 9);
                         $pdf->Cell(50, 5, "INVOICE NUMBER");
                         $pdf->Cell(50, 5, "DATE OF ISSUE", 0, 1);
-                        $pdf->SetFont("Arial", "", 8);
+                        $pdf->SetFont("Nunito", "", 8);
                         $pdf->Cell(50, 5, date("YmdHi") . "#" . $admission_number);
                         $pdf->Cell(50, 5, date("D dS M Y"), 0, 1);
 
                         // BILL FOR
                         $pdf->Ln(10);
-                        $pdf->SetFont("Arial", "B", 9);
+                        $pdf->SetFont("Nunito", "B", 9);
                         $pdf->Cell(50, 5, "BILLED TO:", 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, trim(ucwords(strtolower($pdf->school_name))), 0, 1);
 
                         // student details
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, $student_name, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "P.0 Box " . $pdf->school_po . " - " . $pdf->school_BOX_CODE, 0, 1);
 
 
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, "Reg No. : " . $admission_number, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "Contact us : " . $pdf->school_contact . "", 0, 1);
 
 
-                        $pdf->SetFont("Arial", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->Cell(50, 5, "Course Level : " . $student_class, 0, 0);
                         $pdf->Cell(50, 5, "", 0, 0);
                         $pdf->Cell(50, 5, "Email us : " . $_SESSION['school_mail'] . "", 0, 1);
 
                         // here we have the description of all the VOTEHEADS the student is supposed to pay.
                         $pdf->Ln(20);
-                        $pdf->SetFont("Arial", "B", 10);
+                        $pdf->SetFont("Nunito", "B", 10);
                         $pdf->SetTextColor(120, 120, 120);
                         $pdf->SetLineWidth(0.5);
                         $pdf->Cell(10, 5, "#", "B", 0);
@@ -9271,7 +9320,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(30, 5, "Amount", "B", 1);
 
                         // change the text color
-                        $pdf->SetFont("Helvetica", "", 9);
+                        $pdf->SetFont("Nunito", "", 9);
                         $pdf->SetTextColor(10, 10, 10);
                         $pdf->SetLineWidth(0.1);
                         // here we set the payments to be paid
@@ -9290,7 +9339,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         }
 
                         // add another row of amount paid
-                        $pdf->SetFont("Arial", "B", 10);
+                        $pdf->SetFont("Nunito", "B", 10);
                         $pdf->Cell(10, 8, "", "", 0);
                         $pdf->Cell(120, 8, "", "", 0);
                         $pdf->Cell(30, 8, "Fees Paid ", "B", 0);
@@ -9298,7 +9347,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(30, 8, "Kes " . number_format($feespaidbystud), "B", 1);
 
                         // total
-                        $pdf->SetFont("Arial", "B", 10);
+                        $pdf->SetFont("Nunito", "B", 10);
                         $pdf->Cell(10, 8, "", "", 0);
                         $pdf->Cell(120, 8, "", "", 0);
                         $pdf->Cell(30, 8, "Total Balance ", "B", 0);
@@ -9306,17 +9355,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                         // payment information
                         $pdf->Ln(10);
-                        $pdf->SetFont("Arial", "", 10);
+                        $pdf->SetFont("Nunito", "", 10);
                         $pdf->Cell(40, 7, "Payment Information: ", 0, 0);
-                        $pdf->SetFont("Arial", "BI", 9);
+                        $pdf->SetFont("Nunito", "BI", 9);
                         $pdf->MultiCell(130, 7, $_POST['invoice_email_message'], 0, "J");
 
 
                         // footer
                         // Position at 1.5 cm from bottom
                         $pdf->SetY(260);
-                        // Arial italic 8
-                        $pdf->SetFont('Arial', 'I', 10);
+                        // Nunito italic 8
+                        $pdf->SetFont('Nunito', 'I', 10);
                         $pdf->Cell(190, 0, "", "T", 1);
                         $pdf->Cell(190, 7, "----- Fees Once Paid are not refundable OR transferable -------", 0, 1, 'C');
                         $pdf->Cell(190, 7, "Page No " . $pdf->PageNo(), 0, 1, 'C');
@@ -9718,57 +9767,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Image(dirname(__FILE__) . "../../.." . "/sims/images/ux_design.png", 1, 1, 295);
                     $pdf->SetFillColor(245, 245, 245);
                     // $pdf->Ln();
-                    $pdf->SetFont("Times", "B", 13);
+                    $pdf->SetFont("Nunito", "B", 13);
                     $pdf->setSchoolLogo("../../" . schoolLogo($conn));
                     $pdf->Image(dirname(__FILE__) . $pdf->school_logo, 8, 8, 30);
                     $pdf->Cell(297, 7, $_SESSION['schname'], 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "B", 11);
+                    $pdf->SetFont("Nunito", "B", 11);
                     $pdf->Cell(297, 7, "LEARNING PROGRESS REPORT", 0, 1, 'C', false);
                     $term = trim($_POST['report_term_selected']) == "" ? (($anwani != "TERM_3" && $anwani != "TERM_2") ? "FIRST TERM" : (($anwani == "TERM_2") ? "SECOND TERM" : "THIRD TERM")) : $_POST['report_term_selected'];
                     $pdf->Cell(297, 7, date("F Y"), 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "", 11);
+                    $pdf->SetFont("Nunito", "", 11);
                     $pdf->Cell(297, 5, "Contact Us: " . $_SESSION['school_contact'], 0, 1, 'C', false);
                     $pdf->Cell(297, 5, "Email Us: " . $_SESSION['school_mail'], 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "B", 13);
+                    $pdf->SetFont("Nunito", "B", 13);
 
-                    $pdf->SetFont("Times", "BU", 12);
+                    $pdf->SetFont("Nunito", "BU", 12);
                     $pdf->Cell(297, 5, className_exam($student_details['stud_class']) . " Academic Assessment", 0, 1, 'C', false);
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Ln();
                     $pdf->Cell(15, 7, "Name:", 1, 0, 'R', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(70, 7, ucwords(strtolower($student_details['surname'] . " " . $student_details['first_name'] . " " . $student_details['second_name'])), 1, 0, 'L', false);
 
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Cell(20, 7, "Adm No:", 1, 0, 'R', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(20, 7, $student_details['adm_no'], 1, 0, 'L', false);
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Cell(20, 7, "TERM: ", 1, 0, 'C', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(30, 7, $term, 1, 0, 'C', false);
 
 
                     if (isset($_POST['academic_year'])) {
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(17, 7, "Class:", 1, 0, 'R', true);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(20, 7, className_exam($student_details['stud_class']), 1, 0, 'L', false);
 
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(35, 7, "Academic Year:", 1, 0, 'R', true);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(30, 7, $_POST['academic_year'], 1, 1, 'L', false);
                     } else {
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(15, 7, "Class:", 1, 0, 'R', false);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(20, 7, className_exam($student_details['stud_class']), 1, 1, 'L', false);
                     }
-                    $pdf->SetFont("Times", "BU", 12);
+                    $pdf->SetFont("Nunito", "BU", 12);
 
                     // create data
                     $terms_present = [];
@@ -9808,7 +9857,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                         // display graphs
                         $x_before = $pdf->GetX();
-                        $pdf->SetFont("Times", "BU", 10);
+                        $pdf->SetFont("Nunito", "BU", 10);
                         $pdf->Cell(295, 6, $TERM . " Trend Analysis", 0, 1, "C");
                         $pdf->BarDiagram(250, $bar_height, ($display_data), $format, array(22, 164, 250), 100, 20);
                         $pdf->SetXY($x_before, $pdf->GetY() + $gap_size);
@@ -9823,58 +9872,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $student_details = getStudDetail($conn2, $student_id);
                     $pdf->SetFillColor(245, 245, 245);
                     // $pdf->Ln();
-                    $pdf->SetFont("Times", "B", 13);
+                    $pdf->SetFont("Nunito", "B", 13);
                     $pdf->setSchoolLogo("../../" . schoolLogo($conn));
                     $pdf->Image(dirname(__FILE__) . $pdf->school_logo, 8, 8, 30);
                     $pdf->Cell(297, 7, $_SESSION['schname'], 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "B", 11);
+                    $pdf->SetFont("Nunito", "B", 11);
                     $pdf->Cell(297, 7, "LEARNING PROGRESS REPORT", 0, 1, 'C', false);
                     $term = trim($_POST['report_term_selected']) == "" ? (($anwani != "TERM_3" && $anwani != "TERM_2") ? "FIRST TERM" : (($anwani == "TERM_2") ? "SECOND TERM" : "THIRD TERM")) : $_POST['report_term_selected'];
                     $pdf->Cell(297, 7, date("F Y"), 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "", 11);
+                    $pdf->SetFont("Nunito", "", 11);
                     $pdf->Cell(297, 7, "Contact Us: " . $_SESSION['school_contact'], 0, 1, 'C', false);
                     $pdf->Cell(297, 7, "Email Us: " . $_SESSION['school_mail'], 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "B", 13);
+                    $pdf->SetFont("Nunito", "B", 13);
 
-                    $pdf->SetFont("Times", "BU", 12);
+                    $pdf->SetFont("Nunito", "BU", 12);
                     $pdf->Cell(297, 5, className_exam($student_details['stud_class']) . " Academic Assessment", 0, 1, 'C', false);
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Ln();
                     $pdf->Cell(15, 7, "Name:", 1, 0, 'R', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(70, 7, ucwords(strtolower($student_details['first_name'] . " " . $student_details['second_name']." ".$student_details['surname'])), 1, 0, 'L', false);
 
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Cell(20, 7, "Adm No:", 1, 0, 'R', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(20, 7, $student_details['adm_no'], 1, 0, 'L', false);
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Cell(20, 7, "TERM: ", 1, 0, 'C', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(30, 7, $term, 1, 0, 'C', false);
 
 
                     if (isset($_POST['academic_year'])) {
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(17, 7, "Class:", 1, 0, 'R', true);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(20, 7, className_exam($student_details['stud_class']), 1, 0, 'L', false);
 
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(35, 7, "Academic Year:", 1, 0, 'R', true);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(30, 7, $_POST['academic_year'], 1, 1, 'L', false);
                     } else {
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(15, 7, "Class:", 1, 0, 'R', false);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(20, 7, className_exam($student_details['stud_class']), 1, 1, 'L', false);
                     }
                 }
-                $pdf->SetFont("Times", "B", 10);
+                $pdf->SetFont("Nunito", "B", 10);
                 $pdf->Cell(295, 6, "TERMLY ACADEMIC RESULTS", 0, 1, 'C', false);
                 // echo true ? 9 : 10;
 
@@ -9891,7 +9940,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 }
 
                 // create the termly academic table
-                $pdf->SetFont("Times", "B", 10);
+                $pdf->SetFont("Nunito", "B", 10);
                 $pdf->SetLineWidth(.1);
                 $pdf->SetFillColor(245, 245, 245);
                 $pdf->Ln(5);
@@ -9944,7 +9993,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $subject_count = count($termly_perfomace[0]['subject_perfomaces']);
                 $term_count = count($termly_perfomace);
                 $term_default_count = 3;
-                $pdf->SetFont("Times", "", 11);
+                $pdf->SetFont("Nunito", "", 11);
                 // echo json_encode($termly_perfomace)."<br>";
                 // subjects passed
                 $subjects_passed = [];
@@ -10069,7 +10118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                 // synopsis
                 if ($_POST['garding_options_grade_8'] == "IGCSE" || $_POST['garding_options_grade_8'] == "iPrimary") {
-                    $pdf->SetFont("Times", "B", 11);
+                    $pdf->SetFont("Nunito", "B", 11);
                     $pdf->Cell(30, 7, "", 0, 0, 'C');
                     $pdf->Cell(210, 7, "Synopsis of perfomance", 1, 1, "C", true);
                     $pdf->Cell(30, 7, "", 0, 0, 'C');
@@ -10078,7 +10127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Cell(50, 7, "TERM 2", 1, 0, "C", true);
                     $pdf->Cell(50, 7, "TERM 3", 1, 1, "C", true);
 
-                    $pdf->SetFont("Times", "", 11);
+                    $pdf->SetFont("Nunito", "", 11);
                     $pdf->Cell(30, 7, "", 0, 0, 'C');
                     $pdf->Cell(60, 7, "No. of Subjects Passed", 1, 0, "C", false);
                     $pdf->Cell(50, 7, "" . ($subjects_passed['TERM_1'] > 0 || $subjects_failed['TERM_1'] > 0) ? $subjects_passed['TERM_1'] . " Subject(s)" : "-", 1, 0, "C", false);
@@ -10106,10 +10155,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     if ($_POST['garding_options_grade_8'] == "iPrimary") {
                         // ROW
 
-                        $pdf->SetFont("Times", "B", 11);
+                        $pdf->SetFont("Nunito", "B", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(110, 8, "ACADEMIC ASSESSMENT KEY", 1, 1, 'C', true);
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         // ROW
 
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
@@ -10117,159 +10166,159 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(50, 8, $table_titles_head, 1, 1, 'C', true);
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "100% - 91%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "A*", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "90% - 81%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "A", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "80% - 71%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "B", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "70% - 61%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "C", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "60% - 51%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "D", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "50% - 41%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "E", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "40% - 31%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "F", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "30% - 0%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "U", 1, 1, 'C');
                     } elseif ($_POST['garding_options_grade_8'] == "IGCSE") {
                         // ROW
                         $pdf->Cell(90, 8, "", 0, 0, 'L', false);
-                        $pdf->SetFont("Times", "B", 11);
+                        $pdf->SetFont("Nunito", "B", 11);
                         $pdf->Cell(110, 8, "ACADEMIC ASSESSMENT KEY", 1, 1, 'C', true);
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         // ROW
                         $pdf->Cell(90, 8, "", 0, 0, 'L', false);
                         $pdf->Cell(60, 8, "Subject Score", 1, 0, 'C', true);
                         $pdf->Cell(50, 8, $table_titles_head, 1, 1, 'C', true);
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "100% - 91%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "9", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "90% - 81%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "8", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "80% - 74%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "7", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "73% - 68%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "6", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "67% - 60%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "5", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "59% - 54%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "4", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "53% - 47%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "3", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "46% - 40%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "2", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "39% - 35%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "1", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "34% - 0%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "U", 1, 1, 'C');
                     } elseif ($_POST['garding_options_grade_8'] == "cbc") {
                         // ROW
                         $pdf->Cell(90, 8, "", 0, 0, 'L', false);
-                        $pdf->SetFont("Times", "B", 11);
+                        $pdf->SetFont("Nunito", "B", 11);
                         $pdf->Cell(110, 8, "ACADEMIC ASSESSMENT KEY", 1, 1, 'C', true);
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         // ROW
                         $pdf->Cell(90, 8, "", 0, 0, 'L', false);
                         $pdf->Cell(60, 8, "Subject Score", 1, 0, 'C', true);
                         $pdf->Cell(50, 8, $table_titles_head, 1, 1, 'C', true);
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "4", 1, 0, 'C');
                         $pdf->Cell(50, 8, "Exceeding Expectation", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "3", 1, 0, 'C');
                         $pdf->Cell(50, 8, "Approaching Expectation", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "2", 1, 0, 'C');
                         $pdf->Cell(50, 8, "Meeting Expectation", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "1", 1, 0, 'C');
                         $pdf->Cell(50, 8, "Approaching Expectation", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "A", 1, 0, 'C');
                         $pdf->Cell(50, 8, "Absent", 1, 1, 'C');
@@ -10280,12 +10329,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                 $pdf->Ln(5);
                 $pdf->Cell(90, 0, "");
-                $pdf->SetFont("Times", "B", 11);
+                $pdf->SetFont("Nunito", "B", 11);
                 $pdf->Cell(90, 6, "Director`s Comment", 0, 1, 'C');
                 // $pdf->Cell(60, 16, "Directors Comments:", 1, 0, 'L', true);
                 $pdf->Cell(10, 8, "", 0, 0, 'C');
                 $pdf->Cell(50, 16, "Name: " . ucwords(strtolower($_SESSION['admin_name'])) . "", 1, 0, 'L', true);
-                $pdf->SetFont("Times", "", 11);
+                $pdf->SetFont("Nunito", "", 11);
 
                 // $X = $pdf->GetX();
                 // $Y = $pdf->GetY()-8;
@@ -10321,21 +10370,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                 $pdf->Ln(5);
                 $pdf->Cell(15, 8, "", 0, 0, 'C');
-                $pdf->SetFont("Times", "B", 11);
+                $pdf->SetFont("Nunito", "B", 11);
                 $pdf->Cell(20, 7, "Date: ", 1, 0, 'L', true);
-                $pdf->SetFont("Times", "", 11);
+                $pdf->SetFont("Nunito", "", 11);
                 $pdf->Cell(60, 7, date("M Y"), 1, 0, 'L');
 
                 // attendance stats
                 $attendances = presentStats_report($conn2, $student_termly_perfomance[$index]['student_id'], $student_info['stud_class']);
-                $pdf->SetFont("Times", "B", 11);
+                $pdf->SetFont("Nunito", "B", 11);
                 $pdf->Cell(30, 7, "Attendance: ", 1, 0, 'L', true);
-                $pdf->SetFont("Times", "", 11);
+                $pdf->SetFont("Nunito", "", 11);
                 $pdf->Cell(50, 7, $attendances[2] . " %", 1, 0, 'L');
 
-                $pdf->SetFont("Times", "B", 11);
+                $pdf->SetFont("Nunito", "B", 11);
                 $pdf->Cell(40, 7, "Next Term Opens: ", 1, 0, 'L', true);
-                $pdf->SetFont("Times", "", 11);
+                $pdf->SetFont("Nunito", "", 11);
                 $pdf->Cell(50, 7, date("D, dS F Y", strtotime($next_yr_opening)), 1, 1, 'L');
                 // break;
             }
@@ -10622,57 +10671,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Image(dirname(__FILE__) . "../../.." . "/sims/images/ux_design.png", 1, 1, 295);
                     $pdf->SetFillColor(245, 245, 245);
                     // $pdf->Ln();
-                    $pdf->SetFont("Times", "B", 13);
+                    $pdf->SetFont("Nunito", "B", 13);
                     $pdf->setSchoolLogo("../../" . schoolLogo($conn));
                     $pdf->Image(dirname(__FILE__) . $pdf->school_logo, 8, 8, 30);
                     $pdf->Cell(297, 7, $_SESSION['schname'], 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "B", 11);
+                    $pdf->SetFont("Nunito", "B", 11);
                     $pdf->Cell(297, 7, "LEARNING PROGRESS REPORT", 0, 1, 'C', false);
                     $term = trim($_POST['report_term_selected']) == "" ? (($anwani != "TERM_3" && $anwani != "TERM_2") ? "FIRST TERM" : (($anwani == "TERM_2") ? "SECOND TERM" : "THIRD TERM")) : $_POST['report_term_selected'];
                     $pdf->Cell(297, 7, date("F Y"), 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "", 11);
+                    $pdf->SetFont("Nunito", "", 11);
                     $pdf->Cell(297, 5, "Contact Us: " . $_SESSION['school_contact'], 0, 1, 'C', false);
                     $pdf->Cell(297, 5, "Email Us: " . $_SESSION['school_mail'], 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "B", 13);
+                    $pdf->SetFont("Nunito", "B", 13);
 
-                    $pdf->SetFont("Times", "BU", 12);
+                    $pdf->SetFont("Nunito", "BU", 12);
                     $pdf->Cell(297, 5, className_exam($student_details['stud_class']) . " Academic Assessment", 0, 1, 'C', false);
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Ln();
                     $pdf->Cell(15, 7, "Name:", 1, 0, 'R', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(70, 7, ucwords(strtolower($student_details['surname'] . " " . $student_details['first_name'] . " " . $student_details['second_name'])), 1, 0, 'L', false);
 
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Cell(20, 7, "Adm No:", 1, 0, 'R', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(20, 7, $student_details['adm_no'], 1, 0, 'L', false);
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Cell(20, 7, "TERM: ", 1, 0, 'C', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(30, 7, $term, 1, 0, 'C', false);
 
 
                     if (isset($_POST['academic_year'])) {
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(17, 7, "Class:", 1, 0, 'R', true);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(20, 7, className_exam($student_details['stud_class']), 1, 0, 'L', false);
 
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(35, 7, "Academic Year:", 1, 0, 'R', true);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(30, 7, $_POST['academic_year'], 1, 1, 'L', false);
                     } else {
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(15, 7, "Class:", 1, 0, 'R', false);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(20, 7, className_exam($student_details['stud_class']), 1, 1, 'L', false);
                     }
-                    $pdf->SetFont("Times", "BU", 12);
+                    $pdf->SetFont("Nunito", "BU", 12);
 
                     // create data
                     $terms_present = [];
@@ -10713,7 +10762,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                         // display graphs
                         $x_before = $pdf->GetX();
-                        $pdf->SetFont("Times", "BU", 10);
+                        $pdf->SetFont("Nunito", "BU", 10);
                         $pdf->Cell(295, 6, $TERM . " Trend Analysis", 0, 1, "C");
                         $pdf->BarDiagram(250, $bar_height, ($display_data), $format, array(22, 164, 250), 100, 20);
                         $pdf->SetXY($x_before, $pdf->GetY() + $gap_size);
@@ -10728,58 +10777,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $student_details = getStudDetail($conn2, $student_id);
                     $pdf->SetFillColor(245, 245, 245);
                     // $pdf->Ln();
-                    $pdf->SetFont("Times", "B", 13);
+                    $pdf->SetFont("Nunito", "B", 13);
                     $pdf->setSchoolLogo("../../" . schoolLogo($conn));
                     $pdf->Image(dirname(__FILE__) . $pdf->school_logo, 8, 8, 30);
                     $pdf->Cell(297, 7, $_SESSION['schname'], 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "B", 11);
+                    $pdf->SetFont("Nunito", "B", 11);
                     $pdf->Cell(297, 7, "LEARNING PROGRESS REPORT", 0, 1, 'C', false);
                     $term = trim($_POST['report_term_selected']) == "" ? (($anwani != "TERM_3" && $anwani != "TERM_2") ? "FIRST TERM" : (($anwani == "TERM_2") ? "SECOND TERM" : "THIRD TERM")) : $_POST['report_term_selected'];
                     $pdf->Cell(297, 7, date("F Y"), 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "", 11);
+                    $pdf->SetFont("Nunito", "", 11);
                     $pdf->Cell(297, 7, "Contact Us: " . $_SESSION['school_contact'], 0, 1, 'C', false);
                     $pdf->Cell(297, 7, "Email Us: " . $_SESSION['school_mail'], 0, 1, 'C', false);
-                    $pdf->SetFont("Times", "B", 13);
+                    $pdf->SetFont("Nunito", "B", 13);
 
-                    $pdf->SetFont("Times", "BU", 12);
+                    $pdf->SetFont("Nunito", "BU", 12);
                     $pdf->Cell(297, 5, className_exam($student_details['stud_class']) . " Academic Assessment", 0, 1, 'C', false);
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Ln();
                     $pdf->Cell(15, 7, "Name:", 1, 0, 'R', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(70, 7, ucwords(strtolower($student_details['first_name'] . " " . $student_details['second_name']." ".$student_details['surname'])), 1, 0, 'L', false);
 
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Cell(20, 7, "Adm No:", 1, 0, 'R', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(20, 7, $student_details['adm_no'], 1, 0, 'L', false);
 
-                    $pdf->SetFont("Times", "B", 12);
+                    $pdf->SetFont("Nunito", "B", 12);
                     $pdf->Cell(20, 7, "TERM: ", 1, 0, 'C', true);
-                    $pdf->SetFont("Times", "", 12);
+                    $pdf->SetFont("Nunito", "", 12);
                     $pdf->Cell(30, 7, $term, 1, 0, 'C', false);
 
 
                     if (isset($_POST['academic_year'])) {
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(17, 7, "Class:", 1, 0, 'R', true);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(20, 7, className_exam($student_details['stud_class']), 1, 0, 'L', false);
 
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(35, 7, "Academic Year:", 1, 0, 'R', true);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(30, 7, $_POST['academic_year'], 1, 1, 'L', false);
                     } else {
-                        $pdf->SetFont("Times", "B", 12);
+                        $pdf->SetFont("Nunito", "B", 12);
                         $pdf->Cell(15, 7, "Class:", 1, 0, 'R', false);
-                        $pdf->SetFont("Times", "", 12);
+                        $pdf->SetFont("Nunito", "", 12);
                         $pdf->Cell(20, 7, className_exam($student_details['stud_class']), 1, 1, 'L', false);
                     }
                 }
-                $pdf->SetFont("Times", "B", 10);
+                $pdf->SetFont("Nunito", "B", 10);
                 $pdf->Cell(295, 6, "TERMLY ACADEMIC RESULTS", 0, 1, 'C', false);
                 // echo true ? 9 : 10;
 
@@ -10795,7 +10844,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 }
 
                 // create the termly academic table
-                $pdf->SetFont("Times", "B", 10);
+                $pdf->SetFont("Nunito", "B", 10);
                 $pdf->SetLineWidth(.1);
                 $pdf->SetFillColor(245, 245, 245);
                 $pdf->Ln(5);
@@ -10848,7 +10897,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $subject_count = count($termly_perfomace[0]['subject_perfomaces']);
                 $term_count = count($termly_perfomace);
                 $term_default_count = 3;
-                $pdf->SetFont("Times", "", 11);
+                $pdf->SetFont("Nunito", "", 11);
                 // echo $subject_count;
                 // subjects passed
                 $subjects_passed = [];
@@ -10974,7 +11023,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                 // synopsis
                 if ($_POST['garding_options_grade_8'] == "IGCSE" || $_POST['garding_options_grade_8'] == "iPrimary") {
-                    $pdf->SetFont("Times", "B", 11);
+                    $pdf->SetFont("Nunito", "B", 11);
                     $pdf->Cell(30, 7, "", 0, 0, 'C');
                     $pdf->Cell(210, 7, "Synopsis of perfomance", 1, 1, "C", true);
                     $pdf->Cell(30, 7, "", 0, 0, 'C');
@@ -10983,7 +11032,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Cell(50, 7, "TERM 2", 1, 0, "C", true);
                     $pdf->Cell(50, 7, "TERM 3", 1, 1, "C", true);
 
-                    $pdf->SetFont("Times", "", 11);
+                    $pdf->SetFont("Nunito", "", 11);
                     $pdf->Cell(30, 7, "", 0, 0, 'C');
                     $pdf->Cell(60, 7, "No. of Subjects Passed", 1, 0, "C", false);
                     $pdf->Cell(50, 7, "" . ($subjects_passed['TERM_1'] > 0 || $subjects_failed['TERM_1'] > 0) ? $subjects_passed['TERM_1'] . " Subject(s)" : "-", 1, 0, "C", false);
@@ -11011,10 +11060,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     if ($_POST['garding_options_grade_8'] == "iPrimary") {
                         // ROW
 
-                        $pdf->SetFont("Times", "B", 11);
+                        $pdf->SetFont("Nunito", "B", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(110, 8, "ACADEMIC ASSESSMENT KEY", 1, 1, 'C', true);
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         // ROW
 
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
@@ -11022,159 +11071,159 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(50, 8, $table_titles_head, 1, 1, 'C', true);
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "100% - 91%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "A*", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "90% - 81%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "A", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "80% - 71%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "B", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "70% - 61%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "C", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "60% - 51%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "D", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "50% - 41%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "E", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "40% - 31%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "F", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "30% - 0%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "U", 1, 1, 'C');
                     } elseif ($_POST['garding_options_grade_8'] == "IGCSE") {
                         // ROW
                         $pdf->Cell(90, 8, "", 0, 0, 'L', false);
-                        $pdf->SetFont("Times", "B", 11);
+                        $pdf->SetFont("Nunito", "B", 11);
                         $pdf->Cell(110, 8, "ACADEMIC ASSESSMENT KEY", 1, 1, 'C', true);
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         // ROW
                         $pdf->Cell(90, 8, "", 0, 0, 'L', false);
                         $pdf->Cell(60, 8, "Subject Score", 1, 0, 'C', true);
                         $pdf->Cell(50, 8, $table_titles_head, 1, 1, 'C', true);
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "100% - 91%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "9", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "90% - 81%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "8", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "80% - 74%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "7", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "73% - 68%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "6", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "67% - 60%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "5", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "59% - 54%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "4", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "53% - 47%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "3", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "46% - 40%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "2", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "39% - 35%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "1", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "34% - 0%", 1, 0, 'C');
                         $pdf->Cell(50, 8, "U", 1, 1, 'C');
                     } elseif ($_POST['garding_options_grade_8'] == "cbc") {
                         // ROW
                         $pdf->Cell(90, 8, "", 0, 0, 'L', false);
-                        $pdf->SetFont("Times", "B", 11);
+                        $pdf->SetFont("Nunito", "B", 11);
                         $pdf->Cell(110, 8, "ACADEMIC ASSESSMENT KEY", 1, 1, 'C', true);
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         // ROW
                         $pdf->Cell(90, 8, "", 0, 0, 'L', false);
                         $pdf->Cell(60, 8, "Subject Score", 1, 0, 'C', true);
                         $pdf->Cell(50, 8, $table_titles_head, 1, 1, 'C', true);
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "4", 1, 0, 'C');
                         $pdf->Cell(50, 8, "Exceeding Expectation", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "3", 1, 0, 'C');
                         $pdf->Cell(50, 8, "Approaching Expectation", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "2", 1, 0, 'C');
                         $pdf->Cell(50, 8, "Meeting Expectation", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "1", 1, 0, 'C');
                         $pdf->Cell(50, 8, "Approaching Expectation", 1, 1, 'C');
 
                         // ROW
-                        $pdf->SetFont("Times", "", 11);
+                        $pdf->SetFont("Nunito", "", 11);
                         $pdf->Cell(90, 8, "", 0, 0, 'C');
                         $pdf->Cell(60, 8, "A", 1, 0, 'C');
                         $pdf->Cell(50, 8, "Absent", 1, 1, 'C');
@@ -11183,12 +11232,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 
                 $pdf->Ln(5);
                 $pdf->Cell(90, 0, "");
-                $pdf->SetFont("Times", "B", 11);
+                $pdf->SetFont("Nunito", "B", 11);
                 $pdf->Cell(90, 6, "Director`s Comment", 0, 1, 'C');
                 // $pdf->Cell(60, 16, "Directors Comments:", 1, 0, 'L', true);
                 $pdf->Cell(10, 8, "", 0, 0, 'C');
                 $pdf->Cell(50, 16, "Name: " . ucwords(strtolower($_SESSION['admin_name'])) . "", 1, 0, 'L', true);
-                $pdf->SetFont("Times", "", 11);
+                $pdf->SetFont("Nunito", "", 11);
 
                 // $X = $pdf->GetX();
                 // $Y = $pdf->GetY()-8;
@@ -11224,21 +11273,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
                 $pdf->Ln(5);
                 $pdf->Cell(15, 8, "", 0, 0, 'C');
-                $pdf->SetFont("Times", "B", 11);
+                $pdf->SetFont("Nunito", "B", 11);
                 $pdf->Cell(20, 7, "Date: ", 1, 0, 'L', true);
-                $pdf->SetFont("Times", "", 11);
+                $pdf->SetFont("Nunito", "", 11);
                 $pdf->Cell(60, 7, date("M Y"), 1, 0, 'L');
 
                 // attendance stats
                 $attendances = presentStats_report($conn2, $student_termly_perfomance[$index]['student_id'], $student_info['stud_class']);
-                $pdf->SetFont("Times", "B", 11);
+                $pdf->SetFont("Nunito", "B", 11);
                 $pdf->Cell(30, 7, "Attendance: ", 1, 0, 'L', true);
-                $pdf->SetFont("Times", "", 11);
+                $pdf->SetFont("Nunito", "", 11);
                 $pdf->Cell(50, 7, $attendances[2] . " %", 1, 0, 'L');
 
-                $pdf->SetFont("Times", "B", 11);
+                $pdf->SetFont("Nunito", "B", 11);
                 $pdf->Cell(40, 7, "Next Term Opens: ", 1, 0, 'L', true);
-                $pdf->SetFont("Times", "", 11);
+                $pdf->SetFont("Nunito", "", 11);
                 $pdf->Cell(50, 7, date("D, dS F Y", strtotime($next_yr_opening)), 1, 1, 'L');
                 // break;
 
@@ -11380,12 +11429,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->set_school_box_code($_SESSION['box_codes']);
         $pdf->set_school_contact($_SESSION['school_contact']);
         $pdf->AddPage();
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(275, 8, "Date Generated : ".date("l dS M Y : h:i:sA"), 0, 0, 'L', false);
         $pdf->ln();
-        // $pdf->SetFont('Times', 'B', 10);
+        // $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 10, "", 0, 0, 'C', false);
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->SetFillColor(0, 112, 192);
         $pdf->Cell(50, 6, "TERM 1", 1, 0, 'C', TRUE);
         $pdf->Cell(50, 6, "TERM 2", 1, 0, 'C', TRUE);
@@ -11393,7 +11442,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
         // SET THE PRIMARY INCOME
         $pdf->ln();
-        $pdf->SetFont('Times', 'BU', 10);
+        $pdf->SetFont('Nunito', 'BU', 10);
         $pdf->Cell(40, 6, "Primary Income", 0, 0, 'L', false);
         $pdf->Cell(150, 6, "", 1, 0, 'C', false);
         $pdf->ln();
@@ -11417,7 +11466,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $years = date("Y");
 
         // operating revenue
-        $pdf->SetFont('Times', '', 11);
+        $pdf->SetFont('Nunito', '', 11);
         $pdf->Cell(40, 6, "Operating Revenue", 0, 0, 'L', false);
         for ($indes=0; $indes < count($term_income); $indes++) {
             $pdf->Cell(50, 6, "Kes ".number_format($term_income[$indes]), 1, 0, 'C', false);
@@ -11428,7 +11477,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Cell(50, 6, "Kes ".number_format($revenue[1]), 1, 0, 'C', false);
         $pdf->Cell(50, 6, "Kes ".number_format($revenue[2]), 1, 0, 'C', false);
         $pdf->ln();
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
         $pdf->Cell(40, 6, "Total Income", 0, 0, 'L', false);
         for ($indes=0; $indes < count($term_income); $indes++) {
             $term_income[$indes] += $revenue[$indes];
@@ -11477,14 +11526,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
         $pdf->ln();
         $pdf->ln();
-        $pdf->SetFont('Times', 'BU', 11);
+        $pdf->SetFont('Nunito', 'BU', 11);
         $pdf->Cell(40, 6, "Expenses", 0, 0, 'L', false);
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(50, 6, "TERM 1", 1, 0, 'C', TRUE);
         $pdf->Cell(50, 6, "TERM 2", 1, 0, 'C', TRUE);
         $pdf->Cell(50, 6, "TERM 3", 1, 0, 'C', TRUE);
         // $pdf->Cell(225, 6, "", 1, 0, 'L', false);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->ln();
 
         for ($indexes=0; $indexes < count($all_expenses); $indexes++) {
@@ -11499,7 +11548,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->ln();
         }
 
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
         $pdf->Cell(40, 6, "Total Expense", 0, 0, 'L', false);
         $pdf->Cell(50, 6, "Kes ".number_format($totalExpenses[0]), 1, 0, 'C', false);
         $pdf->Cell(50, 6, "Kes ".number_format($totalExpenses[1]), 1, 0, 'C', false);
@@ -11516,29 +11565,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->ln();
 
         // HEADER
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "", 0, 0, 'L', false);
         $pdf->Cell(50, 6, "TERM 1", 1, 0, 'C', TRUE);
         $pdf->Cell(50, 6, "TERM 2", 1, 0, 'C', TRUE);
         $pdf->Cell(50, 6, "TERM 3", 1, 1, 'C', TRUE);
 
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
         $pdf->Cell(40, 6, "Earning Before Tax", 0, 0, 'L', false);
         $pdf->Cell(50, 6, "Kes ".number_format($before_taxes[0]), 1, 0, 'C', false);
         $pdf->Cell(50, 6, "Kes ".number_format($before_taxes[1]), 1, 0, 'C', false);
         $pdf->Cell(50, 6, "Kes ".number_format($before_taxes[2]), 1, 0, 'C', false);
         $pdf->Ln();
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Ln();
-        $pdf->SetFont('Times', 'BU', 11);
+        $pdf->SetFont('Nunito', 'BU', 11);
 
         $pdf->Cell(40, 6, "Taxes", 0, 0, 'L', false);
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(50, 6, "TERM 1", 1, 0, 'C', TRUE);
         $pdf->Cell(50, 6, "TERM 2", 1, 0, 'C', TRUE);
         $pdf->Cell(50, 6, "TERM 3", 1, 0, 'C', TRUE);
         $pdf->ln();
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(40, 6, "Taxes", 0, 0, 'L', false);
         $pdf->Cell(50, 6, "Kes ".number_format($all_taxes[0]), 1, 0, 'C', false);
         $pdf->Cell(50, 6, "Kes ".number_format($all_taxes[1]), 1, 0, 'C', false);
@@ -11552,9 +11601,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             // add other revenues
             array_push($net_income,$netincome);
         }
-        $pdf->SetFont('Times', 'BUI', 11);
+        $pdf->SetFont('Nunito', 'BUI', 11);
         $pdf->Cell(40, 7, "Net Income", 0, 0, 'L', false);
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
         $pdf->Cell(50, 7, "Kes ".number_format($net_income[0]), 1, 0, 'C', false);
         $pdf->Cell(50, 7, "Kes ".number_format($net_income[1]), 1, 0, 'C', false);
         $pdf->Cell(50, 7, "Kes ".number_format($net_income[2]), 1, 0, 'C', false);
@@ -11577,7 +11626,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->set_school_box_code($_SESSION['box_codes']);
         $pdf->set_school_contact($_SESSION['school_contact']);
         $pdf->AddPage();
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(275, 8, "Date Generated : ".date("l dS M Y : h:i:sA"), 0, 0, 'L', false);
         $pdf->ln();
         // annual quater array
@@ -11617,16 +11666,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Ln();
         $pdf->Cell(40,6,"",0,0,'C',false);
         $pdf->SetFillColor(0, 112, 192);
-        $pdf->SetFont('Times', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(38,6,date("M-d-Y",strtotime($annual_quaters[0][0]))." - ".date("M-d-Y",strtotime($annual_quaters[0][1])),1,0,'C',true);
         $pdf->Cell(38,6,date("M-d-Y",strtotime($annual_quaters[1][0]))." - ".date("M-d-Y",strtotime($annual_quaters[1][1])),1,0,'C',true);
         $pdf->Cell(38,6,date("M-d-Y",strtotime($annual_quaters[2][0]))." - ".date("M-d-Y",strtotime($annual_quaters[2][1])),1,0,'C',true);
         $pdf->Cell(38,6,date("M-d-Y",strtotime($annual_quaters[3][0]))." - ".date("M-d-Y",strtotime($annual_quaters[3][1])),1,1,'C',true);
         
-        $pdf->SetFont('Times', 'BU', 11);
+        $pdf->SetFont('Nunito', 'BU', 11);
         $pdf->Cell(40,6,"Income",0,0,"L");
         $pdf->Cell(152,6,"",1,1,"L");
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
 
         // primary income
         $pdf->Cell(40,7,"Primary Income",0,0);
@@ -11642,7 +11691,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Ln();
 
         //total the income
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
         $pdf->Cell(40,7,"Total Income",0,0);
         for ($indes=0; $indes < count($term_income); $indes++) {
             $term_income[$indes] += $revenue[$indes];
@@ -11650,10 +11699,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         }
         $pdf->Ln();
 
-        $pdf->SetFont('Times', 'BU', 11);
+        $pdf->SetFont('Nunito', 'BU', 11);
         $pdf->Cell(40,6,"Expenses",0,0,"L");
         $pdf->Cell(152,6,"",1,1,"L");
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
 
         //create an array with all the expense array list
         $expenses_val = [];
@@ -11708,7 +11757,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         }
         
         //TOTAL ALL THE EXPENSES
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
         $pdf->Cell(40,7,"Total Expenses",0,0);
         $pdf->Cell(38,7,"Ksh ".number_format($totalExpenses[0])."",1,0);
         $pdf->Cell(38,7,"Ksh ".number_format($totalExpenses[1])."",1,0);
@@ -11727,7 +11776,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         }
         $pdf->Cell(40,6,"",0,0,"L");
         $pdf->Cell(152,6,"",1,1,"L");
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
         $pdf->Cell(40,7,"Earning before Tax",0,0);
         $pdf->Cell(38,7,"Ksh ".number_format($before_taxes[0])."",1,0);
         $pdf->Cell(38,7,"Ksh ".number_format($before_taxes[1])."",1,0);
@@ -11737,7 +11786,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         // earnings before tax
         $pdf->Cell(40,6,"Tax",0,0,"L");
         $pdf->Cell(152,6,"",1,1,"L");
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
 
         $pdf->Cell(40,7,"Taxes",0,0);
         $pdf->Cell(38,7,"Ksh ".number_format($all_taxes[0])."",1,0);
@@ -11753,7 +11802,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             // add other revenues
             array_push($net_income,$netincome);
         }
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
         $pdf->Cell(40,6,"Net Income",0,0,"L");
         $pdf->Cell(38,7,"Ksh ".number_format($net_income[0])."",1,0);
         $pdf->Cell(38,7,"Ksh ".number_format($net_income[1])."",1,0);
@@ -12313,14 +12362,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->set_school_box_code($_SESSION['box_codes']);
         $pdf->set_school_contact($_SESSION['school_contact']);
         $pdf->AddPage();
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         // $pdf->Cell(275, 10, "Date Generated : ".date("l dS M Y"), 0, 0, 'L', false);
         $pdf->ln();
         $pdf->Cell(190, 8, "Date Generated : ".date("l dS M Y : h:i:sA"), 0, 1, 'L',false);
 
         // create the table header
         $pdf->SetFillColor(0, 112, 192);
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(100, 8, "Description", 1, 0, 'C',true);
         $pdf->Cell(45, 8, $current_display_year, 1, 0, 'C',true);
         $pdf->Cell(45, 8, $previous_display_year, 1, 1, 'C',true);
@@ -12329,7 +12378,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Cell(45, 8, "Kes", 1, 1, 'C',true);
 
         // display Cashflow from Operating Activities
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(190, 6, "Cashflow from Operating Activities", 1, 1, 'L',false);
         $index = 1;
         $total_current = 0;
@@ -12342,7 +12391,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $net_increase_prev_year_1 = 0;
         $pdf->SetFillColor(216, 217, 218);
         $fill = true;
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         if(count($operating_revenue_categories) > 0 ){
             foreach($operating_revenue_categories as $key => $value){
                 $current_year = 0;
@@ -12378,10 +12427,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 // $fill = !$fill;
             }
         }else{
-            $pdf->SetFont('Times', '', 10);
+            $pdf->SetFont('Nunito', '', 10);
             $pdf->Cell(190, 6, "No cash flow from operating activities record!", 1, 1, 'L',false);
         }
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
         $pdf->Cell(100, 6, "Total", 1, 0, 'L',false);
         $pdf->Cell(45, 6, "Ksh ".number_format($total_current), 1, 0, 'L',false);
         $pdf->Cell(45, 6, "Ksh ".number_format($total_previous), 1, 1, 'L',false);
@@ -12392,9 +12441,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $total_current_expense = 0;
         $total_previous_expense = 0;
         $total_previous_expense_1 = 0;
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(190, 6, "Cashflow Used in Operating Activity", 1, 1, 'L',false);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
 
         $index = 1;
         $total_current_expense = 0;
@@ -12437,10 +12486,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $index++;
             }
         }else{
-            $pdf->SetFont('Times', '', 10);
+            $pdf->SetFont('Nunito', '', 10);
             $pdf->Cell(190, 6, "No Operating Activity Expenses!", 1, 1, 'L',false);
         }
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
 
         $pdf->Cell(100, 6, "Total", 1, 0, 'L',false);
         $pdf->Cell(45, 6, "Ksh ".number_format($total_current_expense), 1, 0, 'L',false);
@@ -12450,7 +12499,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Cell(45, 6, "Ksh ".number_format($total_current - $total_current_expense), 1, 0, 'L',false);
         $pdf->Cell(45, 6, "Ksh ".number_format($total_previous  - $total_previous_expense), 1, 1, 'L',false);
 
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(190, 6, "Cashflow From Investing Activities", 1, 1, 'L',false);
 
         $net_increase_curr_year+=($total_current - $total_current_expense);
@@ -12461,7 +12510,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $total_current = 0;
         $total_previous = 0;
         $total_previous_1 = 0;
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         if(count($investing_revenue_categories) > 0 ){
             foreach($investing_revenue_categories as $key => $value){
                 $current_year = 0;
@@ -12497,16 +12546,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $index++;
             }
         }else{
-            $pdf->SetFont('Times', '', 10);
+            $pdf->SetFont('Nunito', '', 10);
             $pdf->Cell(190, 6, "No Cashflow from Investing Activities!", 1, 1, 'L',false);
         }
 
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
         $pdf->Cell(100, 6, "Total", 1, 0, 'L',false);
         $pdf->Cell(45, 6, "Ksh ".number_format($total_current), 1, 0, 'L',false);
         $pdf->Cell(45, 6, "Ksh ".number_format($total_previous), 1, 1, 'L',false);
 
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(190, 6, "Cashflow Used in Investing Activity", 1, 1, 'L',false);
                     
         $index = 1;
@@ -12514,7 +12563,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $total_previous_expense = 0;
         $total_previous_expense_1 = 0;
         
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         if(count($investing_expense_categories) > 0 ){
             foreach($investing_expense_categories as $key => $value){
                 $current_year = 0;
@@ -12553,10 +12602,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $index++;
             }
         }else{
-            $pdf->SetFont('Times', '', 10);
+            $pdf->SetFont('Nunito', '', 10);
             $pdf->Cell(190, 6, "No Investing Activity Expenses!", 1, 1, 'L',false);
         }
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
 
         $pdf->Cell(100, 6, "Total", 1, 0, 'L',false);
         $pdf->Cell(45, 6, "Ksh ".number_format($total_current_expense), 1, 0, 'L',false);
@@ -12570,14 +12619,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $net_increase_prev_year+=($total_previous  - $total_previous_expense);
         $net_increase_prev_year_1+=($total_previous_1  - $total_previous_expense_1);
 
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(190, 6, "Cashflow from Financing Activities", 1, 1, 'L',false);
                     
         $index = 1;
         $total_current = 0;
         $total_previous = 0;
         $total_previous_1 = 0;
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         if(count($financing_revenue_categories) > 0 ){
             foreach($financing_revenue_categories as $key => $value){
                 $current_year = 0;
@@ -12613,16 +12662,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $index++;
             }
         }else{
-            $pdf->SetFont('Times', '', 10);
+            $pdf->SetFont('Nunito', '', 10);
             $pdf->Cell(190, 6, "No Financing Activity records!", 1, 1, 'L',false);
         }
 
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
         $pdf->Cell(100, 6, "Total", 1, 0, 'L',false);
         $pdf->Cell(45, 6, "Ksh ".number_format($total_current), 1, 0, 'L',false);
         $pdf->Cell(45, 6, "Ksh ".number_format($total_previous), 1, 1, 'L',false);
 
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(190, 6, "Cashflow Used in Financing Activity", 1, 1, 'L',false);
                     
         $index = 1;
@@ -12632,7 +12681,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
         // echo json_encode($operating_expense_categories);
         // return 0;
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         if(count($financing_expense_categories) > 0 ){
             foreach($financing_expense_categories as $key => $value){
                 $current_year = 0;
@@ -12671,10 +12720,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $index++;
             }
         }else{
-            $pdf->SetFont('Times', '', 10);
+            $pdf->SetFont('Nunito', '', 10);
             $pdf->Cell(190, 6, "No Financing Activity Expenses!", 1, 1, 'L',false);
         }
-        $pdf->SetFont('Times', 'BI', 10);
+        $pdf->SetFont('Nunito', 'BI', 10);
 
         $pdf->Cell(100, 6, "Total", 1, 0, 'L',false);
         $pdf->Cell(45, 6, "Ksh ".number_format($total_current_expense), 1, 0, 'L',false);
@@ -12692,7 +12741,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Cell(45, 6, "Ksh ".number_format($net_increase_curr_year), 1, 0, 'L',false);
         $pdf->Cell(45, 6, "Ksh ".number_format($net_increase_prev_year), 1, 1, 'L',false);
 
-        $pdf->SetFont('Times', 'I', 10);
+        $pdf->SetFont('Nunito', 'I', 10);
         $pdf->Cell(190, 6, "Cash and Cash Equivalents at the Beginning and End of the Period", 1, 1, 'L',false);
 
         $pdf->Cell(100, 6, "Cash and Cash Equivalents at the Beginning of the Period", 1, 0, 'L',false);
@@ -12735,7 +12784,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $table_style_2 = [
             'font' => [
                 'bold' => true,
-                'name' => 'Times New Roman',
+                'name' => 'Nunito New Roman',
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
@@ -12754,7 +12803,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 'bold' => true,
                 'italic' => false,
                 'underline' => false,
-                'name' => 'Times New Roman',
+                'name' => 'Nunito New Roman',
             ],
             'alignment' => [
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
@@ -12777,7 +12826,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         ];
         $just_border = [
             'font' => [
-                'name' => 'Times New Roman',
+                'name' => 'Nunito New Roman',
             ],
             'borders' => [
                 'outline' => [
@@ -12799,7 +12848,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 'bold' => false,
                 'italic' => false,
                 'underline' => false,
-                'name' => 'Times New Roman',
+                'name' => 'Nunito New Roman',
                 'color' => ['argb' => 'FFFF0000'],
             ],
             // 'alignment' => [
@@ -12820,7 +12869,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 'bold' => true,
                 'italic' => false,
                 'underline' => false,
-                'name' => 'Times New Roman',
+                'name' => 'Nunito New Roman',
                 // 'color' => ['argb' => 'FFFF0000'],
             ],
             'alignment' => [
@@ -12847,7 +12896,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 'bold' => true,
                 'italic' => true,
                 'underline' => false,
-                'name' => 'Times New Roman',
+                'name' => 'Nunito New Roman',
                 // 'color' => ['argb' => 'FFFF0000'],
             ],
             'alignment' => [
@@ -13954,11 +14003,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
         // echo json_encode($asset_data);
         // row 1
-        $pdf->SetFont('Times', 'BU', 10);
+        $pdf->SetFont('Nunito', 'BU', 10);
         $pdf->Cell(45, 6, "Asset Details: ", 0, 'B', 'L',false);
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Asset Name: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, ucwords(strtolower($asset_table['asset_name'])), 0,1);
         
         // get the asset category
@@ -13980,52 +14029,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         }
 
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Asset Category: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, ucwords(strtolower($asset_category)), 0,1);
 
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Asset Acquiry Date: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, date("D dS M Y",strtotime($asset_table['date_of_acquiry'])), 0,1);
 
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Asset Original Value: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, "Kes ".number_format($asset_table['orginal_value']), 0,1);
 
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Asset Acquisition Rate: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, $asset_table['acquisition_rate']."%", 0,1);
 
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Current Value: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, "Kes ".number_format(round(($asset_data['new_value']*1),2))." (".(date("Y",strtotime($asset_table['date_of_acquiry'])) * 1) + ($asset_data['years']*1).")", 0,1);
         // echo json_encode($asset_data);
 
         // Disposed Status
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Disposed Status: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, ($asset_table['disposed_status'] == 1 ? "Disposed" : "Not-Disposed"), 0,1);
 
         // Disposed value
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Disposed Value: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, $asset_table['disposed_status'] == 1 ? "Kes ". number_format($asset_table['disposed_value'])." - ( Date : ".date("D dS M Y",strtotime($asset_table['disposed_on']))." )" : "0", 0,1);
 
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Acquisition Method:", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, $asset_data['value_acquisition_method'], 0,1);
 
         // make a line
@@ -14035,7 +14084,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Ln();
         $pdf->Ln();
         $pdf->Ln();
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->SetFillColor(216, 217, 218);
         $pdf->Cell(190,6,$pdf->school_document_title,1,1,"C",TRUE);
         $pdf->Cell(10,6,"QTY",1,0,"L",TRUE);
@@ -14044,7 +14093,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Cell(30,6,"DEBIT",1,0,"L",TRUE);
         $pdf->Cell(30,6,"CREDIT",1,0,"L",TRUE);
         $pdf->Cell(30,6,"BALANCE",1,1,"L",TRUE);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
 
         // GET THE ROW VALUE
         $reductions = $asset_data['account'];
@@ -14056,7 +14105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $pdf->Cell(30,6,$reductions[$index]['account'] == "credit" ? $reductions[$index]['amount'] : "-",1,0);
             $pdf->Cell(30,6,$reductions[$index]['balance'],1,1);
         }
-        $pdf->SetFont('Times', 'B', 10,"L");
+        $pdf->SetFont('Nunito', 'B', 10,"L");
         $pdf->Cell(100,6,"Total:",0,0,"R",FALSE);
         $pdf->Cell(30,6, substr($asset_data['value_acquisition_method'],-5) == "(+ve)" ? "Kes ". number_format(round($asset_data['reduction_amount'],2)) : "-",1,0,"L",TRUE);
         $pdf->Cell(30,6, substr($asset_data['value_acquisition_method'],-5) == "(-ve)" ? "Kes ". number_format(round($asset_data['reduction_amount'],2)) : "-",1,0,"L",TRUE);
@@ -14149,7 +14198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->set_school_box_code($_SESSION['box_codes']);
         $pdf->set_school_contact($_SESSION['school_contact']);
         $pdf->AddPage();
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $width = array(7, 35, 17, 22, 25, 33, 37, 15);
         $pdf->NSSF_TABLE($header, $data, $width);
         $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -14283,7 +14332,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->set_school_box_code($_SESSION['box_codes']);
         $pdf->set_school_contact($_SESSION['school_contact']);
         $pdf->AddPage();
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $width = array(7, 40, 25, 20, 25, 25, 25, 30);
         $pdf->KRA_TABLE($header, $data, $width);
         $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -14333,33 +14382,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $pdf2->set_school_contact($_SESSION['school_contact']);
                 $pdf2->AddPage();
                 // Line break
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $pdf2->Cell(30, 5, "Staff Name : ", 0, 0, 'L', 0);
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $pdf2->Cell(30, 5, ucwords(strtolower($selected_staff['fullname'])), 0, 0, 'L', 0);
                 $pdf2->Ln();
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $pdf2->Cell(30, 5, "Age : ", 0, 0, 'L', 0);
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $date1 = date_create($selected_staff['dob']);
                 $date2 = date_create(date("Y-m-d"));
                 $diff = date_diff($date1, $date2);
                 $diffs = $diff->format("%y Yr(s)");
                 $pdf2->Cell(30, 5, $diffs, 0, 0, 'L', 0);
                 $pdf2->Ln();
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $pdf2->Cell(30, 5, "Staff Role : ", 0, 0, 'L', 0);
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $pdf2->Cell(30, 5, authority($selected_staff['auth']), 0, 0, 'L', 0);
                 $pdf2->Ln();
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $pdf2->Cell(30, 5, "I`d No : ", 0, 0, 'L', 0);
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $pdf2->Cell(30, 5, $selected_staff['nat_id'], 0, 0, 'L', 0);
                 $pdf2->Ln();
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $pdf2->Cell(30, 5, "Staff Netpay : ", 0, 0, 'L', 0);
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $number = 1;
                 $date_selected = $_GET['selected_month'];
                 $deductions = getSalaryDeductionDetails($conn2, $selected_staff['user_id'], $number, $date_selected);
@@ -14367,14 +14416,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 unset($_SESSION['total_advances']);
                 $pdf2->Cell(30, 5, "Kes " . number_format($salary_amount), 0, 0, 'L', 0);
                 $pdf2->Ln();
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $pdf2->Cell(30, 5, "Last Month Paid : ", 0, 0, 'L', 0);
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $pdf2->Cell(30, 5, $current_balance_monNyear, 0, 0, 'L', 0);
                 $pdf2->Ln();
-                $pdf2->SetFont('Helvetica', '', 10);
+                $pdf2->SetFont('Nunito', '', 10);
                 $pdf2->Cell(30, 5, "Salary Balance : ", 0, 0, 'L', 0);
-                $pdf2->SetFont('Helvetica', '', 9);
+                $pdf2->SetFont('Nunito', '', 9);
                 $pdf2->Cell(30, 5, "Kes " . number_format($current_balance), 0, 0, 'L', 0);
                 $pdf2->Ln();
                 $pdf2->Cell(190, 5, "", 'B', 0, 'L', 0);
@@ -14382,10 +14431,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 // earnings
                 // get the staff earnings and allowances
                 $pdf2->Ln();
-                $pdf2->SetFont('Helvetica', 'BU', 10);
+                $pdf2->SetFont('Nunito', 'BU', 10);
                 $pdf2->Cell(30, 5, "Earnings & Reliefs", 0, 0, 'L', 0);
                 $pdf2->Ln();
-                $pdf2->SetFont('Helvetica', 'B', 10);
+                $pdf2->SetFont('Nunito', 'B', 10);
                 $number = 1;
                 $earnings = getSalaryEarningsDetails($conn2, $selected_staff['user_id'], $number, $date_selected);
                 $header = array("No.", "Earnings & Reliefs", "Amount", "Working Days", "Total");
@@ -14393,14 +14442,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                 $pdf2->salaryTables($header, $earnings, $w);
                 // get the staff deductions
                 $pdf2->Ln(10);
-                $pdf2->SetFont('Helvetica', 'BU', 10);
+                $pdf2->SetFont('Nunito', 'BU', 10);
                 $pdf2->Cell(30, 5, "Deductions", 0, 0, 'L', 0);
                 $header = array("No.", "Deductions", "Amount", "Working Days", "Total");
                 $w = array(15, 70, 30, 30, 30);
                 $pdf2->Ln();
                 $pdf2->salaryTables($header, $deductions, $w);
                 $pdf2->Ln(10);
-                $pdf2->SetFillColor(157, 183, 184);
+                $pdf2->SetFillColor(243, 151, 205);
                 $pdf2->Cell(85, 1, '', 0, 0, 0, 0);
                 $pdf2->Cell(45, 6, 'Net Pay', 1, 0, 'L', true);
                 $pdf2->Cell(45, 6, "Kes " . number_format($salary_amount), 1, 0, 'L', true);
@@ -14567,7 +14616,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
         $pdf->Image($school_profile_image, 5, 10, 20, 20);
         // $pdf->Image($pdf->arm_of_gov, 100, 15, 12, 12);
-        $pdf->SetFont('Helvetica', 'B', 14);
+        $pdf->SetFont('Nunito', 'B', 14);
         $pdf->SetFillColor(100, 100, 100);
         $pdf->SetTitle("Receipt for ".$students_names." Reg No. ".$student_admission_no.".");
         $pdf->Cell(15, 10, "", 0, 0, "L", false);
@@ -14577,7 +14626,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->SetXY($X, $y + 5);
 
         $pdf->Cell(100, 6, $school_name, 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
@@ -14590,38 +14639,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
 
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 10, "", 0, 0, "L", false);
         $pdf->Cell(100, 10, $school_motto, 0, 0, "L", false);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $pdf->Cell(80, 4, $physicall_address, 0, 1, "R", false);
 
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $pdf->Cell(80, 4, "Tel: " . $school_contact, 0, 1, "R", false);
 
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
@@ -14632,10 +14681,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
 
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
@@ -14647,42 +14696,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->SetFillColor(240, 240, 240);
 
         // start the receipt details
-        $pdf->SetFont('Helvetica', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(65, 10, "CLIENT PAYMENT RECEIPT", 0, 0, "C", false);
         $pdf->Cell(65, 10, "** SCHOOL COPY **", 0, 0, "C", false);
         $pdf->Cell(65, 10, "** ORIGINAL **", 0, 1, "C", false);
 
         // RECEIPT DETAILS
         // row 1
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(25, 6, "Receipt No. : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(60, 6, $last_receipt_id_take, 1, 0, "L");
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(20, 6, "Date : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30, 6, $date_of_payments_fees , 1, 0, "L",false);
         
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(25, 6, "Time : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(40, 6, $time_of_payment_fees , "RTB", 1, "L",false);
         // $pdf->Cell(53, 6, "", "RBT", 1, "L");
 
         // row 2
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30, 6, "Client Name. : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(170, 6, $students_names, 1, 1, "L");
-        // $pdf->SetFont('Helvetica', 'B', 9);
+        // $pdf->SetFont('Nunito', 'B', 9);
         // $pdf->Cell(25, 6, "Adm No. : ", 1, 0, "L",true);
-        // $pdf->SetFont('Helvetica', '', 9);
+        // $pdf->SetFont('Nunito', '', 9);
         // $pdf->Cell(75, 6, $student_admission_no, 1, 1, "L");
 
         // THIRD ROW
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(22, 6, "Amount", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30, 6, $amount_paid_by_student, 1, 0, "L");
         $new_numbers = new NUmbers();
         $new_number = returnNumbers($amount_paid_by_student);
@@ -14692,12 +14741,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $text_width = $pdf->GetStringWidth("** ".$prefix." ".$my_number." Kenya Shillings Only **");
         $font_size = round((148*100*9) / ($text_width * 100),3)-1;
         $font_size = $font_size > 9 ? 9 : $font_size;
-        $pdf->SetFont('Helvetica', 'B', $font_size);
+        $pdf->SetFont('Nunito', 'B', $font_size);
         $pdf->Cell(148, 6, "** ".$prefix." ".$my_number." Kenya Shillings Only **", "BR", 1, "L");
 
         // voteheads paid for
         $pdf->SetFillColor(240, 240, 240);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(200,7,"VOTEHEAD","TBLR",1,"C",true);
 
         // another row
@@ -14705,28 +14754,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Cell(45,7,$amount_paid_by_student,"BR",1,"L",false);
 
         // another row
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Payment Mode : ",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(35,7,$mode_of_payments,1,0,"L",false);
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Transaction Code:",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(60,7,"".$transaction_codes."",1,0,"L",false);
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(15,7,"Total:",1,0,"L",false);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30,7,"".$amount_paid_by_student."",1,1,"L",false);
 
         // ANOTHER ROW
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Served By : ",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $staff_infor = getStaffInformations_report($conn,$_SESSION['userids']);
         $pdf->Cell(170,7,explode(" ",ucwords(strtolower($staff_infor['fullname'])))[0],1,1,"L",false);
 
         // DISCLAIMER
-        $pdf->SetFont('Helvetica', 'I', 9);
+        $pdf->SetFont('Nunito', 'I', 9);
         $pdf->Cell(200,7,"** Receipts are not valid unless signed OR Stamped with the Official School Stamp  **","",1,"C",false);
         // $pdf->Ln(5);
         
@@ -14742,7 +14791,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $y = $pdf->GetY();
         $pdf->Image($school_profile_image, 5, $y, 20, 20);
         // $pdf->Image($pdf->arm_of_gov, 100, $y+5, 12, 12);
-        $pdf->SetFont('Helvetica', 'B', 14);
+        $pdf->SetFont('Nunito', 'B', 14);
         $pdf->SetFillColor(100, 100, 100);
         $pdf->Cell(20, 10, "", 0, 0, "L", false);
 
@@ -14751,7 +14800,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->SetXY($X, $y + 5);
 
         $pdf->Cell(100, 6, $school_name, 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
@@ -14764,38 +14813,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
 
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 10, "", 0, 0, "L", false);
         $pdf->Cell(100, 10, $school_motto, 0, 0, "L", false);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $pdf->Cell(80, 4, $physicall_address, 0, 1, "R", false);
 
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $pdf->Cell(80, 4, "Tel: " . $school_contact, 0, 1, "R", false);
 
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
@@ -14806,10 +14855,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
 
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
@@ -14821,42 +14870,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->SetFillColor(240, 240, 240);
 
         // start the receipt details
-        $pdf->SetFont('Helvetica', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(65, 10, "CLIENT PAYMENT RECEIPT", 0, 0, "C", false);
         $pdf->Cell(65, 10, "** CLIENT COPY **", 0, 0, "C", false);
         $pdf->Cell(65, 10, "** ORIGINAL **", 0, 1, "C", false);
 
         // RECEIPT DETAILS
         // row 1
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(25, 6, "Receipt No. : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(60, 6, $last_receipt_id_take, 1, 0, "L");
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(20, 6, "Date : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30, 6, $date_of_payments_fees , 1, 0, "L",false);
         
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(25, 6, "Time : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(40, 6, $time_of_payment_fees , "RTB", 1, "L",false);
         // $pdf->Cell(53, 6, "", "RBT", 1, "L");
 
         // row 2
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30, 6, "Client Name. : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(170, 6, $students_names, 1, 1, "L");
-        // $pdf->SetFont('Helvetica', 'B', 9);
+        // $pdf->SetFont('Nunito', 'B', 9);
         // $pdf->Cell(25, 6, "Adm No. : ", 1, 0, "L",true);
-        // $pdf->SetFont('Helvetica', '', 9);
+        // $pdf->SetFont('Nunito', '', 9);
         // $pdf->Cell(75, 6, $student_admission_no, 1, 1, "L");
 
         // THIRD ROW
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(22, 6, "Amount", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30, 6, $amount_paid_by_student, 1, 0, "L");
         $new_numbers = new NUmbers();
         $new_number = returnNumbers($amount_paid_by_student);
@@ -14866,12 +14915,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $text_width = $pdf->GetStringWidth("** ".$prefix." ".$my_number." Kenya Shillings Only **");
         $font_size = round((148*100*9) / ($text_width * 100),3)-1;
         $font_size = $font_size > 9 ? 9 : $font_size;
-        $pdf->SetFont('Helvetica', 'B', $font_size);
+        $pdf->SetFont('Nunito', 'B', $font_size);
         $pdf->Cell(148, 6, "** ".$prefix." ".$my_number." Kenya Shillings Only **", "BR", 1, "L");
 
         // voteheads paid for
         $pdf->SetFillColor(240, 240, 240);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(200,7,"VOTEHEAD","TBLR",1,"C",true);
 
         // another row
@@ -14879,28 +14928,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Cell(45,7,$amount_paid_by_student,"BR",1,"L",false);
 
         // another row
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Payment Mode : ",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(35,7,$mode_of_payments,1,0,"L",false);
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Transaction Code:",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(60,7,"".$transaction_codes."",1,0,"L",false);
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(15,7,"Total:",1,0,"L",false);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30,7,"".$amount_paid_by_student."",1,1,"L",false);
 
         // ANOTHER ROW
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Served By : ",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $staff_infor = getStaffInformations_report($conn,$_SESSION['userids']);
         $pdf->Cell(170,7,explode(" ",ucwords(strtolower($staff_infor['fullname'])))[0],1,1,"L",false);
 
         // DISCLAIMER
-        $pdf->SetFont('Helvetica', 'I', 9);
+        $pdf->SetFont('Nunito', 'I', 9);
         $pdf->Cell(200,7,"** Receipts are not valid unless signed OR Stamped with the Official School Stamp  **","",1,"C",false);
         // $pdf->Ln(5);
 
@@ -15020,7 +15069,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
 
         $pdf->Image($school_profile_image, 5, 10, 40, 40);
         // $pdf->Image($pdf->arm_of_gov, 100, 15, 12, 12);
-        $pdf->SetFont('Helvetica', 'B', 14);
+        $pdf->SetFont('Nunito', 'B', 14);
         $pdf->SetFillColor(100, 100, 100);
         $pdf->SetTitle("Payment Voucher for ".$students_names." Reg No. ".$student_admission_no.".");
         $pdf->Cell(15, 10, "", 0, 0, "L", false);
@@ -15030,7 +15079,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->SetXY($X, $y + 5);
 
         $pdf->Cell(100, 6, $school_name, 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
@@ -15043,38 +15092,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
 
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 10, "", 0, 0, "L", false);
         $pdf->Cell(100, 10, $school_motto, 0, 0, "L", false);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $pdf->Cell(80, 4, $physicall_address, 0, 1, "R", false);
 
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $pdf->Cell(80, 4, "Tel: " . $school_contact, 0, 1, "R", false);
 
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
@@ -15085,10 +15134,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
 
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
@@ -15100,42 +15149,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->SetFillColor(240, 240, 240);
 
         // start the receipt details
-        $pdf->SetFont('Helvetica', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(65, 10, "SUPPLIER PAYMENT VOUCHER", 0, 0, "C", false);
         $pdf->Cell(65, 10, "** SCHOOL COPY **", 0, 0, "C", false);
         $pdf->Cell(65, 10, "** ORIGINAL **", 0, 1, "C", false);
 
         // RECEIPT DETAILS
         // row 1
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(25, 6, "Receipt No. : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(60, 6, $last_receipt_id_take, 1, 0, "L");
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(20, 6, "Date : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30, 6, $date_of_payments_fees , 1, 0, "L",false);
         
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(25, 6, "Time : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(40, 6, $time_of_payment_fees , "RTB", 1, "L",false);
         // $pdf->Cell(53, 6, "", "RBT", 1, "L");
 
         // row 2
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30, 6, "Client Name. : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(170, 6, $students_names, 1, 1, "L");
-        // $pdf->SetFont('Helvetica', 'B', 9);
+        // $pdf->SetFont('Nunito', 'B', 9);
         // $pdf->Cell(25, 6, "Adm No. : ", 1, 0, "L",true);
-        // $pdf->SetFont('Helvetica', '', 9);
+        // $pdf->SetFont('Nunito', '', 9);
         // $pdf->Cell(75, 6, $student_admission_no, 1, 1, "L");
 
         // THIRD ROW
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(22, 6, "Amount", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30, 6, $amount_paid_by_student, 1, 0, "L");
         $new_numbers = new NUmbers();
         $new_number = returnNumbers($amount_paid_by_student);
@@ -15145,12 +15194,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $text_width = $pdf->GetStringWidth("** ".$prefix." ".$my_number." Kenya Shillings Only **");
         $font_size = round((148*100*9) / ($text_width * 100),3)-1;
         $font_size = $font_size > 9 ? 9 : $font_size;
-        $pdf->SetFont('Helvetica', 'B', $font_size);
+        $pdf->SetFont('Nunito', 'B', $font_size);
         $pdf->Cell(148, 6, "** ".$prefix." ".$my_number." Kenya Shillings Only **", "BR", 1, "L");
 
         // voteheads paid for
         $pdf->SetFillColor(240, 240, 240);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(200,7,"VOTEHEAD","TBLR",1,"C",true);
 
         // another row
@@ -15158,28 +15207,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Cell(45,7,$amount_paid_by_student,"BR",1,"L",false);
 
         // another row
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Payment Mode : ",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(35,7,$mode_of_payments,1,0,"L",false);
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Transaction Code:",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(60,7,"".$transaction_codes."",1,0,"L",false);
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(15,7,"Total:",1,0,"L",false);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30,7,"".$amount_paid_by_student."",1,1,"L",false);
 
         // ANOTHER ROW
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Served By : ",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $staff_infor = getStaffInformations_report($conn,$_SESSION['userids']);
         $pdf->Cell(170,7,explode(" ",ucwords(strtolower($staff_infor['fullname'])))[0],1,1,"L",false);
 
         // DISCLAIMER
-        $pdf->SetFont('Helvetica', 'I', 9);
+        $pdf->SetFont('Nunito', 'I', 9);
         $pdf->Cell(200,7,"** Receipts are not valid unless signed OR Stamped with the Official School Stamp  **","",1,"C",false);
         // $pdf->Ln(5);
         
@@ -15195,7 +15244,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $y = $pdf->GetY();
         $pdf->Image($school_profile_image, 5, $y, 20, 20);
         // $pdf->Image($pdf->arm_of_gov, 100, $y+5, 12, 12);
-        $pdf->SetFont('Helvetica', 'B', 14);
+        $pdf->SetFont('Nunito', 'B', 14);
         $pdf->SetFillColor(100, 100, 100);
         $pdf->Cell(20, 10, "", 0, 0, "L", false);
 
@@ -15204,7 +15253,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->SetXY($X, $y + 5);
 
         $pdf->Cell(100, 6, $school_name, 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
@@ -15217,38 +15266,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
 
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 10, "", 0, 0, "L", false);
         $pdf->Cell(100, 10, $school_motto, 0, 0, "L", false);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $pdf->Cell(80, 4, $physicall_address, 0, 1, "R", false);
 
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $pdf->Cell(80, 4, "Tel: " . $school_contact, 0, 1, "R", false);
 
 
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
@@ -15259,10 +15308,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y + 5);
 
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(20, 5, "", 0, 0, "L", false);
         $pdf->Cell(100, 5, "", 0, 0, "L", false);
-        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Nunito', '', 8);
         $X = $pdf->GetX();
         $y = $pdf->GetY();
         $pdf->SetXY($X, $y - 5);
@@ -15274,42 +15323,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->SetFillColor(240, 240, 240);
 
         // start the receipt details
-        $pdf->SetFont('Helvetica', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(65, 10, "SUPPLIER PAYMENT VOUCHER", 0, 0, "C", false);
         $pdf->Cell(65, 10, "** SUPPLIER COPY **", 0, 0, "C", false);
         $pdf->Cell(65, 10, "** ORIGINAL **", 0, 1, "C", false);
 
         // RECEIPT DETAILS
         // row 1
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(25, 6, "Receipt No. : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(60, 6, $last_receipt_id_take, 1, 0, "L");
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(20, 6, "Date : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30, 6, $date_of_payments_fees , 1, 0, "L",false);
         
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(25, 6, "Time : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(40, 6, $time_of_payment_fees , "RTB", 1, "L",false);
         // $pdf->Cell(53, 6, "", "RBT", 1, "L");
 
         // row 2
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30, 6, "Client Name. : ", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(170, 6, $students_names, 1, 1, "L");
-        // $pdf->SetFont('Helvetica', 'B', 9);
+        // $pdf->SetFont('Nunito', 'B', 9);
         // $pdf->Cell(25, 6, "Adm No. : ", 1, 0, "L",true);
-        // $pdf->SetFont('Helvetica', '', 9);
+        // $pdf->SetFont('Nunito', '', 9);
         // $pdf->Cell(75, 6, $student_admission_no, 1, 1, "L");
 
         // THIRD ROW
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(22, 6, "Amount", 1, 0, "L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30, 6, $amount_paid_by_student, 1, 0, "L");
         $new_numbers = new NUmbers();
         $new_number = returnNumbers($amount_paid_by_student);
@@ -15319,12 +15368,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $text_width = $pdf->GetStringWidth("** ".$prefix." ".$my_number." Kenya Shillings Only **");
         $font_size = round((148*100*9) / ($text_width * 100),3)-1;
         $font_size = $font_size > 9 ? 9 : $font_size;
-        $pdf->SetFont('Helvetica', 'B', $font_size);
+        $pdf->SetFont('Nunito', 'B', $font_size);
         $pdf->Cell(148, 6, "** ".$prefix." ".$my_number." Kenya Shillings Only **", "BR", 1, "L");
 
         // voteheads paid for
         $pdf->SetFillColor(240, 240, 240);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(200,7,"VOTEHEAD","TBLR",1,"C",true);
 
         // another row
@@ -15332,28 +15381,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Cell(45,7,$amount_paid_by_student,"BR",1,"L",false);
 
         // another row
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Payment Mode : ",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(35,7,$mode_of_payments,1,0,"L",false);
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Transaction Code:",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(60,7,"".$transaction_codes."",1,0,"L",false);
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(15,7,"Total:",1,0,"L",false);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $pdf->Cell(30,7,"".$amount_paid_by_student."",1,1,"L",false);
 
         // ANOTHER ROW
-        $pdf->SetFont('Helvetica', 'B', 9);
+        $pdf->SetFont('Nunito', 'B', 9);
         $pdf->Cell(30,7,"Served By : ",1,0,"L",true);
-        $pdf->SetFont('Helvetica', '', 9);
+        $pdf->SetFont('Nunito', '', 9);
         $staff_infor = getStaffInformations_report($conn,$_SESSION['userids']);
         $pdf->Cell(170,7,explode(" ",ucwords(strtolower($staff_infor['fullname'])))[0],1,1,"L",false);
 
         // DISCLAIMER
-        $pdf->SetFont('Helvetica', 'I', 9);
+        $pdf->SetFont('Nunito', 'I', 9);
         $pdf->Cell(200,7,"** Receipts are not valid unless signed OR Stamped with the Official School Stamp  **","",1,"C",false);
         // $pdf->Ln(5);
 
@@ -15427,41 +15476,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->set_school_contact($_SESSION['school_contact']);
         $pdf->AddPage();
         // row 1
-        $pdf->SetFont('Times', 'BU', 10);
+        $pdf->SetFont('Nunito', 'BU', 10);
         $pdf->Cell(45, 6, "Supplier Details: ", 0, 'B', 'L',false);
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Supplier Name: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, ucwords(strtolower($supplier_data['supplier_name'])), 0,1);
 
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Supplier Company: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, ucwords(strtolower($supplier_data['company_name'])), 0,1);
         
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Supplier Address: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, $supplier_data['supplier_address']."", 0,1);
 
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Registration Date: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, date("D dS M Y",strtotime($supplier_data['date_registered'])), 0,1);
 
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Supplier Contact: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, $supplier_data['supplier_phone'], 0,1);
 
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Date Generated: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, date("D dS M Y @ H:i:sA"), 0,1);
 
         // supplier balance
@@ -15483,9 +15532,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $amount_owed = $billing_amount-$paid_amount;
 
         // row 2
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->Cell(40, 6, "Supplier Balance: ", 0);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
         $pdf->Cell(45, 6, "Kes ".number_format($amount_owed), 0,1);
 
         // make a line
@@ -15495,7 +15544,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Ln();
         $pdf->Ln();
         $pdf->Ln();
-        $pdf->SetFont('Times', 'B', 10);
+        $pdf->SetFont('Nunito', 'B', 10);
         $pdf->SetFillColor(216, 217, 218);
         $pdf->Cell(190,6,$pdf->school_document_title,1,1,"C",TRUE);
         $pdf->Cell(10,6,"QTY",1,0,"L",TRUE);
@@ -15504,7 +15553,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
         $pdf->Cell(30,6,"DEBIT",1,0,"L",TRUE);
         $pdf->Cell(30,6,"CREDIT",1,0,"L",TRUE);
         $pdf->Cell(30,6,"BALANCE",1,1,"L",TRUE);
-        $pdf->SetFont('Times', '', 10);
+        $pdf->SetFont('Nunito', '', 10);
 
         // GET THE ROW VALUE
         // $data = array("account" => "credit","amount" => $rowed['amount'],"date" => $rowed['date_paid'], "usage" => $row['bill_name']);
@@ -15525,7 +15574,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             $balance = $row_data[$index]['account'] == "credit" ? ($balance - $row_data[$index]['amount']*1) : ($row_data[$index]['account'] == "debit" ? ($balance + $row_data[$index]['amount']*1) : $balance);
             $pdf->Cell(30,6,"Kes ".number_format($balance),1,1);
         }
-        $pdf->SetFont('Times', 'B', 10,"L");
+        $pdf->SetFont('Nunito', 'B', 10,"L");
         $pdf->Cell(100,6,"Total:",0,0,"R",FALSE);
         $pdf->Cell(30,6, "Kes ". number_format($debit) ,1,0,"L",TRUE);
         $pdf->Cell(30,6, "Kes ". number_format($credit) ,1,0,"L",TRUE);
@@ -15617,7 +15666,7 @@ function display_notes($note, $pdf, $periods, $note_title){
     $pdf->Cell(190,7,$note_title,0,1,"L");
     
     // SET FILL COLLOR
-    $pdf->SetFont('Times', 'B', 10);
+    $pdf->SetFont('Nunito', 'B', 10);
     $pdf->SetFillColor(0, 112, 192);
     $pdf->SetTextColor(255, 255, 255);
     $pdf->Cell(85,6,"Description","TL",0,"C",TRUE);
@@ -15648,7 +15697,7 @@ function display_notes($note, $pdf, $periods, $note_title){
         }
     }
 
-    $pdf->SetFont('Times', '', 10);
+    $pdf->SetFont('Nunito', '', 10);
     for($index = 0; $index < count($values); $index++){
         $pdf->Cell(85,6,$values[$index],"BL",0,"L",false);
 
@@ -15670,7 +15719,7 @@ function display_notes($note, $pdf, $periods, $note_title){
         $pdf->Cell(45,6,"Ksh ".number_format($current_value),1,0,"C",false);
         $pdf->Cell(45,6,"Ksh ".number_format($last_year_value),1,1,"C",false);
     }
-    $pdf->SetFont('Times', 'B', 10);
+    $pdf->SetFont('Nunito', 'B', 10);
 
     $pdf->Cell(85,6,"Total","BL",0,"L",false);
     $pdf->Cell(45,6,"Ksh ".number_format($note['current_year_total']),1,0,"C",false);
@@ -15977,7 +16026,7 @@ function create_note_table($pdf, $periods, $row, $note_title){
     $pdf->Cell(190,7,$note_title,0,1,"L");
 
     // SET FILL COLLOR
-    $pdf->SetFont('Times', 'B', 10);
+    $pdf->SetFont('Nunito', 'B', 10);
     $pdf->SetFillColor(0, 112, 192);
     $pdf->SetTextColor(255, 255, 255);
     $pdf->Cell(85,6,"Description","TL",0,"C",TRUE);
@@ -15990,15 +16039,15 @@ function create_note_table($pdf, $periods, $row, $note_title){
 
     $pdf->SetTextColor(0, 0, 0);
 
-    $pdf->SetFont('Times', '', 10);
+    $pdf->SetFont('Nunito', '', 10);
     for($index = 0; $index < $row; $index ++){
         $pdf->Cell(85,6,"",1,0,"L",false);
         $pdf->Cell(45,6,"",1,0,"C",false);
         $pdf->Cell(45,6,"",1,1,"C",false);
     }
     
-    // times
-    $pdf->SetFont('Times', 'B', 10);
+    // Nunito
+    $pdf->SetFont('Nunito', 'B', 10);
 
     $pdf->Cell(85,6,"Total","BL",0,"L",false);
     $pdf->Cell(45,6," ",1,0,"C",false);
@@ -17576,11 +17625,11 @@ function getSalary_Report($dates, $conn2, $staff_id, $first_salary = -1)
     $stmt->bind_param("s", $staff_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $times = "";
+    $Nunito = "";
     $salary = "";
     if ($result) {
         if ($row = $result->fetch_assoc()) {
-            $times = $row['effect_month'];
+            $Nunito = $row['effect_month'];
             $salary = $row['salary_amount'];
         }
     }
@@ -17590,8 +17639,8 @@ function getSalary_Report($dates, $conn2, $staff_id, $first_salary = -1)
         // echo $first_salary." ".$f_d_date;
         return $first_salary;
     }
-    if (isset($times) && strlen($times) > 0) {
-        $time_divide = explode(",", $times);
+    if (isset($Nunito) && strlen($Nunito) > 0) {
+        $time_divide = explode(",", $Nunito);
         if (count($time_divide) == 1) {
             return $salary;
         } elseif (count($time_divide) > 1) {

@@ -55,6 +55,10 @@ class PDF2 extends FPDF
     // Page header
     function Header()
     {
+        $this->AddFont('Nunito', '', 'Nunito-Regular.php');
+        $this->AddFont('Nunito', 'B', 'Nunito-Bold.php');
+        $this->AddFont('Nunito', 'BI', 'Nunito-Bold.php');
+        $this->AddFont('Nunito', 'I', 'Nunito-Bold.php');
         // Logo
         // $this->Image(dirname(__FILE__) . $this->school_logo, 6, 6, 20);
         // // Arial  15
@@ -114,7 +118,7 @@ class PDF2 extends FPDF
         // Color and font restoration
         $this->SetFillColor(205, 211, 218);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 9);
+        $this->SetFont('Nunito', '', 9);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -152,7 +156,7 @@ class PDF2 extends FPDF
         // Color and font restoration
         $this->SetFillColor(205, 211, 218);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 9);
+        $this->SetFont('Nunito', '', 9);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -191,7 +195,7 @@ class PDF2 extends FPDF
         // Color and font restoration
         $this->SetFillColor(205, 211, 218);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 9);
+        $this->SetFont('Nunito', '', 9);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -231,7 +235,7 @@ class PDF2 extends FPDF
         // Color and font restoration
         $this->SetFillColor(205, 211, 218);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 9);
+        $this->SetFont('Nunito', '', 9);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -264,7 +268,7 @@ class PDF2 extends FPDF
         // Color and font restoration
         $this->SetFillColor(205, 211, 218);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 10);
+        $this->SetFont('Nunito', '', 10);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -302,7 +306,7 @@ class PDF2 extends FPDF
         // Color and font restoration
         $this->SetFillColor(205, 211, 218);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 9);
+        $this->SetFont('Nunito', '', 9);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -339,7 +343,7 @@ class PDF2 extends FPDF
         // Color and font restoration
         $this->SetFillColor(205, 211, 218);
         $this->SetTextColor(0);
-        $this->SetFont('Helvetica', '', 10);
+        $this->SetFont('Nunito', '', 10);
         // Data
         $fill = false;
         foreach ($data as $row) {
@@ -404,7 +408,7 @@ class PDF2 extends FPDF
             $term2+=$row[3];
             $term3+=$row[4];
         }
-        $this->SetFont('Helvetica', 'B', 9);
+        $this->SetFont('Nunito', 'B', 9);
         $this->Cell(5, 6, "", 0, 0, 'C', 0);
         $this->Cell($w[0], 6, "", "TB", 0, 'L', false);
         $this->Cell($w[1], 6, "Total", "TB", 0, 'L', false);

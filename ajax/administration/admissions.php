@@ -446,7 +446,9 @@
                         array_push($data_array,$row['primary_parent_occupation']);
                         array_push($data_array,$row['secondary_parent_occupation']);
                         $term = getTerm();
-                        $fees_paid_by_student = getFeespaidByStudent($row['adm_no'],$conn2)*1;
+                        $payments = getFeespaidByStudent($row['adm_no'],$conn2, true);
+                        $fees_paid_by_student = $payments[0]*1;
+                        $provisional_amount = $payments[1]*1;
                         $last_year_bal = lastACADyrBal($row['adm_no'],$conn2);
                         $balance = getBalance($row['adm_no'],$term,$conn2);
                         $total_fees = $fees_paid_by_student+$balance;
@@ -540,6 +542,11 @@
                         array_push($data_array,$row['student_contact']);
                         array_push($data_array,$row['student_email']);
                         array_push($data_array,$row['study_mode']);
+
+                        $course_fees = getStudentCourseFees($conn2, $row['adm_no']);
+                        array_push($data_array,"Kes ".number_format($course_fees[0]));
+                        array_push($data_array,"Kes ".number_format($course_fees[1]));
+                        array_push($data_array, "Kes ".number_format($provisional_amount));
                     }else{
                     }
                 }else {
@@ -7987,6 +7994,46 @@ function isJson_report($string) {
             }
         }
         return "Null";
+    }
+
+    function getStudentCourseFees($conn2, $admission_no){
+        // get the total amount a student is supposed to pay
+        $select = "SELECT * FROM student_data WHERE adm_no = ?";
+        $stmt = $conn2->prepare($select);
+        $stmt->bind_param("s", $admission_no);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $total_fees = 0;
+        $current_term_fees = 0;
+        if($result){
+            if ($row = $result->fetch_assoc()) {
+                $my_course_list = $row['my_course_list'];
+                if (isJson($my_course_list)) {
+                    $my_course_list = json_decode($my_course_list, false);
+                    foreach($my_course_list as $course){
+                        if($course->course_status == 1){
+                            $module_terms = $course->module_terms;
+                            $course_fee = 0;
+                            foreach($module_terms as $term){
+                                if($row['study_mode'] == "fulltime"){
+                                    $course_fee = $term->fulltime_cost ?? ($term->course_fees ?? 0);
+                                }elseif($row['study_mode'] == "weekend"){
+                                    $course_fee = $term->weekend_cost ?? ($term->course_fees ?? 0);
+                                }elseif($row['study_mode'] == "evening"){
+                                    $course_fee = $term->evening_cost ?? ($term->course_fees ?? 0);
+                                }
+                                if($term->status == 1){
+                                    $current_term_fees = $course_fee;
+                                }
+                                $total_fees += $course_fee;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return [$total_fees, $current_term_fees];
     }
     function createStudentn4($conn2,$result,$searchinfor){
         if($result){

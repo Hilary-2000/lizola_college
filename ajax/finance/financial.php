@@ -7576,7 +7576,7 @@
         }
         return [0,0];
     }
-    function getFeespaidByStudent($admno,$conn2){
+    function getFeespaidByStudent($admno,$conn2, $provisional_status = false){
         // get the student details
         $student_data = students_details($admno,$conn2);
         
@@ -7602,8 +7602,9 @@
         $stmt->bind_param("sss",$admno,$start_date,$end_date);
         $stmt->execute();
         $res = $stmt->get_result();
+        $total_amounts = 0;
+        $provisional_amount = 0;
         if($res){
-            $total_amounts = 0;
             while($row = $res->fetch_assoc()){
                 $payment_for = isJson($row['payment_for']) ? json_decode($row['payment_for'], true) : [];
                 if (count($payment_for) > 0) {
@@ -7611,14 +7612,21 @@
                         if($payment['roles'] != "provisional"){
                             $total_amounts += ($payment['amount_paid']*1);
                         }
+                        if($payment['roles'] == "provisional"){
+                            $provisional_amount += ($payment['amount_paid']*1);
+                        }
                     }
                 }else{
                     $total_amounts += ($row['amount']*1);
                 }
             }
-            return $total_amounts;
+            // return $total_amounts;
         }
-        return 0;
+
+        if($provisional_status){
+            return [$total_amounts,$provisional_amount];
+        }
+        return $total_amounts;
     }
     function getFeespaidByStudent_with_prov($admno,$conn2){
         $select = "SELECT * FROM `finance` where `stud_admin` = ?  AND `date_of_transaction` BETWEEN ? and ? AND `payment_for` != 'admission fees'";
