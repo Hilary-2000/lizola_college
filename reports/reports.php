@@ -363,6 +363,7 @@ class PDF extends FPDF
             $row_count = 0;
             $compulsory = 0;
             $provisional = 0;
+            // echo $row[6]."<br>";
             if (isJson_report($row[6])) {
                 foreach(json_decode($row[6], true) as $ind => $vh){
                     if($vh['roles'] == "provisional"){
@@ -3952,7 +3953,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pay_for = $row['payment_for'];
                             $date = date("dS M Y H:ia", strtotime($row['date_of_transaction'] . " " . $row['time_of_transaction']));
                             $transaction_code = $row['transaction_code'];
-                            $stud_data = array($number, $amount_paid, $balance, $transaction_code, $fullname, $row['stud_admin'], $mode_of_pay, $pay_for, $date, $payBy);
+                            $stud_data = array($number, $amount_paid, $balance, $transaction_code, $fullname, $row['stud_admin'], $pay_for, $mode_of_pay, $date, $payBy);
                             if ($amount_paid != 0) {
                                 array_push($finance_list, $stud_data);
                             }
@@ -4043,7 +4044,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Cell(200, 8, "Fees Collection Table", 0, 0, 'C', false);
                     $pdf->Ln();
                     $pdf->SetFont('Nunito', 'B', 8);
-                    $width = array(5, 20, 20, 20, 25, 25, 60, 60, 35, 18);
+                    $width = array(5, 18, 18, 20, 25, 20, 63, 63, 33, 18);
                     $skip = false;
                     $pdf->financeTable($header, $data, $width, $skip);
                     $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -4093,7 +4094,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $pay_for = $row['payment_for'];
                             $date = date("dS M Y H:ia", strtotime($row['date_of_transaction'] . " " . $row['time_of_transaction']));
                             $transaction_code = $row['transaction_code'];
-                            $stud_data = array($number, $amount_paid, $balance, $transaction_code, $fullname, $row['stud_admin'], $mode_of_pay, $pay_for, $date, $payBy);
+                            $stud_data = array($number, $amount_paid, $balance, $transaction_code, $fullname, $row['stud_admin'], $pay_for, $mode_of_pay, $date, $payBy);
                             // array_push($finance_list,$stud_data);
                             if ($amount_paid != 0) {
                                 array_push($finance_list, $stud_data);
@@ -4149,7 +4150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                     $pdf->Cell(200, 8, "Fees Collection Table", 0, 0, 'C', false);
                     $pdf->Ln();
                     $pdf->SetFont('Nunito', 'B', 8);
-                    $width = array(5, 18, 18, 20, 25, 20, 60, 60, 35, 18);
+                    $width = array(5, 18, 18, 20, 25, 20, 63, 63, 33, 18);
                     $skip = false;
                     $pdf->financeTable($header, $data, $width, $skip);
                     $pdf->Output("I", str_replace(" ", "_", $pdf->school_document_title) . ".pdf");
@@ -4157,6 +4158,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
             } elseif ($student_options == "bySpecific" && strlen($period_selection) > 0) {
                 // if the student id is set proceed
                 if (strlen($student_admno_in) > 0) {
+                    include_once("../ajax/finance/financial.php");
+                    // include_once("../ajax/administration/admissions.php");
                     if ($period_selection == "specific_date") {
                         $select = "SELECT * FROM `finance` WHERE `stud_admin` = '$student_admno_in' AND `date_of_transaction` = '$specific_date_finance' ORDER BY `transaction_id` DESC";
                     } else {
@@ -4239,7 +4242,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(40, 10, "Balance", 0, 0, 'L', false);
                         $pdf->Ln();
                         $pdf->SetFont('Nunito', 'I', 9);
-                        $pdf->Cell(40, 5, "Last Balance :", 0, 0, 'L', false);
+                        $pdf->Cell(40, 5, "Outstanding Balance :", 0, 0, 'L', false);
                         $pdf->Cell(40, 5, $capture_balance, 0, 0, 'L', false);
                         $pdf->Ln();
                         // $pdf->SetFont('Nunito', 'U', 8);
@@ -4262,41 +4265,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->SetFont('Nunito', 'B', 9);
                         $pdf->Cell(100, 5, "Finance Summary", 'TLR', 0, 'C', false);
                         $pdf->Ln();
+                        $last_year_bal = lastACADyrBal($student_admno_in,$conn2);
+                        $payments = getFeespaidByStudent($student_admno_in,$conn2, true);
+                        $course_fees = getStudentCourseFees($conn2, $student_admno_in);
+                        $fees_paid_by_student = $payments[0]*1;
+                        $provisional_amount = $payments[1]*1;
 
                         $pdf->SetFont('Nunito', 'B', 9);
                         $pdf->Cell(60, 5, "Course Fees:", 'TLR', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
-                        $pdf->Cell(40, 5, "Kes 0", 'TR', 0, 'L', false);
+                        $pdf->Cell(40, 5, "Kes ". number_format($course_fees[0]), 'TR', 0, 'L', false);
                         $pdf->Ln();
 
                         $pdf->SetFont('Nunito', 'B', 9);
                         $pdf->Cell(60, 5, "This Month Fees:", 'TLR', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
-                        $pdf->Cell(40, 5, "Kes 0", 'TR', 0, 'L', false);
+                        $pdf->Cell(40, 5, "Kes ". number_format($course_fees[1]), 'TR', 0, 'L', false);
                         $pdf->Ln();
 
                         $pdf->SetFont('Nunito', 'B', 9);
                         $pdf->Cell(60, 5, "Fees Paid this Month:", 'TLR', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
-                        $pdf->Cell(40, 5, "Kes 0", 'TR', 0, 'L', false);
+                        $pdf->Cell(40, 5, "Kes ".number_format($fees_paid_by_student), 'TR', 0, 'L', false);
                         $pdf->Ln();
 
                         $pdf->SetFont('Nunito', 'B', 9);
                         $pdf->Cell(60, 5, "Current Fees Balance:", 'TLR', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
-                        $pdf->Cell(40, 5, "Kes 0", 'TR', 0, 'L', false);
+                        $pdf->Cell(40, 5, "".($capture_balance) , 'TR', 0, 'L', false);
                         $pdf->Ln();
 
                         $pdf->SetFont('Nunito', 'B', 9);
                         $pdf->Cell(60, 5, "Starter Pack & Other Payments:", 'TLRB', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
-                        $pdf->Cell(40, 5, "Kes 0", 'TR', 0, 'L', false);
+                        $pdf->Cell(40, 5, "Kes ".number_format($provisional_amount), 'TR', 0, 'L', false);
                         $pdf->Ln();
 
                         $pdf->SetFont('Nunito', 'B', 9);
                         $pdf->Cell(60, 5, "Tot Paid Since Joining:", 'TLRB', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
-                        $pdf->Cell(40, 5, "Kes 0", 'TRB', 0, 'L', false);
+                        $pdf->Cell(40, 5, "Kes ".number_format(total_fees_paid($student_admno_in,$conn2)), 'TRB', 0, 'L', false);
                         $pdf->Ln();
 
                         $pdf->SetFont('Nunito', 'IU', 13);
@@ -17890,4 +17898,45 @@ function receiptNo($no){
         }
     }
     return $no;
+}
+
+
+function getStudentCourseFees($conn2, $admission_no){
+    // get the total amount a student is supposed to pay
+    $select = "SELECT * FROM student_data WHERE adm_no = ?";
+    $stmt = $conn2->prepare($select);
+    $stmt->bind_param("s", $admission_no);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $total_fees = 0;
+    $current_term_fees = 0;
+    if($result){
+        if ($row = $result->fetch_assoc()) {
+            $my_course_list = $row['my_course_list'];
+            if (isJson($my_course_list)) {
+                $my_course_list = json_decode($my_course_list, false);
+                foreach($my_course_list as $course){
+                    if($course->course_status == 1){
+                        $module_terms = $course->module_terms;
+                        $course_fee = 0;
+                        foreach($module_terms as $term){
+                            if($row['study_mode'] == "fulltime"){
+                                $course_fee = $term->fulltime_cost ?? ($term->course_fees ?? 0);
+                            }elseif($row['study_mode'] == "weekend"){
+                                $course_fee = $term->weekend_cost ?? ($term->course_fees ?? 0);
+                            }elseif($row['study_mode'] == "evening"){
+                                $course_fee = $term->evening_cost ?? ($term->course_fees ?? 0);
+                            }
+                            if($term->status == 1){
+                                $current_term_fees = $course_fee;
+                            }
+                            $total_fees += $course_fee;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return [$total_fees, $current_term_fees];
 }

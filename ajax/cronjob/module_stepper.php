@@ -56,21 +56,22 @@ foreach ($databases as $database) {
                                 if(!$stepped){
                                     $student_course[$key]->module_terms[$key_mod]->status = 2;
                                     if ($key_mod < count($modules)-1) {
+                                        // update the next module
                                         $student_course[$key]->module_terms[$key_mod+1]->status = 1;
                                         $student_course[$key]->module_terms[$key_mod+1]->start_date = date("YmdHis");
                                         $student_course[$key]->module_terms[$key_mod+1]->end_date = date("YmdHis", strtotime($course_duration));
-
-                                        // add the balance to the student
-                                        $term = "TERM_1";
-                                        $update = "UPDATE student_data SET balance_carry_forward = ?, my_course_list = ? WHERE adm_no = ?";
-                                        $stmt = $conn2->prepare($update);
-                                        $student_balance = getBalanceReports($row['adm_no'], $term, $conn2);
-                                        $student_course = json_encode($student_course);
-                                        $stmt->bind_param("sss", $student_balance, $student_course, $row['adm_no']);
-                                        $stmt->execute();
-                                        $stepped = true;
-                                        break;
                                     }
+
+                                    // add the balance to the student
+                                    $term = "TERM_1";
+                                    $update = "UPDATE student_data SET balance_carry_forward = ?, my_course_list = ? WHERE adm_no = ?";
+                                    $stmt = $conn2->prepare($update);
+                                    $student_balance = getBalanceReports($row['adm_no'], $term, $conn2);
+                                    $student_course = json_encode($student_course);
+                                    $stmt->bind_param("sss", $student_balance, $student_course, $row['adm_no']);
+                                    $stmt->execute();
+                                    $stepped = true;
+                                    break;
                                 }
                             }
                         }

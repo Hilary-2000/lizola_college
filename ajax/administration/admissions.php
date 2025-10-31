@@ -455,7 +455,7 @@
                         $percentage_paid = number_format(round($fees_paid_by_student / $total_fees * 100))."%";
                         $percentage_balance = number_format(round($balance / $total_fees * 100))."%";
                         array_push($data_array,"Kes ".number_format($fees_paid_by_student)." - <small>(".$percentage_paid.")</small>");
-                        array_push($data_array,"Kes ".number_format(lastACADyrBal($row['adm_no'],$conn2)));
+                        array_push($data_array,"Kes ".number_format($last_year_bal));
                         array_push($data_array,"Kes ".number_format(getFeesAsPerTermBoarders($term,$conn2,$row['stud_class'],$row['adm_no'])));
                         array_push($data_array,"Kes ".number_format(getBalance($row['adm_no'],$term,$conn2))." - <small>(".$percentage_balance.")</small>");
                         array_push($data_array,"Kes ".number_format(total_fees_paid($row['adm_no'],$conn2)));
