@@ -4216,11 +4216,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                             $number++;
                         }
                     }
+
                     // create the pdf file
                     $pdf = new PDF('P', 'mm', 'A4');
                     $pdf->setHeaderPos(200);
                     // Column headings
-                    $header = array('No', 'Fees Paid', 'Balance', 'Code', 'Student Name', 'Mode', 'Votehead', 'Date', 'Served By');
+                    $header = array('No', 'Fees Paid', 'Balance', 'Code', 'Student Name', 'Mode', 'Voteheads', 'Date', 'Served By');
                     // Data loading
                     // $data = $pdf->LoadData('countries.txt');
                     $title = "No data to display!";
@@ -4239,11 +4240,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->set_school_contact($_SESSION['school_contact']);
                         $pdf->SetMargins(5,5);
                         $pdf->AddPage();
-                        $pdf->Cell(40, 10, "Balance", 0, 0, 'L', false);
-                        $pdf->Ln();
+                        $term = getTermV2($conn2);
+                        $capture_balance = getBalance($student_admno_in,$term,$conn2);
                         $pdf->SetFont('Nunito', 'I', 9);
                         $pdf->Cell(40, 5, "Outstanding Balance :", 0, 0, 'L', false);
-                        $pdf->Cell(40, 5, $capture_balance, 0, 0, 'L', false);
+                        $pdf->Cell(40, 5, "Kes ".number_format($capture_balance), 0, 0, 'L', false);
                         $pdf->Ln();
                         // $pdf->SetFont('Nunito', 'U', 8);
                         // $pdf->Cell(40, 10, "Statistics", 0, 0, 'L', false);
@@ -4263,46 +4264,126 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['schname'])) {
                         $pdf->Cell(190, 1, "", "T", 1, 'C', false);
                         $pdf->Ln(2);
                         $pdf->SetFont('Nunito', 'B', 9);
-                        $pdf->Cell(100, 5, "Finance Summary", 'TLR', 0, 'C', false);
+                        $pdf->Cell(90, 5, "Finance Summary", 'TLR', 0, 'C', false);
+                        $pdf->Cell(20, 5, "", '', 0, 'C', false);
+                        $pdf->Cell(80, 5, "Student Details", 'TLR', 0, 'C', false);
                         $pdf->Ln();
                         $last_year_bal = lastACADyrBal($student_admno_in,$conn2);
                         $payments = getFeespaidByStudent($student_admno_in,$conn2, true);
                         $course_fees = getStudentCourseFees($conn2, $student_admno_in);
+                        $student_details = getStudDetail($conn2, $student_admno_in);
+                        $discount_percentage = isset($student_details) ? $student_details['discount_percentage'] : 0;
+                        $discount_value = isset($student_details) ? $student_details['discount_value'] : 0;
                         $fees_paid_by_student = $payments[0]*1;
                         $provisional_amount = $payments[1]*1;
 
+                        $discount = $discount_percentage > 0 ? (($discount_percentage * $course_fees[1]) / 100) : ($discount_value > 0 ? $discount_value : 0);
                         $pdf->SetFont('Nunito', 'B', 9);
-                        $pdf->Cell(60, 5, "Course Fees:", 'TLR', 0, 'L', false);
+                        $pdf->Cell(50, 5, "Course Fees:", 'TLR', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
-                        $pdf->Cell(40, 5, "Kes ". number_format($course_fees[0]), 'TR', 0, 'L', false);
+                        $pdf->Cell(40, 5, "Kes ". number_format($course_fees[0]-$discount), 'TR', 0, 'L', false);
+
+                        $pdf->Cell(20, 5, "", '', 0, 'L', false);
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(25, 5, "Student Name:", 'TLR', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(55, 5, ucwords(strtolower($student_details['first_name']." ".$student_details['second_name'])), 'TR', 0, 'L', false);
                         $pdf->Ln();
 
                         $pdf->SetFont('Nunito', 'B', 9);
-                        $pdf->Cell(60, 5, "This Month Fees:", 'TLR', 0, 'L', false);
+                        $pdf->Cell(50, 5, "This Month Fees:", 'TLR', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
-                        $pdf->Cell(40, 5, "Kes ". number_format($course_fees[1]), 'TR', 0, 'L', false);
+                        $pdf->Cell(40, 5, "Kes ". number_format($course_fees[1] - $discount), 'TR', 0, 'L', false);
+
+                        $pdf->Cell(20, 5, "", '', 0, 'L', false);
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(25, 5, "Registration No", 'TLR', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(55, 5, $student_details['adm_no'], 'TR', 0, 'L', false);
+                        $pdf->Ln();
+                        
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(50, 5, "Discount:", 'TLR', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(40, 5, "Kes ". number_format($discount), 'TR', 0, 'L', false);
+
+                        // GET THE COURSE NAME
+                        $all_courses = [];
+                        $select = "SELECT * FROM `settings` WHERE `sett` = 'courses'";
+                        $statements = $conn2->prepare($select);
+                        $statements->execute();
+                        $res = $statements->get_result();
+                        if($res){
+                            if($rows = $res->fetch_assoc()){
+                                $all_courses = isJson_report($rows['valued']) ? json_decode($rows['valued']) : [];
+                            }
+                        }
+                        $course_id = $student_details['course_done'];
+                        $course_name = "N/A";
+                        $department_id = null;
+                        for($index =0; $index < count($all_courses); $index++){
+                            if($all_courses[$index]->id == $course_id){
+                                $course_name = $all_courses[$index]->course_name;
+                                $department_id = $all_courses[$index]->department;
+                                break;
+                            }
+                        }
+
+                        // MY COURSE LIST
+                        $my_course_list = $student_details['my_course_list'];
+                        $module_index = 0;
+                        if(isJson_report($my_course_list)){
+                            $my_course_list = json_decode($my_course_list);
+                            for($index = 0; $index < count($my_course_list); $index++){
+                                if($my_course_list[$index]->course_status == 1){
+                                    foreach($my_course_list[$index]->module_terms as $index2 => $module_term){
+                                        if($module_term->status == 1){
+                                            $module_index = $index2;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        $pdf->Cell(20, 5, "", '', 0, 'L', false);
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(25, 5, "Course Name:", 'TLR', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(55, 5, ucwords(strtolower($course_name)), 'TR', 0, 'L', false);
                         $pdf->Ln();
 
                         $pdf->SetFont('Nunito', 'B', 9);
-                        $pdf->Cell(60, 5, "Fees Paid this Month:", 'TLR', 0, 'L', false);
+                        $pdf->Cell(50, 5, "Fees Paid this Month:", 'TLR', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
                         $pdf->Cell(40, 5, "Kes ".number_format($fees_paid_by_student), 'TR', 0, 'L', false);
-                        $pdf->Ln();
 
+                        $pdf->Cell(20, 5, "", '', 0, 'L', false);
                         $pdf->SetFont('Nunito', 'B', 9);
-                        $pdf->Cell(60, 5, "Current Fees Balance:", 'TLR', 0, 'L', false);
+                        $pdf->Cell(25, 5, "Course Level:", 'TLR', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
-                        $pdf->Cell(40, 5, "".($capture_balance) , 'TR', 0, 'L', false);
+                        $pdf->Cell(55, 5, $student_details['stud_class'], 'TR', 0, 'L', false);
                         $pdf->Ln();
 
                         $pdf->SetFont('Nunito', 'B', 9);
-                        $pdf->Cell(60, 5, "Starter Pack & Other Payments:", 'TLRB', 0, 'L', false);
+                        $pdf->Cell(50, 5, "Current Fees Balance:", 'TLR', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(40, 5, "Kes ".number_format($capture_balance) , 'TR', 0, 'L', false);
+
+                        $pdf->Cell(20, 5, "", '', 0, 'L', false);
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(25, 5, "Current Month", 'TLRB', 0, 'L', false);
+                        $pdf->SetFont('Nunito', '', 9);
+                        $pdf->Cell(55, 5, "Month ".($module_index+1), 'TRB', 0, 'L', false);
+                        $pdf->Ln();
+
+                        $pdf->SetFont('Nunito', 'B', 9);
+                        $pdf->Cell(50, 5, "Starter Pack & Other Payments:", 'TLRB', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
                         $pdf->Cell(40, 5, "Kes ".number_format($provisional_amount), 'TR', 0, 'L', false);
                         $pdf->Ln();
 
                         $pdf->SetFont('Nunito', 'B', 9);
-                        $pdf->Cell(60, 5, "Tot Paid Since Joining:", 'TLRB', 0, 'L', false);
+                        $pdf->Cell(50, 5, "Tot Paid Since Joining:", 'TLRB', 0, 'L', false);
                         $pdf->SetFont('Nunito', '', 9);
                         $pdf->Cell(40, 5, "Kes ".number_format(total_fees_paid($student_admno_in,$conn2)), 'TRB', 0, 'L', false);
                         $pdf->Ln();

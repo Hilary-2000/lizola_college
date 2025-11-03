@@ -93,7 +93,7 @@
             if(username.length>1){
                 grayBorder(cObj("username"));
                 cObj("err").innerHTML = "<p class='data' style='color:green;text-align:center;'></p>"
-                let datapass = "?log=true&username="+valObj("username");
+                let datapass = "?log=true&username="+valObj("username")+"&domain="+(document.domain);
                 sendData1('GET','login/login.php',datapass,cObj("err"));
                  setTimeout(() => {
                      var timeout = 0;

@@ -47,6 +47,7 @@ require("../../assets/encrypt/functions.php");
                                         $results = $stmt->get_result();
                                         if($results){
                                             $data = "";
+                                            $domain = "";
                                             if($row = $results->fetch_assoc()){
                                                 $snames=" ".$row['school_name'];
                                                 $smotto =" ".$row['school_motto'];
@@ -65,7 +66,17 @@ require("../../assets/encrypt/functions.php");
                                                 $school_profile_image = $row['school_profile_image'];
                                                 $physicall_address = $row['physicall_address'];
                                                 $website_name = $row['website_name'];
+
+                                                // check the domain
+                                                $domain = $row['school_domain'];
                                             }
+
+                                            $check_domain = $_GET['domain'];
+                                            if($check_domain != $domain && $check_domain != "192.168.86.18"){
+                                                echo "<p style = 'color:red;'>You are using the wrong domain, you should be using <a href='https://".$domain."'>".$domain."</a>!</p>";
+                                                return 0;
+                                            }
+
                                             $_SESSION['ct_cg'] = $ct_cg;
                                             $_SESSION['sch_countrys'] = $sch_country;
                                             $_SESSION['sch_countys'] = $sch_county;
@@ -83,6 +94,7 @@ require("../../assets/encrypt/functions.php");
                                             $_SESSION['school_profile_image'] = strlen(trim($school_profile_image)) > 1 ? $school_profile_image: "images/no-image.png";
                                             $_SESSION['physicall_address'] = $physicall_address;
                                             $_SESSION['website_name'] = $website_name;
+                                            $_SESSION['domain'] = $domain;
                                             if ($userauth == 5) {
                                                 $dbname = $_SESSION['dbname'];
                                                 $hostname = 'localhost';
@@ -135,6 +147,12 @@ require("../../assets/encrypt/functions.php");
                 echo "<p class='data' style='color:rgb(121, 19, 19);'>Invalid username!</p>";
             }
         }elseif (isset($_GET['password'])) {
+            $check_domain = $_GET['domain'];
+            $domain = $_SESSION['domain'];
+            if($check_domain != $domain && $check_domain != "192.168.86.18"){
+                echo "<p style = 'color:red;'>You are using the wrong domain, you should be using <a href='https://".$domain."'>".$domain."</a>!</p>";
+                return 0;
+            }
             include_once("../../assets/encrypt/encrypt.php");
             $passwords = encryptCode( $_GET['password']);
             $username = $_GET['usernames'];
@@ -492,4 +510,5 @@ require("../../assets/encrypt/functions.php");
             }
         }
     }
+
 ?>

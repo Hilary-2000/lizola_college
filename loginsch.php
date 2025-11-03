@@ -106,7 +106,7 @@
             if(passwds.length>1){
                 cObj("errors").innerHTML = "<p class='data' style='color:red;display:none;'>done</p>"
                 grayBorder(cObj("pass"));
-                let datapas = "?password="+passwds+"&usernames="+valObj("uname");
+                let datapas = "?password="+passwds+"&usernames="+valObj("uname")+"&domain="+(document.domain);
                 sendData('GET','login/login.php',datapas,cObj("errors"));
                 setTimeout(() => {
                     var timeout = 0;
