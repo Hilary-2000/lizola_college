@@ -1,0 +1,50 @@
+# ----------------------------------------------------------------------
+# SECURITY & BASIC SETTINGS
+# ----------------------------------------------------------------------
+
+# Disable directory listing (stops users from seeing file indexes)
+Options -Indexes
+
+# Follow symbolic links (helps with includes or linked resources)
+Options +FollowSymLinks
+
+# Set the default index files
+DirectoryIndex index.php index.html
+
+# Deny access to hidden files (like .htaccess or .env)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Block access to sensitive files
+<FilesMatch "\.(env|log|sql|conf|ini|json|lock|md|bak)$">
+    Require all denied
+</FilesMatch>
+
+# ----------------------------------------------------------------------
+# CUSTOM ERROR PAGES
+# ----------------------------------------------------------------------
+
+# Show your custom 404 page
+ErrorDocument 404 /404.php
+
+# Optional: handle forbidden access
+ErrorDocument 403 /403.php
+
+# ----------------------------------------------------------------------
+# PHP SETTINGS (Optional — adjust if needed)
+# ----------------------------------------------------------------------
+
+# Set PHP upload and memory limits
+php_value upload_max_filesize 20M
+php_value post_max_size 25M
+php_value memory_limit 256M
+
+# ----------------------------------------------------------------------
+# MISCELLANEOUS
+# ----------------------------------------------------------------------
+
+# Prevent access to backup or temporary files
+<FilesMatch "\.(bak|old|orig|tmp|swp|dist)$">
+    Require all denied
+</FilesMatch>
