@@ -6160,11 +6160,16 @@
             $course_list = [];
             $student_balance = 0;
             $study_mode = "fulltime";
+            $fname = "";
+            $sname = "";
+            $admissionNumber = $student_id;
             if($result){
                 if($row = $result->fetch_assoc()){
                     $course_list = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
                     $student_balance = $row['balance_carry_forward'];
                     $study_mode = $row['study_mode'];
+                    $fname = ucwords(strtolower($row['first_name']));
+                    $sname = ucwords(strtolower($row['second_name']));
                 }
             }
 
@@ -6268,14 +6273,12 @@
                         if(!$deactivate){
                             $module_terms[$index]->start_date = $module_terms[$index]->start_date != "" ? $module_terms[$index]->start_date : date("YmdHis");
                             $module_terms[$index]->end_date = $module_terms[$index]->end_date != "" ? $module_terms[$index]->end_date : date("YmdHis",strtotime($course_duration));
-                            // $module_terms[$index]->termly_cost = $course_cost*1;
                             $module_terms[$index]->fulltime_cost = $fulltime_cost*1;
                             $module_terms[$index]->evening_cost = $evening_cost*1;
                             $module_terms[$index]->weekend_cost = $weekend_cost*1;
                         }else{
                             $module_terms[$index]->start_date = "";
                             $module_terms[$index]->end_date = "";
-                            // $module_terms[$index]->termly_cost = $course_cost*1;
                             $module_terms[$index]->fulltime_cost = $fulltime_cost*1;
                             $module_terms[$index]->evening_cost = $evening_cost*1;
                             $module_terms[$index]->weekend_cost = $weekend_cost*1;
@@ -6288,7 +6291,6 @@
                         // term
                         $module_terms[$index]->start_date = "";
                         $module_terms[$index]->end_date = "";
-                        // $module_terms[$index]->termly_cost = $course_cost*1;
                         $module_terms[$index]->fulltime_cost = $fulltime_cost*1;
                         $module_terms[$index]->evening_cost = $evening_cost*1;
                         $module_terms[$index]->weekend_cost = $weekend_cost*1;
@@ -6369,6 +6371,8 @@
                 $stmt->execute();
                 echo "<p class='text-success'>Course updates have been done successfully!</p>";
             }
+            $log_text = $fname." ".$sname." with admission number ".$admissionNumber." course details have been updated successfully";
+            log_administration($log_text);
         }elseif(isset($_POST['add_modules'])){
             $student_admno = $_POST['student_id'];
             // GET THE STUDENT DATA
@@ -6379,17 +6383,26 @@
             $result = $stmt->get_result();
             $course_list = [];
             $course_chosen = null;
+            $fname = "";
+            $sname = "";
             if($result){
                 if($row = $result->fetch_assoc()){
                     $course_list = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
                     $course_chosen = $row['course_done'];
+                    $fname = ucwords(strtolower($row['first_name']));
+                    $sname = ucwords(strtolower($row['second_name']));
                 }
             }
+
+            // MODULE ONE
+            $module_name = "MODULE 1";
             
             if(is_array($course_list) && count($course_list) > 0){
                 $module_index = 1;
                 $module_id = 1;
-                $module_termly_cost = 0;
+                $fulltime_cost = 0;
+                $evening_cost = 0;
+                $weekend_cost = 0;
                 foreach($course_list as $key_init => $course){
                     if($course->course_status == 1){
                         $modules = $course->module_terms;
@@ -6397,17 +6410,22 @@
                             if($key == (count($modules)-1)){
                                 $module_index = $key+1;
                                 $module_id = $module->id;
-                                $module_termly_cost = $module->termly_cost;
+                                $fulltime_cost = $module->fulltime_cost;
+                                $evening_cost = $module->evening_cost;
+                                $weekend_cost = $module->weekend_cost;
                             }
                         }
     
                         $term = new stdClass();
                         $term->id = $module_id + 1;
                         $term->term_name = "MODULE ". ($module_index + 1);
+                        $module_name = $term->term_name;
                         $term->status = 0;
                         $term->start_date = "";
                         $term->end_date = "";
-                        $term->termly_cost = $module_termly_cost;
+                        $term->fulltime_cost = $fulltime_cost;
+                        $term->evening_cost = $evening_cost;
+                        $term->weekend_cost = $weekend_cost;
     
                         // course list
                         array_push($course_list[$key_init]->module_terms,$term);
@@ -6428,15 +6446,19 @@
                 }
 
                 $no_of_term = 0;
-                $cost_per_term = 0;
                 $course_level = null;
                 $term_duration = 0;
+                $fulltime_cost = 0;
+                $evening_cost = 0;
+                $weekend_cost = 0;
                 $duration_intervals = "days";
                 foreach($courses as $course){
                     if($course->id == $course_chosen){
                         $course_level = $course->course_level;
                         $no_of_term = $course->no_of_terms;
-                        $cost_per_term = $course->termly_fees;
+                        $fulltime_cost = $course->fulltime_fees;
+                        $evening_cost = $course->evening_fees;
+                        $weekend_cost = $course->weekend_fees;
                         $duration_intervals = $course->duration_intervals;
                         $term_duration = $course->term_duration;
                     }
@@ -6456,7 +6478,9 @@
                     $new_module_term->status = $index == 0 ? 1 : 0;
                     $new_module_term->start_date = $index == 0 ? date("YmdHis") : "";
                     $new_module_term->end_date = $index == 0 ? date("YmdHis", strtotime($term_duration." ".$duration_intervals)) : "";
-                    $new_module_term->termly_cost = $cost_per_term;
+                    $new_module_term->fulltime_cost = $fulltime_cost;
+                    $new_module_term->evening_cost = $evening_cost;
+                    $new_module_term->weekend_cost = $weekend_cost;
                     array_push($module_terms, $new_module_term);
                 }
 
@@ -6473,9 +6497,10 @@
             $my_course_list = json_encode($course_list);
             $stmt->bind_param("ss", $my_course_list, $student_admno);
             $stmt->execute();
-
-
             echo "<p class='text-success'>Module has been added successfully!</p>";
+
+            $log_text = $fname." ".$sname." with admission number ".$student_admno." course module \"".$module_name."\" have been added successfully";
+            log_administration($log_text);
         }elseif(isset($_POST['delete_course_module'])){
             $admission_number = $_POST['admission_number'];
             // DELETE THE COURSE MODULE OF THE ACTIVE COURSE
@@ -6485,11 +6510,16 @@
             $stmt->execute();
             $result = $stmt->get_result();
             $courses = [];
+            $fname = "";
+            $sname = "";
             if($result){
                 if($row = $result->fetch_assoc()){
+                    $fname = ucwords(strtolower($row['first_name']));
+                    $sname = ucwords(strtolower($row['second_name']));
                     $courses = isJson_report($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
                 }
             }
+            $module_name = "MODULE 1";
             foreach($courses as $key => $course){
                 if($course->course_status == "1"){
                     $modules = $course->module_terms;
@@ -6497,6 +6527,8 @@
                     foreach($modules as $key_init => $module){
                         if($key_init < (count($modules)-1)){
                             array_push($new_modules, $module);
+                        }else{
+                            $module_name = $module->term_name;
                         }
                     }
                     $course->module_terms = $new_modules;
@@ -6513,6 +6545,9 @@
             $stmt->execute();
 
             echo "<p class='text-success'>Student term module has been deleted successfully!</p>";
+
+            $log_text = $fname." ".$sname." with admission number ".$admission_number." course module \"".$module_name."\" have been deleted successfully";
+            log_administration($log_text);
         }elseif(isset($_POST['deregister_stud'])){
             $deregister_stud = $_POST['deregister_stud'];
             $select_term_deregister = $_POST['select_term_deregister'];

@@ -8,9 +8,9 @@
             {
                 "id": 1,
                 "term_name": "MODULE 1",
-                "status": 1,
-                "start_date": "20250917092009",
-                "end_date": "20251017092009",
+                "status": "1",
+                "start_date": "20251106181038",
+                "end_date": "20251206181038",
                 "fulltime_cost": 9000,
                 "evening_cost": 8500,
                 "weekend_cost": 7500
@@ -18,7 +18,7 @@
             {
                 "id": 2,
                 "term_name": "MODULE 2",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "fulltime_cost": 9000,
@@ -28,7 +28,7 @@
             {
                 "id": 3,
                 "term_name": "MODULE 3",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "fulltime_cost": 9000,
@@ -38,7 +38,7 @@
             {
                 "id": 4,
                 "term_name": "MODULE 4",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "fulltime_cost": 9000,
@@ -48,7 +48,7 @@
             {
                 "id": 5,
                 "term_name": "MODULE 5",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "fulltime_cost": 9000,
@@ -58,7 +58,7 @@
             {
                 "id": 6,
                 "term_name": "MODULE 6",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "fulltime_cost": 9000,
@@ -68,7 +68,7 @@
             {
                 "id": 7,
                 "term_name": "MODULE 7",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "fulltime_cost": 9000,
@@ -78,7 +78,7 @@
             {
                 "id": 8,
                 "term_name": "MODULE 8",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "fulltime_cost": 9000,
@@ -88,7 +88,7 @@
             {
                 "id": 9,
                 "term_name": "MODULE 9",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "fulltime_cost": 9000,
@@ -98,7 +98,7 @@
             {
                 "id": 10,
                 "term_name": "MODULE 10",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "fulltime_cost": 9000,
@@ -108,7 +108,7 @@
             {
                 "id": 11,
                 "term_name": "MODULE 11",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "fulltime_cost": 9000,
@@ -118,7 +118,7 @@
             {
                 "id": 12,
                 "term_name": "MODULE 12",
-                "status": 0,
+                "status": "0",
                 "start_date": "",
                 "end_date": "",
                 "fulltime_cost": 9000,
