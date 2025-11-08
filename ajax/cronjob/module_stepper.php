@@ -5,14 +5,16 @@ if(session_status()==PHP_SESSION_NONE){
     session_start();
 }
 date_default_timezone_set('Africa/Nairobi');
-
+$_SERVER['REQUEST_METHOD'] = "";
 $databases = ['nuelas_college', 'lizola_college'];
 foreach ($databases as $database) {
     // $_SESSION['databasename'] = $database;
-    // include_once("/var/www/html/lizola_college/college_sims/ajax/finance/financial.php");
-    // include_once("/var/www/html/lizola_college/college_sims/connections/module_stepper_conn.php");
-    include_once("../../connections/module_stepper_conn.php");
-    include_once("../../ajax/finance/financial.php");
+    include_once("/var/www/html/lizola_college/college_sims/ajax/finance/financial.php");
+    include_once("/var/www/html/lizola_college/college_sims/connections/module_stepper_conn.php");
+    // include_once("/opt/lampp/htdocs/lizola_college/ajax/finance/financial.php");
+    // include_once("/opt/lampp/htdocs/lizola_college/connections/module_stepper_conn.php");
+    // include_once("../../connections/module_stepper_conn.php");
+    // include_once("../../ajax/finance/financial.php");
     if ($conn2) {
         // include("../finance/financial.php");
         // GET ALL COURSE
@@ -34,6 +36,7 @@ foreach ($databases as $database) {
         $result = $stmt->get_result();
         if ($result) {
             while ($row = $result->fetch_assoc()) {
+                // echo $row['first_name']." ".$row['second_name']."<br>";
                 $course_done = $row['course_done'];
                 $course_duration = "0 Days";
                 foreach ($course_list as $key => $value) {
@@ -41,6 +44,8 @@ foreach ($databases as $database) {
                         $course_duration = $value->term_duration." ".$value->duration_intervals;
                     }
                 }
+                // echo $row['first_name']." ".$row['second_name']." - ".$row['adm_no']."<br>\n";
+                // echo $row['my_course_list']."<br>";
 
                 // student_course
                 $student_course = isJson($row['my_course_list']) ? json_decode($row['my_course_list']) : [];
@@ -52,7 +57,7 @@ foreach ($databases as $database) {
                         $modules = $course->module_terms;
                         foreach ($modules as $key_mod => $value) {
                             if($value->status == 1 && date("Ymd") >= date("Ymd", strtotime($value->end_date))){
-                                // echo $row['first_name']." - ".$row['second_name']." ".$row['adm_no']." < = > ".$value->status." ".date("Ymd", strtotime($value->end_date))." ".(isset($modules[$key_mod+1]) ? "true" : "false")."<br>";
+                                echo $row['first_name']." - ".$row['second_name']."<span style='color:green'>(Extended)</span> <br>\n";
                                 if(!$stepped){
                                     $student_course[$key]->module_terms[$key_mod]->status = 2;
                                     if ($key_mod < count($modules)-1) {

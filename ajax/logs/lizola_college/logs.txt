@@ -1,3 +1,10 @@
+08th Nov 2025 14:53:46PM : James Mwingi with admission number LC-2025-6 course details have been updated successfully - {HILLARY NGIGE}
+08th Nov 2025 14:53:21PM : Mutiso Karama with admission number LC-2025-4 course details have been updated successfully - {HILLARY NGIGE}
+08th Nov 2025 14:31:04PM : Mutiso Karama with admission number LC-2025-4 course details have been updated successfully - {HILLARY NGIGE}
+08th Nov 2025 14:30:09PM : Mutiso Karama with admission number LC-2025-4 course details have been updated successfully - {HILLARY NGIGE}
+08th Nov 2025 14:29:51PM : Mutiso Karama with admission number LC-2025-4 course details have been updated successfully - {HILLARY NGIGE}
+08th Nov 2025 14:27:23PM : Mutiso Karama with admission number LC-2025-4 course module "MODULE 13" have been added successfully - {HILLARY NGIGE}
+08th Nov 2025 14:01:42PM : HILLARY NGIGE successfully logged into the system as Principal - {HILLARY NGIGE}
 06th Nov 2025 19:05:11PM : Mercy Kyalo - of Reg No. (LC-2025-5) data has been updated successfully! - {HILLARY NGIGE}
 06th Nov 2025 18:47:53PM : Owen Malingu with admission number LC-2025-013 course module "MODULE 13" have been deleted successfully - {HILLARY NGIGE}
 06th Nov 2025 18:39:14PM : Owen Malingu with admission number LC-2025-013 course module "MODULE 13" have been added successfully - {HILLARY NGIGE}
